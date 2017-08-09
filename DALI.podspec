@@ -9,34 +9,25 @@
 Pod::Spec.new do |s|
   s.name             = 'DALI'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of DALI.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.summary          = 'A framework for iOS and tvOS that will handle all the needs of a DALI member working on an internal project'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+As a DALI member, have you ever wondered if you could make an app that does all the things that the DALI Lab app can do and more?!
                        DESC
 
-  s.homepage         = 'https://github.com/johnlev/DALI'
+  s.homepage         = 'https://dali-lab.github.io/API-iOS-Framework/'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'johnlev' => 'john.lyme@mac.com' }
-  s.source           = { :git => 'https://github.com/johnlev/DALI.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'git@github.com:dali-lab/DALI-Framework.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
+  s.watchos.deployment_target = '3.1'
+  s.tvos.deployment_target = '10.0'
 
   s.source_files = 'DALI/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'DALI' => ['DALI/Assets/*.png']
-  # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.frameworks = 'Foundation'
+  s.dependency 'SwiftyJSON
+  s.source_files = 'MyFramework/Classes/*.{swift}''
 end

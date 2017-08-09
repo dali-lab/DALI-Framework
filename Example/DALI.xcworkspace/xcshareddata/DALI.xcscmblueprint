@@ -1,0 +1,29 @@
+{
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0550F5575B13503B2C5CB5EE283836661DF4CB0D" : 9223372036854775807,
+    "E970DD2B0546BEEC0585B1F58933359D4271B6E1" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "512F9224-B913-4D37-9E7C-B11E7F3AAB94",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0550F5575B13503B2C5CB5EE283836661DF4CB0D" : "..",
+    "E970DD2B0546BEEC0585B1F58933359D4271B6E1" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "DALI",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Example\/DALI.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dali-lab\/DALI-Internal.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0550F5575B13503B2C5CB5EE283836661DF4CB0D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:dali-lab\/API-iOS-Framework.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E970DD2B0546BEEC0585B1F58933359D4271B6E1"
+    }
+  ]
+}

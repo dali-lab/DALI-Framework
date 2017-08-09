@@ -19,7 +19,7 @@ As a DALI member, have you ever wondered if you could make an app that does all 
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'johnlev' => 'john.lyme@mac.com' }
-  s.source           = { :git => 'git@github.com:dali-lab/DALI-Framework.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/dali-lab/DALI-Framework.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
   s.watchos.deployment_target = '3.1'
@@ -28,6 +28,6 @@ As a DALI member, have you ever wondered if you could make an app that does all 
   s.source_files = 'DALI/Classes/**/*'
 
   s.frameworks = 'Foundation'
-  s.dependency 'SwiftyJSON
-  s.source_files = 'MyFramework/Classes/*.{swift}''
+  s.dependency 'SwiftyJSON'
+  s.source_files = 'DALI/Classes/*.{swift}'
 end

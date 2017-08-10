@@ -2,15 +2,19 @@
 # * http://www.objc.io/issue-6/travis-ci.html
 # * https://github.com/supermarin/xcpretty#usage
 
-osx_image: xcode8.3
 language: objective-c
+osx_image: xcode8.3
 # cache: cocoapods
 podfile: Example/Podfile
-xcode_workspace: Example/DALI.xcodeproj # path to your xcodeproj folder
-xcode_scheme: DALI-Example
+# xcode_workspace: Example/DALI.xcodeproj # path to your xcodeproj folder
+# xcode_scheme: DALI-Example
 # before_install:
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
 # script:
 # - set -o pipefail && xcodebuild -workspace Example/DALI.xcworkspace -scheme DALI-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
 # - pod lib lint
+script:
+  - set -o pipefail
+  - xcodebuild -workspace Example/DALI.xcworkspace -scheme DALI-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+  - pod lib lint

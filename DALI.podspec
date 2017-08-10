@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DALI'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A framework for iOS and tvOS that will handle all the needs of a DALI member working on an internal project'
 
   s.description      = <<-DESC
@@ -22,7 +22,6 @@ As a DALI member, have you ever wondered if you could make an app that does all 
   s.source           = { :git => 'https://github.com/dali-lab/DALI-Framework.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
-  s.watchos.deployment_target = '3.1'
   s.tvos.deployment_target = '10.0'
 
   s.source_files = 'DALI/Classes/**/*'

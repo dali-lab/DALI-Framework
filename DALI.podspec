@@ -8,14 +8,14 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DALI'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'A framework for iOS and tvOS that will handle all the needs of a DALI member working on an internal project'
 
   s.description      = <<-DESC
 As a DALI member, have you ever wondered if you could make an app that does all the things that the DALI Lab app can do and more?!
                        DESC
 
-  s.homepage         = 'https://dali-lab.github.io/API-iOS-Framework/'
+  s.homepage         = 'https://dali-lab.github.io/DALI-Framework/'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'johnlev' => 'john.lyme@mac.com' }

@@ -1,6 +1,6 @@
 # DALI
 
-[![CI Status](http://img.shields.io/travis/johnlev/DALI.svg?style=flat)](https://travis-ci.org/johnlev/DALI)
+[![CI Status](https://travis-ci.org/dali-lab/DALI-Framework.svg?branch=master)](https://travis-ci.org/dali-lab/DALI-Framework)
 [![Version](https://img.shields.io/cocoapods/v/DALI.svg?style=flat)](http://cocoapods.org/pods/DALI)
 [![License](https://img.shields.io/cocoapods/l/DALI.svg?style=flat)](http://cocoapods.org/pods/DALI)
 [![Platform](https://img.shields.io/cocoapods/p/DALI.svg?style=flat)](http://cocoapods.org/pods/DALI)

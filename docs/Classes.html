@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Classes  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="Classes  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">DALI Docs</a> (94% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">DALI Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Classes  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/DALIConfig.html">DALIConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DALIError.html">DALIError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DALIError.html#/s:OC4DALI9DALIError4Save">– Save</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DALIError/Create.html">– Create</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DALIError/General.html">– General</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DALIEvent.html">DALIEvent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DALIEvent/Voting.html">– Voting</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DALIapi.html">DALIapi</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/DALILocation.html">DALILocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DALILocation/Tim.html">– Tim</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DALILocation/Shared.html">– Shared</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs.html#/s:V4DALI11DALIProject">DALIProject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DALIUser.html">DALIUser</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Classes</h1>
+            <p>The following classes are available globally.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C4DALI7DALIapi"></a>
+                    <a name="//apple_ref/swift/Class/DALIapi" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C4DALI7DALIapi">DALIapi</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Static class to configure and handle general requests the DALI api framework</p>
+
+                        <a href="Classes/DALIapi.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIapi</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C4DALI10DALIConfig"></a>
+                    <a name="//apple_ref/swift/Class/DALIConfig" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C4DALI10DALIConfig">DALIConfig</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Configurations for the DALIapi framework can be stored and handled using this</p>
+
+<p>Example usage:</p>
+<pre class="highlight plaintext"><code>let file = NSDictionary(dictionary: [
+    "server_url": "https://dalilab-api.herokuapp.com/"
+])
+let config = DALIConfig(dict: file)
+DALIapi.configure(config: config)
+</code></pre>
+
+                        <a href="Classes/DALIConfig.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">DALIConfig</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C4DALI9DALIError"></a>
+                    <a name="//apple_ref/swift/Class/DALIError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C4DALI9DALIError">DALIError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A set of errors used by the DALIapi framework to signal the user when there is an issue</p>
+
+                        <a href="Classes/DALIError.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">DALIError</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C4DALI9DALIEvent"></a>
+                    <a name="//apple_ref/swift/Class/DALIEvent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C4DALI9DALIEvent">DALIEvent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An DALI event struct</p>
+
+<p>Handles event queries</p>
+<h3 id='honestly-this-is-how-i-coded-this-part' class='heading'>Honestly, this is how I coded this part:</h3>
+
+<p><img src="https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif" alt="Coding stuff"></p>
+
+<p>I&rsquo;ll be cleaning it up soon enough</p>
+
+                        <a href="Classes/DALIEvent.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIEvent</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://dali-lab.github.io/API-iOS-Framework/" target="_blank" rel="external">johnlev</a>. All rights reserved. (Last updated: 2017-08-10)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

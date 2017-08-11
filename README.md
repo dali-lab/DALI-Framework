@@ -1,11 +1,11 @@
-<p align="center">
+<div style="text-align:center">
 <h1>DALI</h1>
 
 [![CI Status](https://travis-ci.org/dali-lab/DALI-Framework.svg?branch=master)](https://travis-ci.org/dali-lab/DALI-Framework)
 [![Version](https://img.shields.io/cocoapods/v/DALI.svg?style=flat)](http://cocoapods.org/pods/DALI)
 [![License](https://img.shields.io/cocoapods/l/DALI.svg?style=flat)](http://cocoapods.org/pods/DALI)
 [![Platform](https://img.shields.io/cocoapods/p/DALI.svg?style=flat)](http://cocoapods.org/pods/DALI)
-</p>
+</div>
 
 A framework used by DALI Lab members to access the internal API, which stores all information about projects, members,
 

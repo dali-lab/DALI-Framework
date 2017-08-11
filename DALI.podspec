@@ -13,12 +13,14 @@ Pod::Spec.new do |s|
 
   s.description      = <<-DESC
 As a DALI member, have you ever wondered if you could make an app that does all the things that the DALI Lab app can do and more?!
+  Well you can! With this framework you can access all sorts of information from the DALI API database, and get access
+  to many other features!
                        DESC
 
   s.homepage         = 'https://dali-lab.github.io/DALI-Framework/'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'johnlev' => 'john.lyme@mac.com' }
+  s.author           = { 'John Kotz' => 'john.kotz@dali.dartmouth.edu' }
   s.source           = { :git => 'https://github.com/dali-lab/DALI-Framework.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.3'

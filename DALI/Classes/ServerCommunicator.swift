@@ -152,7 +152,7 @@ class ServerCommunicator {
 					err = DALIError.General.BadRequest
 					break
 				case 404:
-					err = DALIError.General.Unfound
+					err = DALIError.General.Unfound 
 					break
 				default:
 					break

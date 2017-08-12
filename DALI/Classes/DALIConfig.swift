@@ -28,6 +28,9 @@ open class DALIConfig {
 	internal var token: String?
 	internal var member: DALIMember?
 	
+	/// A default value for the sharing preference
+	public var sharingDefault = false
+	
 	/**
 		Creates a DALIConfig object
 	

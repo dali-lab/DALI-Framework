@@ -74,6 +74,10 @@ public class DALIapi {
 		}
 	}
 	
+	public static func signin(accessToken: String, refreshToken: String, done: @escaping (Bool, DALIError.General?) -> Void) {
+		self.signin(accessToken: accessToken, refreshToken: refreshToken, forced: false, done: done)
+	}
+	
 	/// Signs in on the server using access and refresh tokens provided by Google Signin
 	public static func signin(accessToken: String, refreshToken: String, forced: Bool, done: @escaping (Bool, DALIError.General?) -> Void) {
 		// One way or the other are we already authenticated

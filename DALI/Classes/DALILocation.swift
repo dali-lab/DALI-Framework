@@ -130,6 +130,32 @@ public struct DALILocation {
 				callback(outputArr, nil)
 			}
 		}
+		
+		/**
+		Submit the current location of the user
+		- important: Do not run this on an API authenticated program. It will fatal error to protect the server!
+		
+		- parameter inDALI: The user is in DALI
+		- parameter entering: The user is entering DALI
+		- parameter callback: Function that is called when done
+		*/
+		public static func submit(inDALI: Bool, entering: Bool, callback: @escaping (Bool, DALIError.General?) -> Void) {
+			DALIapi.assertUser(funcName: "DALILocation.submit")
+			
+			let dict: [String: Any] = [
+				"inDALI": inDALI,
+				"entering": entering,
+				"sharing": DALILocation.sharing
+			]
+			
+			do {
+				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/shared", json: JSON(dict)) { (success, response, error) in
+					callback(success, error)
+				}
+			} catch {
+				callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "SwiftyJSON", code: ErrorInvalidJSON, userInfo: nil)))
+			}
+		}
 	}
 	
 	/// The current user is sharing this device's location
@@ -139,33 +165,6 @@ public struct DALILocation {
 		}
 		set {
 			UserDefaults.standard.set(newValue, forKey: "DALIapi:sharing:\(DALIapi.config.member?.id ?? "all")")
-		}
-	}
-
-	
-	/**
-	Submit the current location of the user
-	- important: Do not run this on an API authenticated program. It will fatal error to protect the server!
-	
-	- parameter inDALI: The user is in DALI
-	- parameter entering: The user is entering DALI
-	- parameter callback: Function that is called when done
-	*/
-	public static func submit(inDALI: Bool, entering: Bool, callback: @escaping (Bool, DALIError.General?) -> Void) {
-		DALIapi.assertUser(funcName: "DALILocation.submit")
-		
-		let dict: [String: Any] = [
-			"inDALI": inDALI,
-			"entering": entering,
-			"sharing": self.sharing
-		]
-		
-		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/shared", json: JSON(dict)) { (success, response, error) in
-				callback(success, error)
-			}
-		} catch {
-			callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "SwiftyJSON", code: ErrorInvalidJSON, userInfo: nil)))
 		}
 	}
 }

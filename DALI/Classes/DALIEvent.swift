@@ -359,7 +359,7 @@ public class DALIEvent {
 	
 		- parameter callback: Fucntion called when done
 	*/
-	public static func getUpcoming(callback: @escaping ([DALIEvent]?, Error?) -> Void) {
+	public static func getUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
 		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/week") { (json, code, error) in
 			if let error = error {
 				callback(nil, error)
@@ -382,6 +382,16 @@ public class DALIEvent {
 		}
 	}
 	
+	/**
+	Checks in the current user to whatever event is happening now
+	*/
+	public static func checkIn(callback: @escaping (Bool, DALIError.General?) -> Void) {
+		DALIapi.assertUser(funcName: "checkIn")
+		
+		ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/checkin", data: "".data(using: .utf8)!) { (success, json, error) in
+			callback(success, error)
+		}
+	}
 	
 	
 	/**

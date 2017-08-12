@@ -12,9 +12,9 @@ A framework used by DALI Lab members to access the internal API, which stores al
 ### Authenticate
 The API protects its data using two methods: private API key and Google OAuth2. This is done to support two different use cases: static installment or user-personal device.
 
-##### Google OAuth2 (User-Personal)
+#### Google OAuth2 (User-Personal)
 
-##### API Key Auth (Static-Installment)
+#### API Key Auth (Static-Installment)
 A static-installment product could be an Apple TV app, a kiosk-type desktop application, or even another server that runs some other service. Its up to your imagination 😀!
 
 _Qualifications:_

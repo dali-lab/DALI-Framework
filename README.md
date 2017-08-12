@@ -71,7 +71,72 @@ Done! Now you may make all the requests you are authorized to.
 
 ### Events
 
-Now that you have authenticated your system you can move on to Events. Unfortunately for you, I haven't written this or any following parts of the Getting Started section yet, as it is Friday night and I am now heading out to play pong. If you have an urgent need, though, check out the [docs](https://dali-lab.github.io/DALI-Framework/). They are awesome and written by yours-truly.
+Now that you have authenticated your system you can move on to Events. The event route is one of the simplest  because it requires no special data and no requirements on authentication usage.
+
+#### Get all events
+```swift
+DALIEvent.getAll { (events, error) in
+  if let error = error {
+    // Encountered a problem
+    // Check the type;
+    if error == DALIError.General.Unauthorized {
+      // ...
+    }else if ... {
+      // ...
+    }
+    return
+  }
+
+  // The events list is a [DALIEvent]? object
+}
+```
+
+#### Get events within a week of now
+```swift
+DALIEvent.getUpcoming { (events, error) in
+  // ...
+}
+```
+
+#### Create an event
+```swift
+DALIEvent.create { (success, error) in
+  // ...
+}
+```
+
+### Location
+DALI uses bluetooth beacon technology to identify when a device is in the lab. You can use this to gain access to the location flag (in DALI or not) for Tim or any other member.
+
+#### Get Tim's Location
+```swift
+DALILocation.Tim.get { (tim, error) in
+  if let error = error {
+    // Encountered error...
+    return
+  }
+
+  if tim.inDALI {
+    // ...
+  }else if tim.inOffice {
+    // ...
+  }
+}
+```
+
+#### Get shared users in DALI
+```swift
+DALILocation.Shared.get { (members, error) in
+  if let error = error {
+    //...
+  }
+
+  guard let members: [DALIMember] = members else {
+    return
+  }
+  // ..
+}
+```
 
 ## Installation
 

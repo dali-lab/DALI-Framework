@@ -26,7 +26,7 @@ open class DALIConfig {
 	internal var apiKey: String?
 	/// Token. This is needed for requests when needing user signin
 	internal var token: String?
-	internal var user: DALIUser?
+	internal var member: DALIMember?
 	
 	/**
 		Creates a DALIConfig object

@@ -105,7 +105,7 @@ public struct DALILocation {
 		
 		- parameter callback: Function called apon completion
 		*/
-		public static func get(callback: @escaping ([String]?, DALIError.General?) -> Void) {
+		public static func get(callback: @escaping ([DALIMember]?, DALIError.General?) -> Void) {
 			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/location/shared") { (object, code, error) in
 				if let error = error {
 					callback(nil, error)
@@ -117,14 +117,14 @@ public struct DALILocation {
 					return
 				}
 				
-				var outputArr: [String] = []
+				var outputArr: [DALIMember] = []
 				for obj in arr {
-					guard let dict = obj.dictionary, let user = dict["user"]?.dictionary, let name = user["fullName"]?.string else {
+					guard let dict = obj.dictionary, let user = dict["user"], let member = DALIMember.parse(user) else {
 						callback(nil, DALIError.General.UnexpectedResponse)
 						return
 					}
 
-					outputArr.append(name)
+					outputArr.append(member)
 				}
 				
 				callback(outputArr, nil)
@@ -135,10 +135,10 @@ public struct DALILocation {
 	/// The current user is sharing this device's location
 	public static var sharing: Bool {
 		get {
-			return UserDefaults.standard.bool(forKey: "DALIapi:sharing:\(DALIapi.config.user?.id ?? "all")")
+			return UserDefaults.standard.bool(forKey: "DALIapi:sharing:\(DALIapi.config.member?.id ?? "all")")
 		}
 		set {
-			UserDefaults.standard.set(newValue, forKey: "DALIapi:sharing:\(DALIapi.config.user?.id ?? "all")")
+			UserDefaults.standard.set(newValue, forKey: "DALIapi:sharing:\(DALIapi.config.member?.id ?? "all")")
 		}
 	}
 

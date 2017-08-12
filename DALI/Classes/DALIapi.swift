@@ -62,13 +62,13 @@ public class DALIapi {
 			
 			let userObj = json["user"]
 			
-			guard let user = DALIUser.parse(userObj) else {
+			guard let member = DALIMember.parse(userObj) else {
 				done(false, DALIError.General.UnexpectedResponse)
 				return
 			}
 			
 			self.unProtConfig.token = token
-			self.unProtConfig.user = user
+			self.unProtConfig.member = member
 			
 			done(true, nil)
 		}
@@ -104,13 +104,13 @@ public class DALIapi {
 					return
 				}
 				
-				guard let user = DALIUser.parse(userObj) else {
+				guard let user = DALIMember.parse(userObj) else {
 					done(false, DALIError.General.UnexpectedResponse)
 					return
 				}
 				
 				self.unProtConfig.token = token
-				self.unProtConfig.user = user
+				self.unProtConfig.member = user
 				
 				done(true, nil)
 			}
@@ -124,7 +124,7 @@ public class DALIapi {
 	}
 	
 	internal static func assertUser(funcName: String) {
-		if (DALIapi.config.user == nil) {
+		if (DALIapi.config.member == nil) {
 			fatalError("API key programs may not modify location records! Don't use \(funcName) if you configure with an API key. If you are getting this error and you do not configure using an API key, consult John Kotz")
 		}
 	}

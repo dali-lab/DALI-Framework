@@ -79,7 +79,7 @@
 		9E95D6E15DBE9B0FC92AAF60D42D1464 /* Nimble-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 572E99F31C50D18F5D1F32BBE21972B8 /* Nimble-dummy.m */; };
 		A33F1754198E8E8CCC7087F6176FFDC8 /* BeIdenticalTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D990CC9E1229B69176474BE0802EF /* BeIdenticalTo.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		A448F837592E21D9387322E8DA0DD93F /* BeAnInstanceOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B041F888709B9835977350A03EB9F9DF /* BeAnInstanceOf.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		A5599EF6B0235D0BDB8FA941687BFD44 /* DALIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CA3183AEF3314FA5D556EA39C1B03 /* DALIUser.swift */; };
+		A5599EF6B0235D0BDB8FA941687BFD44 /* DALIMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CA3183AEF3314FA5D556EA39C1B03 /* DALIMember.swift */; };
 		A59DD8D878845C7DA7A87F77443F071E /* ExampleMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45619E252BD57F023E12AB8186CF6A0A /* ExampleMetadata.swift */; };
 		A794E1982D81EEB8555ABB65249D2B78 /* SuiteHooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0091B362D6F1EA59C17F771B23F084E /* SuiteHooks.swift */; };
 		A91166D0A5E8F1D5D5377622C381C045 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC793A56324D6A0868785B62C0E334BE /* Match.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -217,7 +217,7 @@
 		3C704C10CF523F1EB719070D66B281B8 /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
 		3D0E79082DB9E8D89630AF68CC94E7F4 /* Pods-DALI_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DALI_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		3EA743C4E03B9DBE3A70DD1D32577B1F /* NMBExpectation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NMBExpectation.swift; path = Sources/Nimble/Adapters/NMBExpectation.swift; sourceTree = "<group>"; };
-		3F6CA3183AEF3314FA5D556EA39C1B03 /* DALIUser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIUser.swift; path = DALI/Classes/DALIUser.swift; sourceTree = "<group>"; };
+		3F6CA3183AEF3314FA5D556EA39C1B03 /* DALIMember.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIMember.swift; path = DALI/Classes/DALIMember.swift; sourceTree = "<group>"; };
 		405B02EA84CE26F2837ADFD4CBA7932E /* BeginWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeginWith.swift; path = Sources/Nimble/Matchers/BeginWith.swift; sourceTree = "<group>"; };
 		425C1C367CD8252F8A9141275188563E /* Stringers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stringers.swift; path = Sources/Nimble/Utils/Stringers.swift; sourceTree = "<group>"; };
 		42AC218A9688BAF8BED065E83D22E5BD /* MatchError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MatchError.swift; path = Sources/Nimble/Matchers/MatchError.swift; sourceTree = "<group>"; };
@@ -474,6 +474,17 @@
 			path = Quick;
 			sourceTree = "<group>";
 		};
+		520A92891F3F658B00A649F0 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				744A28939EE4B619B2BD20321499B89F /* DALIEvent.swift */,
+				E788420BE1D51338FB87D71950A3DA4C /* DALILocation.swift */,
+				4851B38FF56F01A76539D26F17382E1E /* DALIProject.swift */,
+				3F6CA3183AEF3314FA5D556EA39C1B03 /* DALIMember.swift */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 		6A310DCF6FBB443C9D1BE91625E81196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -574,10 +585,7 @@
 				E73593412B568D0A93CE02CE7DE65C38 /* DALIapi.swift */,
 				CA72214FAAFA701D113E1A6BFF7AF432 /* DALIConfig.swift */,
 				F77313B0B98BE4E5A9D35238D334F08E /* DALIErrors.swift */,
-				744A28939EE4B619B2BD20321499B89F /* DALIEvent.swift */,
-				E788420BE1D51338FB87D71950A3DA4C /* DALILocation.swift */,
-				4851B38FF56F01A76539D26F17382E1E /* DALIProject.swift */,
-				3F6CA3183AEF3314FA5D556EA39C1B03 /* DALIUser.swift */,
+				520A92891F3F658B00A649F0 /* Objects */,
 				85DC22E75CA9BA45376D4BDD50B0DBB2 /* ServerCommunicator.swift */,
 				867CF9EB75648B1CA14DED2B399105BC /* Support Files */,
 			);
@@ -998,7 +1006,7 @@
 				7FF5719F54606390219B22EF8092964F /* DALIEvent.swift in Sources */,
 				2F1366BF3558E55FEFC50728C2252F5E /* DALILocation.swift in Sources */,
 				5DE02A259A1781B9C0DF766851D319EC /* DALIProject.swift in Sources */,
-				A5599EF6B0235D0BDB8FA941687BFD44 /* DALIUser.swift in Sources */,
+				A5599EF6B0235D0BDB8FA941687BFD44 /* DALIMember.swift in Sources */,
 				6C5F098F5B1B38DA9D37EC9C0E78D937 /* ServerCommunicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

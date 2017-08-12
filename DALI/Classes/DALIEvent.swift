@@ -145,7 +145,7 @@ public class DALIEvent {
 			- parameters callback: Function called when done
 		*/
 		public static func get(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
-			if DALIapi.config.user?.isAdmin ?? false {
+			if DALIapi.config.member?.isAdmin ?? false {
 				callback(nil, DALIError.General.Unauthorized)
 				return
 			}

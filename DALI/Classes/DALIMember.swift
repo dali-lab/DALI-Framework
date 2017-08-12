@@ -15,7 +15,7 @@ A member of DALI
 
 The user object contains as much data as is allowed to a general client by the api
  */
-public struct DALIUser {
+public struct DALIMember {
 	private var name_in: String
 	private var gender_in: String?
 	private var email_in: String
@@ -117,7 +117,7 @@ public struct DALIUser {
 	
 		- returns: `DALIUser?` - The user object that was generated, if it could
 	 */
-	public static func parse(_ object: JSON) -> DALIUser? {
+	public static func parse(_ object: JSON) -> DALIMember? {
 		guard let dict = object.dictionary else {
 			return nil
 		}
@@ -135,7 +135,7 @@ public struct DALIUser {
 		
 		let location = dict["location"]?.arrayObject as? [Double]
 		
-		let user = DALIUser(
+		let user = DALIMember(
 			name_in: name,
 			gender_in: dict["gender"]?.string,
 			email_in: email,

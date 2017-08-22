@@ -398,6 +398,23 @@ public class DALIEvent {
 		}
 	}
 	
+	/**
+	Enables checkin on the event, and gets back major and minor values to be used when advertizing
+	*/
+	public func enableCheckin(callback: @escaping (Bool?, Int?, Int?, DALIError.General?) -> Void) {
+		ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/\(self.id)/checkinEnable", data: "".data(using: .utf8)!) { (success, json, error) in
+			var major: Int?
+			var minor: Int?
+			
+			if let dict = json?.dictionary {
+				major = dict["major"]?.int
+				minor = dict["minor"]?.int
+			}
+			
+			callback(success, major, minor, error)
+		}
+	}
+	
 	
 	/**
 	Get the public results for this event

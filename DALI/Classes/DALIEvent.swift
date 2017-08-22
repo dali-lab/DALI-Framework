@@ -385,11 +385,16 @@ public class DALIEvent {
 	/**
 	Checks in the current user to whatever event is happening now
 	*/
-	public static func checkIn(callback: @escaping (Bool, DALIError.General?) -> Void) {
+	public static func checkIn(major: Int, minor: Int, callback: @escaping (Bool, DALIError.General?) -> Void) {
 		DALIapi.assertUser(funcName: "checkIn")
+		let data = ["major": major, "minor": minor]
 		
-		ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/checkin", data: "".data(using: .utf8)!) { (success, json, error) in
-			callback(success, error)
+		do {
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/checkin", json: JSON(data)) { (success, json, error) in
+				callback(success, error)
+			}
+		} catch {
+			
 		}
 	}
 	

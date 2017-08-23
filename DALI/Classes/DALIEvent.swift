@@ -423,7 +423,7 @@ public class DALIEvent {
 	Gets a list of members who have checked in
 	*/
 	public func getMembersCheckedIn(callback: @escaping ([DALIMember], DALIError.General?) -> Void) {
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/\(self.id)/checkinEnable") { (data, code, error) in
+		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/\(self.id)/checkin") { (data, code, error) in
 			
 			var members: [DALIMember] = []
 			if let array = data?.array {

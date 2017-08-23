@@ -220,6 +220,10 @@ public class DALIEvent {
 	public var editable: Bool {
 		return myGoogleID == nil
 	}
+	/// A flag that indicates if this event is happening now
+	public var isNow: Bool {
+		return self.start_in <= Date() && self.end_in >= Date()
+	}
 	
 	/**
 		Creates an event object

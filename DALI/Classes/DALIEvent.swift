@@ -401,8 +401,8 @@ public class DALIEvent {
 	/**
 	Enables checkin on the event, and gets back major and minor values to be used when advertizing
 	*/
-	public func enableCheckin(callback: @escaping (Bool?, Int?, Int?, DALIError.General?) -> Void) {
-		ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/\(self.id)/checkinEnable", data: "".data(using: .utf8)!) { (success, json, error) in
+	public func enableCheckin(callback: @escaping (Bool, Int?, Int?, DALIError.General?) -> Void) {
+		ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/\(self.id)/checkin", data: "".data(using: .utf8)!) { (success, json, error) in
 			var major: Int?
 			var minor: Int?
 			
@@ -412,6 +412,25 @@ public class DALIEvent {
 			}
 			
 			callback(success, major, minor, error)
+		}
+	}
+	
+	/**
+	Gets a list of members who have checked in
+	*/
+	public func getMembersCheckedIn(callback: @escaping ([DALIMember], DALIError.General?) -> Void) {
+		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/\(self.id)/checkinEnable") { (data, code, error) in
+			
+			var members: [DALIMember] = []
+			if let array = data?.array {
+				for memberObj in array {
+					if let member = DALIMember.parse(memberObj) {
+						members.append(member)
+					}
+				}
+			}
+			
+			callback(members, error)
 		}
 	}
 	

@@ -14,7 +14,7 @@
     <a title="DALIEvent Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DALI Docs</a> (94% documented)</p>
+        <p><a href="../index.html">DALI Docs</a> (93% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -69,10 +69,10 @@
                 <a href="../Structs/DALILocation/Shared.html">– Shared</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:V4DALI11DALIProject">DALIProject</a>
+                <a href="../Structs/DALIMember.html">DALIMember</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/DALIUser.html">DALIUser</a>
+                <a href="../Structs.html#/s:V4DALI11DALIProject">DALIProject</a>
               </li>
             </ul>
           </li>
@@ -697,9 +697,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFC4DALI9DALIEvent11getUpcomingFT8callbackFTGSqGSaS0___GSqPs5Error___T__T_"></a>
+                    <a name="/s:ZFC4DALI9DALIEvent11getUpcomingFT8callbackFTGSqGSaS0___GSqOCS_9DALIError7General__T__T_"></a>
                     <a name="//apple_ref/swift/Method/getUpcoming(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFC4DALI9DALIEvent11getUpcomingFT8callbackFTGSqGSaS0___GSqPs5Error___T__T_">getUpcoming(callback:)</a>
+                    <a class="token" href="#/s:ZFC4DALI9DALIEvent11getUpcomingFT8callbackFTGSqGSaS0___GSqOCS_9DALIError7General__T__T_">getUpcoming(callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -714,7 +714,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getUpcoming</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">DALIEvent</span><span class="p">]?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getUpcoming</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">DALIEvent</span><span class="p">]?,</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -736,6 +736,60 @@
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFC4DALI9DALIEvent7checkInFT5majorSi5minorSi8callbackFTSbGSqOCS_9DALIError7General__T__T_"></a>
+                    <a name="//apple_ref/swift/Method/checkIn(major:minor:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFC4DALI9DALIEvent7checkInFT5majorSi5minorSi8callbackFTSbGSqOCS_9DALIError7General__T__T_">checkIn(major:minor:callback:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Checks in the current user to whatever event is happening now</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">checkIn</span><span class="p">(</span><span class="nv">major</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">minor</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC4DALI9DALIEvent13enableCheckinFT8callbackFTSbGSqSi_GSqSi_GSqOCS_9DALIError7General__T__T_"></a>
+                    <a name="//apple_ref/swift/Method/enableCheckin(callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC4DALI9DALIEvent13enableCheckinFT8callbackFTSbGSqSi_GSqSi_GSqOCS_9DALIError7General__T__T_">enableCheckin(callback:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enables checkin on the event, and gets back major and minor values to be used when advertizing</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">enableCheckin</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt">Int</span><span class="p">?,</span> <span class="kt">Int</span><span class="p">?,</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -845,7 +899,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://dali-lab.github.io/API-iOS-Framework/" target="_blank" rel="external">johnlev</a>. All rights reserved. (Last updated: 2017-08-10)</p>
+          <p>&copy; 2017 <a class="link" href="https://dali-lab.github.io/DALI-Framework/" target="_blank" rel="external">John Kotz</a>. All rights reserved. (Last updated: 2017-08-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

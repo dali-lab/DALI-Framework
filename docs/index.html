@@ -13,7 +13,7 @@
     <a title="DALI  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">DALI Docs</a> (94% documented)</p>
+        <p><a href="index.html">DALI Docs</a> (93% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -68,10 +68,10 @@
                 <a href="Structs/DALILocation/Shared.html">– Shared</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs.html#/s:V4DALI11DALIProject">DALIProject</a>
+                <a href="Structs/DALIMember.html">DALIMember</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/DALIUser.html">DALIUser</a>
+                <a href="Structs.html#/s:V4DALI11DALIProject">DALIProject</a>
               </li>
             </ul>
           </li>
@@ -87,19 +87,176 @@
 <a href="http://cocoapods.org/pods/DALI"><img src="https://img.shields.io/cocoapods/v/DALI.svg?style=flat" alt="Version"></a>
 <a href="http://cocoapods.org/pods/DALI"><img src="https://img.shields.io/cocoapods/l/DALI.svg?style=flat" alt="License"></a>
 <a href="http://cocoapods.org/pods/DALI"><img src="https://img.shields.io/cocoapods/p/DALI.svg?style=flat" alt="Platform"></a></p>
-<h2 id='example' class='heading'>Example</h2>
 
-<p>To run the example project, clone the repo, and run <code>pod install</code> from the Example directory first.</p>
-<h2 id='requirements' class='heading'>Requirements</h2>
+<p>A framework used by DALI Lab members to access the internal API, which stores all information about DALI&rsquo;s projects, members, and events.</p>
+<h2 id='getting-started' class='heading'>Getting Started</h2>
+<h3 id='authenticate' class='heading'>Authenticate</h3>
+
+<p>The API protects its data using two methods: private API key and Google OAuth2. This is done to support two different use cases: static installment or user-personal device.</p>
+<h4 id='google-oauth2-user-personal' class='heading'>Google OAuth2 (User-Personal)</h4>
+
+<p>A user-personal product could be an iOS app, Watch OS app, or anything that is personal to a user. This type of authentication uses the user&rsquo;s login credentials with Google to authenticate and identify them.</p>
+
+<p><em>Qualifications:</em></p>
+
+<ul>
+<li>The application acts on behalf of a single member</li>
+<li>The application modifies member information</li>
+<li>The application needs access to protected member information</li>
+</ul>
+
+<p><em>Authenticating Using Google OAuth2:</em></p>
+
+<ol>
+<li>Choose a method of Google sign-in. Some good options are:
+
+<ul>
+<li><a href="https://cocoapods.org/pods/GoogleSignIn">GoogleSignIn</a></li>
+</ul></li>
+<li>When the user has signed in successfully with Google, extract their accessToken and refreshToken
+
+<ul>
+<li>Using <a href="https://cocoapods.org/pods/GoogleSignIn">GoogleSignIn</a> the information is stored in <code>user.authentication</code></li>
+</ul></li>
+<li>Use those tokens to sign-in with the API
+<code>swift
+DALIapi.signin(accessToken: accessToken, refreshToken: refreshToken) { (success, error) in
+if success {
+  // Continue into the app
+  // Your api will handle authenticated requests from here on
+} else if let error = error {
+  // There was an error
+  // Most likely the user didn&#39;t use a @dali.dartmouth.edu email
+}
+}
+</code></li>
+</ol>
+
+<p><em>Althernate Method: Google OAuth2:</em></p>
+
+<p>Some Google Signing sign-in systems (Not <a href="https://cocoapods.org/pods/GoogleSignIn">GoogleSignIn</a>) may not sign the user in all the way, and instead of giving access and refresh tokens gives an authCode. In this case use <code>DALIapi.signin(authCode: authCode) { ... }</code>.</p>
+<h4 id='api-key-auth-static-installment' class='heading'>API Key Auth (Static-Installment)</h4>
+
+<p>A static-installment product could be an Apple TV app, a kiosk-type desktop application, or pretty much anything that doesn&rsquo;t need user sign-in. Its up to your imagination 😀!</p>
+
+<p><em>Qualifications:</em></p>
+
+<ul>
+<li>The application does not act on behalf of any single member</li>
+<li>The application does not need to modify member information</li>
+</ul>
+
+<p><em>Authenticating Using API Key:</em></p>
+
+<ol>
+<li>Contact an API administrator to register for an API key to be made for your app.
+
+<ul>
+<li>The key&rsquo;s access will be limited to the routes you need, but you can request more routes later if you need them</li>
+<li>Keep the key you get secret! It is an all access pass to the routes you were granted</li>
+</ul></li>
+<li>Create a plist file (sample shown below) to store the key and add it to .gitignore
+<img src="./images/envFile.png" alt="envFile"></li>
+<li>Load the file and load the config:
+<code>swift
+let file = NSDictionary(contentsOfFile: &quot;path/to/your/file.plist&quot;)
+let config = DALIConfig(dict: file)
+</code></li>
+<li>Configure the API with your credentials
+<code>swift
+// ...
+let config = DALIConfig(dict: file)
+DALIapi.configure(config)
+</code></li>
+</ol>
+
+<p>Done! Now you may make all the requests you are authorized to.</p>
+<h3 id='events' class='heading'>Events</h3>
+
+<p>Now that you have authenticated your system you can move on to Events. The event route is one of the simplest  because it requires no special data and no requirements on authentication usage.</p>
+<h4 id='get-all-events' class='heading'>Get all events</h4>
+<pre class="highlight swift"><code><span class="kt">DALIEvent</span><span class="o">.</span><span class="n">getAll</span> <span class="p">{</span> <span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+    <span class="c1">// Encountered a problem</span>
+    <span class="c1">// Check the type;</span>
+    <span class="k">if</span> <span class="n">error</span> <span class="o">==</span> <span class="kt">DALIError</span><span class="o">.</span><span class="kt">General</span><span class="o">.</span><span class="kt">Unauthorized</span> <span class="p">{</span>
+      <span class="c1">// ...</span>
+    <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="o">...</span> <span class="p">{</span>
+      <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="k">return</span>
+  <span class="p">}</span>
+
+  <span class="c1">// The events list is a [DALIEvent]? object</span>
+<span class="p">}</span>
+</code></pre>
+<h4 id='get-events-within-a-week-of-now' class='heading'>Get events within a week of now</h4>
+<pre class="highlight swift"><code><span class="kt">DALIEvent</span><span class="o">.</span><span class="n">getUpcoming</span> <span class="p">{</span> <span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre>
+<h4 id='create-an-event' class='heading'>Create an event</h4>
+<pre class="highlight swift"><code><span class="kt">DALIEvent</span><span class="o">.</span><span class="n">create</span> <span class="p">{</span> <span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='location' class='heading'>Location</h3>
+
+<p>DALI uses bluetooth beacon technology to identify when a device is in the lab. You can use this to gain access to the location flag (in DALI or not) for Tim or any other member.</p>
+<h4 id='get-tim-39-s-location' class='heading'>Get Tim&rsquo;s Location</h4>
+<pre class="highlight swift"><code><span class="kt">DALILocation</span><span class="o">.</span><span class="kt">Tim</span><span class="o">.</span><span class="k">get</span> <span class="p">{</span> <span class="p">(</span><span class="n">tim</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+    <span class="c1">// Encountered error...</span>
+    <span class="k">return</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="n">tim</span><span class="o">.</span><span class="n">inDALI</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+  <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="n">tim</span><span class="o">.</span><span class="n">inOffice</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h4 id='get-shared-users-in-dali' class='heading'>Get shared users in DALI</h4>
+<pre class="highlight swift"><code><span class="kt">DALILocation</span><span class="o">.</span><span class="kt">Shared</span><span class="o">.</span><span class="k">get</span> <span class="p">{</span> <span class="p">(</span><span class="n">members</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+  <span class="p">}</span>
+
+  <span class="k">guard</span> <span class="k">let</span> <span class="nv">members</span><span class="p">:</span> <span class="p">[</span><span class="kt">DALIMember</span><span class="p">]</span> <span class="o">=</span> <span class="n">members</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span>
+  <span class="p">}</span>
+  <span class="c1">// ..</span>
+<span class="p">}</span>
+</code></pre>
 <h2 id='installation' class='heading'>Installation</h2>
 
 <p>DALI is available through <a href="http://cocoapods.org">CocoaPods</a>. To install
 it, simply add the following line to your Podfile:</p>
 <pre class="highlight ruby"><code><span class="n">pod</span> <span class="s2">"DALI"</span>
 </code></pre>
+<h2 id='example' class='heading'>Example</h2>
+
+<blockquote>
+<p>Example project is still in alpha</p>
+</blockquote>
+
+<p>To run the example project, clone the repo, and run <code>pod install</code> from the Example directory first.</p>
 <h2 id='author' class='heading'>Author</h2>
 
-<p>johnlev, <a href="mailto:john.lyme@mac.com">john.lyme@mac.com</a></p>
+<p>John Kotz, <a href="mailto:john.kotz@dali.dartmouth.edu">john.kotz@dali.dartmouth.edu</a></p>
+<h2 id='requirements' class='heading'>Requirements</h2>
+<h5 id='usage-requirements' class='heading'>Usage Requirements</h5>
+
+<p>You must be a member of the DALI Lab or be working on behalf (with the permission) of the DALI Lab to use this pod. By using this cocoapod you acknowledge this requirement.</p>
+<h5 id='dependencies' class='heading'>Dependencies</h5>
+
+<ul>
+<li>SwiftJSON</li>
+</ul>
+<h5 id='function-specific-requirements' class='heading'>Function Specific Requirements</h5>
+
+<p>Some routes will intentionally crash your app if you use them without proper permission. Check out the docs on <a href="">Protected Functions</a>.</p>
 <h2 id='license' class='heading'>License</h2>
 
 <p>DALI is available under the MIT license. See the LICENSE file for more info.</p>
@@ -107,7 +264,7 @@ it, simply add the following line to your Podfile:</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://dali-lab.github.io/API-iOS-Framework/" target="_blank" rel="external">johnlev</a>. All rights reserved. (Last updated: 2017-08-10)</p>
+          <p>&copy; 2017 <a class="link" href="https://dali-lab.github.io/DALI-Framework/" target="_blank" rel="external">John Kotz</a>. All rights reserved. (Last updated: 2017-08-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

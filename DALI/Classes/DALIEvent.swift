@@ -424,7 +424,7 @@ public class DALIEvent {
 		]
 		
 		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/voting/events/\(self.id)/enable", json: JSON(dict)) { (success, data, error) in
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/events/\(self.id)/enable", json: JSON(dict)) { (success, data, error) in
 				callback(success, error)
 			}
 		} catch {
@@ -441,7 +441,7 @@ public class DALIEvent {
 		]
 		
 		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/voting/events/\(self.id)/options", json: JSON(dict), callback: { (success, data, error) in
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/events/\(self.id)/options", json: JSON(dict), callback: { (success, data, error) in
 				callback(success, error)
 			})
 		} catch {

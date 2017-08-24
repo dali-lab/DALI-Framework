@@ -415,6 +415,41 @@ public class DALIEvent {
 	}
 	
 	/**
+	Enable voting on this event
+	*/
+	public func enableVoting(numSelected: Int, ordered: Bool, callback: @escaping (Bool, DALIError.General?) -> Void) {
+		let dict: [String: Any] = [
+			"numSelected": numSelected,
+			"ordered": ordered
+		]
+		
+		do {
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/voting/events/\(self.id)/enable", json: JSON(dict)) { (success, data, error) in
+				callback(success, error)
+			}
+		} catch {
+			
+		}
+	}
+	
+	/**
+	Adds an option to the event
+	*/
+	public func addOption(option: String, callback: @escaping (Bool, DALIError.General?) -> Void) {
+		let dict: [String: String] = [
+			"option": option
+		]
+		
+		do {
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/voting/events/\(self.id)/options", json: JSON(dict), callback: { (success, data, error) in
+				callback(success, error)
+			})
+		} catch {
+			
+		}
+	}
+	
+	/**
 	Checks in the current user to whatever event is happening now
 	*/
 	public static func checkIn(major: Int, minor: Int, callback: @escaping (Bool, DALIError.General?) -> Void) {

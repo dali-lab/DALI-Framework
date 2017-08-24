@@ -321,7 +321,7 @@ public class DALIEvent {
 		event.myId = id
 		event.myGoogleID = googleID
 		event.votingEnabled = voting
-		if let numSelected = dict["votingConfig"]?["numSelected"].int, let ordered = dict["votingCongig"]?["ordered"].bool {
+		if let numSelected = dict["votingConfig"]?["numSelected"].int, let ordered = dict["votingConfig"]?["ordered"].bool {
 			event.votingConfig = Voting.Config(numSelected: numSelected, ordered: ordered)
 		} else if voting {
 			return nil

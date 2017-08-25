@@ -20,7 +20,7 @@ _Qualifications:_
 - The application modifies member information
 - The application needs access to protected member information
 
-_Authenticating Using Google OAuth2:_
+_Authenticating Using Google Signin:_
 1. Choose a method of Google sign-in. Some good options are:
   - [GoogleSignIn](https://cocoapods.org/pods/GoogleSignIn)
 2. When the user has signed in successfully with Google, extract their accessToken and refreshToken

@@ -192,6 +192,8 @@ public class DALIEvent {
 	public private(set) var votingEnabled: Bool
 	/// The configure the voting
 	public private(set) var votingConfig: Voting.Config?
+	/// Voting results have been released
+	public private(set) var votingResultsReleased: Bool
 	
 	fileprivate var myId: String!
 	fileprivate var myDirty: Bool = true
@@ -229,6 +231,7 @@ public class DALIEvent {
 		self.end_in = end
 		self.votingEnabled = false
 		self.votingConfig = nil
+		self.votingResultsReleased = false
 	}
 	
 	/**
@@ -305,6 +308,7 @@ public class DALIEvent {
 		let googleID = dict["googleID"]?.string
 		
 		let event = DALIEvent(name: name, desc: description, location: location, start: start, end: end)
+		event.votingResultsReleased = dict["votingResultsReleased"]?.boolValue ?? false
 		event.myId = id
 		event.myGoogleID = googleID
 		event.votingEnabled = voting
@@ -455,6 +459,9 @@ public class DALIEvent {
 		}
 		
 		ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)", data: "".data(using: .utf8)!) { (success, data, error) in
+			if (success) {
+				self.votingResultsReleased = true
+			}
 			callback(success, error)
 		}
 	}

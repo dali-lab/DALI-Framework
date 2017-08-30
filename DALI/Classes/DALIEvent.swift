@@ -446,6 +446,20 @@ public class DALIEvent {
 	}
 	
 	/**
+	Releases the results
+	*/
+	public func release(callback: @escaping (Bool, DALIError.General?) -> Void) {
+		if DALIapi.config.member?.isAdmin ?? false {
+			callback(false, DALIError.General.Unauthorized)
+			return
+		}
+		
+		ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)", data: "".data(using: .utf8)!) { (success, data, error) in
+			callback(success, error)
+		}
+	}
+	
+	/**
 	Adds an option to the event
 	*/
 	public func addOption(option: String, callback: @escaping (Bool, DALIError.General?) -> Void) {

@@ -156,22 +156,10 @@ public class DALIEvent {
 		}
 	}
 	
-	public var description: String {
-		var outputStr = "{\n"
-		
-		outputStr += "\tname: \(name)\n"
-		outputStr += "\tdescription: \(desc ?? "nil")\n"
-		outputStr += "\tlocation: \(location ?? "nil")\n"
-		outputStr += "\tstart: \(start)\n"
-		outputStr += "\tend: \(end)\n"
-	
-		return outputStr + "}"
-	}
-	
 	public var votingOptions: [Voting.Option]?
 	
 	private var name_in: String
-	private var desc_in: String?
+	private var description_in: String?
 	private var location_in: String?
 	private var start_in: Date
 	private var end_in: Date
@@ -182,9 +170,9 @@ public class DALIEvent {
 		set { if self.editable { self.name_in = newValue; self.myDirty = true } }
 	}
 	/// Description of the event
-	public var desc: String? {
-		get { return desc_in }
-		set { if self.editable { self.desc_in = newValue; self.myDirty = true } }
+	public var description: String? {
+		get { return description_in }
+		set { if self.editable { self.description_in = newValue; self.myDirty = true } }
 	}
 	/// Location of the event
 	public var location: String? {
@@ -236,7 +224,7 @@ public class DALIEvent {
 	 */
 	public init(name: String, desc: String?, location: String?, start: Date, end: Date) {
 		self.name_in = name
-		self.desc_in = desc
+		self.description_in = desc
 		self.location_in = location
 		self.start_in = start
 		self.end_in = end
@@ -263,7 +251,7 @@ public class DALIEvent {
 			"votingEnabled": self.votingEnabled
 		]
 		
-		if let description = self.desc {
+		if let description = self.description {
 			dict["description"] = description
 		}
 		if let location = self.location {
@@ -328,6 +316,27 @@ public class DALIEvent {
 		}
 		
 		return event
+	}
+	
+	public func json() -> JSON {
+		var dict: [String: Any?] = [
+			"name": self.name_in,
+			"startTime": DALIEvent.dateFormatter().string(from: self.start_in),
+			"endTime": DALIEvent.dateFormatter().string(from: self.end_in),
+			"description": self.description,
+			"id": self.id,
+			"votingEnabled": self.votingEnabled,
+			"googleID": self.myGoogleID,
+		]
+		
+		if let config = votingConfig {
+			dict["votingConfig"] = [
+				"numSelected": config.numSelected,
+				"ordered": config.ordered
+			]
+		}
+		
+		return JSON(dict)
 	}
 	
 	/**

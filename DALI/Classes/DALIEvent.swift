@@ -37,7 +37,7 @@ public class DALIEvent {
 			/// Identifier for the option
 			public private(set) var id: String
 			/// The awards this option has earned. Available only for admins or for events with results released
-			public private(set) var awards: [String]?
+			public var awards: [String]?
 			
 			/// A boolean to indicate if the user is voting for this one
 			public var isVotedFor: Bool = false
@@ -75,7 +75,6 @@ public class DALIEvent {
 		}
 		
 		
-		
 		/**
 		The configuration for voting events
 		*/
@@ -92,7 +91,7 @@ public class DALIEvent {
 			- parameter callback: Function called when done
 		*/
 		public static func getCurrent(callback: @escaping (DALIEvent?, DALIError.General?) -> Void) {
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/events/current") { (object, code, error) in
+			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/current") { (object, code, error) in
 				if let error = error {
 					callback(nil, error)
 					return
@@ -133,8 +132,8 @@ public class DALIEvent {
 		
 			- parameter callback: Function called when done
 		*/
-		public static func getResults(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/events") { (object, code, error) in
+		public static func getReleasedEvents(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public") { (object, code, error) in
 				handleEventList(object: object, code: code, error: error, callback: callback)
 			}
 		}
@@ -150,7 +149,7 @@ public class DALIEvent {
 				return
 			}
 			
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/admin/events") { (object, code, error) in
+			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/admin") { (object, code, error) in
 				handleEventList(object: object, code: code, error: error, callback: callback)
 			}
 		}
@@ -427,13 +426,18 @@ public class DALIEvent {
 	Enable voting on this event
 	*/
 	public func enableVoting(numSelected: Int, ordered: Bool, callback: @escaping (Bool, DALIError.General?) -> Void) {
+		if DALIapi.config.member?.isAdmin ?? false {
+			callback(false, DALIError.General.Unauthorized)
+			return
+		}
+		
 		let dict: [String: Any] = [
 			"numSelected": numSelected,
 			"ordered": ordered
 		]
 		
 		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/events/\(self.id)/enable", json: JSON(dict)) { (success, data, error) in
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)/enable", json: JSON(dict)) { (success, data, error) in
 				callback(success, error)
 			}
 		} catch {
@@ -445,12 +449,17 @@ public class DALIEvent {
 	Adds an option to the event
 	*/
 	public func addOption(option: String, callback: @escaping (Bool, DALIError.General?) -> Void) {
+		if DALIapi.config.member?.isAdmin ?? false {
+			callback(false, DALIError.General.Unauthorized)
+			return
+		}
+		
 		let dict: [String: String] = [
 			"option": option
 		]
 		
 		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/events/\(self.id)/options", json: JSON(dict), callback: { (success, data, error) in
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)/options", json: JSON(dict), callback: { (success, data, error) in
 				callback(success, error)
 			})
 		} catch {
@@ -496,7 +505,6 @@ public class DALIEvent {
 	*/
 	public func getMembersCheckedIn(callback: @escaping ([DALIMember], DALIError.General?) -> Void) {
 		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/\(self.id)/checkin") { (data, code, error) in
-			
 			var members: [DALIMember] = []
 			if let array = data?.array {
 				for memberObj in array {
@@ -518,7 +526,7 @@ public class DALIEvent {
 	- parameters callback: Function to be called when done
 	*/
 	public func getPublicResults(callback: @escaping ([Voting.Option]?, DALIError.General?) -> Void) {
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/results/events/\(self.id)") { (object, code, error) in
+		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(self.id)/results") { (object, code, error) in
 			if let error = error {
 				callback(nil, error)
 				return
@@ -542,7 +550,37 @@ public class DALIEvent {
 		}
 	}
 	
+	/**
+	Save the awards given to the given options
+	NOTE: This route will only work on admin accounts
 	
+	- parameter options: The options to save
+	- parameter callback: Function called when done
+	*/
+	public func saveResults(options: [Voting.Option], callback: @escaping (Bool, DALIError.General?) -> Void) {
+		if DALIapi.config.member?.isAdmin ?? false {
+			callback(false, DALIError.General.Unauthorized)
+			return
+		}
+		
+		var optionsData = [[String: Any]]()
+		for option in options {
+			let dict: [String : Any] = [
+				"id": option.id,
+				"awards": option.awards ?? []
+			]
+			
+			optionsData.append(dict)
+		}
+		
+		do {
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)/results", json: JSON(optionsData)) { (success, response, error) in
+				callback(success, error)
+			}
+		} catch {
+			callback(false, DALIError.General.InvalidJSON(text: optionsData.description, jsonError: NSError(domain: "some", code: ErrorInvalidJSON, userInfo: nil)))
+		}
+	}
 	
 	/**
 	Get all the options for this event
@@ -555,7 +593,7 @@ public class DALIEvent {
 			callback(options, nil)
 		}
 		
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/events/\(self.id)") { (object, code, error) in
+		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(self.id)") { (object, code, error) in
 			if let error = error {
 				callback(nil, error)
 				return
@@ -579,13 +617,19 @@ public class DALIEvent {
 	}
 	
 	/**
-	Get the results of an event. This route will only work on admin accounts
+	Get the results of an event.
+	NOTE: This route will only work on admin accounts
 	
 	- parameters event: Event to get the events of
 	- parameters callback: Function to be called when done
 	*/
 	public func getResults(callback: @escaping ([Voting.Option]?, DALIError.General?) -> Void) {
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/admin/events/\(self.id)") { (object, code, error) in
+		if DALIapi.config.member?.isAdmin ?? false {
+			callback(nil, DALIError.General.Unauthorized)
+			return
+		}
+		
+		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)") { (object, code, error) in
 			if let error = error {
 				callback(nil, error)
 				return

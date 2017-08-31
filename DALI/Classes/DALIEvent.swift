@@ -673,6 +673,25 @@ public class DALIEvent {
 		}
 	}
 	
+	public func submitVotes(options: [DALIEvent.Voting.Option], callback: @escaping (Bool, DALIError.General?) -> Void) {
+		var dict: [[String: Any]] = []
+		
+		for option in options {
+			dict.append([
+				"id": option.id,
+				"name": option.name
+			])
+		}
+		
+		do {
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/public/\(self.id)", json: JSON(dict), callback: { (success, data, error) in
+				callback(success, error)
+			})
+		}catch {
+			callback(false, DALIError.General.InvalidJSON(text: optionsData.description, jsonError: NSError(domain: "some", code: ErrorInvalidJSON, userInfo: nil)))
+		}
+	}
+	
 	private static func dateFormatter() -> DateFormatter {
 		let formatter = DateFormatter()
 		formatter.calendar = Calendar(identifier: .iso8601)

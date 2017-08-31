@@ -674,17 +674,17 @@ public class DALIEvent {
 	}
 	
 	public func submitVotes(options: [DALIEvent.Voting.Option], callback: @escaping (Bool, DALIError.General?) -> Void) {
-		var dict: [[String: Any]] = []
+		var optionsData: [[String: Any]] = []
 		
 		for option in options {
-			dict.append([
+			optionsData.append([
 				"id": option.id,
 				"name": option.name
 			])
 		}
 		
 		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/public/\(self.id)", json: JSON(dict), callback: { (success, data, error) in
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/public/\(self.id)", json: JSON(optionsData), callback: { (success, data, error) in
 				callback(success, error)
 			})
 		}catch {

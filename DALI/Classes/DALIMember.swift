@@ -16,6 +16,10 @@ A member of DALI
 The user object contains as much data as is allowed to a general client by the api
  */
 public struct DALIMember {
+	public static var current: DALIMember? {
+		return DALIapi.config.member
+	}
+	
 	private var name_in: String
 	private var gender_in: String?
 	private var email_in: String

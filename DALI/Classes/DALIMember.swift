@@ -156,4 +156,18 @@ public struct DALIMember {
 		
 		return user
 	}
+	
+	public func setNotificationID(id: String) {
+		let dict = [
+			"playerID": id
+		]
+		
+		do {
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/users/\(self.id)/notifID", json: JSON(dict), callback: { (success, data, error) in
+				
+			})
+		}catch{
+			
+		}
+	}
 }

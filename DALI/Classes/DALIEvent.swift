@@ -692,9 +692,10 @@ public class DALIEvent {
 		}
 	}
 	
-	public func updateNotificationPreference(notify: Bool, callback: @escaping (Bool, DALIError.General?) -> Void) {
-		let dict = [
-			"notify": notify
+	public func updateNotificationPreference(notify: Bool, playerID: String, callback: @escaping (Bool, DALIError.General?) -> Void) {
+		let dict: [String : Any] = [
+			"notify": notify,
+			"playerID": playerID
 		]
 		
 		do {

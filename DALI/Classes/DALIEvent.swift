@@ -692,6 +692,20 @@ public class DALIEvent {
 		}
 	}
 	
+	public func updateNotificationPreference(notify: Bool, callback: @escaping (Bool, DALIError.General?) -> Void) {
+		let dict = [
+			"notify": notify
+		]
+		
+		do {
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/public/\(self.id)/notify", json: JSON(dict), callback: { (success, data, error) in
+				callback(success, error)
+			})
+		}catch{
+			
+		}
+	}
+	
 	private static func dateFormatter() -> DateFormatter {
 		let formatter = DateFormatter()
 		formatter.calendar = Calendar(identifier: .iso8601)

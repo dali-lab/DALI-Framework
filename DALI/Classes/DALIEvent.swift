@@ -474,7 +474,7 @@ public class DALIEvent {
 				callback(success, error)
 			}
 		} catch {
-			
+			callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "some", code: ErrorInvalidJSON, userInfo: nil)))
 		}
 	}
 	
@@ -513,7 +513,7 @@ public class DALIEvent {
 				callback(success, error)
 			})
 		} catch {
-			
+			callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "some", code: ErrorInvalidJSON, userInfo: nil)))
 		}
 	}
 	
@@ -529,7 +529,7 @@ public class DALIEvent {
 				callback(success, error)
 			}
 		} catch {
-			
+			callback(false, DALIError.General.InvalidJSON(text: data.description, jsonError: NSError(domain: "some", code: ErrorInvalidJSON, userInfo: nil)))
 		}
 	}
 	
@@ -718,21 +718,6 @@ public class DALIEvent {
 			})
 		}catch {
 			callback(false, DALIError.General.InvalidJSON(text: optionsData.description, jsonError: NSError(domain: "some", code: ErrorInvalidJSON, userInfo: nil)))
-		}
-	}
-	
-	public func updateNotificationPreference(notify: Bool, playerID: String, callback: @escaping (Bool, DALIError.General?) -> Void) {
-		let dict: [String : Any] = [
-			"notify": notify,
-			"playerID": playerID
-		]
-		
-		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/public/\(self.id)/notify", json: JSON(dict), callback: { (success, data, error) in
-				callback(success, error)
-			})
-		}catch{
-			
 		}
 	}
 	

@@ -123,6 +123,26 @@ public class DALIapi {
 		config.token = nil
 	}
 	
+	/**
+	Sends a notification to EVERY device with the given tag set to true
+	*/
+	public static func sendSimpleNotification(with title: String, and subtitle: String, to tag: String,callback: @escaping (Bool, DALIError.General?) -> Void) {
+		
+		let dict: [String: Any] = [
+			"title": title,
+			"subtitle": subtitle,
+			"tag": tag
+		]
+		
+		do {
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/notify", json: JSON(dict), callback: { (success, data, error) in
+				callback(success, error)
+			})
+		}catch {
+			callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "some", code: ErrorInvalidJSON, userInfo: nil)))
+		}
+	}
+	
 	internal static func assertUser(funcName: String) {
 		if (DALIapi.config.member == nil) {
 			fatalError("API key programs may not modify location records! Don't use \(funcName) if you configure with an API key. If you are getting this error and you do not configure using an API key, consult John Kotz")

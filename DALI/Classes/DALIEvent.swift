@@ -399,6 +399,35 @@ public class DALIEvent {
 	}
 	
 	/**
+	Gets all upcoming events within a week from now that are public
+	No authorization is needed for this route
+	
+	- parameter callback: Function called when done
+	*/
+	public static func getPublicUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/public/week") { (json, code, error) in
+			if let error = error {
+				callback(nil, error)
+				return
+			}
+			
+			guard let array = json?.array else {
+				callback(nil, DALIError.General.UnexpectedResponse)
+				return
+			}
+			
+			var outputArr = [DALIEvent]()
+			for object in array {
+				if let event = DALIEvent.parse(object) {
+					outputArr.append(event)
+				}
+			}
+			
+			callback(outputArr, nil)
+		}
+	}
+	
+	/**
 	Gets all events in the future
 	
 	- parameter callback: Function called when done

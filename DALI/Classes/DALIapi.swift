@@ -10,8 +10,8 @@ import UIKit
 import SwiftyJSON
 
 /**
-Static class to configure and handle general requests the DALI api framework
- */
+Static class to configure and handle general requests for the DALI api framework
+*/
 public class DALIapi {
 	private static var unProtConfig: DALIConfig!
 	internal static var config: DALIConfig {
@@ -25,8 +25,10 @@ public class DALIapi {
 	}
 	
 	/**
-	 * Configures the entire framework
-	 */
+	Configures the entire framework
+	
+	NOTE: Make sure to run this configure method before using anything on the API
+	*/
 	public static func configure(config: DALIConfig) {
 		self.unProtConfig = config
 	}
@@ -74,6 +76,7 @@ public class DALIapi {
 		}
 	}
 	
+	/// Signs in on the server using access and refresh tokens provided by Google Signin. Will not sign in if already signed in
 	public static func signin(accessToken: String, refreshToken: String, done: @escaping (Bool, DALIError.General?) -> Void) {
 		self.signin(accessToken: accessToken, refreshToken: refreshToken, forced: false, done: done)
 	}
@@ -119,6 +122,7 @@ public class DALIapi {
 		}
 	}
 	
+	/// Signs out of your account on the API
 	public static func signOut() {
 		config.token = nil
 	}

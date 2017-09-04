@@ -3,7 +3,7 @@
 //  DALIapi
 //
 //  Created by John Kotz on 7/28/17.
-//  Copyright © 2017 BrunchLabs. All rights reserved.
+//  Copyright © 2017 DALI Lab. All rights reserved.
 //
 
 import Foundation

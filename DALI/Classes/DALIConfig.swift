@@ -3,7 +3,7 @@
 //  DALIapi
 //
 //  Created by John Kotz on 7/28/17.
-//  Copyright © 2017 BrunchLabs. All rights reserved.
+//  Copyright © 2017 DALI Lab. All rights reserved.
 //
 
 import Foundation
@@ -26,6 +26,7 @@ open class DALIConfig {
 	internal var apiKey: String?
 	/// Token. This is needed for requests when needing user signin
 	internal var token: String?
+	/// The current member signed in
 	internal var member: DALIMember?
 	
 	/// A default value for the sharing preference

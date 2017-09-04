@@ -2,16 +2,23 @@
   "warnings": [
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEvent.swift",
-      "line": 159,
-      "symbol": "DALIEvent.description",
+      "line": 158,
+      "symbol": "DALIEvent.votingOptions",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEvent.swift",
-      "line": 171,
-      "symbol": "DALIEvent.votingOptions",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "line": 324,
+      "symbol": "DALIEvent.json()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEvent.swift",
+      "line": 705,
+      "symbol": "DALIEvent.submitVotes(options:callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -23,7 +30,14 @@
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIMember.swift",
-      "line": 102,
+      "line": 19,
+      "symbol": "DALIMember.current",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIMember.swift",
+      "line": 106,
       "symbol": "DALIMember.isAdmin",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

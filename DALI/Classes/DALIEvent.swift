@@ -11,15 +11,9 @@ import SwiftyJSON
 
 /**
 A DALI event
-
-### Honestly, this is how I coded this part:
-
-![Coding stuff](https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif)
-
-I'll be cleaning it up soon enough
 */
 public class DALIEvent {
-	// MARK: Properties
+	// MARK: - Properties
 	private var name_in: String
 	private var description_in: String?
 	private var location_in: String?
@@ -74,18 +68,21 @@ public class DALIEvent {
 	internal var dict: [String: JSON]?
 	
 	
-	// MARK: Subclasses
+	// MARK: - Subclasses
 	
 	/**
 		Handles all voting communications
 	*/
 	public class VotingEvent: DALIEvent {
+		// MARK: - Properties
 		/// The configure the voting
 		public private(set) var config: Config
 		/// The options connected to the event
 		public var options: [Option]?
 		/// Voting results have been released
 		public private(set) var resultsReleased: Bool
+		
+		// MARK: - Structures
 		
 		/**
 		An option that a user can vote for.
@@ -150,6 +147,8 @@ public class DALIEvent {
 			}
 		}
 		
+		// MARK: Initialization Methods
+		
 		/**
 		Create a new voting event with all the given information
 		*/
@@ -202,6 +201,8 @@ public class DALIEvent {
 			self.init(event: event, votingConfig: config, options: nil, resultsReleased: resultsReleased)
 		}
 		
+		// MARK: JSON Methods
+		
 		public override func json() -> JSON {
 			if let dict = self.dict {
 				return JSON(dict)
@@ -223,6 +224,8 @@ public class DALIEvent {
 			
 			return JSON(dict)
 		}
+		
+		// MARK: Public Methods
 		
 		/**
 		Get the public results for this event
@@ -315,6 +318,7 @@ public class DALIEvent {
 		}
 		
 		// ===================== Admin only methods ======================
+		// MARK: Admin Methods
 		
 		/**
 		Save the awards given to the given options
@@ -430,6 +434,7 @@ public class DALIEvent {
 		}
 		
 		// =================== Static Methods =======================
+		// MARK: Static Getter Methods
 		
 		/**
 		Get the current voting event
@@ -501,8 +506,7 @@ public class DALIEvent {
 		}
 	}
 	
-	
-	// MARK: Functions
+	// MARK: Initialization Methods
 	
 	/**
 		Creates an event object
@@ -552,6 +556,8 @@ public class DALIEvent {
 		}
 	}
 	
+	// MARK: JSON Parsing and Constructing Methods
+	
 	/**
 		Parses a given json object and returns an event object if it can find one
 	
@@ -582,7 +588,7 @@ public class DALIEvent {
 		}
 		
 		// Get the rest
-		guard let id = dict["id"]?.string, let voting = dict["votingEnabled"]?.bool else {
+		guard let id = dict["id"]?.string else {
 			return nil
 		}
 		let googleID = dict["googleID"]?.string
@@ -623,6 +629,8 @@ public class DALIEvent {
 		
 		return JSON(dict)
 	}
+	
+	// MARK: Static Get Methods
 	
 	/**
 		Pulls __all__ the events from the server
@@ -737,6 +745,8 @@ public class DALIEvent {
 		}
 	}
 	
+	// MARK: Voting Conversion Methods
+	
 	/**
 	Enable voting on this event
 	
@@ -763,6 +773,8 @@ public class DALIEvent {
 			callback(false, nil, DALIError.General.InvalidJSON(text: config.json().string!, jsonError: NSError(domain: "some", code: ErrorInvalidJSON, userInfo: nil)))
 		}
 	}
+	
+	// MARK: Check In Methods
 	
 	/**
 	Checks in the current user to whatever event is happening now

@@ -9,14 +9,7 @@
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIMember.swift",
-      "line": 19,
-      "symbol": "DALIMember.current",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIMember.swift",
-      "line": 106,
+      "line": 108,
       "symbol": "DALIMember.isAdmin",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

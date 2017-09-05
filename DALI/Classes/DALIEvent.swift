@@ -23,42 +23,40 @@ public class DALIEvent {
 	/// Name of the event
 	public var name: String {
 		get { return name_in }
-		set { if self.editable { self.name_in = newValue; self.myDirty = true } }
+		set { if self.editable { self.name_in = newValue; self.dict?["name"] = JSON(newValue); self.dirty = true } }
 	}
 	/// Description of the event
 	public var description: String? {
 		get { return description_in }
-		set { if self.editable { self.description_in = newValue; self.myDirty = true } }
+		set { if self.editable { self.description_in = newValue; if let newValue = newValue { self.dict?["description"] = JSON(newValue) } else { self.dict?.removeValue(forKey: "description") }; self.dirty = true } }
 	}
 	/// Location of the event
 	public var location: String? {
 		get { return location_in }
-		set { if self.editable { self.location_in = newValue; self.myDirty = true } }
+		set { if self.editable { self.location_in = newValue; if let newValue = newValue { self.dict?["location"] = JSON(newValue) } else { self.dict?.removeValue(forKey: "location") }; self.dirty = true } }
 	}
 	/// Start time of the event
 	public var start: Date {
 		get { return start_in }
-		set { if self.editable { self.start_in = newValue; self.myDirty = true } }
+		set { if self.editable { self.start_in = newValue; self.dict?["start"] = JSON(newValue); self.dirty = true } }
 	}
 	/// Start time of the event
 	public var end: Date {
 		get { return end_in }
-		set { if self.editable { self.end_in = newValue; self.myDirty = true } }
+		set { if self.editable { self.end_in = newValue; self.dict?["end"] = JSON(newValue); self.dirty = true } }
 	}
 	
-	fileprivate var myId: String!
-	fileprivate var myDirty: Bool = true
-	fileprivate var myGoogleID: String?
+	fileprivate var googleID: String?
 	
 	/// The identifier used by the server
-	public var id: String { return myId }
+	public private(set) var id: String!
 	
 	/// Signifies when this event object contains information that has not been saved
-	public var dirty: Bool { return myDirty }
+	public private(set) var dirty: Bool
 	
 	/// A flag that indicates if this event can be edited
 	public var editable: Bool {
-		return myGoogleID == nil
+		return googleID == nil
 	}
 	/// A flag that indicates if this event is happening now
 	public var isNow: Bool {
@@ -78,7 +76,7 @@ public class DALIEvent {
 		/// The configure the voting
 		public private(set) var config: Config
 		/// The options connected to the event
-		public var options: [Option]?
+		public private(set) var options: [Option]?
 		/// Voting results have been released
 		public private(set) var resultsReleased: Bool
 		
@@ -171,9 +169,9 @@ public class DALIEvent {
 			super.init(name: event.name_in, description: event.description_in, location: event.description_in, start: event.start_in, end: event.end_in)
 			
 			self.dict = event.dict
-			self.myId = event.myId
-			self.myGoogleID = event.myGoogleID
-			self.myDirty = event.myDirty
+			self.id = event.id
+			self.googleID = event.googleID
+			self.dirty = event.dirty
 			
 			self.dict?["votingConfig"] = config.json()
 			self.dict?["votingResultsReleased"] = JSON(resultsReleased)
@@ -203,6 +201,11 @@ public class DALIEvent {
 		
 		// MARK: JSON Methods
 		
+		/**
+		Converts the data stored in the event into a JSON format that the API will understand
+		
+		- returns: JSON data describing the event
+		*/
 		public override func json() -> JSON {
 			if let dict = self.dict {
 				return JSON(dict)
@@ -217,12 +220,16 @@ public class DALIEvent {
 				"votingEnabled": true,
 				"votingResultsReleased": resultsReleased,
 				"votingConfig": config.json(),
-				"googleID": self.myGoogleID,
+				"googleID": self.googleID,
 			]
 			
 			self.dict = JSON(dict).dictionary
 			
 			return JSON(dict)
+		}
+		
+		public override class func parse(_ object: JSON) -> VotingEvent? {
+			return super.parse(object) as? VotingEvent
 		}
 		
 		// MARK: Public Methods
@@ -233,7 +240,7 @@ public class DALIEvent {
 		- parameters event: Event to get the results of
 		- parameters callback: Function to be called when done
 		*/
-		public func getPublicResults(callback: @escaping ([Option]?, DALIError.General?) -> Void) {
+		public func getResults(callback: @escaping ([Option]?, DALIError.General?) -> Void) {
 			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(self.id)/results") { (object, code, error) in
 				if let error = error {
 					callback(nil, error)
@@ -298,14 +305,18 @@ public class DALIEvent {
 		- parameter options: The options to be submitted. If the voting event is ordered then they need to be in 1st, 2nd, 3rd, ..., nth choice order
 		- parameter callback: Function to be called when done
 		*/
-		public func submitVote(options: [Option], callback: @escaping (Bool, DALIError.General?) -> Void) {
+		public func submitVote(options: [Option], callback: @escaping DALIapi.SuccessCallback) {
 			var optionsData: [[String: Any]] = []
 			
 			for option in options {
-				optionsData.append([
-					"id": option.id,
-					"name": option.name
-					])
+				if let storedOptions = self.options, storedOptions.contains(where: { (storedOption) -> Bool in return storedOption.id == option.id }) {
+					optionsData.append([
+						"id": option.id,
+						"name": option.name
+						])
+				}else{
+					// TODO: Have an error
+				}
 			}
 			
 			do {
@@ -328,7 +339,7 @@ public class DALIEvent {
 		- parameter options: The options to save
 		- parameter callback: Function called when done
 		*/
-		public func saveResults(options: [Option], callback: @escaping (Bool, DALIError.General?) -> Void) {
+		public func saveResults(options: [Option], callback: @escaping DALIapi.SuccessCallback) {
 			if DALIapi.config.member?.isAdmin ?? false {
 				callback(false, DALIError.General.Unauthorized)
 				return
@@ -358,10 +369,12 @@ public class DALIEvent {
 		
 		![Admin only](http://icons.iconarchive.com/icons/graphicloads/flat-finance/64/lock-icon.png)
 		
-		- parameters event: Event to get the events of
-		- parameters callback: Function to be called when done
+		- parameter event: Event to get the events of
+		- parameter callback: Function to be called when done
+		- parameter results: The results requested
+		- parameter error: Error encountered (if any)
 		*/
-		public func getResults(callback: @escaping ([Option]?, DALIError.General?) -> Void) {
+		public func getUnreleasedResults(callback: @escaping (_ results: [Option]?, _ error: DALIError.General?) -> Void) {
 			if DALIapi.config.member?.isAdmin ?? false {
 				callback(nil, DALIError.General.Unauthorized)
 				return
@@ -394,8 +407,10 @@ public class DALIEvent {
 		Releases the results
 		
 		![Admin only](http://icons.iconarchive.com/icons/graphicloads/flat-finance/64/lock-icon.png)
+		
+		- parameter callback: Function called when done
 		*/
-		public func release(callback: @escaping (Bool, DALIError.General?) -> Void) {
+		public func release(callback: @escaping DALIapi.SuccessCallback) {
 			if DALIapi.config.member?.isAdmin ?? false {
 				callback(false, DALIError.General.Unauthorized)
 				return
@@ -404,6 +419,7 @@ public class DALIEvent {
 			ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)", data: "".data(using: .utf8)!) { (success, data, error) in
 				if (success) {
 					self.resultsReleased = true
+					self.dict?["votingResultsReleased"] = JSON(true)
 				}
 				callback(success, error)
 			}
@@ -413,8 +429,11 @@ public class DALIEvent {
 		Adds an option to the event
 		
 		![Admin only](http://icons.iconarchive.com/icons/graphicloads/flat-finance/64/lock-icon.png)
+		
+		- parameter option: The option to be added
+		- parameter callback: Function called when done
 		*/
-		public func addOption(option: String, callback: @escaping (Bool, DALIError.General?) -> Void) {
+		public func addOption(option: String, callback: @escaping DALIapi.SuccessCallback) {
 			if DALIapi.config.member?.isAdmin ?? false {
 				callback(false, DALIError.General.Unauthorized)
 				return
@@ -426,6 +445,14 @@ public class DALIEvent {
 			
 			do {
 				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)/options", json: JSON(dict), callback: { (success, data, error) in
+					if success, let data = data, let option = Option.parse(object: data) {
+						if self.options == nil {
+							self.options = []
+						}
+						
+						self.options!.append(option)
+					}
+					
 					callback(success, error)
 				})
 			} catch {
@@ -440,15 +467,17 @@ public class DALIEvent {
 		Get the current voting event
 	
 		- parameter callback: Function called when done
+		- parameter event: Event found (if any)
+		- parameter error: Error encountered (if any)
 		*/
-		public static func getCurrent(callback: @escaping (DALIEvent?, DALIError.General?) -> Void) {
+		public static func getCurrent(callback: @escaping (_ event: VotingEvent?, _ error: DALIError.General?) -> Void) {
 			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/current") { (object, code, error) in
 				if let error = error {
 					callback(nil, error)
 					return
 				}
 				
-				guard let event = DALIEvent.parse(object!) else {
+				guard let event = VotingEvent.parse(object!) else {
 					callback(nil, DALIError.General.Unfound)
 					return
 				}
@@ -457,7 +486,7 @@ public class DALIEvent {
 			}
 		}
 		
-		private static func handleEventList(object: JSON?, code: Int?, error: DALIError.General?, callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+		private static func handleEventList(object: JSON?, code: Int?, error: DALIError.General?, callback: @escaping ([VotingEvent]?, DALIError.General?) -> Void) {
 			if let error = error {
 				callback(nil, error)
 				return
@@ -468,9 +497,9 @@ public class DALIEvent {
 				return
 			}
 			
-			var outputArr = [DALIEvent]()
+			var outputArr = [VotingEvent]()
 			for object in eventObjects {
-				if let event = DALIEvent.parse(object) {
+				if let event = VotingEvent.parse(object) {
 					outputArr.append(event)
 				}
 			}
@@ -479,22 +508,28 @@ public class DALIEvent {
 		}
 		
 		/**
-			Get all events that have results released
-		
-			- parameter callback: Function called when done
+		Get all events that have results released
+	
+		- parameter callback: Function called when done
+		- parameter events: List of events retrieved
+		- parameter error: Error encountered (if any)
 		*/
-		public static func getReleasedEvents(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+		public static func getReleasedEvents(callback: @escaping (_ events: [VotingEvent]?, _ error: DALIError.General?) -> Void) {
 			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public") { (object, code, error) in
 				handleEventList(object: object, code: code, error: error, callback: callback)
 			}
 		}
 		
 		/**
-		Get voting events as an admin. The signed in user __must__ be an admin, otherwise will exit immediately. Also cannot be API-key-authorized product
+		Get voting events as an admin. The signed in user __must__ be an admin, otherwise will exit immediately
+		
+		![Admin only](http://icons.iconarchive.com/icons/graphicloads/flat-finance/64/lock-icon.png)
 	
-		- parameters callback: Function called when done
+		- parameter callback: Function called when done
+		- parameter events: List of events retrieved
+		- parameter error: Error encountered (if any)
 		*/
-		public static func get(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+		public static func get(callback: @escaping (_ events: [VotingEvent]?, _ error: DALIError.General?) -> Void) {
 			if DALIapi.config.member?.isAdmin ?? false {
 				callback(nil, DALIError.General.Unauthorized)
 				return
@@ -523,6 +558,9 @@ public class DALIEvent {
 		self.location_in = location
 		self.start_in = start
 		self.end_in = end
+		self.googleID = nil
+		self.dirty = true
+		self.id = nil
 	}
 	
 	/**
@@ -533,7 +571,7 @@ public class DALIEvent {
 		- throws: `DALIError.Create` error describing some error encountered
 	 */
 	public func create(callback: @escaping (Bool, DALIError.General?) -> Void) throws {
-		if self.myId != nil {
+		if self.id != nil {
 			throw DALIError.Create.AlreadyCreated
 		}
 		
@@ -565,7 +603,7 @@ public class DALIEvent {
 	
 		- returns: `DALIEvent` that was found. Will be nil if object is not event
 	 */
-	public static func parse(_ object: JSON) -> DALIEvent? {
+	public class func parse(_ object: JSON) -> DALIEvent? {
 		guard let dict = object.dictionary else {
 			return nil
 		}
@@ -594,8 +632,8 @@ public class DALIEvent {
 		let googleID = dict["googleID"]?.string
 		
 		let event = DALIEvent(name: name, description: description, location: location, start: start, end: end)
-		event.myId = id
-		event.myGoogleID = googleID
+		event.id = id
+		event.googleID = googleID
 		event.dict = dict
 		
 		if let votingEvent = VotingEvent(event: event) {
@@ -624,7 +662,7 @@ public class DALIEvent {
 			"description": self.description,
 			"id": self.id,
 			"votingEnabled": false,
-			"googleID": self.myGoogleID,
+			"googleID": self.googleID,
 		]
 		
 		return JSON(dict)
@@ -633,11 +671,13 @@ public class DALIEvent {
 	// MARK: Static Get Methods
 	
 	/**
-		Pulls __all__ the events from the server
-	
-		- parameter callback: Function called when done
+	Pulls __all__ the events from the server
+
+	- parameter callback: Function called when done
+	- parameter events: The events returned by the API
+	- parameter error: The error encountered (if any)
 	 */
-	public static func getAll(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+	public static func getAll(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) {
 		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events") { (json, code, error) in
 			if let error = error {
 				callback(nil, error)
@@ -661,11 +701,13 @@ public class DALIEvent {
 	}
 	
 	/**
-		Gets all upcoming events within a week from now
-	
-		- parameter callback: Function called when done
+	Gets all upcoming events within a week from now
+
+	- parameter callback: Function called when done
+	- parameter events: The events returned by the API
+	- parameter error: The error encountered (if any)
 	*/
-	public static func getUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+	public static func getUpcoming(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) {
 		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/week") { (json, code, error) in
 			if let error = error {
 				callback(nil, error)
@@ -693,8 +735,10 @@ public class DALIEvent {
 	No authorization is needed for this route
 	
 	- parameter callback: Function called when done
+	- parameter events: The events returned by the API
+	- parameter error: The error encountered (if any)
 	*/
-	public static func getPublicUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+	public static func getPublicUpcoming(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) {
 		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/public/week") { (json, code, error) in
 			if let error = error {
 				callback(nil, error)
@@ -721,8 +765,10 @@ public class DALIEvent {
 	Gets all events in the future
 	
 	- parameter callback: Function called when done
+	- parameter events: The events returned by the API
+	- parameter error: The error encountered (if any)
 	*/
-	public static func getFuture(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+	public static func getFuture(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) {
 		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/future") { (json, code, error) in
 			if let error = error {
 				callback(nil, error)

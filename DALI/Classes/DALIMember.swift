@@ -16,6 +16,8 @@ A member of DALI
 The user object contains as much data as is allowed to a general client by the api
  */
 public struct DALIMember {
+	// MARK: - Properties
+	/// The current member
 	public static var current: DALIMember? {
 		return DALIapi.config.member
 	}
@@ -113,6 +115,8 @@ public struct DALIMember {
 	public var dirty: Bool {
 		return dirty_in
 	}
+	
+	// MARK: - Functions
 	
 	/**
 		Parses a json object and returns a DALIUser object if it can find all the required information

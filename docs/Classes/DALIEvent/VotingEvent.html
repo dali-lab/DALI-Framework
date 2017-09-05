@@ -14,7 +14,7 @@
     <a title="VotingEvent Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">DALI Docs</a> (97% documented)</p>
+        <p><a href="../../index.html">DALI Docs</a> (98% documented)</p>
         <p class="header-right"><a href="https://github.com/dali-lab/DALI-Framework"><img src="../../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -149,7 +149,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Classes/DALIEvent/VotingEvent/Option.html">Option</a></span><span class="p">]?</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Classes/DALIEvent/VotingEvent/Option.html">Option</a></span><span class="p">]?</span></code></pre>
 
                         </div>
                       </div>
@@ -274,7 +274,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Converts the data stored in the event into a JSON format that the API will understand</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -283,6 +284,55 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">json</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">JSON</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>JSON data describing the event</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFCC4DALI9DALIEvent11VotingEvent5parseFV10SwiftyJSON4JSONGSqS1__"></a>
+                    <a name="//apple_ref/swift/Method/parse(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFCC4DALI9DALIEvent11VotingEvent5parseFV10SwiftyJSON4JSONGSqS1__">parse(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">parse</span><span class="p">(</span><span class="n">_</span> <span class="nv">object</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">VotingEvent</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -301,9 +351,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FCC4DALI9DALIEvent11VotingEvent16getPublicResultsFT8callbackFTGSqGSaVS1_6Option__GSqOCS_9DALIError7General__T__T_"></a>
-                    <a name="//apple_ref/swift/Method/getPublicResults(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FCC4DALI9DALIEvent11VotingEvent16getPublicResultsFT8callbackFTGSqGSaVS1_6Option__GSqOCS_9DALIError7General__T__T_">getPublicResults(callback:)</a>
+                    <a name="/s:FCC4DALI9DALIEvent11VotingEvent10getResultsFT8callbackFTGSqGSaVS1_6Option__GSqOCS_9DALIError7General__T__T_"></a>
+                    <a name="//apple_ref/swift/Method/getResults(callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FCC4DALI9DALIEvent11VotingEvent10getResultsFT8callbackFTGSqGSaVS1_6Option__GSqOCS_9DALIError7General__T__T_">getResults(callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -318,7 +368,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getPublicResults</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../../Classes/DALIEvent/VotingEvent/Option.html">Option</a></span><span class="p">]?,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getResults</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../../Classes/DALIEvent/VotingEvent/Option.html">Option</a></span><span class="p">]?,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -391,7 +441,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">submitVote</span><span class="p">(</span><span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Classes/DALIEvent/VotingEvent/Option.html">Option</a></span><span class="p">],</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">submitVote</span><span class="p">(</span><span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Classes/DALIEvent/VotingEvent/Option.html">Option</a></span><span class="p">],</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../../Classes/DALIapi.html">DALIapi</a></span><span class="o">.</span><span class="kt">SuccessCallback</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -462,7 +512,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">saveResults</span><span class="p">(</span><span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Classes/DALIEvent/VotingEvent/Option.html">Option</a></span><span class="p">],</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">saveResults</span><span class="p">(</span><span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Classes/DALIEvent/VotingEvent/Option.html">Option</a></span><span class="p">],</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../../Classes/DALIapi.html">DALIapi</a></span><span class="o">.</span><span class="kt">SuccessCallback</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -503,9 +553,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FCC4DALI9DALIEvent11VotingEvent10getResultsFT8callbackFTGSqGSaVS1_6Option__GSqOCS_9DALIError7General__T__T_"></a>
-                    <a name="//apple_ref/swift/Method/getResults(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FCC4DALI9DALIEvent11VotingEvent10getResultsFT8callbackFTGSqGSaVS1_6Option__GSqOCS_9DALIError7General__T__T_">getResults(callback:)</a>
+                    <a name="/s:FCC4DALI9DALIEvent11VotingEvent20getUnreleasedResultsFT8callbackFTGSqGSaVS1_6Option__GSqOCS_9DALIError7General__T__T_"></a>
+                    <a name="//apple_ref/swift/Method/getUnreleasedResults(callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FCC4DALI9DALIEvent11VotingEvent20getUnreleasedResultsFT8callbackFTGSqGSaVS1_6Option__GSqOCS_9DALIError7General__T__T_">getUnreleasedResults(callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -522,9 +572,64 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getResults</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../../Classes/DALIEvent/VotingEvent/Option.html">Option</a></span><span class="p">]?,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getUnreleasedResults</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">results</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../../Classes/DALIEvent/VotingEvent/Option.html">Option</a></span><span class="p">]?,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Event to get the events of</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to be called when done</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>results</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The results requested</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Error encountered (if any)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -551,9 +656,28 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">release</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">release</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../../Classes/DALIapi.html">DALIapi</a></span><span class="o">.</span><span class="kt">SuccessCallback</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function called when done</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -580,9 +704,40 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addOption</span><span class="p">(</span><span class="nv">option</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addOption</span><span class="p">(</span><span class="nv">option</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../../Classes/DALIapi.html">DALIapi</a></span><span class="o">.</span><span class="kt">SuccessCallback</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>option</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The option to be added</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function called when done</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -601,9 +756,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFCC4DALI9DALIEvent11VotingEvent10getCurrentFT8callbackFTGSqS0__GSqOCS_9DALIError7General__T__T_"></a>
+                    <a name="/s:ZFCC4DALI9DALIEvent11VotingEvent10getCurrentFT8callbackFTGSqS1__GSqOCS_9DALIError7General__T__T_"></a>
                     <a name="//apple_ref/swift/Method/getCurrent(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFCC4DALI9DALIEvent11VotingEvent10getCurrentFT8callbackFTGSqS0__GSqOCS_9DALIError7General__T__T_">getCurrent(callback:)</a>
+                    <a class="token" href="#/s:ZFCC4DALI9DALIEvent11VotingEvent10getCurrentFT8callbackFTGSqS1__GSqOCS_9DALIError7General__T__T_">getCurrent(callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -618,7 +773,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getCurrent</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../../Classes/DALIEvent.html">DALIEvent</a></span><span class="p">?,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getCurrent</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">VotingEvent</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -638,6 +793,30 @@
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Event found (if any)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Error encountered (if any)</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -647,9 +826,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFCC4DALI9DALIEvent11VotingEvent17getReleasedEventsFT8callbackFTGSqGSaS0___GSqOCS_9DALIError7General__T__T_"></a>
+                    <a name="/s:ZFCC4DALI9DALIEvent11VotingEvent17getReleasedEventsFT8callbackFTGSqGSaS1___GSqOCS_9DALIError7General__T__T_"></a>
                     <a name="//apple_ref/swift/Method/getReleasedEvents(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFCC4DALI9DALIEvent11VotingEvent17getReleasedEventsFT8callbackFTGSqGSaS0___GSqOCS_9DALIError7General__T__T_">getReleasedEvents(callback:)</a>
+                    <a class="token" href="#/s:ZFCC4DALI9DALIEvent11VotingEvent17getReleasedEventsFT8callbackFTGSqGSaS1___GSqOCS_9DALIError7General__T__T_">getReleasedEvents(callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -664,7 +843,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getReleasedEvents</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../../Classes/DALIEvent.html">DALIEvent</a></span><span class="p">]?,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getReleasedEvents</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">events</span><span class="p">:</span> <span class="p">[</span><span class="kt">VotingEvent</span><span class="p">]?,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -684,6 +863,30 @@
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>events</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>List of events retrieved</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Error encountered (if any)</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -693,9 +896,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFCC4DALI9DALIEvent11VotingEvent3getFT8callbackFTGSqGSaS0___GSqOCS_9DALIError7General__T__T_"></a>
+                    <a name="/s:ZFCC4DALI9DALIEvent11VotingEvent3getFT8callbackFTGSqGSaS1___GSqOCS_9DALIError7General__T__T_"></a>
                     <a name="//apple_ref/swift/Method/get(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFCC4DALI9DALIEvent11VotingEvent3getFT8callbackFTGSqGSaS0___GSqOCS_9DALIError7General__T__T_">get(callback:)</a>
+                    <a class="token" href="#/s:ZFCC4DALI9DALIEvent11VotingEvent3getFT8callbackFTGSqGSaS1___GSqOCS_9DALIError7General__T__T_">get(callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -703,16 +906,61 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Get voting events as an admin. The signed in user <strong>must</strong> be an admin, otherwise will exit immediately. Also cannot be API-key-authorized product</p>
+                        <p>Get voting events as an admin. The signed in user <strong>must</strong> be an admin, otherwise will exit immediately</p>
+
+<p><img src="http://icons.iconarchive.com/icons/graphicloads/flat-finance/64/lock-icon.png" alt="Admin only"></p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">get</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../../Classes/DALIEvent.html">DALIEvent</a></span><span class="p">]?,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">get</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">events</span><span class="p">:</span> <span class="p">[</span><span class="kt">VotingEvent</span><span class="p">]?,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function called when done</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>events</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>List of events retrieved</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Error encountered (if any)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>

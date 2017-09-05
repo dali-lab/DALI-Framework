@@ -21,9 +21,11 @@ class ServerCommunicator {
 	/**
 	Makes a GET request on a given url, calling the callback with the response JSON object when its done
 	
-	- paramters:
-		- url: String - The URL you wan to GET from
-		- callback: (response: Any)->Void - The callback that will be invoked when the task is done
+	- parameter url: String - The URL you wan to GET from
+	- parameter callback: (response: Any)->Void - The callback that will be invoked when the task is done
+	- parameter response: The data response from the server
+	- parameter code: The code for the response
+	- parameter error: The error encountered (if any)
 	*/
 	static func get(url: String, callback: @escaping (_ response: JSON?, _ code: Int?, _ error: DALIError.General?) -> Void) {
 		var request = URLRequest(url: URL(string: url)!)
@@ -98,12 +100,14 @@ class ServerCommunicator {
 	/**
 	Convenience function for posting JSON data
 	
-	- Parameters:
-		- url: `String` - The URL you want to post to
-		- json: `Data` - A JSON encoded data string to be sent to the server
-		- callback: `(Bool, DALIError.General?)->Void` - A callback that will be invoked when the process is complete
+	- parameter url: The URL you want to post to
+	- parameter json: A JSON encoded data string to be sent to the server
+	- parameter callback: A callback that will be invoked when the process is complete
+	- parameter success: Flag indicating success
+	- parameter data: The JSON data sent back
+	- parameter error: The error encountered (if any)
 	*/
-	static func post(url: String, json: JSON, callback: @escaping (Bool, JSON?, DALIError.General?) -> Void) throws {
+	static func post(url: String, json: JSON, callback: @escaping (_ success: Bool, _ data: JSON?, _ error: DALIError.General?) -> Void) throws {
 		let data = try json.rawData()
 		
 		ServerCommunicator.post(url: url, data: data, callback: callback)
@@ -112,12 +116,14 @@ class ServerCommunicator {
 	/**
 	Makes a POST request to the given url using the given data, using the callback when it is done
 	
-	- Parameters:
-		- url: String - The URL you want to post to
-		- data: Data - A JSON encoded data string to be sent to the server
-		- callback: ()->Void - A callback that will be invoked when the process is complete
+	- parameter url: String - The URL you want to post to
+	- parameter data: Data - A JSON encoded data string to be sent to the server
+	- parameter callback: A callback that will be invoked when the process is complete
+	- parameter success: Flag indicating success
+	- parameter data: The JSON data sent back
+	- parameter error: The error encountered (if any)
 	*/
-	static func post(url: String, data: Data, callback: @escaping (Bool, JSON?, DALIError.General?) -> Void) {
+	static func post(url: String, data: Data, callback: @escaping (_ success: Bool, _ data: JSON?, _ error: DALIError.General?) -> Void) {
 		var request = URLRequest(url: URL(string: url)!)
 		request.httpMethod = "POST"
 		request.httpBody = data

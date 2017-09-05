@@ -25,6 +25,14 @@ public class DALIapi {
 	}
 	
 	/**
+	A callback reporting either success or failure in the requested action
+	
+	- parameter success: Flag indicating success in the action
+	- parameter error: Error encountered (if any)
+	*/
+	public typealias SuccessCallback = (_ success: Bool, _ error: DALIError.General?) -> Void
+	
+	/**
 	Configures the entire framework
 	
 	NOTE: Make sure to run this configure method before using anything on the API

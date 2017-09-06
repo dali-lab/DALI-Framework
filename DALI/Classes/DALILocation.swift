@@ -121,9 +121,19 @@ public class DALILocation {
 			}
 		}
 		
-		public static func observe(callback: @escaping (Tim?, DALIError.General?) -> Void) {
+		public static func observe(callback: @escaping (Tim?, DALIError.General?) -> Void) -> Observation {
 			DALILocation.assertSocket()
 			DALILocation.timCallback = callback
+			
+			return Observation(stop: {
+				DALILocation.timCallback = nil
+				if DALILocation.sharedCallback == nil && DALILocation.updatingSocket != nil {
+					if DALILocation.updatingSocket.status != .disconnected {
+						DALILocation.updatingSocket.disconnect()
+					}
+					DALILocation.updatingSocket = nil
+				}
+			}, id: "timObserver")
 		}
 		
 		/**
@@ -187,9 +197,19 @@ public class DALILocation {
 			}
 		}
 		
-		public static func observe(callback: @escaping ([DALIMember]?, DALIError.General?) -> Void) {
+		public static func observe(callback: @escaping ([DALIMember]?, DALIError.General?) -> Void) -> Observation {
 			DALILocation.assertSocket()
 			DALILocation.sharedCallback = callback
+			
+			return Observation(stop: {
+				DALILocation.sharedCallback = nil
+				if DALILocation.timCallback == nil && DALILocation.updatingSocket != nil {
+					if DALILocation.updatingSocket.status != .disconnected {
+						DALILocation.updatingSocket.disconnect()
+					}
+					DALILocation.updatingSocket = nil
+				}
+			}, id: "sharedObserver")
 		}
 		
 		/**

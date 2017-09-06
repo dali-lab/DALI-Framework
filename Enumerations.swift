@@ -14,3 +14,8 @@ extension Notification.Name {
 		static let SocketsEnabled = Notification.Name(rawValue: "SocketsEnabled")
 	}
 }
+
+public struct Observation {
+	public let stop: () -> Void
+	public let id: String
+}

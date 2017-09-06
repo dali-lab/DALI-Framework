@@ -729,32 +729,59 @@ public class DALIEvent {
 		}
 	}
 	
-	public static func observeAll(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+	public static func observeAll(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) -> Observation {
 		assertUpdatesSocket()
 		updatesCallbacks["allEvents"] = callback
 		
 		getAll(callback: callback)
+		
+		return Observation(stop: {
+			removeCallback(forKey: "allEvents")
+		}, id: "allEventsOberver")
 	}
 	
-	public static func observeUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+	public static func observeUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) -> Observation {
 		assertUpdatesSocket()
 		updatesCallbacks["weekEvents"] = callback
 		
 		getUpcoming(callback: callback)
+		
+		return Observation(stop: {
+			removeCallback(forKey: "weekEvents")
+		}, id: "weekEventsOberver")
 	}
 	
-	public static func observeFuture(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+	internal static func removeCallback(forKey key: String) {
+		updatesCallbacks.removeValue(forKey: key)
+		
+		if updatesCallbacks.keys.count == 0 && updatesSocket != nil {
+			if updatesSocket.status != .disconnected {
+				updatesSocket.disconnect()
+			}
+			updatesSocket = nil
+		}
+	}
+	
+	public static func observeFuture(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) -> Observation {
 		assertUpdatesSocket()
 		updatesCallbacks["futureEvents"] = callback
 		
 		getFuture(callback: callback)
+		
+		return Observation(stop: {
+			removeCallback(forKey: "futureEvents")
+		}, id: "futureEventsOberver")
 	}
 	
-	public static func observePublicUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+	public static func observePublicUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) -> Observation {
 		assertUpdatesSocket()
 		updatesCallbacks["publicEvents"] = callback
 		
 		getPublicUpcoming(callback: callback)
+		
+		return Observation(stop: {
+			removeCallback(forKey: "publicEvents")
+		}, id: "publicEventsOberver")
 	}
 	
 	

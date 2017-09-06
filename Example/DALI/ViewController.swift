@@ -14,14 +14,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	@IBOutlet weak var label: UILabel!
 	
 	var members: [DALIMember] = []
+	
+	var sharedObserver: Observation!
+	var timObserver: Observation!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
-		
-		DALILocation.Shared.observe { (members, error) in
+    }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		sharedObserver = DALILocation.Shared.observe { (members, error) in
 			if let members = members {
 				self.members = members
 				DispatchQueue.main.async {
@@ -34,14 +39,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 			}
 		}
 		
-		DALILocation.Tim.observe { (tim, error) in
+		timObserver = DALILocation.Tim.observe { (tim, error) in
 			if let tim = tim {
 				DispatchQueue.main.async {
 					self.label.text = "Tim inDALI: \(tim.inDALI) inOffice: \(tim.inOffice)"
 				}
 			}
 		}
-    }
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		sharedObserver.stop()
+		timObserver.stop()
+	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return members.count

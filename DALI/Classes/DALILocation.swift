@@ -153,7 +153,7 @@ public class DALILocation {
 			]
 			
 			do {
-				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/location/tim", json: JSON(dict)) { (success, response, error) in
+				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/tim", json: JSON(dict)) { (success, response, error) in
 					callback(success, error)
 				}
 			} catch {

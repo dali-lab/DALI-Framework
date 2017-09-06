@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DALI'
-  s.version          = '0.3.1.11'
+  s.version          = '0.3.11'
   s.summary          = 'A framework for iOS and tvOS that will handle all the needs of a DALI member working on an internal project'
 
   s.description      = <<-DESC

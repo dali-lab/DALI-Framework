@@ -242,7 +242,12 @@ public class DALIEvent {
 		- parameters callback: Function to be called when done
 		*/
 		public func getResults(callback: @escaping ([Option]?, DALIError.General?) -> Void) {
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(self.id)/results") { (object, code, error) in
+			guard let id = self.id else {
+				callback(nil, DALIError.General.BadRequest)
+				return
+			}
+			
+			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)/results") { (object, code, error) in
 				if let error = error {
 					callback(nil, error)
 					return
@@ -277,7 +282,12 @@ public class DALIEvent {
 				callback(options, nil)
 			}
 			
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(self.id)") { (object, code, error) in
+			guard let id = self.id else {
+				callback(nil, DALIError.General.BadRequest)
+				return
+			}
+			
+			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)") { (object, code, error) in
 				if let error = error {
 					callback(nil, error)
 					return
@@ -320,8 +330,13 @@ public class DALIEvent {
 				}
 			}
 			
+			guard let id = self.id else {
+				callback(false, DALIError.General.BadRequest)
+				return
+			}
+			
 			do {
-				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/public/\(self.id)", json: JSON(optionsData), callback: { (success, data, error) in
+				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)", json: JSON(optionsData), callback: { (success, data, error) in
 					callback(success, error)
 				})
 			}catch {
@@ -356,8 +371,13 @@ public class DALIEvent {
 				optionsData.append(dict)
 			}
 			
+			guard let id = self.id else {
+				callback(false, DALIError.General.BadRequest)
+				return
+			}
+			
 			do {
-				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)/results", json: JSON(optionsData)) { (success, response, error) in
+				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/results", json: JSON(optionsData)) { (success, response, error) in
 					callback(success, error)
 				}
 			} catch {
@@ -381,7 +401,12 @@ public class DALIEvent {
 				return
 			}
 			
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)") { (object, code, error) in
+			guard let id = self.id else {
+				callback(nil, DALIError.General.BadRequest)
+				return
+			}
+			
+			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)") { (object, code, error) in
 				if let error = error {
 					callback(nil, error)
 					return
@@ -417,7 +442,12 @@ public class DALIEvent {
 				return
 			}
 			
-			ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)", data: "".data(using: .utf8)!) { (success, data, error) in
+			guard let id = self.id else {
+				callback(false, DALIError.General.BadRequest)
+				return
+			}
+			
+			ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)", data: "".data(using: .utf8)!) { (success, data, error) in
 				if (success) {
 					self.resultsReleased = true
 					self.dict?["votingResultsReleased"] = JSON(true)
@@ -444,8 +474,13 @@ public class DALIEvent {
 				"option": option
 			]
 			
+			guard let id = self.id else {
+				callback(false, DALIError.General.BadRequest)
+				return
+			}
+			
 			do {
-				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)/options", json: JSON(dict), callback: { (success, data, error) in
+				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/options", json: JSON(dict), callback: { (success, data, error) in
 					if success, let data = data, let option = Option.parse(object: data) {
 						if self.options == nil {
 							self.options = []
@@ -896,8 +931,13 @@ public class DALIEvent {
 		
 		let config = VotingEvent.Config(numSelected: numSelected, ordered: ordered)
 		
+		guard let id = self.id else {
+			callback(false, nil, DALIError.General.BadRequest)
+			return
+		}
+		
 		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(self.id)/enable", json: config.json()) { (success, data, error) in
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/enable", json: config.json()) { (success, data, error) in
 				callback(success, success ? VotingEvent(event: self, votingConfig: config, options: nil, resultsReleased: false) : nil, error)
 			}
 		} catch {
@@ -927,7 +967,12 @@ public class DALIEvent {
 	Enables checkin on the event, and gets back major and minor values to be used when advertizing
 	*/
 	public func enableCheckin(callback: @escaping (Bool, Int?, Int?, DALIError.General?) -> Void) {
-		ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/\(self.id)/checkin", data: "".data(using: .utf8)!) { (success, json, error) in
+		guard let id = self.id else {
+			callback(false, nil, nil, DALIError.General.BadRequest)
+			return
+		}
+		
+		ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/\(id)/checkin", data: "".data(using: .utf8)!) { (success, json, error) in
 			var major: Int?
 			var minor: Int?
 			
@@ -944,7 +989,12 @@ public class DALIEvent {
 	Gets a list of members who have checked in
 	*/
 	public func getMembersCheckedIn(callback: @escaping ([DALIMember], DALIError.General?) -> Void) {
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/\(self.id)/checkin") { (data, code, error) in
+		guard let id = self.id else {
+			callback([], DALIError.General.BadRequest)
+			return
+		}
+		
+		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/\(id)/checkin") { (data, code, error) in
 			var members: [DALIMember] = []
 			if let array = data?.array {
 				for memberObj in array {

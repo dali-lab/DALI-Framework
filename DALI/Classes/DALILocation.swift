@@ -30,7 +30,7 @@ public class DALILocation {
 	internal static var updatingSocket: SocketIOClient!
 	internal static func assertSocket() {
 		if updatingSocket == nil {
-			updatingSocket = SocketIOClient(socketURL: URL(string: DALIapi.config.serverURL)!, config: [SocketIOClientOption.nsp("/location")])
+			updatingSocket = SocketIOClient(socketURL: URL(string: DALIapi.config.serverURL)!, config: [SocketIOClientOption.nsp("/location"), SocketIOClientOption.forcePolling(false)])
 			
 			updatingSocket.on("shared", callback: { (data, ack) in
 				guard let arr = data[0] as? [Any] else {

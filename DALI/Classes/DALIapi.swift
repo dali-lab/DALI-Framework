@@ -24,8 +24,6 @@ public class DALIapi {
 		}
 		return unProtConfig!
 	}
-	internal static var socket: SocketIOClient!
-	private static var socketConnected: Bool = false
 	
 	/**
 	A callback reporting either success or failure in the requested action
@@ -42,51 +40,48 @@ public class DALIapi {
 	*/
 	public static func configure(config: DALIConfig) {
 		self.unProtConfig = config
-		socket = SocketIOClient(socketURL: URL(string: config.serverURL)!)
 		
-		if config.enableSockets {
-			self.enableSockets()
-		}
+		enableSockets()
 	}
 	
 	internal static func enableSockets() {
-//		if !socketConnected { socket.connect() }
-		socketConnected = true
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(self.goingForeground), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(self.goingBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
 	}
 	
 	internal static func disableSockets() {
-//		socket.disconnect()
-		socketConnected = false
 		
 		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
 		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
 		
-		if DALIEvent.updatesSocket != nil {
-			DALIEvent.updatesSocket.disconnect()
+		if let eventSocket = DALIEvent.updatesSocket, eventSocket.status != .disconnected {
+			eventSocket.disconnect()
+		}
+		if let locationSocket = DALILocation.updatingSocket, locationSocket.status != .disconnected {
+			locationSocket.disconnect()
 		}
 	}
 	
 	@objc internal static func goingBackground() {
-		
 		if config.socketAutoSwitching {
-//			if socketConnected { socket.disconnect() }
-			if DALIEvent.updatesSocket != nil {
-				DALIEvent.updatesSocket.disconnect()
+			if let eventSocket = DALIEvent.updatesSocket, eventSocket.status != .disconnected {
+				eventSocket.disconnect()
 			}
-			socketConnected = false
+			if let locationSocket = DALILocation.updatingSocket, locationSocket.status != .disconnected {
+				locationSocket.disconnect()
+			}
 		}
 	}
 	
 	@objc internal static func goingForeground() {
 		if config.socketAutoSwitching {
-//			if !socketConnected { socket.connect() }
-			if DALIEvent.updatesSocket != nil {
-				DALIEvent.updatesSocket.connect()
+			if let eventSocket = DALIEvent.updatesSocket, eventSocket.status == .disconnected {
+				eventSocket.connect()
 			}
-			socketConnected = true
+			if let locationSocket = DALILocation.updatingSocket, locationSocket.status == .disconnected {
+				locationSocket.connect()
+			}
 		}
 	}
 	

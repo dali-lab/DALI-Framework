@@ -1008,6 +1008,45 @@ public class DALIEvent {
 		}
 	}
 	
+	internal var checkinSocket: SocketIOClient?
+	
+	public func observeMembersCheckedIn(callback: @escaping ([DALIMember]) -> Void) -> Observation {
+		if checkinSocket == nil {
+			self.checkinSocket = SocketIOClient(socketURL: URL(string: DALIapi.config.serverURL)!, config: [SocketIOClientOption.nsp("/listCheckins")])
+			
+			let checkinSocket = self.checkinSocket!
+			
+			checkinSocket.on("connect", callback: { (data, ack) in
+				checkinSocket.emit("eventSelect", self.id!)
+			})
+			
+			checkinSocket.connect()
+		}
+		
+		self.checkinSocket!.on("members", callback: { (data, ack) in
+			guard let array = data[0] as? [Any] else {
+				callback([])
+				return
+			}
+			
+			var members: [DALIMember] = []
+			for memberObj in array {
+				if let member = DALIMember.parse(JSON(memberObj)) {
+					members.append(member)
+				}
+			}
+			
+			callback(members)
+		})
+		
+		return Observation(stop: { 
+			if self.checkinSocket?.status != .disconnected {
+				self.checkinSocket?.disconnect()
+			}
+			self.checkinSocket = nil
+		}, id: "checkInMembers:\(self.id!)")
+	}
+	
 	private static func dateFormatter() -> DateFormatter {
 		let formatter = DateFormatter()
 		formatter.calendar = Calendar(identifier: .iso8601)

@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import SocketIO
 
 /**
 A static struct that contains all location updates and queries
@@ -23,14 +24,64 @@ A static struct that contains all location updates and queries
 	    }
 	}
 */
-public struct DALILocation {
-	private init() {}
+public class DALILocation {
+	internal static var sharedCallback: (([DALIMember]?, DALIError.General?) -> Void)?
+	internal static var timCallback: ((Tim?, DALIError.General?) -> Void)?
+	internal static var updatingSocket: SocketIOClient!
+	internal static func assertSocket() {
+		if updatingSocket == nil {
+			updatingSocket = SocketIOClient(socketURL: URL(string: DALIapi.config.serverURL)!, config: [SocketIOClientOption.nsp("/location")])
+			
+			updatingSocket.on("shared", callback: { (data, ack) in
+				guard let arr = data[0] as? [Any] else {
+					if let sharedCallback = sharedCallback {
+						sharedCallback(nil, DALIError.General.UnexpectedResponse)
+					}
+					return
+				}
+				
+				var outputArr: [DALIMember] = []
+				for obj in arr {
+					guard let dict = obj as? [String: Any], let user = dict["user"], let member = DALIMember.parse(JSON(user)) else {
+						if let sharedCallback = sharedCallback {
+							sharedCallback(nil, DALIError.General.UnexpectedResponse)
+						}
+						return
+					}
+					
+					outputArr.append(member)
+				}
+				
+				if let sharedCallback = sharedCallback {
+					sharedCallback(outputArr, nil)
+				}
+			})
+			
+			updatingSocket.on("tim", callback: { (data, ack) in
+				guard let dict = data[0] as? [String: Any], let inDALI = dict["inDALI"] as? Bool, let inOffice = dict["inOffice"] as? Bool else {
+					if let timCallback = timCallback {
+						timCallback(nil, DALIError.General.UnexpectedResponse)
+					}
+					return
+				}
+				
+				let tim = Tim(inDALI: inDALI, inOffice: inOffice)
+				Tim.current = tim
+				
+				if let timCallback = timCallback {
+					timCallback(tim, nil)
+				}
+			})
+			
+			updatingSocket.connect()
+		}
+	}
 	
 	/**
 	A simple struct that holds booleans that indicate Tim's location. Use it wisely 😉
 	*/
 	public struct Tim {
-		public private(set) static var current: Tim?
+		public internal(set) static var current: Tim?
 		
 		/// Tim is in DALI
 		public private(set) var inDALI: Bool
@@ -68,6 +119,11 @@ public struct DALILocation {
 				
 				callback(tim, nil)
 			}
+		}
+		
+		public static func observe(callback: @escaping (Tim?, DALIError.General?) -> Void) {
+			DALILocation.assertSocket()
+			DALILocation.timCallback = callback
 		}
 		
 		/**
@@ -129,6 +185,11 @@ public struct DALILocation {
 				
 				callback(outputArr, nil)
 			}
+		}
+		
+		public static func observe(callback: @escaping ([DALIMember]?, DALIError.General?) -> Void) {
+			DALILocation.assertSocket()
+			DALILocation.sharedCallback = callback
 		}
 		
 		/**

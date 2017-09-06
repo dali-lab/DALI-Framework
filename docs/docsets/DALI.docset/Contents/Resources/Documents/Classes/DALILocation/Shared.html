@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Shared Struct Reference</title>
+    <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../../js/jquery.min.js" defer></script>
+    <script src="../../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Shared" class="dashAnchor"></a>
+    <a title="Shared Struct Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../../index.html">DALI Docs</a> (87% documented)</p>
+        <p class="header-right"><a href="https://github.com/dali-lab/DALI-Framework"><img src="../../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../../index.html">DALI Reference</a>
+        <img id="carat" src="../../img/carat.png" />
+        Shared Struct Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Classes/DALIConfig.html">DALIConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/DALIError.html">DALIError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/DALIError.html#/s:OC4DALI9DALIError4Save">– Save</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/DALIError/Create.html">– Create</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/DALIError/General.html">– General</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/DALIEvent.html">DALIEvent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/DALIEvent/VotingEvent.html">– VotingEvent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/DALILocation.html">DALILocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/DALILocation/Tim.html">– Tim</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/DALILocation/Shared.html">– Shared</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Classes/DALIapi.html">DALIapi</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Structs/DALIMember.html">DALIMember</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs.html#/s:V4DALI11DALIProject">DALIProject</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Shared</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Shared</span></code></pre>
+
+                </div>
+              </div>
+            <p>A simple struct that handles getting a list of shared user</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFVC4DALI12DALILocation6Shared3getFT8callbackFTGSqGSaVS_10DALIMember__GSqOCS_9DALIError7General__T__T_"></a>
+                    <a name="//apple_ref/swift/Method/get(callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFVC4DALI12DALILocation6Shared3getFT8callbackFTGSqGSaVS_10DALIMember__GSqOCS_9DALIError7General__T__T_">get(callback:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get a list of all the people in the lab who are sharing their location</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">get</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../../Structs/DALIMember.html">DALIMember</a></span><span class="p">]?,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function called apon completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFVC4DALI12DALILocation6Shared7observeFT8callbackFTGSqGSaVS_10DALIMember__GSqOCS_9DALIError7General__T__T_"></a>
+                    <a name="//apple_ref/swift/Method/observe(callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFVC4DALI12DALILocation6Shared7observeFT8callbackFTGSqGSaVS_10DALIMember__GSqOCS_9DALIError7General__T__T_">observe(callback:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Shared</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFVC4DALI12DALILocation6Shared6submitFT6inDALISb8enteringSb8callbackFTSbGSqOCS_9DALIError7General__T__T_"></a>
+                    <a name="//apple_ref/swift/Method/submit(inDALI:entering:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFVC4DALI12DALILocation6Shared6submitFT6inDALISb8enteringSb8callbackFTSbGSqOCS_9DALIError7General__T__T_">submit(inDALI:entering:callback:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Submit the current location of the user</p>
+<div class="aside aside-important">
+    <p class="aside-title">Important</p>
+    <p>Do not run this on an API authenticated program. It will fatal error to protect the server!</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">submit</span><span class="p">(</span><span class="nv">inDALI</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">entering</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inDALI</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The user is in DALI</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>entering</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The user is entering DALI</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function that is called when done</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://dali-lab.github.io/DALI-Framework/" target="_blank" rel="external">John Kotz</a>. All rights reserved. (Last updated: 2017-09-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

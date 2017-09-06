@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import SocketIO
 
 /**
 A DALI event
@@ -699,6 +700,63 @@ public class DALIEvent {
 			callback(outputArr, nil)
 		}
 	}
+	
+	internal static var updatesSocket: SocketIOClient!
+	internal static var updatesCallbacks: [String: ([DALIEvent]?, DALIError.General?) -> Void] = [:]
+	internal static func assertUpdatesSocket() {
+		if updatesSocket == nil {
+			updatesSocket = SocketIOClient(socketURL: URL(string: DALIapi.config.serverURL)!, config: [SocketIOClientOption.nsp("eventsReloads")])
+			
+			updatesSocket.onAny({ (event) in
+				if let callback = updatesCallbacks[event.event] {
+					guard let arr = event.items?[0] as? [[String: Any]] else {
+						callback(nil, DALIError.General.UnexpectedResponse)
+						return
+					}
+					
+					var events: [DALIEvent] = []
+					for obj in arr {
+						if let event = DALIEvent.parse(JSON(obj)) {
+							events.append(event)
+						}
+					}
+					
+					callback(events, nil)
+				}
+			})
+			
+			updatesSocket.connect()
+		}
+	}
+	
+	public static func observeAll(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+		assertUpdatesSocket()
+		updatesCallbacks["allEvents"] = callback
+		
+		getAll(callback: callback)
+	}
+	
+	public static func observeUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+		assertUpdatesSocket()
+		updatesCallbacks["weekEvents"] = callback
+		
+		getUpcoming(callback: callback)
+	}
+	
+	public static func observeFuture(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+		assertUpdatesSocket()
+		updatesCallbacks["futureEvents"] = callback
+		
+		getFuture(callback: callback)
+	}
+	
+	public static func observePublicUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) {
+		assertUpdatesSocket()
+		updatesCallbacks["publicEvents"] = callback
+		
+		getPublicUpcoming(callback: callback)
+	}
+	
 	
 	/**
 	Gets all upcoming events within a week from now

@@ -8,13 +8,14 @@
 
 import UIKit
 import SwiftyJSON
+import SocketIO
 
 /**
 Static class to configure and handle general requests for the DALI api framework
 */
 public class DALIapi {
 	private static var unProtConfig: DALIConfig!
-	internal static var config: DALIConfig {
+	public static var config: DALIConfig {
 		if self.unProtConfig == nil {
 			fatalError("DALIapi: Config missing! You are required to have a configuration\n" +
 					   "Run:\nlet config = DALIConfig(dict: NSDictionary(contentsOfFile: filePath))\n" +
@@ -23,6 +24,8 @@ public class DALIapi {
 		}
 		return unProtConfig!
 	}
+	internal static var socket: SocketIOClient!
+	private static var socketConnected: Bool = false
 	
 	/**
 	A callback reporting either success or failure in the requested action
@@ -39,6 +42,52 @@ public class DALIapi {
 	*/
 	public static func configure(config: DALIConfig) {
 		self.unProtConfig = config
+		socket = SocketIOClient(socketURL: URL(string: config.serverURL)!)
+		
+		if config.enableSockets {
+			self.enableSockets()
+		}
+	}
+	
+	internal static func enableSockets() {
+//		if !socketConnected { socket.connect() }
+		socketConnected = true
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(self.goingForeground), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(self.goingBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+	}
+	
+	internal static func disableSockets() {
+//		socket.disconnect()
+		socketConnected = false
+		
+		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+		
+		if DALIEvent.updatesSocket != nil {
+			DALIEvent.updatesSocket.disconnect()
+		}
+	}
+	
+	@objc internal static func goingBackground() {
+		
+		if config.socketAutoSwitching {
+//			if socketConnected { socket.disconnect() }
+			if DALIEvent.updatesSocket != nil {
+				DALIEvent.updatesSocket.disconnect()
+			}
+			socketConnected = false
+		}
+	}
+	
+	@objc internal static func goingForeground() {
+		if config.socketAutoSwitching {
+//			if !socketConnected { socket.connect() }
+			if DALIEvent.updatesSocket != nil {
+				DALIEvent.updatesSocket.connect()
+			}
+			socketConnected = true
+		}
 	}
 	
 	/// Signs in on the server using Google Signin provided server auth code

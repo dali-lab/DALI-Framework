@@ -7,13 +7,53 @@
 //
 
 import UIKit
+import DALI
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var label: UILabel!
+	
+	var members: [DALIMember] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		tableView.delegate = self
+		tableView.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
+		
+		DALILocation.Shared.observe { (members, error) in
+			if let members = members {
+				self.members = members
+				DispatchQueue.main.async {
+					self.tableView.reloadData()
+				}
+			}
+			
+			if let error = error {
+				print(error)
+			}
+		}
+		
+		DALILocation.Tim.observe { (tim, error) in
+			if let tim = tim {
+				DispatchQueue.main.async {
+					self.label.text = "Tim inDALI: \(tim.inDALI) inOffice: \(tim.inOffice)"
+				}
+			}
+		}
     }
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return members.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+		
+		cell.textLabel?.text = members[indexPath.row].name
+		
+		return cell
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

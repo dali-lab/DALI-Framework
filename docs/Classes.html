@@ -13,7 +13,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">DALI Docs</a> (98% documented)</p>
+        <p><a href="index.html">DALI Docs</a> (87% documented)</p>
         <p class="header-right"><a href="https://github.com/dali-lab/DALI-Framework"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -52,6 +52,15 @@
                 <a href="Classes/DALIEvent/VotingEvent.html">– VotingEvent</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/DALILocation.html">DALILocation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DALILocation/Tim.html">– Tim</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DALILocation/Shared.html">– Shared</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/DALIapi.html">DALIapi</a>
               </li>
             </ul>
@@ -59,15 +68,6 @@
           <li class="nav-group-name">
             <a href="Structs.html">Structs</a>
             <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Structs/DALILocation.html">DALILocation</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/DALILocation/Tim.html">– Tim</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/DALILocation/Shared.html">– Shared</a>
-              </li>
               <li class="nav-group-task">
                 <a href="Structs/DALIMember.html">DALIMember</a>
               </li>
@@ -214,6 +214,48 @@ DALIapi.configure(config: config)
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIEvent</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C4DALI12DALILocation"></a>
+                    <a name="//apple_ref/swift/Class/DALILocation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C4DALI12DALILocation">DALILocation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A static struct that contains all location updates and queries</p>
+<h2 id='example' class='heading'>Example:</h2>
+<pre class="highlight plaintext"><code>DALILocation.Tim.get { (tim, error) in
+    // ...
+    if tim.inDALI {
+        // ...
+    } else if tim.inOffice {
+        // ...
+    }
+}
+</code></pre>
+
+                        <a href="Classes/DALILocation.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALILocation</span></code></pre>
 
                         </div>
                       </div>

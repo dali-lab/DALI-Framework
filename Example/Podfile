@@ -6,6 +6,7 @@ target 'DALI_Example' do
   target 'DALI_Tests' do
 	inherit! :search_paths
 	pod 'SwiftyJSON'
+	pod 'Socket.IO-Client-Swift'
 
     pod 'Quick', '~> 1.0.0'
     pod 'Nimble', '~> 5.1.1'

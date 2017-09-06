@@ -31,23 +31,46 @@ open class DALIConfig {
 	
 	/// A default value for the sharing preference
 	public var sharingDefault = false
+	private var enableSockets_internal = false
+	public var enableSockets: Bool {
+		get { return enableSockets_internal }
+		set { enableSockets_internal = newValue; if newValue { DALIapi.enableSockets() } else { DALIapi.disableSockets() } }
+	}
+	public var socketAutoSwitching = true
 	
 	/**
-		Creates a DALIConfig object
-	
-		- parameter dict: A dictionary containing server_url
+	Creates a DALIConfig object
+
+	- parameter dict: A dictionary containing server_url
 	*/
-	public init(dict: NSDictionary) {
+	public convenience init(dict: NSDictionary) {
 		guard let serverURL = dict["server_url"] as? String else {
 			fatalError("DALIConfig: Server URL Missing! Make sure server_url is in your config dictionary")
 		}
-		let apiKey = dict["api_key"] as? String
 		
+		self.init(serverURL: serverURL, apiKey: dict["api_key"] as? String, enableSockets: dict["enableSockets"] as? Bool)
+	}
+	
+	public convenience init(serverURL: String, apiKey: String) {
+		self.init(serverURL: serverURL, apiKey: apiKey, enableSockets: nil)
+	}
+	
+	public convenience init(serverURL: String) {
+		self.init(serverURL: serverURL, apiKey: nil, enableSockets: nil)
+	}
+	
+	public convenience init(serverURL: String, enableSockets: Bool) {
+		self.init(serverURL: serverURL, apiKey: nil, enableSockets: enableSockets)
+	}
+	
+	public init(serverURL: String, apiKey: String?, enableSockets: Bool?) {
 		self.serverURL = serverURL
 		self.apiKey = apiKey
 		
 		if self.serverURL.characters.last == "/" {
 			self.serverURL = self.serverURL.substring(to: self.serverURL.index(before: self.serverURL.endIndex))
 		}
+		
+		self.enableSockets_internal = enableSockets ?? false
 	}
 }

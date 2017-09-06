@@ -705,7 +705,7 @@ public class DALIEvent {
 	internal static var updatesCallbacks: [String: ([DALIEvent]?, DALIError.General?) -> Void] = [:]
 	internal static func assertUpdatesSocket() {
 		if updatesSocket == nil {
-			updatesSocket = SocketIOClient(socketURL: URL(string: DALIapi.config.serverURL)!, config: [SocketIOClientOption.nsp("eventsReloads")])
+			updatesSocket = SocketIOClient(socketURL: URL(string: DALIapi.config.serverURL)!, config: [SocketIOClientOption.nsp("/eventsReloads")])
 			
 			updatesSocket.onAny({ (event) in
 				if let callback = updatesCallbacks[event.event] {

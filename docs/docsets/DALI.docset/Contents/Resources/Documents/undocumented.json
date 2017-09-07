@@ -44,28 +44,28 @@
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEvent.swift",
-      "line": 732,
+      "line": 767,
       "symbol": "DALIEvent.observeAll(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEvent.swift",
-      "line": 743,
+      "line": 778,
       "symbol": "DALIEvent.observeUpcoming(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEvent.swift",
-      "line": 765,
+      "line": 800,
       "symbol": "DALIEvent.observeFuture(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEvent.swift",
-      "line": 776,
+      "line": 811,
       "symbol": "DALIEvent.observePublicUpcoming(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"

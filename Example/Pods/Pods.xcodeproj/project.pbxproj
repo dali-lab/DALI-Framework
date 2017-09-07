@@ -57,6 +57,7 @@
 		513DE60B95EFB3E69A36EC725E41173C /* QuickSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = EF910136726F40C05B7DA7D8FFCF7A49 /* QuickSpec.m */; };
 		5163ACE442F2A584900C4318042CB354 /* SocketEnginePacketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011ED0CC1BC749FB49CC0866069499B7 /* SocketEnginePacketType.swift */; };
 		5225AE061F5F5CF900718D12 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225AE051F5F5CF900718D12 /* Enumerations.swift */; };
+		5225AE0C1F60E73F00718D12 /* DALIFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225AE0B1F60E73E00718D12 /* DALIFood.swift */; };
 		5423BD4FA6CF47CAACBE519042CBA728 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63768018BC73405DFDEBBBB6E3A030 /* SocketAckEmitter.swift */; };
 		551440A0F92574039C1D2EB39227D6B8 /* AsyncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9B5ADEC8F81342B61A1EBB3FC5D445 /* AsyncMatcherWrapper.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		567728B6CA074B7483D438EA1479891C /* SocketEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F1DA75DFA87CA0D872A753B3F39A14 /* SocketEngineSpec.swift */; };
@@ -322,6 +323,7 @@
 		4CABDF523B2F5BC46A2B23A2561083C3 /* NSBundle+CurrentTestBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSBundle+CurrentTestBundle.swift"; path = "Sources/Quick/NSBundle+CurrentTestBundle.swift"; sourceTree = "<group>"; };
 		4F2687AE6721C9393F42DFFBAF69E09B /* AssertionRecorder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AssertionRecorder.swift; path = Sources/Nimble/Adapters/AssertionRecorder.swift; sourceTree = "<group>"; };
 		5225AE051F5F5CF900718D12 /* Enumerations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Enumerations.swift; path = DALI/Classes/Enumerations.swift; sourceTree = "<group>"; };
+		5225AE0B1F60E73E00718D12 /* DALIFood.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DALIFood.swift; sourceTree = "<group>"; };
 		523DDE9D33F54372A2C5085E61C1A2C2 /* QuickSelectedTestSuiteBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickSelectedTestSuiteBuilder.swift; path = Sources/Quick/QuickSelectedTestSuiteBuilder.swift; sourceTree = "<group>"; };
 		53F1DA75DFA87CA0D872A753B3F39A14 /* SocketEngineSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineSpec.swift; path = Source/SocketIO/Engine/SocketEngineSpec.swift; sourceTree = "<group>"; };
 		546B6F55FD7806ECA56BA76284BA71EE /* StarscreamSocketIO.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = StarscreamSocketIO.xcconfig; sourceTree = "<group>"; };
@@ -845,6 +847,7 @@
 				D78E032922A13F5E6112E1E63552776F /* DALIConfig.swift */,
 				5225AE051F5F5CF900718D12 /* Enumerations.swift */,
 				2AB6627BC04D1885E924A7301B4B6A80 /* DALIErrors.swift */,
+				5225AE0B1F60E73E00718D12 /* DALIFood.swift */,
 				B552B33896D6083CD730CE7181743444 /* DALIEvent.swift */,
 				1F84383788D76A63ECE585EBAF7D14EB /* DALILocation.swift */,
 				DCDC1E115F2BE4C4B00AF987B8DFE0D3 /* DALIMember.swift */,
@@ -1258,6 +1261,7 @@
 				938201344C01A2A52F4D36E7269C5682 /* DALIapi.swift in Sources */,
 				94B957CD4A09B0B4FB339495E136C246 /* DALIConfig.swift in Sources */,
 				5225AE061F5F5CF900718D12 /* Enumerations.swift in Sources */,
+				5225AE0C1F60E73F00718D12 /* DALIFood.swift in Sources */,
 				6670C35A49C66492DB96897D5D41F5A0 /* DALIErrors.swift in Sources */,
 				09113395903E2D556773536179079992 /* DALIEvent.swift in Sources */,
 				5F803F872605D7761AC097A5AA9D8229 /* DALILocation.swift in Sources */,

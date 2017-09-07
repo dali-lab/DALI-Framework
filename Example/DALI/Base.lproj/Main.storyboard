@@ -70,6 +70,79 @@
             </objects>
             <point key="canvasLocation" x="199" y="1057"/>
         </scene>
+        <!--Food-->
+        <scene sceneID="Nz4-WW-YDz">
+            <objects>
+                <viewController id="50K-Af-TRq" customClass="FoodViewController" customModule="DALI_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2JO-i1-5Yj"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lhz-Fl-x2h"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="P9s-fc-W1o">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connecting..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fO-Si-Mhu">
+                                <rect key="frame" x="136" y="28" width="102.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food is this" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1c2-aO-s6j">
+                                <rect key="frame" x="98.5" y="80" width="177" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nRk-OY-D9j">
+                                <rect key="frame" x="81" y="318.5" width="213" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="213" id="bcr-cq-Gil"/>
+                                    <constraint firstAttribute="height" constant="30" id="xL6-N6-Kkf"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ss0-RA-twi">
+                                <rect key="frame" x="163" y="356" width="49" height="30"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submit:" destination="50K-Af-TRq" eventType="touchUpInside" id="Xjz-nT-OMP"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set food to:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ddq-Ez-K4u">
+                                <rect key="frame" x="142" y="289" width="90" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1c2-aO-s6j" firstAttribute="centerX" secondItem="P9s-fc-W1o" secondAttribute="centerX" id="Fi9-eD-L1W"/>
+                            <constraint firstItem="1c2-aO-s6j" firstAttribute="top" secondItem="0fO-Si-Mhu" secondAttribute="bottom" constant="31" id="Hgn-IK-WC0"/>
+                            <constraint firstItem="nRk-OY-D9j" firstAttribute="centerY" secondItem="P9s-fc-W1o" secondAttribute="centerY" id="J5M-lR-ASy"/>
+                            <constraint firstItem="nRk-OY-D9j" firstAttribute="centerX" secondItem="P9s-fc-W1o" secondAttribute="centerX" id="WE0-Ye-SEr"/>
+                            <constraint firstItem="0fO-Si-Mhu" firstAttribute="top" secondItem="2JO-i1-5Yj" secondAttribute="bottom" constant="8" id="eDG-vD-Aam"/>
+                            <constraint firstItem="ss0-RA-twi" firstAttribute="centerX" secondItem="P9s-fc-W1o" secondAttribute="centerX" id="iZZ-vK-J81"/>
+                            <constraint firstItem="0fO-Si-Mhu" firstAttribute="centerX" secondItem="P9s-fc-W1o" secondAttribute="centerX" id="k7L-dP-U3j"/>
+                            <constraint firstItem="Ddq-Ez-K4u" firstAttribute="centerX" secondItem="P9s-fc-W1o" secondAttribute="centerX" id="sEN-Go-vYw"/>
+                            <constraint firstItem="nRk-OY-D9j" firstAttribute="top" secondItem="Ddq-Ez-K4u" secondAttribute="bottom" constant="8.5" id="vIx-Ld-bpd"/>
+                            <constraint firstItem="ss0-RA-twi" firstAttribute="top" secondItem="nRk-OY-D9j" secondAttribute="bottom" constant="7.5" id="y6P-yF-Wfx"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Food" id="7iZ-Ay-EGK"/>
+                    <connections>
+                        <outlet property="connectionLabel" destination="0fO-Si-Mhu" id="m6k-wo-CtF"/>
+                        <outlet property="foodLabel" destination="1c2-aO-s6j" id="xPJ-3s-p7x"/>
+                        <outlet property="foodTextField" destination="nRk-OY-D9j" id="UQZ-mL-I13"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ze8-jZ-mzS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="197.59999999999999" y="1862.5187406296852"/>
+        </scene>
         <!--Checkin View Controller-->
         <scene sceneID="8Ug-9O-haF">
             <objects>
@@ -83,7 +156,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="76u-QA-1v5" id="7kA-fM-SlF">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -111,6 +184,7 @@
                     <connections>
                         <segue destination="DKJ-q2-DPo" kind="relationship" relationship="viewControllers" id="uyZ-aK-8Lu"/>
                         <segue destination="Nc0-t3-esE" kind="relationship" relationship="viewControllers" id="nM6-b1-xLb"/>
+                        <segue destination="50K-Af-TRq" kind="relationship" relationship="viewControllers" id="qd0-qQ-XOn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jHo-SO-1n5" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -54,4 +54,19 @@ public class DALIFood {
 			callback(false)
 		}
 	}
+	
+	public static func cancelFood(callback: @escaping (Bool) -> Void) {
+		if !(DALIMember.current?.isAdmin ?? false) {
+			callback(false)
+			return
+		}
+		
+		do {
+			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/food", json: JSON([:]), callback: { (success, data, error) in
+				callback(success)
+			})
+		} catch {
+			callback(false)
+		}
+	}
 }

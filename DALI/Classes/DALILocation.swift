@@ -242,7 +242,7 @@ public class DALILocation {
 	/// The current user is sharing this device's location
 	public static var sharing: Bool {
 		get {
-			return UserDefaults.standard.value(forKey: "DALIapi:sharing)") as? Bool ?? DALIapi.config.sharingDefault
+			return UserDefaults.standard.value(forKey: "DALIapi:sharing") as? Bool ?? DALIapi.config.sharingDefault
 		}
 		set {
 			UserDefaults.standard.set(newValue, forKey: "DALIapi:sharing")

@@ -30,7 +30,7 @@ open class DALIConfig {
 	internal var member: DALIMember?
 	
 	/// A default value for the sharing preference
-	public var sharingDefault = false
+	public var sharingDefault = true
 	private var enableSockets_internal = false
 	public var enableSockets: Bool {
 		get { return enableSockets_internal }

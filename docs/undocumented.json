@@ -113,6 +113,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIFood.swift",
+      "line": 58,
+      "symbol": "DALIFood.cancelFood(callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
       "line": 84,
       "symbol": "DALILocation.Tim.current",

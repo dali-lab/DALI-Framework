@@ -242,10 +242,10 @@ public class DALILocation {
 	/// The current user is sharing this device's location
 	public static var sharing: Bool {
 		get {
-			return UserDefaults.standard.value(forKey: "DALIapi:sharing:\(DALIapi.config.member?.id ?? "all")") as? Bool ?? DALIapi.config.sharingDefault
+			return UserDefaults.standard.value(forKey: "DALIapi:sharing)") as? Bool ?? DALIapi.config.sharingDefault
 		}
 		set {
-			UserDefaults.standard.set(newValue, forKey: "DALIapi:sharing:\(DALIapi.config.member?.id ?? "all")")
+			UserDefaults.standard.set(newValue, forKey: "DALIapi:sharing")
 			do {
 				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/shared/updatePreference", json: JSON(["sharing": newValue]), callback: { (success, object, error) in
 				

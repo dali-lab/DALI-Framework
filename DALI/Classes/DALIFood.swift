@@ -15,7 +15,9 @@ public class DALIFood {
 	
 	public static func getFood(callback: @escaping (String?) -> Void) {
 		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/food") { (data, code, error) in
-			callback(data?.string)
+			DispatchQueue.main.async {
+				callback(data?.string)
+			}
 		}
 	}
 	
@@ -29,7 +31,9 @@ public class DALIFood {
 		}
 		
 		socket!.on("foodUpdate", callback: { (data, ack) in
-			callback(data[0] as? String)
+			DispatchQueue.main.async {
+				callback(data[0] as? String)
+			}
 		})
 		
 		return Observation(stop: { 
@@ -42,31 +46,43 @@ public class DALIFood {
 	
 	public static func setFood(food: String, callback: @escaping (Bool) -> Void) {
 		if !(DALIMember.current?.isAdmin ?? false) {
-			callback(false)
+			DispatchQueue.main.async {
+				callback(false)
+			}
 			return
 		}
 		
 		do {
 			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/food", json: JSON(["food": food]), callback: { (success, data, error) in
-				callback(success)
+				DispatchQueue.main.async {
+					callback(success)
+				}
 			})
 		} catch {
-			callback(false)
+			DispatchQueue.main.async {
+				callback(false)
+			}
 		}
 	}
 	
 	public static func cancelFood(callback: @escaping (Bool) -> Void) {
 		if !(DALIMember.current?.isAdmin ?? false) {
-			callback(false)
+			DispatchQueue.main.async {
+				callback(false)
+			}
 			return
 		}
 		
 		do {
 			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/food", json: JSON([:]), callback: { (success, data, error) in
-				callback(success)
+				DispatchQueue.main.async {
+					callback(success)
+				}
 			})
 		} catch {
-			callback(false)
+			DispatchQueue.main.async {
+				callback(false)
+			}
 		}
 	}
 }

@@ -35,7 +35,9 @@ public class DALILocation {
 			updatingSocket.on("shared", callback: { (data, ack) in
 				guard let arr = data[0] as? [Any] else {
 					if let sharedCallback = sharedCallback {
-						sharedCallback(nil, DALIError.General.UnexpectedResponse)
+						DispatchQueue.main.async {
+							sharedCallback(nil, DALIError.General.UnexpectedResponse)
+						}
 					}
 					return
 				}
@@ -44,7 +46,9 @@ public class DALILocation {
 				for obj in arr {
 					guard let dict = obj as? [String: Any], let user = dict["user"], let member = DALIMember.parse(JSON(user)) else {
 						if let sharedCallback = sharedCallback {
-							sharedCallback(nil, DALIError.General.UnexpectedResponse)
+							DispatchQueue.main.async {
+								sharedCallback(nil, DALIError.General.UnexpectedResponse)
+							}
 						}
 						return
 					}
@@ -53,14 +57,18 @@ public class DALILocation {
 				}
 				
 				if let sharedCallback = sharedCallback {
-					sharedCallback(outputArr, nil)
+					DispatchQueue.main.async {
+						sharedCallback(outputArr, nil)
+					}
 				}
 			})
 			
 			updatingSocket.on("tim", callback: { (data, ack) in
 				guard let dict = data[0] as? [String: Any], let inDALI = dict["inDALI"] as? Bool, let inOffice = dict["inOffice"] as? Bool else {
 					if let timCallback = timCallback {
-						timCallback(nil, DALIError.General.UnexpectedResponse)
+						DispatchQueue.main.async {
+							timCallback(nil, DALIError.General.UnexpectedResponse)
+						}
 					}
 					return
 				}
@@ -69,7 +77,9 @@ public class DALILocation {
 				Tim.current = tim
 				
 				if let timCallback = timCallback {
-					timCallback(tim, nil)
+					DispatchQueue.main.async {
+						timCallback(tim, nil)
+					}
 				}
 			})
 			
@@ -106,18 +116,24 @@ public class DALILocation {
 		public static func get(callback: @escaping (Tim?, DALIError.General?) -> Void) {
 			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/location/tim") { (object, code, error) in
 				if let error = error {
-					callback(nil, error)
+					DispatchQueue.main.async {
+						callback(nil, error)
+					}
 					return
 				}
 				
 				guard let dict = object?.dictionary, let inDALI = dict["inDALI"]?.bool, let inOffice = dict["inOffice"]?.bool else {
-					callback(nil, DALIError.General.UnexpectedResponse)
+					DispatchQueue.main.async {
+						callback(nil, DALIError.General.UnexpectedResponse)
+					}
 					return
 				}
 				let tim = Tim(inDALI: inDALI, inOffice: inOffice)
 				self.current = tim
 				
-				callback(tim, nil)
+				DispatchQueue.main.async {
+					callback(tim, nil)
+				}
 			}
 		}
 		
@@ -154,10 +170,14 @@ public class DALILocation {
 			
 			do {
 				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/tim", json: JSON(dict)) { (success, response, error) in
-					callback(success, error)
+					DispatchQueue.main.async {
+						callback(success, error)
+					}
 				}
 			} catch {
-				callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "SwiftyJSON", code: ErrorInvalidJSON, userInfo: nil)))
+				DispatchQueue.main.async {
+					callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "SwiftyJSON", code: ErrorInvalidJSON, userInfo: nil)))
+				}
 			}
 		}
 	}
@@ -174,12 +194,16 @@ public class DALILocation {
 		public static func get(callback: @escaping ([DALIMember]?, DALIError.General?) -> Void) {
 			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/location/shared") { (object, code, error) in
 				if let error = error {
-					callback(nil, error)
+					DispatchQueue.main.async {
+						callback(nil, error)
+					}
 					return
 				}
 				
 				guard let arr = object?.array else {
-					callback(nil, DALIError.General.UnexpectedResponse)
+					DispatchQueue.main.async {
+						callback(nil, DALIError.General.UnexpectedResponse)
+					}
 					return
 				}
 				
@@ -193,7 +217,9 @@ public class DALILocation {
 					outputArr.append(member)
 				}
 				
-				callback(outputArr, nil)
+				DispatchQueue.main.async {
+					callback(outputArr, nil)
+				}
 			}
 		}
 		
@@ -231,10 +257,14 @@ public class DALILocation {
 			
 			do {
 				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/shared", json: JSON(dict)) { (success, response, error) in
-					callback(success, error)
+					DispatchQueue.main.async {
+						callback(success, error)
+					}
 				}
 			} catch {
-				callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "SwiftyJSON", code: ErrorInvalidJSON, userInfo: nil)))
+				DispatchQueue.main.async {
+					callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "SwiftyJSON", code: ErrorInvalidJSON, userInfo: nil)))
+				}
 			}
 		}
 	}

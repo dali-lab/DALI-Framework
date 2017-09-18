@@ -12,6 +12,7 @@ import SocketIO
 
 public class DALILights {
 	private static var scenesMap: [String:[String]] = [:]
+	private static var scenesAvgColorMap: [String:String] = [:]
 	
 	public struct Group {
 		public let name: String
@@ -27,6 +28,17 @@ public class DALILights {
 			return scene?.capitalized
 		}
 		public let color: String?
+		
+		public var avgColor: String? {
+			if let color = color {
+				return color
+			}else if let scene = scene {
+				return DALILights.scenesAvgColorMap[scene]
+			}else{
+				return nil
+			}
+		}
+		
 		public let isOn: Bool
 		public var scenes: [String] {
 			if name == "all" {
@@ -187,13 +199,15 @@ public class DALILights {
 			}
 			
 			var map = [String:[String]]()
+			var colorMap = [String:String]()
 			
 			for entry in dict {
 				if let value = entry.value.array {
 					var array: [String] = []
 					for scene in value {
-						if let scene = scene.string {
+						if let sceneDict = scene.dictionary, let scene = sceneDict["name"]?.string, let avgColor = sceneDict["averageColor"]?.string {
 							array.append(scene)
+							colorMap[scene] = avgColor
 						}
 					}
 					
@@ -201,6 +215,7 @@ public class DALILights {
 				}
 			}
 			
+			DALILights.scenesAvgColorMap = colorMap
 			DALILights.scenesMap = map
 		}
 		

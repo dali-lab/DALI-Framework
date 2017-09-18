@@ -1,9 +1,10 @@
 PODS:
-  - DALI (0.3):
+  - DALI (0.3.24):
     - Socket.IO-Client-Swift
     - SwiftyJSON
   - Nimble (5.1.1)
   - Quick (1.0.0)
+  - SCLAlertView (0.7.0)
   - Socket.IO-Client-Swift (11.1.2):
     - StarscreamSocketIO (~> 8.0.5)
   - StarscreamSocketIO (8.0.5)
@@ -13,6 +14,7 @@ DEPENDENCIES:
   - DALI (from `../`)
   - Nimble (~> 5.1.1)
   - Quick (~> 1.0.0)
+  - SCLAlertView
   - Socket.IO-Client-Swift
   - SwiftyJSON
 
@@ -21,13 +23,14 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  DALI: d04dfe93b3bb7bce790a95d526d383930f0ccc75
+  DALI: 0e5b8a5b7e4e21b9718c7c1bab65fb46f324e24e
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
+  SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   Socket.IO-Client-Swift: 2283d3d333cc6b24c4e7ba191a8a7907d35ac42b
   StarscreamSocketIO: b56993332d3cd74885a7486e183ff0cd9541b3f3
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: afcb7acb57c34f8eee0b3157a3ea1ee56244b00b
+PODFILE CHECKSUM: ed3444375daa063b58db78d2222ab400fcb42070
 
 COCOAPODS: 1.3.1

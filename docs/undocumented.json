@@ -120,22 +120,141 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 13,
+      "symbol": "DALILights",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 16,
+      "symbol": "DALILights.Group",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 17,
+      "symbol": "DALILights.Group.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 18,
+      "symbol": "DALILights.Group.formattedName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 25,
+      "symbol": "DALILights.Group.scene",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 26,
+      "symbol": "DALILights.Group.formattedScene",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 29,
+      "symbol": "DALILights.Group.color",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 30,
+      "symbol": "DALILights.Group.isOn",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 31,
+      "symbol": "DALILights.Group.scenes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 73,
+      "symbol": "DALILights.Group.init(name:scene:color:isOn:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 80,
+      "symbol": "DALILights.Group.set(scene:callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 96,
+      "symbol": "DALILights.Group.set(color:callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 100,
+      "symbol": "DALILights.Group.set(on:callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 104,
+      "symbol": "DALILights.Group.all",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 105,
+      "symbol": "DALILights.Group.pods",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILights.swift",
+      "line": 110,
+      "symbol": "DALILights.oberserveAll(callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
-      "line": 94,
+      "line": 28,
+      "symbol": "DALILocation.autoForcePost",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
+      "line": 96,
       "symbol": "DALILocation.Tim.current",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
-      "line": 140,
+      "line": 142,
       "symbol": "DALILocation.Tim.observe(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
-      "line": 226,
+      "line": 230,
       "symbol": "DALILocation.Shared.observe(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"

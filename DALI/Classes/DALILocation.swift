@@ -25,6 +25,8 @@ A static struct that contains all location updates and queries
 	}
 */
 public class DALILocation {
+	public static var autoForcePost = true
+	
 	internal static var sharedCallback: (([DALIMember]?, DALIError.General?) -> Void)?
 	internal static var timCallback: ((Tim?, DALIError.General?) -> Void)?
 	internal static var updatingSocket: SocketIOClient!
@@ -173,6 +175,8 @@ public class DALILocation {
 					DispatchQueue.main.async {
 						callback(success, error)
 					}
+					
+					
 				}
 			} catch {
 				DispatchQueue.main.async {

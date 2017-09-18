@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4A47CE533768624975383D74 /* Pods_DALI_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA84EFFC76BCC3987F4EDF6 /* Pods_DALI_Tests.framework */; };
+		520E74311F6F7A1A0001FF7E /* LightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520E74301F6F7A1A0001FF7E /* LightsViewController.swift */; };
+		520E74331F703E6B0001FF7E /* SetSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520E74321F703E6B0001FF7E /* SetSceneViewController.swift */; };
 		5225AE0A1F608AE400718D12 /* CheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225AE091F608AE400718D12 /* CheckinViewController.swift */; };
 		5225AE0E1F60EA6200718D12 /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225AE0D1F60EA6200718D12 /* FoodViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -32,6 +34,8 @@
 /* Begin PBXFileReference section */
 		01E8F9B0906894BB8223B43C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4FF4D7EE552BDA14522C5D2D /* Pods-DALI_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DALI_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DALI_Tests/Pods-DALI_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		520E74301F6F7A1A0001FF7E /* LightsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightsViewController.swift; sourceTree = "<group>"; };
+		520E74321F703E6B0001FF7E /* SetSceneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetSceneViewController.swift; sourceTree = "<group>"; };
 		5225AE091F608AE400718D12 /* CheckinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinViewController.swift; sourceTree = "<group>"; };
 		5225AE0D1F60EA6200718D12 /* FoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
 		542D2A1021DDE2DE48214B4C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				5225AE091F608AE400718D12 /* CheckinViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				520E74301F6F7A1A0001FF7E /* LightsViewController.swift */,
+				520E74321F703E6B0001FF7E /* SetSceneViewController.swift */,
 				5225AE0D1F60EA6200718D12 /* FoodViewController.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -357,6 +363,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DALI_Example/Pods-DALI_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DALI/DALI.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/StarscreamSocketIO/StarscreamSocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -364,6 +371,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DALI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StarscreamSocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -395,7 +403,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				520E74331F703E6B0001FF7E /* SetSceneViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				520E74311F6F7A1A0001FF7E /* LightsViewController.swift in Sources */,
 				5225AE0A1F608AE400718D12 /* CheckinViewController.swift in Sources */,
 				5225AE0E1F60EA6200718D12 /* FoodViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,

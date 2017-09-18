@@ -135,6 +135,8 @@ class ServerCommunicator {
 			request.addValue(apiKey, forHTTPHeaderField: "apiKey")
 		}
 		
+		
+		
 		// Set up the task
 		let task = URLSession.shared.dataTask(with: request) { data, response, error in
 			let httpResponse = response as? HTTPURLResponse

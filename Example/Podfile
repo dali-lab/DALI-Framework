@@ -2,6 +2,7 @@ use_frameworks!
 
 target 'DALI_Example' do
   pod 'DALI', :path => '../'
+  pod 'SCLAlertView'
 
   target 'DALI_Tests' do
 	inherit! :search_paths

@@ -205,9 +205,9 @@ public class DALILights {
 				if let value = entry.value.array {
 					var array: [String] = []
 					for scene in value {
-						if let sceneDict = scene.dictionary, let scene = sceneDict["name"]?.string, let avgColor = sceneDict["averageColor"]?.string {
+						if let sceneDict = scene.dictionary, let scene = sceneDict["name"]?.string {
 							array.append(scene)
-							colorMap[scene] = avgColor
+							colorMap[scene] = sceneDict["averageColor"]?.string
 						}
 					}
 					

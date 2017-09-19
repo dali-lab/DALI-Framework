@@ -55,7 +55,9 @@ public class DALILights {
 					}
 				}
 				
-				return Array(allSet!).sorted()
+				return Array(allSet!).sorted(by: { (string1, string2) -> Bool in
+					return string1 == "default" || string1 < string2
+				})
 			}else if name == "pods" {
 				var podsSet: Set<String>?
 				for entry in scenesMap {
@@ -72,11 +74,15 @@ public class DALILights {
 					}
 				}
 				
-				return Array(podsSet!).sorted()
+				return Array(podsSet!).sorted(by: { (string1, string2) -> Bool in
+					return string1 == "default" || string1 < string2
+				})
 			}
 			
 			if let scenes = DALILights.scenesMap[name] {
-				return scenes.sorted()
+				return scenes.sorted(by: { (string1, string2) -> Bool in
+					return string1 == "default" || string1 < string2
+				})
 			}else{
 				return []
 			}

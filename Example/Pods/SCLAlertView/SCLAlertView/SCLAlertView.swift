@@ -33,7 +33,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 public enum SCLAlertViewStyle {
     case success, error, notice, warning, info, edit, wait
     
-    var defaultColorInt: UInt {
+    public var defaultColorInt: UInt {
         switch self {
         case .success:
             return 0x22B573
@@ -666,7 +666,7 @@ open class SCLAlertView: UIViewController {
             viewText.text = subTitle
             // Adjust text view size, if necessary
             let str = subTitle as NSString
-            let attr = [NSFontAttributeName:viewText.font ?? UIFont()]
+			let attr = [NSAttributedStringKey.font:viewText.font ?? UIFont()]
             let sz = CGSize(width: appearance.kWindowWidth - 24, height:90)
             let r = str.boundingRect(with: sz, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:attr, context:nil)
             let ht = ceil(r.size.height)
@@ -838,7 +838,7 @@ open class SCLAlertView: UIViewController {
 }
 
 // Helper function to convert from RGB to UIColor
-func UIColorFromRGB(_ rgbValue: UInt) -> UIColor {
+public func UIColorFromRGB(_ rgbValue: UInt) -> UIColor {
     return UIColor(
         red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
         green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,

@@ -61,6 +61,12 @@ public class DALIapi {
 		if let locationSocket = DALILocation.updatingSocket, locationSocket.status != .disconnected {
 			locationSocket.disconnect()
 		}
+		if let updatingSocket = DALILights.updatingSocket, updatingSocket.status != .disconnected {
+			updatingSocket.disconnect()
+		}
+		if let socket = DALIFood.socket, socket.status != .disconnected {
+			socket.disconnect()
+		}
 	}
 	
 	@objc internal static func goingBackground() {
@@ -70,6 +76,12 @@ public class DALIapi {
 			}
 			if let locationSocket = DALILocation.updatingSocket, locationSocket.status != .disconnected {
 				locationSocket.disconnect()
+			}
+			if let updatingSocket = DALILights.updatingSocket, updatingSocket.status != .disconnected {
+				updatingSocket.disconnect()
+			}
+			if let socket = DALIFood.socket, socket.status != .disconnected {
+				socket.disconnect()
 			}
 		}
 	}
@@ -81,6 +93,12 @@ public class DALIapi {
 			}
 			if let locationSocket = DALILocation.updatingSocket, locationSocket.status == .disconnected {
 				locationSocket.connect()
+			}
+			if let updatingSocket = DALILights.updatingSocket, updatingSocket.status == .disconnected {
+				updatingSocket.connect()
+			}
+			if let socket = DALIFood.socket, socket.status == .disconnected {
+				socket.connect()
 			}
 		}
 	}

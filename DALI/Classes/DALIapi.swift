@@ -139,7 +139,9 @@ public class DALIapi {
 				return
 			}
 			
-			self.unProtConfig.token = token
+			UserDefaults.standard.set(token, forKey: "DALIapi:token")
+			
+			self.unProtConfig.token_stored = token
 			self.unProtConfig.member = member
 			
 			done(true, nil)
@@ -182,7 +184,9 @@ public class DALIapi {
 					return
 				}
 				
-				self.unProtConfig.token = token
+				UserDefaults.standard.set(token, forKey: "DALIapi:token")
+				
+				self.unProtConfig.token_stored = token
 				self.unProtConfig.member = user
 				
 				done(true, nil)
@@ -194,7 +198,7 @@ public class DALIapi {
 	
 	/// Signs out of your account on the API
 	public static func signOut() {
-		config.token = nil
+		config.token_stored = nil
 	}
 	
 	/**

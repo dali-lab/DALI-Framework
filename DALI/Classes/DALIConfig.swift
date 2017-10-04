@@ -25,7 +25,17 @@ open class DALIConfig {
 	/// Used to connect to the server without needing user signin
 	internal var apiKey: String?
 	/// Token. This is needed for requests when needing user signin
-	internal var token: String?
+	internal var token_stored: String?
+	
+	internal var token: String? {
+		if let token_stored = token_stored {
+			return token_stored
+		}else if let token = UserDefaults.standard.string(forKey: "DALIapi:token") {
+			return token
+		}else{
+			return nil
+		}
+	}
 	/// The current member signed in
 	internal var member: DALIMember?
 	

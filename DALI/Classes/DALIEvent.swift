@@ -380,7 +380,7 @@ public class DALIEvent {
 		- parameter callback: Function called when done
 		*/
 		public func saveResults(options: [Option], callback: @escaping DALIapi.SuccessCallback) {
-			if DALIapi.config.member?.isAdmin ?? false {
+			if !(DALIapi.config.member?.isAdmin ?? false) {
 				DispatchQueue.main.async {
 					callback(false, DALIError.General.Unauthorized)
 				}
@@ -428,7 +428,7 @@ public class DALIEvent {
 		- parameter error: Error encountered (if any)
 		*/
 		public func getUnreleasedResults(callback: @escaping (_ results: [Option]?, _ error: DALIError.General?) -> Void) {
-			if DALIapi.config.member?.isAdmin ?? false {
+			if !(DALIapi.config.member?.isAdmin ?? false) {
 				DispatchQueue.main.async {
 					callback(nil, DALIError.General.Unauthorized)
 				}
@@ -479,7 +479,7 @@ public class DALIEvent {
 		- parameter callback: Function called when done
 		*/
 		public func release(callback: @escaping DALIapi.SuccessCallback) {
-			if DALIapi.config.member?.isAdmin ?? false {
+			if !(DALIapi.config.member?.isAdmin ?? false) {
 				DispatchQueue.main.async {
 					callback(false, DALIError.General.Unauthorized)
 				}
@@ -513,7 +513,7 @@ public class DALIEvent {
 		- parameter callback: Function called when done
 		*/
 		public func addOption(option: String, callback: @escaping DALIapi.SuccessCallback) {
-			if DALIapi.config.member?.isAdmin ?? false {
+			if !(DALIapi.config.member?.isAdmin ?? false) {
 				DispatchQueue.main.async {
 					callback(false, DALIError.General.Unauthorized)
 				}
@@ -634,7 +634,7 @@ public class DALIEvent {
 		- parameter error: Error encountered (if any)
 		*/
 		public static func get(callback: @escaping (_ events: [VotingEvent]?, _ error: DALIError.General?) -> Void) {
-			if DALIapi.config.member?.isAdmin ?? false {
+			if !(DALIapi.config.member?.isAdmin ?? false) {
 				DispatchQueue.main.async {
 					callback(nil, DALIError.General.Unauthorized)
 				}
@@ -1024,7 +1024,7 @@ public class DALIEvent {
 	- parameter error: The error encountered if it was not successful
 	*/
 	public func enableVoting(numSelected: Int, ordered: Bool, callback: @escaping (_ success: Bool, _ event: VotingEvent?, _ error: DALIError.General?) -> Void) {
-		if DALIapi.config.member?.isAdmin ?? false {
+		if !(DALIapi.config.member?.isAdmin ?? false) {
 			DispatchQueue.main.async {
 				callback(false, nil, DALIError.General.Unauthorized)
 			}

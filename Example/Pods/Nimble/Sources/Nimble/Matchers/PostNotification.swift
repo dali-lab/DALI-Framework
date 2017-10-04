@@ -36,7 +36,7 @@ internal class NotificationCollector {
 
 private let mainThread = pthread_self()
 
-public let notificationCenterDefault = NotificationCenter.default
+let notificationCenterDefault = NotificationCenter.default
 
 public func postNotifications<T>(
     _ notificationsMatcher: T,

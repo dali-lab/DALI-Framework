@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import DALI
-import SCLAlertView
 
 class LightsViewController: UITableViewController {
 	var groups: [DALILights.Group] = []
@@ -82,39 +81,6 @@ class LightsViewController: UITableViewController {
 				return group.name.contains("pod")
 			}
 		})[indexPath.row]
-		let alert = SCLAlertView()
-		alert.addButton("Turn \(group.isOn ? "off" : "on")") {
-			group.set(on: !group.isOn, callback: { (success, error) in
-				
-			})
-		}
-		
-		alert.addButton("Set color") { 
-			let alert = SCLAlertView()
-			let textField = alert.addTextField("Color")
-		
-			alert.addButton("Set", action: {
-				group.set(color: textField.text!, callback: { (success, error) in
-					if let _ = error {
-						SCLAlertView().showError("Unsupported color", subTitle: "")
-					}
-				})
-			})
-			
-			alert.showNotice("What color?", subTitle: "")
-		}
-		
-		alert.addButton("Set scene") { 
-			self.performSegue(withIdentifier: "pickScene", sender: group)
-		}
-		
-		alert.addButton("Default") {
-			group.set(scene: "default", callback: { (success, error) in
-				
-			})
-		}
-		
-		alert.showNotice("What do?", subTitle: "")
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -125,7 +91,6 @@ class LightsViewController: UITableViewController {
 			dest.callback = { scene in
 				group.set(scene: scene, callback: { (success, error) in
 					if let _ = error {
-						SCLAlertView().showError("Unsupported scene", subTitle: "")
 					}
 				})
 			}

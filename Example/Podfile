@@ -2,12 +2,11 @@ use_frameworks!
 
 target 'DALI_Example' do
   pod 'DALI', :path => '../'
-  pod 'SCLAlertView'
 
   target 'DALI_Tests' do
 	inherit! :search_paths
 	pod 'SwiftyJSON'
-	pod 'Socket.IO-Client-Swift'
+	pod 'Socket.IO-Client-Swift', :git => 'https://github.com/johnlev/socket.io-client-swift.git'
 
     pod 'Quick', '~> 1.0.0'
     pod 'Nimble', '~> 5.1.1'

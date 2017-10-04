@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double SCLAlertViewVersionNumber;
-FOUNDATION_EXPORT const unsigned char SCLAlertViewVersionString[];
+FOUNDATION_EXPORT double StarscreamVersionNumber;
+FOUNDATION_EXPORT const unsigned char StarscreamVersionString[];
 

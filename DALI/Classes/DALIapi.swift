@@ -24,6 +24,9 @@ public class DALIapi {
 		}
 		return unProtConfig!
 	}
+    public static var isSignedIn: Bool {
+        return config.token != nil
+    }
 	
 	/**
 	A callback reporting either success or failure in the requested action

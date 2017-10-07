@@ -30,7 +30,7 @@ As a DALI member, have you ever wondered if you could make an app that does all 
 
   s.frameworks = 'Foundation'
   s.dependency 'SwiftyJSON'
-  s.dependency 'Socket.IO-Client-Swift', '~> 12.1.0'
+  s.dependency 'Socket.IO-Client-Swift'
   s.source_files = 'DALI/Classes/*.{swift}'
 
   s.documentation_url = 'https://dali-lab.github.io/DALI-Framework/'

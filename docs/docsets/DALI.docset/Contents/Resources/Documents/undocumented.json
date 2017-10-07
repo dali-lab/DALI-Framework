@@ -2,42 +2,42 @@
   "warnings": [
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 35,
+      "line": 45,
       "symbol": "DALIConfig.enableSockets",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 39,
+      "line": 49,
       "symbol": "DALIConfig.socketAutoSwitching",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 54,
+      "line": 64,
       "symbol": "DALIConfig.init(serverURL:apiKey:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 58,
+      "line": 68,
       "symbol": "DALIConfig.init(serverURL:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 62,
+      "line": 72,
       "symbol": "DALIConfig.init(serverURL:enableSockets:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 66,
+      "line": 76,
       "symbol": "DALIConfig.init(serverURL:apiKey:enableSockets:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -277,6 +277,13 @@
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIapi.swift",
       "line": 18,
       "symbol": "DALIapi.config",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIapi.swift",
+      "line": 27,
+      "symbol": "DALIapi.isSignedIn",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },

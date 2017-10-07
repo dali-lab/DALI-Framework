@@ -25,7 +25,7 @@ public class DALIapi {
 		return unProtConfig!
 	}
     public static var isSignedIn: Bool {
-        return config.token != nil
+        return config.member != nil
     }
 	
 	/**
@@ -64,8 +64,8 @@ public class DALIapi {
 		if let locationSocket = DALILocation.updatingSocket, locationSocket.status != .disconnected {
 			locationSocket.disconnect()
 		}
-		if let updatingSocket = DALILights.updatingSocket, updatingSocket.status != .disconnected {
-			updatingSocket.disconnect()
+		if let lightsSocket = DALILights.updatingSocket, lightsSocket.status != .disconnected {
+			lightsSocket.disconnect()
 		}
 		if let socket = DALIFood.socket, socket.status != .disconnected {
 			socket.disconnect()

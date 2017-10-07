@@ -1,6 +1,6 @@
 PODS:
   - DALI (0.3.30):
-    - Socket.IO-Client-Swift
+    - Socket.IO-Client-Swift (~> 12.1.0)
     - SwiftyJSON
   - Nimble (5.1.1)
   - Quick (1.0.0)
@@ -28,7 +28,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/johnlev/socket.io-client-swift.git
 
 SPEC CHECKSUMS:
-  DALI: 18304a987e84f0cabcf35cb91effaa39e46d9033
+  DALI: aa6001d8f0ade9f5d1a7ec376b2a9c1d1d122ae6
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
   Socket.IO-Client-Swift: b8deb44a611bf92d2e1e54e22ada4f2b732e1272

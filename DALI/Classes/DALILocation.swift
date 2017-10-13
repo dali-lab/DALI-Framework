@@ -28,6 +28,7 @@ public class DALILocation {
 	public static var autoForcePost = true
 	
 	internal static var sharedCallback: (([DALIMember]?, DALIError.General?) -> Void)?
+	internal static var enterCallback: ((DALIMember) -> Void)?
 	internal static var timCallback: ((Tim?, DALIError.General?) -> Void)?
 	internal static var updatingSocket: SocketIOClient!
 	internal static func assertSocket() {
@@ -62,6 +63,21 @@ public class DALILocation {
 					DispatchQueue.main.async {
 						sharedCallback(outputArr, nil)
 					}
+				}
+			})
+			
+			updatingSocket.on("memberEnter", callback: { (data, ack) in
+				guard let dict = data[0] as? [String: Any], let user = dict["user"], let member = DALIMember.parse(JSON(user)) else {
+					if let sharedCallback = sharedCallback {
+						DispatchQueue.main.async {
+							sharedCallback(nil, DALIError.General.UnexpectedResponse)
+						}
+					}
+					return
+				}
+				
+				if let enterCallback = enterCallback {
+					enterCallback(member)
 				}
 			})
 			
@@ -145,7 +161,7 @@ public class DALILocation {
 			
 			return Observation(stop: {
 				DALILocation.timCallback = nil
-				if DALILocation.sharedCallback == nil && DALILocation.updatingSocket != nil {
+				if DALILocation.sharedCallback == nil && DALILocation.enterCallback == nil && DALILocation.updatingSocket != nil {
 					if DALILocation.updatingSocket.status != .disconnected {
 						DALILocation.updatingSocket.disconnect()
 					}
@@ -233,7 +249,7 @@ public class DALILocation {
 			
 			return Observation(stop: {
 				DALILocation.sharedCallback = nil
-				if DALILocation.timCallback == nil && DALILocation.updatingSocket != nil {
+				if DALILocation.timCallback == nil && DALILocation.enterCallback == nil && DALILocation.updatingSocket != nil {
 					if DALILocation.updatingSocket.status != .disconnected {
 						DALILocation.updatingSocket.disconnect()
 					}
@@ -271,6 +287,21 @@ public class DALILocation {
 				}
 			}
 		}
+	}
+	
+	public static func observeMemberEnter(callback: @escaping (DALIMember) -> Void) -> Observation {
+		DALILocation.assertSocket()
+		DALILocation.enterCallback = callback
+		
+		return Observation(stop: {
+			DALILocation.enterCallback = nil
+			if DALILocation.timCallback == nil && DALILocation.sharedCallback == nil && DALILocation.updatingSocket != nil {
+				if DALILocation.updatingSocket.status != .disconnected {
+					DALILocation.updatingSocket.disconnect()
+				}
+				DALILocation.updatingSocket = nil
+			}
+		}, id: "enterObserver")
 	}
 	
 	/// The current user is sharing this device's location

@@ -50,7 +50,7 @@
 		4F3AA38B8BA215269026246E6C19E4EB /* SocketIOClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87F8A19C3B7A289B004268C10F3755A /* SocketIOClientOption.swift */; };
 		4F3F103945CC52D0A3B8A891BB0E21C4 /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D7225A29BD9A258E72E25C15B7AFD /* RaisesException.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		50B80F12A9BAE302F07F6CF94752F462 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 65CCF82A15191612494F7D566D4B04F8 /* mach_excServer.c */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		524EEAF61F912A0500199B14 /* DALIPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524EEAF51F912A0500199B14 /* DALIPhotos.swift */; };
+		524EEAF61F912A0500199B14 /* DALIPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524EEAF51F912A0500199B14 /* DALIPhoto.swift */; };
 		551440A0F92574039C1D2EB39227D6B8 /* AsyncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274BBB45441452CB2A04077D5956ECBA /* AsyncMatcherWrapper.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		56872B9A3C958269BCD8A7126C2D4F9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89BFB1ECC6BB875D522CE9950A2CF11F /* Foundation.framework */; };
 		5744439033FDB0A1C0EDF6D7364B7E67 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC31402CE8B7BDAD6FC7C9AD95A059A /* Configuration.swift */; };
@@ -340,7 +340,7 @@
 		4E0B618D408C4F1625672670E70A06D8 /* FailureMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FailureMessage.swift; path = Sources/Nimble/FailureMessage.swift; sourceTree = "<group>"; };
 		4E507C82AD0E401DEBECD441FFF4F40F /* Contain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Contain.swift; path = Sources/Nimble/Matchers/Contain.swift; sourceTree = "<group>"; };
 		4F27A62BE9AD107474F8CF1A404EA132 /* ExampleMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExampleMetadata.swift; path = Sources/Quick/ExampleMetadata.swift; sourceTree = "<group>"; };
-		524EEAF51F912A0500199B14 /* DALIPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DALIPhotos.swift; path = DALI/Classes/DALIPhotos.swift; sourceTree = "<group>"; };
+		524EEAF51F912A0500199B14 /* DALIPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DALIPhoto.swift; path = DALI/Classes/DALIPhoto.swift; sourceTree = "<group>"; };
 		53D449237E253A6C56CD00A7851F6E4A /* MatcherFunc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MatcherFunc.swift; path = Sources/Nimble/Matchers/MatcherFunc.swift; sourceTree = "<group>"; };
 		588EC62CEB454A646CBC9291F2979843 /* CurrentTestCaseTracker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CurrentTestCaseTracker.h; path = Sources/NimbleObjectiveC/CurrentTestCaseTracker.h; sourceTree = "<group>"; };
 		5985CA063E72E9895AC89DF1EEE8E06A /* Pods-DALI_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DALI_Example-umbrella.h"; sourceTree = "<group>"; };
@@ -884,7 +884,7 @@
 				8E444CC12C18A4F24702AB0FBD81ABFD /* DALIEvent.swift */,
 				A2350066BECFACFB47A6D9C8126A3E89 /* DALIFood.swift */,
 				A38C61B314BBEBACEE3D06E51A1B30E9 /* DALILights.swift */,
-				524EEAF51F912A0500199B14 /* DALIPhotos.swift */,
+				524EEAF51F912A0500199B14 /* DALIPhoto.swift */,
 				1CC634593C2CC20AB04EB6230A12467C /* DALILocation.swift */,
 				E05A76A8FBAB83DB0C06356E9AC35402 /* DALIMember.swift */,
 				8FD03B064CA1795BF71CD3A0F6BC6285 /* DALIProject.swift */,
@@ -1198,7 +1198,7 @@
 				7449E7083B710E83B6674228653BA1B0 /* DALIapi.swift in Sources */,
 				1654AA234D4A8E9AED453F7003C4D060 /* DALIConfig.swift in Sources */,
 				9B3D2CCDF8251D8A1976730EFAA1994D /* DALIErrors.swift in Sources */,
-				524EEAF61F912A0500199B14 /* DALIPhotos.swift in Sources */,
+				524EEAF61F912A0500199B14 /* DALIPhoto.swift in Sources */,
 				C80CA75FABBF81B51F4711DCF2464B5A /* DALIEvent.swift in Sources */,
 				494B2E223C016432FA8150C324EE0CB7 /* DALIFood.swift in Sources */,
 				EA7D47DACF102F0687D9BCC9D324AFD9 /* DALILights.swift in Sources */,

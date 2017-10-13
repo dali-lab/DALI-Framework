@@ -8,7 +8,7 @@
 import Foundation
 
 public class DALIPhoto {
-	public func get(callback: @escaping (_ photos: [String], _ error: DALIError.General?) -> Void) {
+	public static func get(callback: @escaping (_ photos: [String], _ error: DALIError.General?) -> Void) {
 		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/photos") { (data, code, error) in
 			guard let array = data?.array else {
 				callback([], error)

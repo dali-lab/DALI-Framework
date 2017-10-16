@@ -142,9 +142,7 @@ public class DALIapi {
 				return
 			}
 			
-			UserDefaults.standard.set(token, forKey: "DALIapi:token")
-			
-			self.unProtConfig.token_stored = token
+			self.unProtConfig.token = token
 			self.unProtConfig.member = member
 			
 			done(true, nil)
@@ -182,20 +180,30 @@ public class DALIapi {
 					return
 				}
 				
-				guard let user = DALIMember.parse(userObj) else {
+				guard let member = DALIMember.parse(userObj) else {
 					done(false, DALIError.General.UnexpectedResponse)
 					return
 				}
 				
-				UserDefaults.standard.set(token, forKey: "DALIapi:token")
-				
-				self.unProtConfig.token_stored = token
-				self.unProtConfig.member = user
+				self.unProtConfig.token = token
+				self.unProtConfig.member = member
 				
 				done(true, nil)
 			}
 		} catch {
 			done(false, nil)
+		}
+	}
+	
+	public static func silentMemberUpdate(callback: @escaping (DALIMember?) -> Void) {
+		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/users/me") { (data, code, error) in
+			guard let data = data, let member = DALIMember.parse(data) else {
+				callback(nil)
+				return
+			}
+			self.unProtConfig.member = member
+			
+			callback(member)
 		}
 	}
 	

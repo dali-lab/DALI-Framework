@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 /**
 Configurations for the DALIapi framework can be stored and handled using this
@@ -24,20 +25,49 @@ open class DALIConfig {
 	internal var serverURL: String
 	/// Used to connect to the server without needing user signin
 	internal var apiKey: String?
+	
 	/// Token. This is needed for requests when needing user signin
 	internal var token_stored: String?
-	
 	internal var token: String? {
-		if let token_stored = token_stored {
-			return token_stored
-		}else if let token = UserDefaults.standard.string(forKey: "DALIapi:token") {
-			return token
-		}else{
-			return nil
+		get {
+			if let token_stored = token_stored {
+				return token_stored
+			}else if let token = UserDefaults.standard.string(forKey: "DALIapi:token") {
+				return token
+			}else{
+				return nil
+			}
+		}
+		set {
+			self.token_stored = newValue
+			if let token = newValue {
+				UserDefaults.standard.set(token, forKey: "DALIapi:token")
+			}else{
+				UserDefaults.standard.removeObject(forKey: "DALIapi:token")
+			}
 		}
 	}
+	
 	/// The current member signed in
-	internal var member: DALIMember?
+	internal var member_stored: DALIMember?
+	internal var member: DALIMember? {
+		get {
+			if let member_stored = member_stored {
+				return member_stored
+			}else if let stored = UserDefaults.standard.data(forKey: "DALIapi:member"), let member = DALIMember.parse(JSON(stored)) {
+				return member
+			}
+			return nil
+		}
+		set {
+			self.member_stored = newValue
+			if let data = try? newValue?.json.rawData() {
+				UserDefaults.standard.set(data, forKey: "DALI:member")
+			}else if newValue == nil {
+				UserDefaults.standard.removeObject(forKey: "DALI:member")
+			}
+		}
+	}
 	
 	/// A default value for the sharing preference
 	public var sharingDefault = true

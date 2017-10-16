@@ -35,6 +35,7 @@ public struct DALIMember {
 	private var location_in: CLLocation?
 	private var jobTitle_in: String?
 	private var skills_in: [String]?
+	internal var json: JSON
 	
 	/// User's full name (eg. John Kotz)
 	public var name: String {
@@ -157,6 +158,7 @@ public struct DALIMember {
 			location_in: location != nil ? CLLocation.init(latitude: location![0], longitude: location![1]) : nil,
 			jobTitle_in: dict["jobTitle"]?.string,
 			skills_in: dict["skills"]?.arrayObject as? [String],
+			json: object,
 			id_in: id,
 			dirty_in: false,
 			isAdmin: dict["isAdmin"]?.bool ?? false

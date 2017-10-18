@@ -62,9 +62,9 @@ open class DALIConfig {
 		set {
 			self.member_stored = newValue
 			if let data = try? newValue?.json.rawData() {
-				UserDefaults.standard.set(data, forKey: "DALI:member")
+				UserDefaults.standard.set(data, forKey: "DALIapi:member")
 			}else if newValue == nil {
-				UserDefaults.standard.removeObject(forKey: "DALI:member")
+				UserDefaults.standard.removeObject(forKey: "DALIapi:member")
 			}
 		}
 	}

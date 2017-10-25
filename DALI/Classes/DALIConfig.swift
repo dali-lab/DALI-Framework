@@ -33,6 +33,7 @@ open class DALIConfig {
 			if let token_stored = token_stored {
 				return token_stored
 			}else if let token = UserDefaults.standard.string(forKey: "DALIapi:token") {
+				token_stored = token
 				return token
 			}else{
 				return nil
@@ -55,6 +56,7 @@ open class DALIConfig {
 			if let member_stored = member_stored {
 				return member_stored
 			}else if let stored = UserDefaults.standard.data(forKey: "DALIapi:member"), let member = DALIMember.parse(JSON(stored)) {
+				member_stored = member
 				return member
 			}
 			return nil

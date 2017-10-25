@@ -209,7 +209,8 @@ public class DALIapi {
 	
 	/// Signs out of your account on the API
 	public static func signOut() {
-		config.token_stored = nil
+		config.token = nil
+		config.member = nil
 	}
 	
 	/**

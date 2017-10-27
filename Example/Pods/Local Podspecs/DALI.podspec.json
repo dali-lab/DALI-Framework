@@ -26,7 +26,7 @@
 
     ],
     "Socket.IO-Client-Swift": [
-      "~> 12.1.0"
+
     ]
   },
   "documentation_url": "https://dali-lab.github.io/DALI-Framework/"

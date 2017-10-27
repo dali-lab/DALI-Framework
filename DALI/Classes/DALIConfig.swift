@@ -110,7 +110,7 @@ open class DALIConfig {
 		self.apiKey = apiKey
 		
 		if self.serverURL.characters.last == "/" {
-			self.serverURL = self.serverURL.substring(to: self.serverURL.index(before: self.serverURL.endIndex))
+			self.serverURL = String(self.serverURL[..<self.serverURL.endIndex])
 		}
 		
 		self.enableSockets_internal = enableSockets ?? false

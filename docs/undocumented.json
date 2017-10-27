@@ -2,42 +2,42 @@
   "warnings": [
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 45,
+      "line": 77,
       "symbol": "DALIConfig.enableSockets",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 49,
+      "line": 81,
       "symbol": "DALIConfig.socketAutoSwitching",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 64,
+      "line": 96,
       "symbol": "DALIConfig.init(serverURL:apiKey:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 68,
+      "line": 100,
       "symbol": "DALIConfig.init(serverURL:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 72,
+      "line": 104,
       "symbol": "DALIConfig.init(serverURL:enableSockets:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
-      "line": 76,
+      "line": 108,
       "symbol": "DALIConfig.init(serverURL:apiKey:enableSockets:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -247,30 +247,51 @@
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
-      "line": 96,
+      "line": 112,
       "symbol": "DALILocation.Tim.current",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
-      "line": 142,
+      "line": 158,
       "symbol": "DALILocation.Tim.observe(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
-      "line": 230,
+      "line": 250,
       "symbol": "DALILocation.Shared.observe(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
+      "line": 300,
+      "symbol": "DALILocation.observeMemberEnter(callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIMember.swift",
-      "line": 108,
+      "line": 109,
       "symbol": "DALIMember.isAdmin",
       "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIPhoto.swift",
+      "line": 10,
+      "symbol": "DALIPhoto",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIPhoto.swift",
+      "line": 11,
+      "symbol": "DALIPhoto.get(callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
@@ -285,6 +306,13 @@
       "line": 27,
       "symbol": "DALIapi.isSignedIn",
       "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIapi.swift",
+      "line": 198,
+      "symbol": "DALIapi.silentMemberUpdate(callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {

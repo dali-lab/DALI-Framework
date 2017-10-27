@@ -28,8 +28,10 @@ public class DALILocation {
 	public static var autoForcePost = true
 	
 	internal static var sharedCallback: (([DALIMember]?, DALIError.General?) -> Void)?
+	internal static var lastSharedData: [DALIMember]?
 	internal static var enterCallback: ((DALIMember) -> Void)?
 	internal static var timCallback: ((Tim?, DALIError.General?) -> Void)?
+	internal static var lastTimData: Tim?
 	internal static var updatingSocket: SocketIOClient!
 	internal static func assertSocket() {
 		if updatingSocket == nil {
@@ -58,6 +60,7 @@ public class DALILocation {
 					
 					outputArr.append(member)
 				}
+				self.lastSharedData = outputArr
 				
 				if let sharedCallback = sharedCallback {
 					DispatchQueue.main.async {
@@ -67,12 +70,7 @@ public class DALILocation {
 			})
 			
 			updatingSocket.on("memberEnter", callback: { (data, ack) in
-				guard let dict = data[0] as? [String: Any], let user = dict["user"], let member = DALIMember.parse(JSON(user)) else {
-					if let sharedCallback = sharedCallback {
-						DispatchQueue.main.async {
-							sharedCallback(nil, DALIError.General.UnexpectedResponse)
-						}
-					}
+				guard let user = data[0] as? [String: Any], let member = DALIMember.parse(JSON(user)) else {
 					return
 				}
 				
@@ -93,6 +91,8 @@ public class DALILocation {
 				
 				let tim = Tim(inDALI: inDALI, inOffice: inOffice)
 				Tim.current = tim
+				
+				self.lastTimData = tim
 				
 				if let timCallback = timCallback {
 					DispatchQueue.main.async {
@@ -158,6 +158,10 @@ public class DALILocation {
 		public static func observe(callback: @escaping (Tim?, DALIError.General?) -> Void) -> Observation {
 			DALILocation.assertSocket()
 			DALILocation.timCallback = callback
+			
+			if let timData = DALILocation.lastTimData {
+				callback(timData, nil)
+			}
 			
 			return Observation(stop: {
 				DALILocation.timCallback = nil
@@ -246,6 +250,10 @@ public class DALILocation {
 		public static func observe(callback: @escaping ([DALIMember]?, DALIError.General?) -> Void) -> Observation {
 			DALILocation.assertSocket()
 			DALILocation.sharedCallback = callback
+			
+			if let sharedData = DALILocation.lastSharedData {
+				callback(sharedData, nil)
+			}
 			
 			return Observation(stop: {
 				DALILocation.sharedCallback = nil

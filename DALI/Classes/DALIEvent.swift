@@ -187,7 +187,7 @@ public class DALIEvent {
 		- parameter event: The DALIEvent to attempt to cast into a VotingEvent
 		*/
 		convenience init?(event: DALIEvent) {
-			guard let dict = event.dict, let resultsReleased = dict["resultsReleased"]?.bool else {
+			guard let dict = event.dict, let resultsReleased = dict["votingResultsReleased"]?.bool else {
 				return nil
 			}
 			

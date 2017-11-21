@@ -814,8 +814,11 @@ public class DALIEvent {
 		}
 	}
 	
+	/// The socket used to get event updates
 	internal static var updatesSocket: SocketIOClient!
+	/// The callbacks for each event type
 	internal static var updatesCallbacks: [String: ([DALIEvent]?, DALIError.General?) -> Void] = [:]
+	/// Makes sure the socket is open and waiting for updates
 	internal static func assertUpdatesSocket() {
 		if updatesSocket == nil {
 			updatesSocket = SocketIOClient(socketURL: URL(string: DALIapi.config.serverURL)!, config: [SocketIOClientOption.nsp("/eventsReloads"), SocketIOClientOption.forcePolling(false)])
@@ -846,7 +849,14 @@ public class DALIEvent {
 		}
 	}
 	
-	public static func observeAll(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) -> Observation {
+	/**
+	Observes all events. Will call callback every time something changes
+	
+	- parameter callback: The function called when the updates occur
+	- parameter events: The updated events
+	- parameter error: The error, if any, encountered
+	*/
+	public static func observeAll(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) -> Observation {
 		assertUpdatesSocket()
 		updatesCallbacks["allEvents"] = callback
 		
@@ -857,7 +867,14 @@ public class DALIEvent {
 		}, id: "allEventsOberver")
 	}
 	
-	public static func observeUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) -> Observation {
+	/**
+	Observes all upcoming events. Will call callback every time something changes
+	
+	- parameter callback: The function to call when done
+	- parameter events: The events
+	- parameter error: The error, if any, encountered
+	*/
+	public static func observeUpcoming(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) -> Observation {
 		assertUpdatesSocket()
 		updatesCallbacks["weekEvents"] = callback
 		
@@ -868,6 +885,7 @@ public class DALIEvent {
 		}, id: "weekEventsOberver")
 	}
 	
+	/// Cancels the callback for that key
 	internal static func removeCallback(forKey key: String) {
 		updatesCallbacks.removeValue(forKey: key)
 		
@@ -879,7 +897,14 @@ public class DALIEvent {
 		}
 	}
 	
-	public static func observeFuture(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) -> Observation {
+	/**
+	Observe future events
+	
+	- parameter callback: The function to call when update happens
+	- parameter events: The updated events
+	- parameter error: The error, if any, encountered
+	*/
+	public static func observeFuture(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) -> Observation {
 		assertUpdatesSocket()
 		updatesCallbacks["futureEvents"] = callback
 		
@@ -890,7 +915,14 @@ public class DALIEvent {
 		}, id: "futureEventsOberver")
 	}
 	
-	public static func observePublicUpcoming(callback: @escaping ([DALIEvent]?, DALIError.General?) -> Void) -> Observation {
+	/**
+	Observes public events.
+	
+	- parameter callback: The function called when the data is updated
+	- parameter events: The events that have been updated
+	- parameter error: The error, if any, encountered
+	*/
+	public static func observePublicUpcoming(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) -> Observation {
 		assertUpdatesSocket()
 		updatesCallbacks["publicEvents"] = callback
 		
@@ -900,7 +932,6 @@ public class DALIEvent {
 			removeCallback(forKey: "publicEvents")
 		}, id: "publicEventsOberver")
 	}
-	
 	
 	/**
 	Gets all upcoming events within a week from now

@@ -1088,8 +1088,14 @@ public class DALIEvent {
 	
 	/**
 	Checks in the current user to whatever event is happening now
+	
+	- parameter major: The major value of the bluetooth beacon
+	- parameter minor: The minor value of the beacon
+	- parameter callback: Called when done
+	- parameter success: The operation was a success
+	- parameter error: The error, if any, encountered
 	*/
-	public static func checkIn(major: Int, minor: Int, callback: @escaping (Bool, DALIError.General?) -> Void) {
+	public static func checkIn(major: Int, minor: Int, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
 		DALIapi.assertUser(funcName: "checkIn")
 		let data = ["major": major, "minor": minor]
 		
@@ -1108,8 +1114,14 @@ public class DALIEvent {
 	
 	/**
 	Enables checkin on the event, and gets back major and minor values to be used when advertizing
+	
+	- parameter callback: Called when done
+	- parameter success: The operation was a success
+	- parameter major: The major value of the bluetooth beacon
+	- parameter minor: The minor value of the beacon
+	- parameter error: The error, if any, encountered
 	*/
-	public func enableCheckin(callback: @escaping (Bool, Int?, Int?, DALIError.General?) -> Void) {
+	public func enableCheckin(callback: @escaping (_ success: Bool, _ major: Int?, _ minor: Int?, _ error: DALIError.General?) -> Void) {
 		guard let id = self.id else {
 			DispatchQueue.main.async {
 				callback(false, nil, nil, DALIError.General.BadRequest)
@@ -1134,8 +1146,12 @@ public class DALIEvent {
 	
 	/**
 	Gets a list of members who have checked in
+	
+	- parameter callback: Called when done
+	- parameter members: The members who have been checked in to the event
+	- parameter error: The error, if any, encountered
 	*/
-	public func getMembersCheckedIn(callback: @escaping ([DALIMember], DALIError.General?) -> Void) {
+	public func getMembersCheckedIn(callback: @escaping (_ members: [DALIMember], _ error: DALIError.General?) -> Void) {
 		guard let id = self.id else {
 			DispatchQueue.main.async {
 				callback([], DALIError.General.BadRequest)
@@ -1161,7 +1177,13 @@ public class DALIEvent {
 	
 	internal var checkinSocket: SocketIOClient?
 	
-	public func observeMembersCheckedIn(callback: @escaping ([DALIMember]) -> Void) -> Observation {
+	/**
+	Observe the list of members whom have checked in
+	
+	- parameter callback: Called when complete
+	- parameter memebers: The members who have checked in
+	*/
+	public func observeMembersCheckedIn(callback: @escaping (_ members: [DALIMember]) -> Void) -> Observation {
 		if checkinSocket == nil {
 			self.checkinSocket = SocketIOClient(socketURL: URL(string: DALIapi.config.serverURL)!, config: [SocketIOClientOption.nsp("/listCheckins")])
 			

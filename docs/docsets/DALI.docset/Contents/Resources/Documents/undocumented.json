@@ -51,42 +51,21 @@
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIFood.swift",
-      "line": 13,
-      "symbol": "DALIFood",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIFood.swift",
-      "line": 14,
-      "symbol": "DALIFood.current",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIFood.swift",
-      "line": 16,
-      "symbol": "DALIFood.getFood(callback:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIFood.swift",
-      "line": 26,
+      "line": 37,
       "symbol": "DALIFood.observeFood(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIFood.swift",
-      "line": 47,
+      "line": 58,
       "symbol": "DALIFood.setFood(food:callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIFood.swift",
-      "line": 68,
+      "line": 79,
       "symbol": "DALIFood.cancelFood(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
@@ -212,35 +191,14 @@
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
-      "line": 28,
-      "symbol": "DALILocation.autoForcePost",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
-      "line": 112,
+      "line": 110,
       "symbol": "DALILocation.Tim.current",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
-      "line": 158,
-      "symbol": "DALILocation.Tim.observe(callback:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
-      "line": 250,
-      "symbol": "DALILocation.Shared.observe(callback:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALILocation.swift",
-      "line": 300,
+      "line": 312,
       "symbol": "DALILocation.observeMemberEnter(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
@@ -249,41 +207,6 @@
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIMember.swift",
       "line": 109,
       "symbol": "DALIMember.isAdmin",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIPhoto.swift",
-      "line": 10,
-      "symbol": "DALIPhoto",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIPhoto.swift",
-      "line": 11,
-      "symbol": "DALIPhoto.get(callback:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/Enumerations.swift",
-      "line": 18,
-      "symbol": "Observation",
-      "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/Enumerations.swift",
-      "line": 19,
-      "symbol": "Observation.stop",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/Enumerations.swift",
-      "line": 20,
-      "symbol": "Observation.id",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     }

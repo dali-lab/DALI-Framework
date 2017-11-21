@@ -25,8 +25,6 @@ A static struct that contains all location updates and queries
 	}
 */
 public class DALILocation {
-	public static var autoForcePost = true
-	
 	internal static var sharedCallback: (([DALIMember]?, DALIError.General?) -> Void)?
 	internal static var lastSharedData: [DALIMember]?
 	internal static var enterCallback: ((DALIMember) -> Void)?
@@ -155,7 +153,14 @@ public class DALILocation {
 			}
 		}
 		
-		public static func observe(callback: @escaping (Tim?, DALIError.General?) -> Void) -> Observation {
+		/**
+		Observe tim's location
+		
+		- parameter callback: Function called when an update on tim's location is received
+		- parameter tim: Tim's updated location
+		- parameter error: The error, if any, encountered
+		*/
+		public static func observe(callback: @escaping (_ tim: Tim?, _ error: DALIError.General?) -> Void) -> Observation {
 			DALILocation.assertSocket()
 			DALILocation.timCallback = callback
 			
@@ -247,7 +252,14 @@ public class DALILocation {
 			}
 		}
 		
-		public static func observe(callback: @escaping ([DALIMember]?, DALIError.General?) -> Void) -> Observation {
+		/**
+		Observe the shared locations
+		
+		- parameter callback: The function called when an update is available
+		- parameter members: The update members listed in the lab
+		- parameter error: The error, if any, encountered
+		*/
+		public static func observe(callback: @escaping (_ members: [DALIMember]?, _ error: DALIError.General?) -> Void) -> Observation {
 			DALILocation.assertSocket()
 			DALILocation.sharedCallback = callback
 			

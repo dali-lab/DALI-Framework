@@ -14,7 +14,7 @@
     <a title="Tim Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">DALI Docs</a> (78% documented)</p>
+        <p><a href="../../index.html">DALI Docs</a> (80% documented)</p>
         <p class="header-right"><a href="https://github.com/dali-lab/DALI-Framework"><img src="../../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -259,16 +259,59 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Observe tim&rsquo;s location</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Tim</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">observe</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">tim</span><span class="p">:</span> <span class="kt">Tim</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../../Structs/Observation.html">Observation</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function called when an update on tim&rsquo;s location is received</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tim</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Tim&rsquo;s updated location</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The error, if any, encountered</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>

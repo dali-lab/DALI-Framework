@@ -77,10 +77,12 @@ open class DALIConfig {
 	/// A default value for the sharing preference
 	public var sharingDefault = true
 	private var enableSockets_internal = false
+	/// Allows to enable or disable the use of sockets
 	public var enableSockets: Bool {
 		get { return enableSockets_internal }
 		set { enableSockets_internal = newValue; if newValue { DALIapi.enableSockets() } else { DALIapi.disableSockets() } }
 	}
+	/// Enables automatic connecting and disconnecting of sockets when going between forground and background
 	public var socketAutoSwitching = true
 	
 	/**
@@ -96,23 +98,18 @@ open class DALIConfig {
 		self.init(serverURL: serverURL, apiKey: dict["api_key"] as? String, enableSockets: dict["enableSockets"] as? Bool)
 	}
 	
-	public convenience init(serverURL: String, apiKey: String) {
-		self.init(serverURL: serverURL, apiKey: apiKey, enableSockets: nil)
-	}
+	/**
+	Initializes the configuration with a server url and an API key
 	
-	public convenience init(serverURL: String) {
-		self.init(serverURL: serverURL, apiKey: nil, enableSockets: nil)
-	}
-	
-	public convenience init(serverURL: String, enableSockets: Bool) {
-		self.init(serverURL: serverURL, apiKey: nil, enableSockets: enableSockets)
-	}
-	
-	public init(serverURL: String, apiKey: String?, enableSockets: Bool?) {
+	- parameter serverURL: The base URL for the server to use
+	- parameter apiKey: The key to use to authenticate requests
+	- parameter enableSockets: Allows sockets to be used
+	*/
+	public init(serverURL: String, apiKey: String? = nil, enableSockets: Bool? = true) {
 		self.serverURL = serverURL
 		self.apiKey = apiKey
 		
-		if self.serverURL.characters.last == "/" {
+		if self.serverURL.last == "/" {
 			self.serverURL = String(self.serverURL[..<self.serverURL.endIndex])
 		}
 		

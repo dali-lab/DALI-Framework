@@ -229,6 +229,11 @@ public class DALIEvent {
 			return JSON(dict)
 		}
 		
+		/**
+		Parses a JSON object. May return nil if this is not a voting event or if it fails
+		
+		- parameter object: The JSON object to parse
+		*/
 		public override class func parse(_ object: JSON) -> VotingEvent? {
 			return super.parse(object) as? VotingEvent
 		}

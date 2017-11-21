@@ -34,7 +34,13 @@ public class DALIFood {
 	/// The socket to be used for observing
 	internal static var socket: SocketIOClient?
 	
-	public static func observeFood(callback: @escaping (String?) -> Void) -> Observation {
+	/**
+	Observe the current listing of food
+	
+	- parameter callback: Called when complete
+	- parameter food: The food listed for tonight, if any
+	*/
+	public static func observeFood(callback: @escaping (_ food: String?) -> Void) -> Observation {
 		if socket == nil {
 			socket = SocketIOClient(socketURL: URL(string: DALIapi.config.serverURL)!, config: [.nsp("/food")])
 			
@@ -55,7 +61,16 @@ public class DALIFood {
 		}, id: "foodSocket")
 	}
 	
-	public static func setFood(food: String, callback: @escaping (Bool) -> Void) {
+	/**
+	Sets the food listing for the night
+	
+	![Admin only](http://icons.iconarchive.com/icons/graphicloads/flat-finance/64/lock-icon.png)
+	
+	- parameter food: The food to set the listing to
+	- parameter callback: Called when complete
+	- parameter success: Was successful
+	*/
+	public static func setFood(food: String, callback: @escaping (_ success: Bool) -> Void) {
 		if !(DALIMember.current?.isAdmin ?? false) {
 			DispatchQueue.main.async {
 				callback(false)
@@ -76,7 +91,15 @@ public class DALIFood {
 		}
 	}
 	
-	public static func cancelFood(callback: @escaping (Bool) -> Void) {
+	/**
+	Cancels the food listing for tonight
+	
+	![Admin only](http://icons.iconarchive.com/icons/graphicloads/flat-finance/64/lock-icon.png)
+	
+	- parameter callback: Called when complete
+	- parameter success: Was successful
+	*/
+	public static func cancelFood(callback: @escaping (_ success: Bool) -> Void) {
 		if !(DALIMember.current?.isAdmin ?? false) {
 			DispatchQueue.main.async {
 				callback(false)

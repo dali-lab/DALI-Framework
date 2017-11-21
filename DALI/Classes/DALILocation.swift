@@ -107,6 +107,7 @@ public class DALILocation {
 	A simple struct that holds booleans that indicate Tim's location. Use it wisely 😉
 	*/
 	public struct Tim {
+		/// The most recent information on tim's location
 		public internal(set) static var current: Tim?
 		
 		/// Tim is in DALI
@@ -309,7 +310,13 @@ public class DALILocation {
 		}
 	}
 	
-	public static func observeMemberEnter(callback: @escaping (DALIMember) -> Void) -> Observation {
+	/**
+	Observe members entering the lab. Will call callback everytime someone is tracked as entering the lab
+	
+	- parameter callback: Called when someone enters the lab
+	- parameter member: The member who entered the lab
+	*/
+	public static func observeMemberEnter(callback: @escaping (_ member: DALIMember) -> Void) -> Observation {
 		DALILocation.assertSocket()
 		DALILocation.enterCallback = callback
 		

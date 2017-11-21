@@ -10,12 +10,20 @@ import Foundation
 import SwiftyJSON
 import SocketIO
 
+/**
+A class for controlling the lights in the lab
+*/
 public class DALILights {
 	private static var scenesMap: [String:[String]] = [:]
 	private static var scenesAvgColorMap: [String:[String:String]] = [:]
 	
+	/**
+	A group of lights. This is defined as one of the rooms in DALI, each one a grouping of lights that can be controlled
+	*/
 	public struct Group {
+		/// The name of the group
 		public let name: String
+		/// The formatted name of the group for printing
 		public var formattedName: String {
 			if name == "tvspace" {
 				return "TV Space"
@@ -23,12 +31,16 @@ public class DALILights {
 				return name.replacingOccurrences(of: "pod:", with: "").capitalized
 			}
 		}
+		/// The name the currently set scene
 		public let scene: String?
+		/// The formated scene name for printing
 		public var formattedScene: String? {
 			return scene?.capitalized
 		}
+		/// The current color set for the group
 		public let color: String?
 		
+		/// An average current color. Used for displaying state via color overlay
 		public var avgColor: String? {
 			if let color = color {
 				return color
@@ -39,7 +51,9 @@ public class DALILights {
 			}
 		}
 		
+		/// Boolean of current power status
 		public let isOn: Bool
+		/// The scenes available for this group
 		public var scenes: [String] {
 			if name == "all" {
 				var allSet: Set<String>?
@@ -88,17 +102,27 @@ public class DALILights {
 			}
 		}
 		
-		public init(name: String, scene: String?, color: String?, isOn: Bool) {
+		/// Initialize the group
+		internal init(name: String, scene: String?, color: String?, isOn: Bool) {
 			self.name = name
 			self.scene = scene
 			self.color = color
 			self.isOn = isOn
 		}
 		
+		/**
+		Set the scene of the group
+		
+		- parameter scene: The scene to set the lights to
+		- parameter callback: Called when done
+		- parameter success: Was successful
+		- parameter error: The error, if any, encountered
+		*/
 		public func set(scene: String, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
 			self.setValue(value: scene, callback: callback)
 		}
 		
+		/// Used to set the value of the lights. The API uses strings to idenitify actions to take on the lights
 		internal func setValue(value: String, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
 			do {
 				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/lights/\(name)", json: JSON(["value":value]), callback: { (success, data, error) in
@@ -111,21 +135,45 @@ public class DALILights {
 			}
 		}
 		
+		/**
+		Set the color of the group
+		
+		- parameter color: The color to set the lights
+		- parameter callback: Called when done
+		- parameter success: Was successful
+		- parameter error: The error, if any, encountered
+		*/
 		public func set(color: String, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
 			self.setValue(value: color, callback: callback)
 		}
 		
+		/**
+		Set the power
+		
+		- parameter on: Boolean = the power is on
+		- parameter callback: Called when done
+		- parameter success: Was successful
+		- parameter error: The error, if any, encountered
+		*/
 		public func set(on: Bool, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
 			self.setValue(value: on ? "on" : "off", callback: callback)
 		}
 		
+		/// All the groups
 		public static internal(set) var all = Group(name: "all", scene: nil, color: nil, isOn: false)
+		/// The pod groups
 		public static internal(set) var pods = Group(name: "pods", scene: nil, color: nil, isOn: false)
 	}
 	
 	internal static var updatingSocket: SocketIOClient!
 	
-	public static func oberserveAll(callback: @escaping ([Group]) -> Void) -> Observation {
+	/**
+	Observe all the groups
+	
+	- parameter callback: Called when done
+	- parameter groups: The updated groups
+	*/
+	public static func oberserveAll(callback: @escaping (_ groups: [Group]) -> Void) -> Observation {
 		if updatingSocket == nil {
 			updatingSocket = SocketIOClient(socketURL: URL(string: "\(DALIapi.config.serverURL)")!, config: [.nsp("/lights")])
 			

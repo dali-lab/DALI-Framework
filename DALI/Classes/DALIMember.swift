@@ -106,6 +106,7 @@ public struct DALIMember {
 	private var id_in: String
 	private var dirty_in: Bool
 	
+	/// The user is an admin
 	public private(set) var isAdmin: Bool = false
 	
 	/// The identifier used by the server

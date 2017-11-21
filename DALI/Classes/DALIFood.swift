@@ -10,10 +10,20 @@ import Foundation
 import SwiftyJSON
 import SocketIO
 
+/**
+An interface for getting and setting information about food in the lab
+*/
 public class DALIFood {
+	/// The most recently gathered information on food
 	public static var current: String?
 	
-	public static func getFood(callback: @escaping (String?) -> Void) {
+	/**
+	Gets the current food for the night
+	
+	- parameter callback: The function called when the data has been received
+	- parameter food: The food tonight
+	*/
+	public static func getFood(callback: @escaping (_ food: String?) -> Void) {
 		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/food") { (data, code, error) in
 			DispatchQueue.main.async {
 				callback(data?.string)
@@ -21,6 +31,7 @@ public class DALIFood {
 		}
 	}
 	
+	/// The socket to be used for observing
 	internal static var socket: SocketIOClient?
 	
 	public static func observeFood(callback: @escaping (String?) -> Void) -> Observation {

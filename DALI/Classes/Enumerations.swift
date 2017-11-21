@@ -15,8 +15,18 @@ extension Notification.Name {
 	}
 }
 
+/**
+An object that allows the user to control socket observations.
+
+You receive an object of this class when you observe some data.
+	You may use this object to close the observation when you are done.
+	The observation will automatically be closed when the app terminates,
+	and the socket will be temporarily suspended when the app goes into the background.
+*/
 public struct Observation {
+	/// A function to cancel an observation
 	public let stop: () -> Void
+	/// An identifier of the observation
 	public let id: String
 }
 

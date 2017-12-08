@@ -209,7 +209,7 @@ public class DALILocation {
 				}
 			} catch {
 				DispatchQueue.main.async {
-					callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "SwiftyJSON", code: ErrorInvalidJSON, userInfo: nil)))
+					callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: SwiftyJSONError.invalidJSON as NSError))
 				}
 			}
 		}
@@ -307,7 +307,7 @@ public class DALILocation {
 				}
 			} catch {
 				DispatchQueue.main.async {
-					callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "SwiftyJSON", code: ErrorInvalidJSON, userInfo: nil)))
+					callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: SwiftyJSONError.invalidJSON as NSError))
 				}
 			}
 		}

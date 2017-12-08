@@ -16,7 +16,7 @@ class ServerCommunicator {
 	}
 	
 	static func authenticateSocket(socket: SocketIOClient) {
-		socket.emit("authenticate", with: [config.token ?? config.apiKey])
+		socket.emit("authenticate", with: [(config.token ?? config.apiKey) as Any])
 	}
 	
 	// MARK : POST and GET methods

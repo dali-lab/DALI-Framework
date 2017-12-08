@@ -44,7 +44,10 @@ public class DALIFood {
 		if socket == nil {
 			socket = SocketIOClient(socketURL: URL(string: DALIapi.config.serverURL)!, config: [.nsp("/food")])
 			
-			socket?.connect()
+			socket!.connect()
+			socket!.on(clientEvent: .connect, callback: { (data, ack) in
+				ServerCommunicator.authenticateSocket(socket: socket!)
+			})
 		}
 		
 		socket!.on("foodUpdate", callback: { (data, ack) in

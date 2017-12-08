@@ -7,7 +7,7 @@ PODS:
   - Socket.IO-Client-Swift (12.1.0):
     - Starscream (~> 2.1.1)
   - Starscream (2.1.1)
-  - SwiftyJSON (3.1.4)
+  - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
   - DALI (from `../`)
@@ -33,7 +33,7 @@ SPEC CHECKSUMS:
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
   Socket.IO-Client-Swift: b8deb44a611bf92d2e1e54e22ada4f2b732e1272
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
-  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
 PODFILE CHECKSUM: f560968cfb57cecfff3dadba47efce941b59c05a
 

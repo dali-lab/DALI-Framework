@@ -100,6 +100,9 @@ public class DALILocation {
 			})
 			
 			updatingSocket.connect()
+			updatingSocket.on(clientEvent: .connect, callback: { (data, ack) in
+				ServerCommunicator.authenticateSocket(socket: updatingSocket)
+			})
 		}
 	}
 	

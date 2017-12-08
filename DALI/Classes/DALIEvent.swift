@@ -851,6 +851,9 @@ public class DALIEvent {
 			})
 			
 			updatesSocket.connect()
+			updatesSocket.on(clientEvent: .connect, callback: { (data, ack) in
+				ServerCommunicator.authenticateSocket(socket: updatesSocket)
+			})
 		}
 	}
 	
@@ -1194,7 +1197,11 @@ public class DALIEvent {
 			
 			let checkinSocket = self.checkinSocket!
 			
-			checkinSocket.on("connect", callback: { (data, ack) in
+			checkinSocket.on(clientEvent: .connect, callback: { (data, ack) in
+				ServerCommunicator.authenticateSocket(socket: checkinSocket)
+			})
+			
+			checkinSocket.on("authed", callback: { (data, ack) in
 				checkinSocket.emit("eventSelect", self.id!)
 			})
 			

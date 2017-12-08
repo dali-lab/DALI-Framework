@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.]
-		DALIapi.configure(config: DALIConfig(serverURL: "https://dalilab-api.herokuapp.com", apiKey: "69222f5c9ea91af57b223e087bca601e7c151ef9c9848dcfbae4d08bb884", enableSockets: true))
+		DALIapi.configure(config: DALIConfig(serverURL: "http://localhost:3000", apiKey: "69222f5c9ea91af57b223e087bca601e7c151ef9c9848dcfbae4d08bb884", enableSockets: true))
 		
         return true
     }

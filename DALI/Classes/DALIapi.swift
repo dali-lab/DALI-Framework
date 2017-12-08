@@ -47,7 +47,9 @@ public class DALIapi {
 	public static func configure(config: DALIConfig) {
 		self.unProtConfig = config
 		
-		enableSockets()
+		if config.enableSockets {
+			enableSockets()
+		}
 	}
 	
 	/// Enables the use of sockets

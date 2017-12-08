@@ -8,12 +8,16 @@
 
 import Foundation
 import SwiftyJSON
+import SocketIO
 
 class ServerCommunicator {
 	private static var config: DALIConfig {
 		return DALIapi.config
 	}
 	
+	static func authenticateSocket(socket: SocketIOClient) {
+		socket.emit("authenticate", with: [config.token ?? config.apiKey])
+	}
 	
 	// MARK : POST and GET methods
 	// ===========================
@@ -82,16 +86,14 @@ class ServerCommunicator {
 				return
 			}
 			
-			let json = JSON.init(data: data)
-			
-			if let error = json.error {
-				if error.code == ErrorInvalidJSON {
-					callback(nil, httpResponse?.statusCode, DALIError.General.InvalidJSON(text: String(data: data, encoding: .utf8), jsonError: error))
-					return
-				}
+			do{
+				let json = try JSON.init(data: data)
+				callback(json, httpResponse?.statusCode, nil)
+			} catch is SwiftyJSONError {
+				callback(nil, httpResponse?.statusCode, DALIError.General.InvalidJSON(text: String(data: data, encoding: .utf8), jsonError: SwiftyJSONError.invalidJSON as NSError))
+			} catch {
+				callback(nil, nil, nil)
 			}
-			
-			callback(json, httpResponse?.statusCode, nil)
 		}
 		
 		task.resume()
@@ -181,16 +183,14 @@ class ServerCommunicator {
 				return
 			}
 			
-			let json = JSON.init(data: data)
-			
-			if let error = json.error {
-				if error.code == ErrorInvalidJSON {
-					callback(true, json, DALIError.General.InvalidJSON(text: String(data: data, encoding: .utf8), jsonError: error))
-					return
-				}
+			do {
+				let json = try JSON.init(data: data)
+				callback(true, json, nil)
+			}catch is SwiftyJSONError {
+				callback(false, nil, DALIError.General.InvalidJSON(text: String(data: data, encoding: .utf8), jsonError: SwiftyJSONError.invalidJSON as NSError))
+			}catch {
+				callback(false, nil, nil)
 			}
-			
-			callback(true, json, nil)
 		}
 		
 		// And complete it

@@ -178,6 +178,10 @@ public class DALILights {
 			updatingSocket = SocketIOClient(socketURL: URL(string: "\(DALIapi.config.serverURL)")!, config: [.nsp("/lights")])
 			
 			updatingSocket.connect()
+			
+			updatingSocket.on(clientEvent: .connect, callback: { (data, ack) in
+				ServerCommunicator.authenticateSocket(socket: updatingSocket)
+			})
 		}
 		
 		updatingSocket.on("state", callback: { (data, ack) in

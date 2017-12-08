@@ -1,12 +1,6 @@
 {
   "warnings": [
-    {
-      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIMember.swift",
-      "line": 109,
-      "symbol": "DALIMember.isAdmin",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    }
+
   ],
   "source_directory": "/Users/john/Programming/DALI/Internal/framework"
 }

@@ -827,7 +827,7 @@ public class DALIEvent {
 	internal static func assertUpdatesSocket() {
 		if updatesSocket == nil {
 			
-			updatesSocket = SocketIOClient(manager: SocketManager(socketURL: URL(string: DALIapi.config.serverURL)!), nsp: "/eventsReloads")
+			updatesSocket = SocketManager(socketURL: URL(string: DALIapi.config.serverURL)!).socket(forNamespace: "/eventsReloads")
 			
 			updatesSocket.onAny({ (event) in
 				if let callback = updatesCallbacks[event.event] {
@@ -1194,7 +1194,7 @@ public class DALIEvent {
 	*/
 	public func observeMembersCheckedIn(callback: @escaping (_ members: [DALIMember]) -> Void) -> Observation {
 		if checkinSocket == nil {
-			self.checkinSocket = SocketIOClient(manager: SocketManager(socketURL: DALIapi.config.serverURLobject), nsp:"/listCheckins")
+			self.checkinSocket = SocketManager(socketURL: DALIapi.config.serverURLobject).socket(forNamespace: "/listCheckins")
 			
 			let checkinSocket = self.checkinSocket!
 			

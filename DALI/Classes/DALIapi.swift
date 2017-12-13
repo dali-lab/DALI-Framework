@@ -26,6 +26,8 @@ public class DALIapi {
 		return unProtConfig!
 	}
 	
+	internal static let socketManager = SocketManager(socketURL: DALIapi.config.serverURLobject)
+	
 	/// Defines if the user is signed in
     public static var isSignedIn: Bool {
         return config.member != nil

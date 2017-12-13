@@ -6,16 +6,16 @@ target 'DALI_Example' do
   target 'DALI_Tests' do
 	inherit! :search_paths
 	pod 'SwiftyJSON'
-	pod 'Socket.IO-Client-Swift', :git => 'https://github.com/johnlev/socket.io-client-swift.git'
+	pod 'Socket.IO-Client-Swift'
 
-    pod 'Quick', '~> 1.0.0'
-    pod 'Nimble', '~> 5.1.1'
+    pod 'Quick'
+    pod 'Nimble'
 	
 	
 	post_install do |installer|
 		installer.pods_project.targets.each do |target|
 			target.build_configurations.each do |config|
-				config.build_settings['SWIFT_VERSION'] = '3.1'
+				config.build_settings['SWIFT_VERSION'] = '4.0'
 			end
 		end
 	end

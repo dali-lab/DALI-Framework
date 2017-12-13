@@ -275,7 +275,7 @@ public class DALIapi {
 				callback(success, error)
 			})
 		}catch {
-			callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "some", code: ErrorInvalidJSON, userInfo: nil)))
+			callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: NSError(domain: "some", code: SwiftyJSONError.invalidJSON.rawValue, userInfo: nil)))
 		}
 	}
 	

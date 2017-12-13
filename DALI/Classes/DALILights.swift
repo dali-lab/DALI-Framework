@@ -175,7 +175,7 @@ public class DALILights {
 	*/
 	public static func oberserveAll(callback: @escaping (_ groups: [Group]) -> Void) -> Observation {
 		if updatingSocket == nil {
-			updatingSocket = SocketIOClient(manager: URL(string: "\(DALIapi.config.serverURL)") as! SocketManagerSpec, nsp: "/lights")
+			updatingSocket = SocketIOClient(manager: SocketManager(socketURL: DALIapi.config.serverURLobject), nsp: "/lights")
 			
 			updatingSocket.connect()
 			

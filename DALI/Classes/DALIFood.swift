@@ -42,7 +42,8 @@ public class DALIFood {
 	*/
 	public static func observeFood(callback: @escaping (_ food: String?) -> Void) -> Observation {
 		if socket == nil {
-			socket = SocketIOClient(manager: URL(string: DALIapi.config.serverURL)! as! SocketManagerSpec, nsp: "/food")
+			let manager = SocketManager(socketURL: URL(string: DALIapi.config.serverURL)!)
+			socket = SocketIOClient(manager: manager, nsp: "/food")
 			
 			socket!.connect()
 			socket!.on(clientEvent: .connect, callback: { (data, ack) in

@@ -52,6 +52,10 @@ open class DALIConfig {
 		}
 	}
 	
+	internal var serverURLobject: URL {
+		return URL(string: DALIapi.config.serverURL)!
+	}
+	
 	/// The current member signed in
 	internal var member_stored: DALIMember?
 	internal var member: DALIMember? {

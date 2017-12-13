@@ -826,7 +826,8 @@ public class DALIEvent {
 	/// Makes sure the socket is open and waiting for updates
 	internal static func assertUpdatesSocket() {
 		if updatesSocket == nil {
-			updatesSocket = SocketIOClient(manager: URL(string: DALIapi.config.serverURL) as! SocketManagerSpec, nsp: "/eventsReloads")
+			
+			updatesSocket = SocketIOClient(manager: SocketManager(socketURL: URL(string: DALIapi.config.serverURL)!), nsp: "/eventsReloads")
 			
 			updatesSocket.onAny({ (event) in
 				if let callback = updatesCallbacks[event.event] {
@@ -1193,7 +1194,7 @@ public class DALIEvent {
 	*/
 	public func observeMembersCheckedIn(callback: @escaping (_ members: [DALIMember]) -> Void) -> Observation {
 		if checkinSocket == nil {
-			self.checkinSocket = SocketIOClient(manager: URL(string: DALIapi.config.serverURL) as! SocketManagerSpec, nsp:"/listCheckins")
+			self.checkinSocket = SocketIOClient(manager: SocketManager(socketURL: DALIapi.config.serverURLobject), nsp:"/listCheckins")
 			
 			let checkinSocket = self.checkinSocket!
 			

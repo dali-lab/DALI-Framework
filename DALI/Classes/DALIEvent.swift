@@ -759,6 +759,7 @@ public class DALIEvent {
 			"startTime": DALIEvent.dateFormatter().string(from: self.start_in),
 			"endTime": DALIEvent.dateFormatter().string(from: self.end_in),
 			"description": self.description,
+			"location": self.location,
 			"id": self.id,
 			"votingEnabled": false,
 			"googleID": self.googleID,

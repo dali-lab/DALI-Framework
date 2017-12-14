@@ -686,21 +686,7 @@ public class DALIEvent {
 			throw DALIError.Create.AlreadyCreated
 		}
 		
-		var dict: [String: Any] = [
-			"name": self.name,
-			"start": DALIEvent.dateFormatter().string(from: self.start),
-			"end": DALIEvent.dateFormatter().string(from: self.end),
-			"votingEnabled": false
-		]
-		
-		if let description = self.description {
-			dict["description"] = description
-		}
-		if let location = self.location {
-			dict["location"] = location
-		}
-		
-		try ServerCommunicator.post(url: DALIapi.config.serverURL + "/api/events", json: JSON(dict)) { success, json, error in
+		try ServerCommunicator.post(url: DALIapi.config.serverURL + "/api/events", json: self.json()) { success, json, error in
 			DispatchQueue.main.async {
 				callback(success, error)
 			}

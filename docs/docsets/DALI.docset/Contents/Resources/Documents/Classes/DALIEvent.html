@@ -867,9 +867,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI9DALIEventC13observeFutureAA11ObservationVySayACGSg_AA9DALIErrorC7GeneralOSgtc8callback_tFZ"></a>
-                    <a name="//apple_ref/swift/Method/observeFuture(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI9DALIEventC13observeFutureAA11ObservationVySayACGSg_AA9DALIErrorC7GeneralOSgtc8callback_tFZ">observeFuture(callback:)</a>
+                    <a name="/s:4DALI9DALIEventC13observeFutureAA11ObservationVSb13includeHidden_ySayACGSg_AA9DALIErrorC7GeneralOSgtc8callbacktFZ"></a>
+                    <a name="//apple_ref/swift/Method/observeFuture(includeHidden:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4DALI9DALIEventC13observeFutureAA11ObservationVSb13includeHidden_ySayACGSg_AA9DALIErrorC7GeneralOSgtc8callbacktFZ">observeFuture(includeHidden:callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -884,7 +884,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">observeFuture</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">events</span><span class="p">:</span> <span class="p">[</span><span class="kt">DALIEvent</span><span class="p">]?,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Observation.html">Observation</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">observeFuture</span><span class="p">(</span><span class="nv">includeHidden</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">events</span><span class="p">:</span> <span class="p">[</span><span class="kt">DALIEvent</span><span class="p">]?,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Observation.html">Observation</a></span></code></pre>
 
                         </div>
                       </div>
@@ -892,6 +892,18 @@
                         <h4>Parameters</h4>
                         <table class="graybox">
                           <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeHidden</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Include events marked as hidden (admin only)</p>
+                                </div>
+                              </td>
+                            </tr>
                             <tr>
                               <td>
                                 <code>
@@ -1148,9 +1160,9 @@ No authorization is needed for this route</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI9DALIEventC9getFutureyySayACGSg_AA9DALIErrorC7GeneralOSgtc8callback_tFZ"></a>
-                    <a name="//apple_ref/swift/Method/getFuture(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI9DALIEventC9getFutureyySayACGSg_AA9DALIErrorC7GeneralOSgtc8callback_tFZ">getFuture(callback:)</a>
+                    <a name="/s:4DALI9DALIEventC9getFutureySb13includeHidden_ySayACGSg_AA9DALIErrorC7GeneralOSgtc8callbacktFZ"></a>
+                    <a name="//apple_ref/swift/Method/getFuture(includeHidden:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4DALI9DALIEventC9getFutureySb13includeHidden_ySayACGSg_AA9DALIErrorC7GeneralOSgtc8callbacktFZ">getFuture(includeHidden:callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1165,7 +1177,7 @@ No authorization is needed for this route</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getFuture</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">events</span><span class="p">:</span> <span class="p">[</span><span class="kt">DALIEvent</span><span class="p">]?,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getFuture</span><span class="p">(</span><span class="nv">includeHidden</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">events</span><span class="p">:</span> <span class="p">[</span><span class="kt">DALIEvent</span><span class="p">]?,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1173,6 +1185,18 @@ No authorization is needed for this route</p>
                         <h4>Parameters</h4>
                         <table class="graybox">
                           <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeHidden</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Include events that have been marked hidden (admin only)</p>
+                                </div>
+                              </td>
+                            </tr>
                             <tr>
                               <td>
                                 <code>
@@ -1240,6 +1264,8 @@ No authorization is needed for this route</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Enable voting on this event</p>
+
+<p><img src="http://icons.iconarchive.com/icons/graphicloads/flat-finance/64/lock-icon.png" alt="Admin only"></p>
 
                       </div>
                       <div class="declaration">
@@ -1664,7 +1690,7 @@ No authorization is needed for this route</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://dali-lab.github.io/DALI-Framework/" target="_blank" rel="external">John Kotz</a>. All rights reserved. (Last updated: 2017-12-13)</p>
+          <p>&copy; 2017 <a class="link" href="https://dali-lab.github.io/DALI-Framework/" target="_blank" rel="external">John Kotz</a>. All rights reserved. (Last updated: 2017-12-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.4</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

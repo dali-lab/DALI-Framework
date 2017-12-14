@@ -896,19 +896,20 @@ public class DALIEvent {
 	/**
 	Observe future events
 	
+	- parameter includeHidden: Include events marked as hidden (admin only)
 	- parameter callback: The function to call when update happens
 	- parameter events: The updated events
 	- parameter error: The error, if any, encountered
 	*/
-	public static func observeFuture(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) -> Observation {
+	public static func observeFuture(includeHidden: Bool = false, callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) -> Observation {
 		assertUpdatesSocket()
-		updatesCallbacks["futureEvents"] = callback
+		updatesCallbacks["futureEvents" + (includeHidden && (DALIapi.config.member?.isAdmin ?? false) ? "Hidden" : "")] = callback
 		
-		getFuture(callback: callback)
+		getFuture(includeHidden: includeHidden && (DALIapi.config.member?.isAdmin ?? false), callback: callback)
 		
 		return Observation(stop: {
-			removeCallback(forKey: "futureEvents")
-		}, id: "futureEventsOberver")
+			removeCallback(forKey: "futureEvents" + (includeHidden && (DALIapi.config.member?.isAdmin ?? false) ? "Hidden" : ""))
+		}, id: "futureEvents" + (includeHidden && (DALIapi.config.member?.isAdmin ?? false) ? "Hidden" : "") + "Oberver")
 	}
 	
 	/**
@@ -1005,12 +1006,18 @@ public class DALIEvent {
 	/**
 	Gets all events in the future
 	
+	- parameter includeHidden: Include events that have been marked hidden (admin only)
 	- parameter callback: Function called when done
 	- parameter events: The events returned by the API
 	- parameter error: The error encountered (if any)
 	*/
-	public static func getFuture(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) {
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/future") { (json, code, error) in
+	public static func getFuture(includeHidden: Bool = false, callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) {
+		var add = ""
+		if includeHidden && (DALIapi.config.member?.isAdmin ?? false) {
+			add = "?hidden=true"
+		}
+		
+		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/future" + add) { (json, code, error) in
 			if let error = error {
 				DispatchQueue.main.async {
 					callback(nil, error)
@@ -1042,6 +1049,8 @@ public class DALIEvent {
 	
 	/**
 	Enable voting on this event
+	
+	![Admin only](http://icons.iconarchive.com/icons/graphicloads/flat-finance/64/lock-icon.png)
 	
 	- parameter numSelected: Number of options the user should select
 	- parameter ordered: The choices the user makes should be ordered (1st, 2nd, 3rd, ...)

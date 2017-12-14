@@ -99,6 +99,71 @@ class ServerCommunicator {
 		task.resume()
 	}
 	
+	static func delete(url: String, json: JSON, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) throws {
+		let data = try json.rawData()
+		
+		ServerCommunicator.delete(url: url, data: data, callback: callback)
+	}
+	
+	static func delete(url: String, data: Data, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
+		var request = URLRequest(url: URL(string: url)!)
+		request.httpMethod = "DELETE"
+		request.httpBody = data
+		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+		request.addValue("application/json", forHTTPHeaderField: "Accept")
+		if let token = config.token {
+			request.addValue(token, forHTTPHeaderField: "authorization")
+		}else if let apiKey = config.apiKey {
+			request.addValue(apiKey, forHTTPHeaderField: "apiKey")
+		}
+		
+		let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+			let httpResponse = response as? HTTPURLResponse
+			
+			if let httpResponse = httpResponse, httpResponse.statusCode != 200 || error != nil {
+				print("Didn't get 200: \(httpResponse.statusCode)")
+				
+				var err: DALIError.General = DALIError.General.UnknownError(error: error, text: data == nil ? nil : String(data: data!, encoding: .utf8), code: httpResponse.statusCode)
+				
+				switch httpResponse.statusCode {
+				case 401:
+					err = DALIError.General.Unauthorized
+					break
+				case 403:
+					fatalError("DALIapi: Provided API Key out invalid!")
+					break
+				case 422:
+					err = DALIError.General.Unprocessable
+					break
+				case 400:
+					err = DALIError.General.BadRequest
+					break
+				case 404:
+					err = DALIError.General.Unfound
+					break
+				default:
+					break
+				}
+				
+				callback(false, err)
+				return
+			}else if let error = error {
+				print(error)
+				
+				callback(false, DALIError.General.UnknownError(error: error, text: data == nil ? nil : String(data: data!, encoding: .utf8), code: -1))
+				return
+			}
+			
+			guard let data = data else {
+				print("Data is empty")
+				callback(true, nil)
+				return
+			}
+			
+			callback(true, nil)
+		}
+	}
+	
 	/**
 	Convenience function for posting JSON data
 	

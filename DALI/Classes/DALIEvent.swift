@@ -140,7 +140,7 @@ public class DALIEvent {
 			/// Boolean to indicate whether the user should put their options in order
 			public private(set) var ordered: Bool
 			
-			/// Get the JSON value of this option
+			/// Get the JSON value of this config
 			public func json() -> JSON {
 				return JSON([ "numSelected": numSelected, "ordered": ordered ])
 			}
@@ -554,6 +554,43 @@ public class DALIEvent {
 				DispatchQueue.main.async {
 					callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: SwiftyJSONError.invalidJSON as NSError))
 				}
+			}
+		}
+		
+		/**
+		Removes the given option from the list of options
+		
+		![Admin only](http://icons.iconarchive.com/icons/graphicloads/flat-finance/64/lock-icon.png)
+		
+		- parameter option: The option to remove
+		- parameter callback: Function called when done
+		*/
+		public func removeOption(option: Option, callback: @escaping DALIapi.SuccessCallback) {
+			if !(DALIapi.config.member?.isAdmin ?? false) {
+				DispatchQueue.main.async {
+					callback(false, DALIError.General.Unauthorized)
+				}
+				return
+			}
+			
+			let dict: [String: String] = [
+				"option": option.id
+			]
+			
+			do {
+				try ServerCommunicator.delete(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/options", json: JSON(dict), callback: { (success, error) in
+					if success {
+						if let index = self.options?.index(where: { (option2) -> Bool in return option2.id == option.id }) {
+							self.options?.remove(at: index)
+						}
+					}
+					
+					DispatchQueue.main.async {
+						callback(success, error)
+					}
+				})
+			} catch {
+				callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: SwiftyJSONError.invalidJSON as NSError))
 			}
 		}
 		

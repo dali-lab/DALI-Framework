@@ -154,14 +154,10 @@ class ServerCommunicator {
 				return
 			}
 			
-			guard let data = data else {
-				print("Data is empty")
-				callback(true, nil)
-				return
-			}
-			
 			callback(true, nil)
 		}
+		
+		task.resume()
 	}
 	
 	/**

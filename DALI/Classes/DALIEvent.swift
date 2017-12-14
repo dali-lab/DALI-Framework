@@ -577,6 +577,11 @@ public class DALIEvent {
 				"option": option.id
 			]
 			
+			guard let id = self.id else {
+				callback(false, DALIError.General.BadRequest)
+				return
+			}
+			
 			do {
 				try ServerCommunicator.delete(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/options", json: JSON(dict), callback: { (success, error) in
 					if success {

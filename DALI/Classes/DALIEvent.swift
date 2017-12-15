@@ -241,6 +241,30 @@ public class DALIEvent {
 		// MARK: Public Methods
 		
 		/**
+		Get if the current device and user have already voted for this event
+		
+		- parameter callback: Function called when done
+		- parameter haveVoted: Flag expressing if the user and device has voted already (default false)
+		- parameter error: The error encountered, if any
+		*/
+		public func haveVoted(callback: @escaping (_ haveVoted: Bool, _ error: DALIError.General?) -> Void) {
+			guard let id = self.id else {
+				DispatchQueue.main.async {
+					callback(false, DALIError.General.BadRequest)
+				}
+				return
+			}
+			
+			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)/hasVoted") { (data, code, error) in
+				if let dict = data?.dictionary, let haveVoted = dict["voted"]?.bool {
+					callback(haveVoted, nil)
+				}else{
+					callback(false, error)
+				}
+			}
+		}
+		
+		/**
 		Get the public results for this event
 		
 		- parameters event: Event to get the results of

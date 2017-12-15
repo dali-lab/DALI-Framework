@@ -248,9 +248,9 @@ class ServerCommunicator {
 				let json = try JSON.init(data: data)
 				callback(true, json, nil)
 			}catch is SwiftyJSONError {
-				callback(false, nil, DALIError.General.InvalidJSON(text: String(data: data, encoding: .utf8), jsonError: SwiftyJSONError.invalidJSON as NSError))
+				callback(true, nil, DALIError.General.InvalidJSON(text: String(data: data, encoding: .utf8), jsonError: SwiftyJSONError.invalidJSON as NSError))
 			}catch {
-				callback(false, nil, nil)
+				callback(true, nil, nil)
 			}
 		}
 		

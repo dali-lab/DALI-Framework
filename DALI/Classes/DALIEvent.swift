@@ -249,7 +249,7 @@ public class DALIEvent {
 		*/
 		public func haveVoted(callback: @escaping (_ haveVoted: Bool, _ error: DALIError.General?) -> Void) {
 			guard let id = self.id else {
-				DispatchQueue.main.async {
+				DispatchQueue.main.async { 
 					callback(false, DALIError.General.BadRequest)
 				}
 				return

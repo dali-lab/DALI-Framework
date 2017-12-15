@@ -55,14 +55,14 @@ public class DALIapi {
 	}
 	
 	/// Enables the use of sockets
-	internal static func enableSockets() {
+	public static func enableSockets() {
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(self.goingForeground), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(self.goingBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
 	}
 	
 	/// Disables all sockets used by the API
-	internal static func disableSockets() {
+	public static func disableSockets() {
 		
 		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
 		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)

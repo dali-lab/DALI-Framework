@@ -14,7 +14,7 @@ class LightsViewController: UITableViewController {
 	var groups: [DALILights.Group] = []
 	
 	override func viewWillAppear(_ animated: Bool) {
-		DALILights.oberserveAll { (groups) in
+		let _ = DALILights.oberserveAll { (groups) in
 			self.groups = groups.sorted(by: { (group1, group2) -> Bool in
 				return group1.name > group2.name
 			})
@@ -74,7 +74,7 @@ class LightsViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
-		let group = groups.filter({ (group) -> Bool in
+		_ = groups.filter({ (group) -> Bool in
 			if indexPath.section == 0 {
 				return !group.name.contains("pod")
 			}else {

@@ -13,11 +13,11 @@
 		06F0920696568BA3A28B8AAABD4496B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89BFB1ECC6BB875D522CE9950A2CF11F /* Foundation.framework */; };
 		0A2CA8B0DD7E300ABFCF1956E6B58248 /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = 1879270A51645D99B1C371E0026AB9B1 /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11E538B7997595DD8153D53C2EA39305 /* QuickSpecBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DF3270C163DC25647EC29CAD94A2C23 /* QuickSpecBase.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1267BC960A7FEF38581AF0346383FB64 /* DALILocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FC1A314BF55023A269112D9D364A11 /* DALILocation.swift */; };
+		1267BC960A7FEF38581AF0346383FB64 /* DALILocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B28C19335337D0F462A5C4FE9A8F42 /* DALILocation.swift */; };
 		13A3A9ECE95F022B78F1A972BC6EFCE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89BFB1ECC6BB875D522CE9950A2CF11F /* Foundation.framework */; };
 		1429AAB08C2220069D7474323017B337 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F86D699C0E0D6A3E631EF927BD0E53FC /* Starscream.framework */; };
-		14D87A2CBA5F88984E85834EA53ACF07 /* ServerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EDE1B596E8D81CC7A9C09C89C285A /* ServerCommunicator.swift */; };
-		1600E4C60EAE0855A75471DEE777447B /* DALIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EB748402BC118FB30ED58E8F6B2F56 /* DALIEvent.swift */; };
+		14D87A2CBA5F88984E85834EA53ACF07 /* ServerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4C190ACEF54B9EB71A46F102DB2232 /* ServerCommunicator.swift */; };
+		1600E4C60EAE0855A75471DEE777447B /* DALIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DF8B567AE25E5820DD5EDC7ED23BA /* DALIEvent.swift */; };
 		16CE6C5B113149E1E52F993D693282F7 /* NSBundle+CurrentTestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF241D6334721657893AB1525871F3CD /* NSBundle+CurrentTestBundle.swift */; };
 		177AA2E7819121DC2D3F7EB61166D71B /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641F8A1C849BD2B3D38618C43FCD5557 /* SocketTypes.swift */; };
 		17C8EE7DF3F57C8F99EAF63C6E61EA99 /* FailureMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F2BCF28625C5A1ECD1F86E6AB1C583 /* FailureMessage.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -28,12 +28,12 @@
 		209DAF48CD7113CF2255488CF81ED7E5 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AE6F58B35887AEB8FB9B6E42033B78 /* World.swift */; };
 		22E9F6FA56858A5F7A5D664E5968ECB0 /* NMBExceptionCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = CDF343A6B9AF0A45474154969C1212C6 /* NMBExceptionCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		25D1805055756CAA69A167CA03B2465C /* ContainElementSatisfying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4540ECB0D4462BC42DD317A03A4E59FF /* ContainElementSatisfying.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		282CE2A4C21E700AA9D0ADB8C800723A /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4448F719AD905521011846FD560B451 /* Enumerations.swift */; };
+		282CE2A4C21E700AA9D0ADB8C800723A /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7DEFEB2387DD940CC6BA89F080E49 /* Enumerations.swift */; };
 		28B2ECEBA833CF460A2007B9616A4E65 /* Socket.IO-Client-Swift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FC8A74299BF4CF9C750735A718FCDBB7 /* Socket.IO-Client-Swift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2929CBFDA0B03B44559BD9CA71BA74B9 /* World.h in Headers */ = {isa = PBXBuildFile; fileRef = 58831768B7DD02684755A541282AB27C /* World.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		29A65FF7D1752DFFF87F5DC8F55CE859 /* ToSucceed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1E203CC3E1744AE10CBB0B956A514 /* ToSucceed.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		2A2665C18F9F039C94E26D2429D53DE5 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D800AA1EBB40C523DFC95AFA4C87D7F /* SwiftyJSON.framework */; };
-		2A88951642DEA92B368962761883D279 /* DALIProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5266FE71DFBBE5BFC442919098DC8520 /* DALIProject.swift */; };
+		2A88951642DEA92B368962761883D279 /* DALIProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F1A9EDE185FC0FCF38B5182E8F2CA0 /* DALIProject.swift */; };
 		2BA58A9FF3B850EE49398A0A956795D0 /* HooksPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6C7A229703D419B96F5016317581CF /* HooksPhase.swift */; };
 		31AED7E657CAFAEFF5D1EB336C61A9B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89BFB1ECC6BB875D522CE9950A2CF11F /* Foundation.framework */; };
 		31C39ED8CB1C9317F1F2840FC919662D /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D439DE89588E0C711BFE83D2770A917D /* PostNotification.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -42,19 +42,19 @@
 		35CADB1AD8E063A35DF68147F3183206 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A7798511E32CA6F7837075464D5B6D6 /* CwlMachBadInstructionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		39451096CF0AA92637CA105F546771EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89BFB1ECC6BB875D522CE9950A2CF11F /* Foundation.framework */; };
 		398F089EAA273ED780488CE5928C1582 /* SocketLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD89F5FD60B21F0CEB47742EFC94871 /* SocketLogger.swift */; };
-		3A68AE39E5CCC79E44ED7B3F76EA4800 /* DALIapi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241945633E69D157B86A889AAF3C9E6 /* DALIapi.swift */; };
+		3A68AE39E5CCC79E44ED7B3F76EA4800 /* DALIapi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E0A59B96AE36CD2A9D320A37F55AB /* DALIapi.swift */; };
 		3B3A88E074630B1EBC2139F4F70F0443 /* ThrowAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304F121863AF654C8B02AA180BF6E318 /* ThrowAssertion.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		3B5230E535214C5478CED828DFCF8E41 /* QuickSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = D982F49DC1C667D349F9EC7642C0834B /* QuickSpec.m */; };
 		3C66D2692E811DAE57A244A67E7AC555 /* BeVoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C87B036A2CF2760AC9D4F521EEDBD /* BeVoid.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		3CEE4030C469345F35F2991EF2299B29 /* DALI-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C6F4E014FD2B9BB59682021D001E41 /* DALI-dummy.m */; };
+		3CEE4030C469345F35F2991EF2299B29 /* DALI-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F297958E7D18B53F9845424EB4B480 /* DALI-dummy.m */; };
 		3D1A89FDD6B579BAA92AD398E5C019F9 /* EndWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = E495C57C1F0F028B0CA0BC0620E33CA3 /* EndWith.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		3D6BE0AC31840B99028C9BAF68700B7D /* QuickSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = B59B3F4033B6C14E6129C18CDF46387A /* QuickSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E04D23B2995705A6106D41F3E3E4E33 /* ExpectationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B720A756C0BB6CFAC05C3CA0712B1EE /* ExpectationMessage.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		3E9B3A3A84B8B82479D0FF3DA1F4C5AD /* SocketIOClientConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C1D0F874E04949F24C87A76E40E7EF /* SocketIOClientConfiguration.swift */; };
-		40389092FFEA8F8012557316F6234EE5 /* DALILights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AB2DCA33CF73CC8BFDD4082FDDDD81 /* DALILights.swift */; };
+		40389092FFEA8F8012557316F6234EE5 /* DALILights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C77D115D4891E72EA7E889DE7A0A614 /* DALILights.swift */; };
 		41C783192F7ECD485C8C6384D30CBF11 /* CwlDarwinDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61C86EFA94CB49363AFE007DDA607CB /* CwlDarwinDefinitions.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		42EAAE8CFB95F2352FCE036F263263E1 /* CwlCatchException.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC712C4ADAF0FB1820AC4DE7968FEE /* CwlCatchException.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		43CB2FD5D06D72A522100EC30EAE744F /* DALIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9031435E1CD24065CE42EDB19A4BB /* DALIConfig.swift */; };
+		43CB2FD5D06D72A522100EC30EAE744F /* DALIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1963803A64C3D1B9CC72DEBC151F9DBF /* DALIConfig.swift */; };
 		45F183320C688F9978649F30ABE21D09 /* MatchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB62239C3A8CF0EA7D45F33B5B6E46EA /* MatchError.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		4779399D340100A8CC6FA3E9FBBC58C4 /* Callsite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FDB2E9178DE4437BE982A44F71610 /* Callsite.swift */; };
 		47A0B0081F8B729ABB0A920D2D4C8AD0 /* SocketExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEAD08AEF7CAF9A8704D7BB8061305E /* SocketExtensions.swift */; };
@@ -85,7 +85,7 @@
 		6CB04D787FEC3BF13D63E62E4A566B38 /* SocketEnginePollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908F9833B0EA387699CD9B50AC2C168F /* SocketEnginePollable.swift */; };
 		6CB4890B9BF5F846E980634AFE83917D /* NMBExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF2237A801EA0F93EE56A9430D8130C /* NMBExceptionCapture.m */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		6D1A3B50163678D44FF8C77594BE8A5F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F97ED97056FF6E55582DDD69E127EC /* XCTest.framework */; };
-		6F35235491ACB6E93B2E41F325B25713 /* DALI-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F16DE680B5B3AB694DFD879C3518A9D7 /* DALI-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F35235491ACB6E93B2E41F325B25713 /* DALI-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CEF710E26DCDE581A2D3B222FD7B90EA /* DALI-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F63E91A687BF3EE699679BC0AF90C66 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BE94C778D2CB863875C7014B6D25B2 /* SwiftyJSON.swift */; };
 		6FF31E7449AC546DB03BDE5B931E9C47 /* SocketPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC33747C38E6D638FFCC0B5F57E212F /* SocketPacket.swift */; };
 		73BC5AC2ECDB8722E085F14B53E0D24E /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B76D9AE4A74514DA83D1E0337DD849 /* AssertionRecorder.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -96,11 +96,11 @@
 		797D00FCA3DD30C6004DC39A1973C685 /* SocketStringReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625E3CA219BF03DA3233F840307F6E20 /* SocketStringReader.swift */; };
 		7B5222991D1C53DF737242CA6C90012C /* CwlCatchException.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7F6BB9051DDBFB8F4C198224B9783A /* CwlCatchException.m */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		7DCB236A3BE28E86827697D086E6495F /* SocketEnginePacketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB26FDDB4B503F779F3FD7DAAC63C9E /* SocketEnginePacketType.swift */; };
-		7E06E59AD3A3732EF1BCD37A49B4BA1F /* DALIPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5262FF36B16083D0D92F9ED29033C59 /* DALIPhoto.swift */; };
+		7E06E59AD3A3732EF1BCD37A49B4BA1F /* DALIPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E3EE45BC307F2C1A78033B7336079E /* DALIPhoto.swift */; };
 		7E0C9AE6468A5DF91F0F4C7A387D725C /* BeAKindOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFB630C1445CC2B373121D9D3036252 /* BeAKindOf.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		8170866E2ACE0ACFBC6D90081354EC65 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABF26D61245E97076BB534CD6ED91FF /* Stringers.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		83A69C7EC20B1B6B89CEF42DE39B3A81 /* QuickSelectedTestSuiteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D07488F2495288FF21E22B81978509 /* QuickSelectedTestSuiteBuilder.swift */; };
-		850122673825EF29D2942B3040DF49CE /* DALIMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023D4ECC90F2CE155B4A205F7F34ACB /* DALIMember.swift */; };
+		850122673825EF29D2942B3040DF49CE /* DALIMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFEB4117F1CAFB1326585D6A8304DEB /* DALIMember.swift */; };
 		856954D49C6B6D134DF36FE7FF068C00 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC67B65CA6FC66F2DF16A49A3BDE68 /* WebSocket.swift */; };
 		866357D85A3A36E27C8490C2DAF2FDE5 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5322BAB81086494736CFA39A7564C76 /* SocketManager.swift */; };
 		8A482867F7C209B7247D281266700AC1 /* SocketParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C406D44352E69662B49FD789D3E071 /* SocketParsable.swift */; };
@@ -126,7 +126,7 @@
 		B102ABE4E54B71B3D2C2118E2782FAB9 /* BeLessThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D288A9FB6B925F3BFB28788F8CDB7C9 /* BeLessThan.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		B2C151B20635A480E1937E3D2B509BB4 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14822289A8F848704ED4DBD049E351C /* Async.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		B52278A6969747795CD96BB889C08B75 /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288F627B04C0C0502F2DB04548A0F31D /* Example.swift */; };
-		B6C930DE8FE4AB25EC61B68871E1DEFD /* DALIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42472E6076CB977866482D57DB7B77CE /* DALIErrors.swift */; };
+		B6C930DE8FE4AB25EC61B68871E1DEFD /* DALIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F005ADE8E2B91633EE669786E868CE19 /* DALIErrors.swift */; };
 		BA893C517320B3144A84CFE03A405EA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89BFB1ECC6BB875D522CE9950A2CF11F /* Foundation.framework */; };
 		BAFC71950532BD2D7B541E7F81C08250 /* QCKDSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 97BF779C3A404EFC110F0B65A228385D /* QCKDSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BC2762357C1484CF58D7638DCFED27EC /* Behavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B9A9F245AAF743E51B7C26D01A58D0 /* Behavior.swift */; };
@@ -137,7 +137,7 @@
 		C1D862177DC2999FAC710AC25F253BD0 /* BeAnInstanceOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6AF5BA8A78B6B80EAA9EDAF190CDC9 /* BeAnInstanceOf.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		C2467221FCD579800B9CD8FBBDB10B4D /* CwlCatchBadInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E445834352042D787FCD9ABA011FDBD3 /* CwlCatchBadInstruction.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		C3072B857026E2AE0B063D15D7B28A7E /* SocketIOClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F25183BFFE6C1855F86C6C80FF5C92 /* SocketIOClientSpec.swift */; };
-		C3F76600C91C85823F8C34B8647C40DD /* DALIFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECED70B0B4C403BF263D8DFB20217A60 /* DALIFood.swift */; };
+		C3F76600C91C85823F8C34B8647C40DD /* DALIFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CE4A38747283F60EE36D707F7E358A /* DALIFood.swift */; };
 		C4085D60218DD7395AF00B219F7AB1CF /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE5D848F52355EC1E8D9054FE137037 /* SSLSecurity.swift */; };
 		C8320A6164C870ADDB8A855ADEBBBDC9 /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED919434BDB09E80D5932C7F9BD34DCC /* Equal.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		CA705D74FA209FF4A16C128BA7254200 /* Quick-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EE89B75606153094AB132529F4E7D71D /* Quick-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -276,14 +276,18 @@
 /* Begin PBXFileReference section */
 		000C59139B086AEBCA8501B985381790 /* Starscream-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Starscream-dummy.m"; sourceTree = "<group>"; };
 		000D5EB5158CE39807EE7D0EEA89A0F3 /* Pods-DALI_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DALI_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		00AB2DCA33CF73CC8BFDD4082FDDDD81 /* DALILights.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALILights.swift; path = DALI/Classes/DALILights.swift; sourceTree = "<group>"; };
 		01F2BCF28625C5A1ECD1F86E6AB1C583 /* FailureMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FailureMessage.swift; path = Sources/Nimble/FailureMessage.swift; sourceTree = "<group>"; };
-		04DD76AF53396566E94CF37A3DE29A41 /* DALI-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DALI-prefix.pch"; sourceTree = "<group>"; };
+		03A435016EF0F7BC2803C5FBECBA07FA /* DALILocation.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALILocation.html; path = docs/Classes/DALILocation.html; sourceTree = "<group>"; };
 		05759FBD9F697B68E3AFDABF3B3EE211 /* SocketEngineClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineClient.swift; path = Source/SocketIO/Engine/SocketEngineClient.swift; sourceTree = "<group>"; };
 		060CAE55DE48250777002FB7E08125F0 /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07890D29633E2269DCC72FAA24243119 /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; name = index.html; path = docs/index.html; sourceTree = "<group>"; };
 		0841186EA279AC2CF7E6128BE52BEC50 /* AsyncMatcherWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncMatcherWrapper.swift; path = Sources/Nimble/Matchers/AsyncMatcherWrapper.swift; sourceTree = "<group>"; };
 		09D49DE4C811C498F6586F97A73454B3 /* MatcherProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MatcherProtocols.swift; path = Sources/Nimble/Matchers/MatcherProtocols.swift; sourceTree = "<group>"; };
+		0A2CAA3CD4257D1A65DD56D902391675 /* docSet.dsidx */ = {isa = PBXFileReference; includeInIndex = 1; name = docSet.dsidx; path = docs/docsets/DALI.docset/Contents/Resources/docSet.dsidx; sourceTree = "<group>"; };
+		0B3418930CE92648E89ADFD3D8AE7AE0 /* Option.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Option.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIEvent/VotingEvent/Option.html; sourceTree = "<group>"; };
+		0BDC433E843D6A25244C610C31826292 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		0D15F3DEEC89D07EE987DC8AE3CFF657 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Sources/Quick/Filter.swift; sourceTree = "<group>"; };
+		0DC09A968B582BD88C70D327F725DF9B /* VotingEvent.html */ = {isa = PBXFileReference; includeInIndex = 1; name = VotingEvent.html; path = docs/Classes/DALIEvent/VotingEvent.html; sourceTree = "<group>"; };
 		0E6F9A3569F5FE7802ED4A2E56073855 /* SocketEventHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEventHandler.swift; path = Source/SocketIO/Client/SocketEventHandler.swift; sourceTree = "<group>"; };
 		0EEAD08AEF7CAF9A8704D7BB8061305E /* SocketExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketExtensions.swift; path = Source/SocketIO/Util/SocketExtensions.swift; sourceTree = "<group>"; };
 		11244F2076BBEE9B026CBA8CA9AFA4DA /* Expectation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expectation.swift; path = Sources/Nimble/Expectation.swift; sourceTree = "<group>"; };
@@ -293,7 +297,12 @@
 		16AF97EA5FE6CE1632EA4ED04C34AF97 /* SocketIOClientOption.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClientOption.swift; path = Source/SocketIO/Client/SocketIOClientOption.swift; sourceTree = "<group>"; };
 		17AF9783E8283CE256DC15EF0467D4F2 /* BeEmpty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeEmpty.swift; path = Sources/Nimble/Matchers/BeEmpty.swift; sourceTree = "<group>"; };
 		1879270A51645D99B1C371E0026AB9B1 /* Nimble.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Nimble.h; path = Sources/Nimble/Nimble.h; sourceTree = "<group>"; };
+		18E3EE45BC307F2C1A78033B7336079E /* DALIPhoto.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIPhoto.swift; path = DALI/Classes/DALIPhoto.swift; sourceTree = "<group>"; };
+		194F049D4CF58AF10D6525FCCDCF48C3 /* DALIConfig.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIConfig.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIConfig.html; sourceTree = "<group>"; };
+		1963803A64C3D1B9CC72DEBC151F9DBF /* DALIConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIConfig.swift; path = DALI/Classes/DALIConfig.swift; sourceTree = "<group>"; };
+		198A817B83087AEAB6D65FD2858B6760 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		19E440F1B9A50A4DF5F0BCD79B4512EB /* Pods_DALI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_DALI_Tests.framework; path = "Pods-DALI_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AA48D68D25BCA75D8076D9926099AD1 /* DALI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = DALI.modulemap; sourceTree = "<group>"; };
 		1B664E4041F4D082452AFD277393F719 /* Pods-DALI_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DALI_Example-resources.sh"; sourceTree = "<group>"; };
 		1FFA557F8A32C8943E65B88ECAA4C037 /* Compression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compression.swift; path = Sources/Compression.swift; sourceTree = "<group>"; };
 		20BA315F2E1AB9A39FB2FDBB6F837B7B /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
@@ -303,11 +312,14 @@
 		22CD97F293149A619D53DBD46F08C4EE /* Socket.IO-Client-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Socket.IO-Client-Swift.modulemap"; sourceTree = "<group>"; };
 		23B600BA78987A975A2D6D09478ADB3F /* BeCloseTo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeCloseTo.swift; path = Sources/Nimble/Matchers/BeCloseTo.swift; sourceTree = "<group>"; };
 		2466CB696B3FB6D6DCCC457748C21859 /* mach_excServer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mach_excServer.h; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlMachBadInstructionHandler/mach_excServer.h; sourceTree = "<group>"; };
+		25E3B4FF7D2FDAF8CB6C179B563A0EB9 /* Tim.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Tim.html; path = docs/Structs/DALILocation/Tim.html; sourceTree = "<group>"; };
 		25F25183BFFE6C1855F86C6C80FF5C92 /* SocketIOClientSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClientSpec.swift; path = Source/SocketIO/Client/SocketIOClientSpec.swift; sourceTree = "<group>"; };
 		26422BC5EB36B473E5D96AB387BF1ED2 /* Nimble-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nimble-umbrella.h"; sourceTree = "<group>"; };
 		2745385A58DA86B3532D6E662C212592 /* Nimble-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nimble-prefix.pch"; sourceTree = "<group>"; };
 		28509E81FF37967F251E70FD4129725F /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
 		288F627B04C0C0502F2DB04548A0F31D /* Example.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Example.swift; path = Sources/Quick/Example.swift; sourceTree = "<group>"; };
+		28BD6068201F1093F63C7733227CDB74 /* VotingEvent.html */ = {isa = PBXFileReference; includeInIndex = 1; name = VotingEvent.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIEvent/VotingEvent.html; sourceTree = "<group>"; };
+		2A25EF7E5249D4E7C83E09FBD14DC2AD /* Tim.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Tim.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALILocation/Tim.html; sourceTree = "<group>"; };
 		2A6AF5BA8A78B6B80EAA9EDAF190CDC9 /* BeAnInstanceOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeAnInstanceOf.swift; path = Sources/Nimble/Matchers/BeAnInstanceOf.swift; sourceTree = "<group>"; };
 		2AE5D848F52355EC1E8D9054FE137037 /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Source/SocketIO/Util/SSLSecurity.swift; sourceTree = "<group>"; };
 		2CCBB2EAE077FCAB1CCA9A4A8C662421 /* Socket.IO-Client-Swift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Socket.IO-Client-Swift.xcconfig"; sourceTree = "<group>"; };
@@ -318,11 +330,12 @@
 		322E5D8EEBE06514BDE25CF34F6214E8 /* NSString+C99ExtendedIdentifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSString+C99ExtendedIdentifier.swift"; path = "Sources/Quick/NSString+C99ExtendedIdentifier.swift"; sourceTree = "<group>"; };
 		327476FEA3FE518CBA77897760A48FC7 /* Pods-DALI_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DALI_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		339828E1883722953D56F78CAD142F27 /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
-		33EB748402BC118FB30ED58E8F6B2F56 /* DALIEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIEvent.swift; path = DALI/Classes/DALIEvent.swift; sourceTree = "<group>"; };
 		35F4EF3C8EAF15596ADDC2B2BAA5EA69 /* XCTestObservationCenter+Register.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "XCTestObservationCenter+Register.m"; path = "Sources/NimbleObjectiveC/XCTestObservationCenter+Register.m"; sourceTree = "<group>"; };
-		371151F1E24199034DE4B72FE8B22876 /* DALI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = DALI.modulemap; sourceTree = "<group>"; };
+		36371D22CF02E1923E6DA540815B9907 /* Shared.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Shared.html; path = docs/Structs/DALILocation/Shared.html; sourceTree = "<group>"; };
+		36DBEF3B8E2D05DAEDA4A5503C6548A1 /* badge.svg */ = {isa = PBXFileReference; includeInIndex = 1; name = badge.svg; path = docs/docsets/DALI.docset/Contents/Resources/Documents/badge.svg; sourceTree = "<group>"; };
 		37B76D9AE4A74514DA83D1E0337DD849 /* AssertionRecorder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AssertionRecorder.swift; path = Sources/Nimble/Adapters/AssertionRecorder.swift; sourceTree = "<group>"; };
 		390B4785737FC994299F6712BD605FC7 /* QuickSpecBase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QuickSpecBase.m; path = Sources/QuickSpecBase/QuickSpecBase.m; sourceTree = "<group>"; };
+		395010FF7332AC0683FD2B640543032F /* DALI-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DALI-prefix.pch"; sourceTree = "<group>"; };
 		39CCD7B787EDC5A6C61AE19C084E16B9 /* SocketEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngine.swift; path = Source/SocketIO/Engine/SocketEngine.swift; sourceTree = "<group>"; };
 		3A7798511E32CA6F7837075464D5B6D6 /* CwlMachBadInstructionHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CwlMachBadInstructionHandler.h; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlMachBadInstructionHandler/include/CwlMachBadInstructionHandler.h; sourceTree = "<group>"; };
 		3ABF26D61245E97076BB534CD6ED91FF /* Stringers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stringers.swift; path = Sources/Nimble/Utils/Stringers.swift; sourceTree = "<group>"; };
@@ -332,16 +345,23 @@
 		3D0E79082DB9E8D89630AF68CC94E7F4 /* Pods-DALI_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DALI_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		3D68710679F51B9D73516EC97CA114C3 /* SocketIOClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClient.swift; path = Source/SocketIO/Client/SocketIOClient.swift; sourceTree = "<group>"; };
 		3E3C84364A6EF129DFB3C470F31BEB8A /* BeGreaterThanOrEqualTo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeGreaterThanOrEqualTo.swift; path = Sources/Nimble/Matchers/BeGreaterThanOrEqualTo.swift; sourceTree = "<group>"; };
-		4023D4ECC90F2CE155B4A205F7F34ACB /* DALIMember.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIMember.swift; path = DALI/Classes/DALIMember.swift; sourceTree = "<group>"; };
-		42472E6076CB977866482D57DB7B77CE /* DALIErrors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIErrors.swift; path = DALI/Classes/DALIErrors.swift; sourceTree = "<group>"; };
+		3F7A0602287451DA6CF7319F5AFCB569 /* DALIMember.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIMember.html; path = docs/Structs/DALIMember.html; sourceTree = "<group>"; };
+		4130637A8A0BBFE2A902A00945804F84 /* jquery.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = jquery.min.js; path = docs/docsets/DALI.docset/Contents/Resources/Documents/js/jquery.min.js; sourceTree = "<group>"; };
+		417E0A59B96AE36CD2A9D320A37F55AB /* DALIapi.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIapi.swift; path = DALI/Classes/DALIapi.swift; sourceTree = "<group>"; };
+		426B03517B86E7A3EDA2C6515C9FA0FA /* Create.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Create.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIError/Create.html; sourceTree = "<group>"; };
 		438CEA003A7A51789B94F631EAFC6963 /* mach_excServer.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mach_excServer.c; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlMachBadInstructionHandler/mach_excServer.c; sourceTree = "<group>"; };
 		439B181780B7E960054B013F3F85C4FF /* AssertionDispatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AssertionDispatcher.swift; path = Sources/Nimble/Adapters/AssertionDispatcher.swift; sourceTree = "<group>"; };
 		4540ECB0D4462BC42DD317A03A4E59FF /* ContainElementSatisfying.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContainElementSatisfying.swift; path = Sources/Nimble/Matchers/ContainElementSatisfying.swift; sourceTree = "<group>"; };
 		46DE9A9B520E50E9FFB5BB6823CEEB36 /* Quick-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Quick-dummy.m"; sourceTree = "<group>"; };
+		496075D241B38E4512907DBF3EC3640F /* General.html */ = {isa = PBXFileReference; includeInIndex = 1; name = General.html; path = docs/Classes/DALIError/General.html; sourceTree = "<group>"; };
+		4ACA90680A524B48AC3502E5D94E5EAE /* DALIError.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIError.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIError.html; sourceTree = "<group>"; };
 		4B7D698DBF4962D802CE2C93416CB970 /* NMBObjCMatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NMBObjCMatcher.swift; path = Sources/Nimble/Adapters/NMBObjCMatcher.swift; sourceTree = "<group>"; };
+		4C118FE28204794A401473FEC1258778 /* gh.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = gh.png; path = docs/img/gh.png; sourceTree = "<group>"; };
 		4C360A16EC3FFDF71779DD9FC3C52CFC /* CurrentTestCaseTracker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CurrentTestCaseTracker.h; path = Sources/NimbleObjectiveC/CurrentTestCaseTracker.h; sourceTree = "<group>"; };
+		4EC243A3096AED2B787D808A7E0033E0 /* DALIapi.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIapi.html; path = docs/Classes/DALIapi.html; sourceTree = "<group>"; };
 		5224CFB8EC4D743A64BD81C918294EDE /* BeginWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeginWith.swift; path = Sources/Nimble/Matchers/BeginWith.swift; sourceTree = "<group>"; };
-		5266FE71DFBBE5BFC442919098DC8520 /* DALIProject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIProject.swift; path = DALI/Classes/DALIProject.swift; sourceTree = "<group>"; };
+		5395B36C3B2627417B7A30FB74AA9C11 /* dash.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = dash.png; path = docs/docsets/DALI.docset/Contents/Resources/Documents/img/dash.png; sourceTree = "<group>"; };
+		557A58724815D7837F647E2EDC7FBE36 /* DALIFood.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIFood.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIFood.html; sourceTree = "<group>"; };
 		566991FE710168B0FBBCA9E63EFDEEA4 /* Expression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expression.swift; path = Sources/Nimble/Expression.swift; sourceTree = "<group>"; };
 		56A95B95E124989F6E3E915DA29A5EAF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57AE17EBA1642773ACE232497F27B021 /* AdapterProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdapterProtocols.swift; path = Sources/Nimble/Adapters/AdapterProtocols.swift; sourceTree = "<group>"; };
@@ -351,59 +371,87 @@
 		5BB26FDDB4B503F779F3FD7DAAC63C9E /* SocketEnginePacketType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEnginePacketType.swift; path = Source/SocketIO/Engine/SocketEnginePacketType.swift; sourceTree = "<group>"; };
 		5D288A9FB6B925F3BFB28788F8CDB7C9 /* BeLessThan.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeLessThan.swift; path = Sources/Nimble/Matchers/BeLessThan.swift; sourceTree = "<group>"; };
 		5DF3270C163DC25647EC29CAD94A2C23 /* QuickSpecBase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QuickSpecBase.h; path = Sources/QuickSpecBase/include/QuickSpecBase.h; sourceTree = "<group>"; };
+		5E7DF8B567AE25E5820DD5EDC7ED23BA /* DALIEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIEvent.swift; path = DALI/Classes/DALIEvent.swift; sourceTree = "<group>"; };
+		5FCF1C3BF4E9379946E24E9D28B888AF /* DALI.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DALI.xcconfig; sourceTree = "<group>"; };
 		60593BFE0D04D3EC64C487BBCC6B1148 /* DSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DSL.swift; path = Sources/Quick/DSL/DSL.swift; sourceTree = "<group>"; };
+		60977420EF31FEC253E67A62886BF9AA /* Structs.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Structs.html; path = docs/Structs.html; sourceTree = "<group>"; };
 		625E3CA219BF03DA3233F840307F6E20 /* SocketStringReader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketStringReader.swift; path = Source/SocketIO/Util/SocketStringReader.swift; sourceTree = "<group>"; };
+		62765D4A7B74D23FEA08917E94F71BB8 /* Tim.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Tim.html; path = docs/Classes/DALILocation/Tim.html; sourceTree = "<group>"; };
+		6321C0528D297F350AEC79645FA3C08E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		641F8A1C849BD2B3D38618C43FCD5557 /* SocketTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketTypes.swift; path = Source/SocketIO/Util/SocketTypes.swift; sourceTree = "<group>"; };
 		6463E0A4C9614C6D0B93CF3DC4E8F769 /* ErrorUtility.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ErrorUtility.swift; path = Sources/Quick/ErrorUtility.swift; sourceTree = "<group>"; };
 		64BDA1D73261409E5C7F4E1A89E2B225 /* SocketAckManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAckManager.swift; path = Source/SocketIO/Ack/SocketAckManager.swift; sourceTree = "<group>"; };
 		655ECC1D893A78D44D9A8AD4EBF82E67 /* SocketIOStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOStatus.swift; path = Source/SocketIO/Client/SocketIOStatus.swift; sourceTree = "<group>"; };
 		65BE94C778D2CB863875C7014B6D25B2 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
+		674381AF3B2ABD1ECD713D4EC83EB3A3 /* Observation.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Observation.html; path = docs/Structs/Observation.html; sourceTree = "<group>"; };
+		6A708CEFCDC9817863917761F23BB526 /* DALIEvent.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIEvent.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIEvent.html; sourceTree = "<group>"; };
+		6AAD53E9CDEEC9B10EE06ACE3C73254C /* Config.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Config.html; path = docs/Classes/DALIEvent/Voting/Config.html; sourceTree = "<group>"; };
+		6ABF62F63F3DB00087E0B4986BD50611 /* DALIConfig.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIConfig.html; path = docs/Classes/DALIConfig.html; sourceTree = "<group>"; };
 		6B720A756C0BB6CFAC05C3CA0712B1EE /* ExpectationMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpectationMessage.swift; path = Sources/Nimble/ExpectationMessage.swift; sourceTree = "<group>"; };
+		6BDBD2740F55B2B9AB3251AB2FE72B34 /* jazzy.js */ = {isa = PBXFileReference; includeInIndex = 1; name = jazzy.js; path = docs/docsets/DALI.docset/Contents/Resources/Documents/js/jazzy.js; sourceTree = "<group>"; };
 		6C3FDB2E9178DE4437BE982A44F71610 /* Callsite.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Callsite.swift; path = Sources/Quick/Callsite.swift; sourceTree = "<group>"; };
 		6D13ECAC70C5893BFA508B09ECAF9665 /* QCKDSL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QCKDSL.m; path = Sources/QuickObjectiveC/DSL/QCKDSL.m; sourceTree = "<group>"; };
+		6E97D8FCF3065A8A9989E1933D9437D2 /* Option.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Option.html; path = docs/Classes/DALIEvent/Voting/Option.html; sourceTree = "<group>"; };
 		6FEC67B65CA6FC66F2DF16A49A3BDE68 /* WebSocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Sources/WebSocket.swift; sourceTree = "<group>"; };
 		7127CE786570974413D5440148831947 /* XCTestSuite+QuickTestSuiteBuilder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "XCTestSuite+QuickTestSuiteBuilder.m"; path = "Sources/QuickObjectiveC/XCTestSuite+QuickTestSuiteBuilder.m"; sourceTree = "<group>"; };
-		729E5DB6AAD042E99AE40864F1412644 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74863A849F73609846607160F7E06533 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAckEmitter.swift; path = Source/SocketIO/Ack/SocketAckEmitter.swift; sourceTree = "<group>"; };
+		7596C9CF3C8B5B2C63EF707427D1C819 /* jazzy.js */ = {isa = PBXFileReference; includeInIndex = 1; name = jazzy.js; path = docs/js/jazzy.js; sourceTree = "<group>"; };
 		7771C4BBED97534A8CD80A813B890DEE /* Contain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Contain.swift; path = Sources/Nimble/Matchers/Contain.swift; sourceTree = "<group>"; };
 		789AC02876EAA34D1EE1C682142B0A6C /* Pods_DALI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_DALI_Example.framework; path = "Pods-DALI_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DB2B037437091FB4A53B637B4BA157 /* SocketEngineSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineSpec.swift; path = Source/SocketIO/Engine/SocketEngineSpec.swift; sourceTree = "<group>"; };
+		7A54F905DA01427B13C79EB80D0C779E /* DALILocation.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALILocation.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Structs/DALILocation.html; sourceTree = "<group>"; };
+		7A981D71306B88A75E538E1DF057F757 /* jazzy.css */ = {isa = PBXFileReference; includeInIndex = 1; name = jazzy.css; path = docs/css/jazzy.css; sourceTree = "<group>"; };
 		7DF2476F7BFB7DA8C043A34A050CC54D /* DSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DSL.h; path = Sources/NimbleObjectiveC/DSL.h; sourceTree = "<group>"; };
+		7EF9DE110B33AB7D61155B932528238F /* Group.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Group.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALILights/Group.html; sourceTree = "<group>"; };
 		82926ABB0CBD16B95286E9A51A0C7CC0 /* NimbleXCTestHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NimbleXCTestHandler.swift; path = Sources/Nimble/Adapters/NimbleXCTestHandler.swift; sourceTree = "<group>"; };
 		83BB658FEE9EACE0B71B9F623A100701 /* DALI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DALI.framework; path = DALI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FAA07B9119F59C808EE83DE55D091B /* AllPass.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AllPass.swift; path = Sources/Nimble/Matchers/AllPass.swift; sourceTree = "<group>"; };
 		860BF224116F8E8DDECE82969B64B30C /* SuiteHooks.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SuiteHooks.swift; path = Sources/Quick/Hooks/SuiteHooks.swift; sourceTree = "<group>"; };
+		87F297958E7D18B53F9845424EB4B480 /* DALI-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DALI-dummy.m"; sourceTree = "<group>"; };
+		889022FA495AD70CB1F2EF387964F8EC /* search.json */ = {isa = PBXFileReference; includeInIndex = 1; name = search.json; path = docs/search.json; sourceTree = "<group>"; };
 		88A9507A6FDC26E8659D181744234A26 /* Pods-DALI_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DALI_Tests-umbrella.h"; sourceTree = "<group>"; };
 		89BFB1ECC6BB875D522CE9950A2CF11F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		8AB7F771FC9CC4E109A796EAB4BD8F3D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BAEF75BD64AB60F44117B81F1E6E8C2 /* DALIError.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIError.html; path = docs/Classes/DALIError.html; sourceTree = "<group>"; };
 		8BE4F447375B38CF652E9A9C720F5A46 /* Match.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Match.swift; path = Sources/Nimble/Matchers/Match.swift; sourceTree = "<group>"; };
 		8C7C822A913D12D7104EDC567CFA233C /* Socket.IO-Client-Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Socket.IO-Client-Swift-prefix.pch"; sourceTree = "<group>"; };
 		8EF2237A801EA0F93EE56A9430D8130C /* NMBExceptionCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMBExceptionCapture.m; path = Sources/NimbleObjectiveC/NMBExceptionCapture.m; sourceTree = "<group>"; };
 		908F9833B0EA387699CD9B50AC2C168F /* SocketEnginePollable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEnginePollable.swift; path = Source/SocketIO/Engine/SocketEnginePollable.swift; sourceTree = "<group>"; };
-		9241945633E69D157B86A889AAF3C9E6 /* DALIapi.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIapi.swift; path = DALI/Classes/DALIapi.swift; sourceTree = "<group>"; };
+		92253FFC361A9A100F10C4B477A76312 /* DALILights.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALILights.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALILights.html; sourceTree = "<group>"; };
+		928DBF06E04C6A34D9D11916845B1410 /* Voting.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Voting.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIEvent/Voting.html; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93B16CB864B10B1A5DFDB2E9A699E984 /* Option.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Option.html; path = docs/Classes/DALIEvent/VotingEvent/Option.html; sourceTree = "<group>"; };
 		93E0AAE19C1B33D633D01695B52E3EEF /* Nimble.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Nimble.modulemap; sourceTree = "<group>"; };
+		93E4B9C9864BC32923A4BB642D49117F /* search.json */ = {isa = PBXFileReference; includeInIndex = 1; name = search.json; path = docs/docsets/DALI.docset/Contents/Resources/Documents/search.json; sourceTree = "<group>"; };
+		948EE60254F3EB4B4170E9B50FC975B0 /* undocumented.json */ = {isa = PBXFileReference; includeInIndex = 1; name = undocumented.json; path = docs/docsets/DALI.docset/Contents/Resources/Documents/undocumented.json; sourceTree = "<group>"; };
+		9508B840ADCC5703C241E28BCCFA2038 /* Config.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Config.html; path = docs/Classes/DALIEvent/VotingEvent/Config.html; sourceTree = "<group>"; };
 		95784036EE1BC1D295C57F9DF120CBD1 /* Quick-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Quick-prefix.pch"; sourceTree = "<group>"; };
 		95CEAC378B218927BA0529E897518A91 /* SocketEngineWebsocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineWebsocket.swift; path = Source/SocketIO/Engine/SocketEngineWebsocket.swift; sourceTree = "<group>"; };
+		966D53B97AFBA3311449B9265BEC26F7 /* Classes.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Classes.html; path = docs/Classes.html; sourceTree = "<group>"; };
 		97BF779C3A404EFC110F0B65A228385D /* QCKDSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QCKDSL.h; path = Sources/QuickObjectiveC/DSL/QCKDSL.h; sourceTree = "<group>"; };
 		97D5FC09F01039BC626782ADBA99EE63 /* Socket.IO-Client-Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Socket.IO-Client-Swift-dummy.m"; sourceTree = "<group>"; };
+		993FD668471DAAE37B161DBECF4BBCFC /* carat.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = carat.png; path = docs/img/carat.png; sourceTree = "<group>"; };
 		994D9D0ADE9BFBDE4070C69709DBDF86 /* Closures.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Closures.swift; path = Sources/Quick/Hooks/Closures.swift; sourceTree = "<group>"; };
 		99B6529274AA4E1334C4795225706DEB /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Sources/Nimble/Utils/Errors.swift; sourceTree = "<group>"; };
 		99BFBBAA6B2E8136BF2EC01959243920 /* SatisfyAnyOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SatisfyAnyOf.swift; path = Sources/Nimble/Matchers/SatisfyAnyOf.swift; sourceTree = "<group>"; };
+		9AE77A08CBE6BC51927DCF0CF86232E4 /* DALIPhoto.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIPhoto.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIPhoto.html; sourceTree = "<group>"; };
+		9B4F4F3FEFE8DAF4699365D03F378D29 /* Classes.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Classes.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes.html; sourceTree = "<group>"; };
 		9BF0EC5CC6AABC851137F4B962A94272 /* SourceLocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SourceLocation.swift; path = Sources/Nimble/Utils/SourceLocation.swift; sourceTree = "<group>"; };
-		9D1EDE1B596E8D81CC7A9C09C89C285A /* ServerCommunicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerCommunicator.swift; path = DALI/Classes/ServerCommunicator.swift; sourceTree = "<group>"; };
+		9C4C190ACEF54B9EB71A46F102DB2232 /* ServerCommunicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerCommunicator.swift; path = DALI/Classes/ServerCommunicator.swift; sourceTree = "<group>"; };
+		9C77D115D4891E72EA7E889DE7A0A614 /* DALILights.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALILights.swift; path = DALI/Classes/DALILights.swift; sourceTree = "<group>"; };
 		9D800AA1EBB40C523DFC95AFA4C87D7F /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DF6DEE0F0BC5D3C9A30D5D0FD324293 /* Starscream-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
+		9DF81FC5E141726681DF3F703725472B /* DALIUser.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIUser.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Structs/DALIUser.html; sourceTree = "<group>"; };
 		9E2B5B6DADDA7241260601BC55118451 /* Pods-DALI_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DALI_Tests-resources.sh"; sourceTree = "<group>"; };
+		9EB2AAFE22F308F4C36A6EFA7EDF4F6B /* DALIUser.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIUser.html; path = docs/Structs/DALIUser.html; sourceTree = "<group>"; };
+		9F2B0EC7D8FEFB863E5B1A22A225C4D9 /* Shared.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Shared.html; path = docs/Classes/DALILocation/Shared.html; sourceTree = "<group>"; };
 		A051ED29565751770F4936647DCDC20E /* HaveCount.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HaveCount.swift; path = Sources/Nimble/Matchers/HaveCount.swift; sourceTree = "<group>"; };
 		A0AC712C4ADAF0FB1820AC4DE7968FEE /* CwlCatchException.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlCatchException.swift; path = Carthage/Checkouts/CwlCatchException/Sources/CwlCatchException/CwlCatchException.swift; sourceTree = "<group>"; };
 		A159886655268D54F1B882617F4D9BF4 /* Functional.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Functional.swift; path = Sources/Nimble/Utils/Functional.swift; sourceTree = "<group>"; };
 		A1BDD9B42D6AFB63B568C4D2A03A4B1C /* URL+FileName.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URL+FileName.swift"; path = "Sources/Quick/URL+FileName.swift"; sourceTree = "<group>"; };
 		A4B9A9F245AAF743E51B7C26D01A58D0 /* Behavior.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Behavior.swift; path = Sources/Quick/Behavior.swift; sourceTree = "<group>"; };
-		A4C6F4E014FD2B9BB59682021D001E41 /* DALI-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DALI-dummy.m"; sourceTree = "<group>"; };
 		A51E46E8A3EB5555CFE16D3B9F000CC4 /* Pods-DALI_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DALI_Example-frameworks.sh"; sourceTree = "<group>"; };
 		A5B5FF9409079929C32C13B8D5CD4BC3 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
-		A5B9031435E1CD24065CE42EDB19A4BB /* DALIConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIConfig.swift; path = DALI/Classes/DALIConfig.swift; sourceTree = "<group>"; };
 		A6B2C0D81B3F56E710F727FC5580FB15 /* Pods-DALI_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-DALI_Example.modulemap"; sourceTree = "<group>"; };
 		A727A63B48A8D51792726D02E3C01C32 /* DSL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DSL.m; path = Sources/NimbleObjectiveC/DSL.m; sourceTree = "<group>"; };
 		A7AA65F05F386284987C8751E9FB28FB /* ExampleMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExampleMetadata.swift; path = Sources/Quick/ExampleMetadata.swift; sourceTree = "<group>"; };
@@ -415,35 +463,50 @@
 		B14822289A8F848704ED4DBD049E351C /* Async.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Async.swift; path = Sources/Nimble/Utils/Async.swift; sourceTree = "<group>"; };
 		B1F5F5C4EB31F67455284BB922674D7E /* Quick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Quick.h; path = Sources/QuickObjectiveC/Quick.h; sourceTree = "<group>"; };
 		B3194CA61273E9A58C25539FD0DA25FD /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		B3B28C19335337D0F462A5C4FE9A8F42 /* DALILocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALILocation.swift; path = DALI/Classes/DALILocation.swift; sourceTree = "<group>"; };
+		B45B34751B490CE603EC4D604C3E6941 /* DALI.tgz */ = {isa = PBXFileReference; includeInIndex = 1; name = DALI.tgz; path = docs/docsets/DALI.tgz; sourceTree = "<group>"; };
 		B45F9798FEB6AAA403744EBBF78CBEE6 /* BeGreaterThan.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeGreaterThan.swift; path = Sources/Nimble/Matchers/BeGreaterThan.swift; sourceTree = "<group>"; };
 		B495E055E4796124FF5BE320FBDB3E7F /* BeIdenticalTo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeIdenticalTo.swift; path = Sources/Nimble/Matchers/BeIdenticalTo.swift; sourceTree = "<group>"; };
+		B4CE4A38747283F60EE36D707F7E358A /* DALIFood.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIFood.swift; path = DALI/Classes/DALIFood.swift; sourceTree = "<group>"; };
+		B519742EB88BE44B9815139EFC5C16DC /* DALIPhoto.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIPhoto.html; path = docs/Classes/DALIPhoto.html; sourceTree = "<group>"; };
 		B5258826C287C7D7A40AFCC939337F65 /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Nimble.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B59B3F4033B6C14E6129C18CDF46387A /* QuickSpec.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QuickSpec.h; path = Sources/QuickObjectiveC/QuickSpec.h; sourceTree = "<group>"; };
 		B5A0A6AE9FB21B872D7E92388BF3CC49 /* NMBExpectation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NMBExpectation.swift; path = Sources/Nimble/Adapters/NMBExpectation.swift; sourceTree = "<group>"; };
 		B61C86EFA94CB49363AFE007DDA607CB /* CwlDarwinDefinitions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlDarwinDefinitions.swift; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift; sourceTree = "<group>"; };
+		B7120593F64172FC60FA0AFDA718E5AA /* jazzy.css */ = {isa = PBXFileReference; includeInIndex = 1; name = jazzy.css; path = docs/docsets/DALI.docset/Contents/Resources/Documents/css/jazzy.css; sourceTree = "<group>"; };
+		B77094342C72E2EEE30FDDDCDFBEE801 /* Create.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Create.html; path = docs/Classes/DALIError/Create.html; sourceTree = "<group>"; };
 		B88DA6B397EF90A871060A40A076299F /* SocketManagerSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketManagerSpec.swift; path = Source/SocketIO/Manager/SocketManagerSpec.swift; sourceTree = "<group>"; };
 		BA54746E78E1BECC0759F72D662B1750 /* Pods-DALI_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DALI_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		BAAA08FE760880F9783A13140A4D4F06 /* Pods-DALI_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-DALI_Tests.modulemap"; sourceTree = "<group>"; };
+		BB10908F8BB8E0BE14917A020FDF5981 /* gh.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = gh.png; path = docs/docsets/DALI.docset/Contents/Resources/Documents/img/gh.png; sourceTree = "<group>"; };
 		BB62239C3A8CF0EA7D45F33B5B6E46EA /* MatchError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MatchError.swift; path = Sources/Nimble/Matchers/MatchError.swift; sourceTree = "<group>"; };
+		BB9013670C016AE3365DAE4004F1E8A7 /* dash.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = dash.png; path = docs/img/dash.png; sourceTree = "<group>"; };
 		BDD1463B9B18081490FDCA1812391B16 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
 		BF46C14F493D37009A0460B4A714C34B /* Pods-DALI_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DALI_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		C4448F719AD905521011846FD560B451 /* Enumerations.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Enumerations.swift; path = DALI/Classes/Enumerations.swift; sourceTree = "<group>"; };
+		C52B0892E45A245CC895C1239262E2E4 /* Tim.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Tim.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Structs/DALILocation/Tim.html; sourceTree = "<group>"; };
+		C6A84A0F991A748FB61A3E8919E7E817 /* DALI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = DALI.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C6F1E203CC3E1744AE10CBB0B956A514 /* ToSucceed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToSucceed.swift; path = Sources/Nimble/Matchers/ToSucceed.swift; sourceTree = "<group>"; };
 		C8F97ED97056FF6E55582DDD69E127EC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C951EBF8DD73FD0038B8D2FE1C988C78 /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Starscream.framework; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9542CF023390918569ACD86C9F4B314 /* Nimble.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Nimble.xcconfig; sourceTree = "<group>"; };
+		CAFEB4117F1CAFB1326585D6A8304DEB /* DALIMember.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIMember.swift; path = DALI/Classes/DALIMember.swift; sourceTree = "<group>"; };
+		CB70423A05A62B2BB2680C715FC5EFFF /* DALILights.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALILights.html; path = docs/Classes/DALILights.html; sourceTree = "<group>"; };
 		CDF343A6B9AF0A45474154969C1212C6 /* NMBExceptionCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMBExceptionCapture.h; path = Sources/NimbleObjectiveC/NMBExceptionCapture.h; sourceTree = "<group>"; };
+		CEF710E26DCDE581A2D3B222FD7B90EA /* DALI-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DALI-umbrella.h"; sourceTree = "<group>"; };
 		CF2CFF1E6709FF94753266B63BFCC0DD /* NimbleEnvironment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NimbleEnvironment.swift; path = Sources/Nimble/Adapters/NimbleEnvironment.swift; sourceTree = "<group>"; };
+		CF3B2A4A1EB3FBC776AC051D94774392 /* Config.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Config.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIEvent/VotingEvent/Config.html; sourceTree = "<group>"; };
 		D0789721DF2C86B106CFAF949672933A /* RaisesException.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RaisesException.swift; path = Sources/Nimble/Matchers/RaisesException.swift; sourceTree = "<group>"; };
 		D0AE6F58B35887AEB8FB9B6E42033B78 /* World.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = World.swift; path = Sources/Quick/World.swift; sourceTree = "<group>"; };
-		D1FC1A314BF55023A269112D9D364A11 /* DALILocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALILocation.swift; path = DALI/Classes/DALILocation.swift; sourceTree = "<group>"; };
+		D0BEA94B34AED4B26BE47D8D69D1D2D8 /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; name = index.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/index.html; sourceTree = "<group>"; };
 		D1FEBF8614A3C47A85D469B7AA1538EE /* Quick.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Quick.xcconfig; sourceTree = "<group>"; };
 		D439DE89588E0C711BFE83D2770A917D /* PostNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PostNotification.swift; path = Sources/Nimble/Matchers/PostNotification.swift; sourceTree = "<group>"; };
 		D47156D44CABEB0CDF712D396B66C1BA /* MatcherFunc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MatcherFunc.swift; path = Sources/Nimble/Matchers/MatcherFunc.swift; sourceTree = "<group>"; };
 		D4E09A4294E35FFC29DF08717BD35DC3 /* World+DSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "World+DSL.swift"; path = "Sources/Quick/DSL/World+DSL.swift"; sourceTree = "<group>"; };
-		D5262FF36B16083D0D92F9ED29033C59 /* DALIPhoto.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIPhoto.swift; path = DALI/Classes/DALIPhoto.swift; sourceTree = "<group>"; };
+		D4E276082FF662C801BE9CCA0A6473BD /* carat.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = carat.png; path = docs/docsets/DALI.docset/Contents/Resources/Documents/img/carat.png; sourceTree = "<group>"; };
+		D5925E1B163154FFA1FBB12845C95AEA /* highlight.css */ = {isa = PBXFileReference; includeInIndex = 1; name = highlight.css; path = docs/css/highlight.css; sourceTree = "<group>"; };
 		D982F49DC1C667D349F9EC7642C0834B /* QuickSpec.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QuickSpec.m; path = Sources/QuickObjectiveC/QuickSpec.m; sourceTree = "<group>"; };
 		D9B6CC765C3EA0AACC4AE121988E981B /* CwlBadInstructionException.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlBadInstructionException.swift; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlBadInstructionException.swift; sourceTree = "<group>"; };
+		DA996F37516829DC6D0B409EA1EC310F /* Shared.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Shared.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Structs/DALILocation/Shared.html; sourceTree = "<group>"; };
 		DB22DAA72EE1ED9D712CBDC6539C7179 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFCBDDC5F87E798F8D9077F1200EF9E /* DSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DSL.swift; path = Sources/Nimble/DSL.swift; sourceTree = "<group>"; };
 		DF241D6334721657893AB1525871F3CD /* NSBundle+CurrentTestBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSBundle+CurrentTestBundle.swift"; path = "Sources/Quick/NSBundle+CurrentTestBundle.swift"; sourceTree = "<group>"; };
@@ -453,37 +516,56 @@
 		E495C57C1F0F028B0CA0BC0620E33CA3 /* EndWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EndWith.swift; path = Sources/Nimble/Matchers/EndWith.swift; sourceTree = "<group>"; };
 		E5123129AC9DDA6F90BB4AC85DC408C5 /* CwlCatchException.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CwlCatchException.h; path = Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/include/CwlCatchException.h; sourceTree = "<group>"; };
 		E5322BAB81086494736CFA39A7564C76 /* SocketManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketManager.swift; path = Source/SocketIO/Manager/SocketManager.swift; sourceTree = "<group>"; };
-		E777A011F7E26E40C69E5BF70E90EF3A /* DALI.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DALI.xcconfig; sourceTree = "<group>"; };
+		E6C24426D315C3ED4D9173850F6EF14E /* badge.svg */ = {isa = PBXFileReference; includeInIndex = 1; name = badge.svg; path = docs/badge.svg; sourceTree = "<group>"; };
+		E764CB7109CDB066EEB88548556736F0 /* Shared.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Shared.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALILocation/Shared.html; sourceTree = "<group>"; };
+		E7F1A9EDE185FC0FCF38B5182E8F2CA0 /* DALIProject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIProject.swift; path = DALI/Classes/DALIProject.swift; sourceTree = "<group>"; };
 		E879A003938B61721F7F067EDD7A75FB /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Sources/SSLSecurity.swift; sourceTree = "<group>"; };
 		E8D07488F2495288FF21E22B81978509 /* QuickSelectedTestSuiteBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickSelectedTestSuiteBuilder.swift; path = Sources/Quick/QuickSelectedTestSuiteBuilder.swift; sourceTree = "<group>"; };
+		E91489B571C7DEB5668773E9BD9D7314 /* Voting.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Voting.html; path = docs/Classes/DALIEvent/Voting.html; sourceTree = "<group>"; };
 		EB2ED3B294EB2B3246477CE38B5747E2 /* Pods-DALI_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DALI_Tests-dummy.m"; sourceTree = "<group>"; };
+		EC06ABEA45E4F1FB7F1497503CBE4335 /* Group.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Group.html; path = docs/Classes/DALILights/Group.html; sourceTree = "<group>"; };
 		EC55BF598992F1D7544A3D4FC16B72FA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECDB174B39D579C93D06A369451D16D3 /* Observation.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Observation.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Structs/Observation.html; sourceTree = "<group>"; };
 		ECEA1D58C1EBF5FBD1EACA747B0E9DA1 /* BeLogical.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeLogical.swift; path = Sources/Nimble/Matchers/BeLogical.swift; sourceTree = "<group>"; };
-		ECED70B0B4C403BF263D8DFB20217A60 /* DALIFood.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIFood.swift; path = DALI/Classes/DALIFood.swift; sourceTree = "<group>"; };
 		ED919434BDB09E80D5932C7F9BD34DCC /* Equal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Equal.swift; path = Sources/Nimble/Matchers/Equal.swift; sourceTree = "<group>"; };
+		EE0BB9DFB9C4FB007AE66B8ABB1C76A0 /* Config.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Config.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIEvent/Voting/Config.html; sourceTree = "<group>"; };
 		EE89B75606153094AB132529F4E7D71D /* Quick-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Quick-umbrella.h"; sourceTree = "<group>"; };
+		EF290E439EFEFEDB96DA9F6F1F5B6543 /* highlight.css */ = {isa = PBXFileReference; includeInIndex = 1; name = highlight.css; path = docs/docsets/DALI.docset/Contents/Resources/Documents/css/highlight.css; sourceTree = "<group>"; };
 		EF57F234D6D4211FFAEAF57D4C85985D /* Pods-DALI_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DALI_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		EF90389238A55997A8DC7008CBE9CE00 /* DALIapi.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIapi.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIapi.html; sourceTree = "<group>"; };
 		EFFC9D302E46EF11BF15917726F9931C /* Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = Sources/Quick/Configuration/Configuration.swift; sourceTree = "<group>"; };
+		F005ADE8E2B91633EE669786E868CE19 /* DALIErrors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DALIErrors.swift; path = DALI/Classes/DALIErrors.swift; sourceTree = "<group>"; };
 		F07A4C557A0D241D8CEEC3D00ECB52BF /* ExampleGroup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExampleGroup.swift; path = Sources/Quick/ExampleGroup.swift; sourceTree = "<group>"; };
 		F1339FE610B101769192C770C79A29B5 /* SocketAnyEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAnyEvent.swift; path = Source/SocketIO/Client/SocketAnyEvent.swift; sourceTree = "<group>"; };
-		F16DE680B5B3AB694DFD879C3518A9D7 /* DALI-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DALI-umbrella.h"; sourceTree = "<group>"; };
 		F16F1A69A7BCADF6325104B46FE872F8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F18470ED10B6F5571C5D05835D15E693 /* Quick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Quick.framework; path = Quick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2E0959816B902956C1155E250B84277 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = docs/docsets/DALI.docset/Contents/Info.plist; sourceTree = "<group>"; };
+		F43F4BAD5BDB21480F58ECFBAB8252D9 /* DALILocation.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALILocation.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALILocation.html; sourceTree = "<group>"; };
 		F52C7FC408DA662C7BBEB732D0708691 /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SocketIO.framework; path = "Socket.IO-Client-Swift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5A772C2E5446DC3AD9F018DE465AD77 /* DALILocation.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALILocation.html; path = docs/Structs/DALILocation.html; sourceTree = "<group>"; };
+		F6661808BD2CA70A0AC276A3B27D7892 /* General.html */ = {isa = PBXFileReference; includeInIndex = 1; name = General.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIError/General.html; sourceTree = "<group>"; };
+		F79064F0B823E951F1793BEAA3463066 /* undocumented.json */ = {isa = PBXFileReference; includeInIndex = 1; name = undocumented.json; path = docs/undocumented.json; sourceTree = "<group>"; };
 		F86D699C0E0D6A3E631EF927BD0E53FC /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F88B57D3BFBCD93BB3AD5B954800625F /* NMBStringify.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMBStringify.h; path = Sources/NimbleObjectiveC/NMBStringify.h; sourceTree = "<group>"; };
 		F8C406D44352E69662B49FD789D3E071 /* SocketParsable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketParsable.swift; path = Source/SocketIO/Parse/SocketParsable.swift; sourceTree = "<group>"; };
+		F9B7DEFEB2387DD940CC6BA89F080E49 /* Enumerations.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Enumerations.swift; path = DALI/Classes/Enumerations.swift; sourceTree = "<group>"; };
 		FA2C87B036A2CF2760AC9D4F521EEDBD /* BeVoid.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeVoid.swift; path = Sources/Nimble/Matchers/BeVoid.swift; sourceTree = "<group>"; };
+		FA35EAC11BD5AD2369DFE3245E0F8336 /* DALIEvent.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIEvent.html; path = docs/Classes/DALIEvent.html; sourceTree = "<group>"; };
 		FB5C00F5B37101AB6EB9724DAEA5C586 /* QuickConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QuickConfiguration.m; path = Sources/QuickObjectiveC/Configuration/QuickConfiguration.m; sourceTree = "<group>"; };
+		FB6C2E76FD0CA94EF63CBA55464096B0 /* DALIFood.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIFood.html; path = docs/Classes/DALIFood.html; sourceTree = "<group>"; };
+		FC87EA7D54AA215A81638291BD07C63E /* jquery.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = jquery.min.js; path = docs/js/jquery.min.js; sourceTree = "<group>"; };
 		FC8A74299BF4CF9C750735A718FCDBB7 /* Socket.IO-Client-Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Socket.IO-Client-Swift-umbrella.h"; sourceTree = "<group>"; };
+		FCABE070F66C57AC5760C497E9A962F5 /* Option.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Option.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Classes/DALIEvent/Voting/Option.html; sourceTree = "<group>"; };
 		FCC33747C38E6D638FFCC0B5F57E212F /* SocketPacket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketPacket.swift; path = Source/SocketIO/Parse/SocketPacket.swift; sourceTree = "<group>"; };
 		FCD89F5FD60B21F0CEB47742EFC94871 /* SocketLogger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketLogger.swift; path = Source/SocketIO/Util/SocketLogger.swift; sourceTree = "<group>"; };
 		FCE0BE2FD1F3FB339B97C4944AC83053 /* Pods-DALI_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DALI_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		FD7EADEC292B868624299E6F9D8E03D9 /* Quick.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Quick.modulemap; sourceTree = "<group>"; };
 		FD93F99F906922EBFF0B62AC1ABEBB82 /* Pods-DALI_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DALI_Example-dummy.m"; sourceTree = "<group>"; };
 		FE1CBBF216F8A0A03BDFD6F2ADAA0CAC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE5DA95016E4EFCC190D745C247E1C2E /* DALIMember.html */ = {isa = PBXFileReference; includeInIndex = 1; name = DALIMember.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Structs/DALIMember.html; sourceTree = "<group>"; };
 		FE6C7A229703D419B96F5016317581CF /* HooksPhase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HooksPhase.swift; path = Sources/Quick/Hooks/HooksPhase.swift; sourceTree = "<group>"; };
 		FF08F3A786F4CBB18E1F15FE89D15075 /* NMBStringify.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMBStringify.m; path = Sources/NimbleObjectiveC/NMBStringify.m; sourceTree = "<group>"; };
+		FFBFBFDCA9ECEFCE8994F04090341B37 /* Structs.html */ = {isa = PBXFileReference; includeInIndex = 1; name = Structs.html; path = docs/docsets/DALI.docset/Contents/Resources/Documents/Structs.html; sourceTree = "<group>"; };
 		FFF6D91281E674460D9751BE7AE5265D /* World+DSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "World+DSL.h"; path = "Sources/QuickObjectiveC/DSL/World+DSL.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -574,26 +656,93 @@
 			path = "../Target Support Files/SwiftyJSON";
 			sourceTree = "<group>";
 		};
-		14CBDB51179B829D961679A6F3025309 /* Development Pods */ = {
+		0D1578B551754FF3444DF39292E84309 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				B3AE4A8292D7B0443EED65368076CAD5 /* DALI */,
+				36DBEF3B8E2D05DAEDA4A5503C6548A1 /* badge.svg */,
+				E6C24426D315C3ED4D9173850F6EF14E /* badge.svg */,
+				D4E276082FF662C801BE9CCA0A6473BD /* carat.png */,
+				993FD668471DAAE37B161DBECF4BBCFC /* carat.png */,
+				9B4F4F3FEFE8DAF4699365D03F378D29 /* Classes.html */,
+				966D53B97AFBA3311449B9265BEC26F7 /* Classes.html */,
+				EE0BB9DFB9C4FB007AE66B8ABB1C76A0 /* Config.html */,
+				6AAD53E9CDEEC9B10EE06ACE3C73254C /* Config.html */,
+				9508B840ADCC5703C241E28BCCFA2038 /* Config.html */,
+				CF3B2A4A1EB3FBC776AC051D94774392 /* Config.html */,
+				B77094342C72E2EEE30FDDDCDFBEE801 /* Create.html */,
+				426B03517B86E7A3EDA2C6515C9FA0FA /* Create.html */,
+				C6A84A0F991A748FB61A3E8919E7E817 /* DALI.podspec */,
+				B45B34751B490CE603EC4D604C3E6941 /* DALI.tgz */,
+				EF90389238A55997A8DC7008CBE9CE00 /* DALIapi.html */,
+				4EC243A3096AED2B787D808A7E0033E0 /* DALIapi.html */,
+				194F049D4CF58AF10D6525FCCDCF48C3 /* DALIConfig.html */,
+				6ABF62F63F3DB00087E0B4986BD50611 /* DALIConfig.html */,
+				4ACA90680A524B48AC3502E5D94E5EAE /* DALIError.html */,
+				8BAEF75BD64AB60F44117B81F1E6E8C2 /* DALIError.html */,
+				6A708CEFCDC9817863917761F23BB526 /* DALIEvent.html */,
+				FA35EAC11BD5AD2369DFE3245E0F8336 /* DALIEvent.html */,
+				FB6C2E76FD0CA94EF63CBA55464096B0 /* DALIFood.html */,
+				557A58724815D7837F647E2EDC7FBE36 /* DALIFood.html */,
+				92253FFC361A9A100F10C4B477A76312 /* DALILights.html */,
+				CB70423A05A62B2BB2680C715FC5EFFF /* DALILights.html */,
+				F5A772C2E5446DC3AD9F018DE465AD77 /* DALILocation.html */,
+				03A435016EF0F7BC2803C5FBECBA07FA /* DALILocation.html */,
+				7A54F905DA01427B13C79EB80D0C779E /* DALILocation.html */,
+				F43F4BAD5BDB21480F58ECFBAB8252D9 /* DALILocation.html */,
+				FE5DA95016E4EFCC190D745C247E1C2E /* DALIMember.html */,
+				3F7A0602287451DA6CF7319F5AFCB569 /* DALIMember.html */,
+				9AE77A08CBE6BC51927DCF0CF86232E4 /* DALIPhoto.html */,
+				B519742EB88BE44B9815139EFC5C16DC /* DALIPhoto.html */,
+				9EB2AAFE22F308F4C36A6EFA7EDF4F6B /* DALIUser.html */,
+				9DF81FC5E141726681DF3F703725472B /* DALIUser.html */,
+				5395B36C3B2627417B7A30FB74AA9C11 /* dash.png */,
+				BB9013670C016AE3365DAE4004F1E8A7 /* dash.png */,
+				0A2CAA3CD4257D1A65DD56D902391675 /* docSet.dsidx */,
+				F6661808BD2CA70A0AC276A3B27D7892 /* General.html */,
+				496075D241B38E4512907DBF3EC3640F /* General.html */,
+				BB10908F8BB8E0BE14917A020FDF5981 /* gh.png */,
+				4C118FE28204794A401473FEC1258778 /* gh.png */,
+				EC06ABEA45E4F1FB7F1497503CBE4335 /* Group.html */,
+				7EF9DE110B33AB7D61155B932528238F /* Group.html */,
+				D5925E1B163154FFA1FBB12845C95AEA /* highlight.css */,
+				EF290E439EFEFEDB96DA9F6F1F5B6543 /* highlight.css */,
+				07890D29633E2269DCC72FAA24243119 /* index.html */,
+				D0BEA94B34AED4B26BE47D8D69D1D2D8 /* index.html */,
+				F2E0959816B902956C1155E250B84277 /* Info.plist */,
+				B7120593F64172FC60FA0AFDA718E5AA /* jazzy.css */,
+				7A981D71306B88A75E538E1DF057F757 /* jazzy.css */,
+				7596C9CF3C8B5B2C63EF707427D1C819 /* jazzy.js */,
+				6BDBD2740F55B2B9AB3251AB2FE72B34 /* jazzy.js */,
+				FC87EA7D54AA215A81638291BD07C63E /* jquery.min.js */,
+				4130637A8A0BBFE2A902A00945804F84 /* jquery.min.js */,
+				198A817B83087AEAB6D65FD2858B6760 /* LICENSE */,
+				674381AF3B2ABD1ECD713D4EC83EB3A3 /* Observation.html */,
+				ECDB174B39D579C93D06A369451D16D3 /* Observation.html */,
+				6E97D8FCF3065A8A9989E1933D9437D2 /* Option.html */,
+				FCABE070F66C57AC5760C497E9A962F5 /* Option.html */,
+				93B16CB864B10B1A5DFDB2E9A699E984 /* Option.html */,
+				0B3418930CE92648E89ADFD3D8AE7AE0 /* Option.html */,
+				0BDC433E843D6A25244C610C31826292 /* README.md */,
+				889022FA495AD70CB1F2EF387964F8EC /* search.json */,
+				93E4B9C9864BC32923A4BB642D49117F /* search.json */,
+				DA996F37516829DC6D0B409EA1EC310F /* Shared.html */,
+				36371D22CF02E1923E6DA540815B9907 /* Shared.html */,
+				E764CB7109CDB066EEB88548556736F0 /* Shared.html */,
+				9F2B0EC7D8FEFB863E5B1A22A225C4D9 /* Shared.html */,
+				FFBFBFDCA9ECEFCE8994F04090341B37 /* Structs.html */,
+				60977420EF31FEC253E67A62886BF9AA /* Structs.html */,
+				62765D4A7B74D23FEA08917E94F71BB8 /* Tim.html */,
+				2A25EF7E5249D4E7C83E09FBD14DC2AD /* Tim.html */,
+				C52B0892E45A245CC895C1239262E2E4 /* Tim.html */,
+				25E3B4FF7D2FDAF8CB6C179B563A0EB9 /* Tim.html */,
+				948EE60254F3EB4B4170E9B50FC975B0 /* undocumented.json */,
+				F79064F0B823E951F1793BEAA3463066 /* undocumented.json */,
+				928DBF06E04C6A34D9D11916845B1410 /* Voting.html */,
+				E91489B571C7DEB5668773E9BD9D7314 /* Voting.html */,
+				28BD6068201F1093F63C7733227CDB74 /* VotingEvent.html */,
+				0DC09A968B582BD88C70D327F725DF9B /* VotingEvent.html */,
 			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		26458E858433FF1EF881ADD228DBC258 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				371151F1E24199034DE4B72FE8B22876 /* DALI.modulemap */,
-				E777A011F7E26E40C69E5BF70E90EF3A /* DALI.xcconfig */,
-				A4C6F4E014FD2B9BB59682021D001E41 /* DALI-dummy.m */,
-				04DD76AF53396566E94CF37A3DE29A41 /* DALI-prefix.pch */,
-				F16DE680B5B3AB694DFD879C3518A9D7 /* DALI-umbrella.h */,
-				729E5DB6AAD042E99AE40864F1412644 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/DALI";
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		278DC9C4A94E519BA93C58277A770DF0 /* Support Files */ = {
@@ -642,6 +791,14 @@
 			path = "Target Support Files/Pods-DALI_Example";
 			sourceTree = "<group>";
 		};
+		4AED0D421DE1D92099B53ABBB371FCA1 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FF51AE1107542980DC1B049EE9629D88 /* DALI */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
 		5EDFF88EB8FFE92A24DEAD223B6260F0 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -649,6 +806,20 @@
 				C8F97ED97056FF6E55582DDD69E127EC /* XCTest.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		6D64739C2B7B62A9C1546886E59323E0 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1AA48D68D25BCA75D8076D9926099AD1 /* DALI.modulemap */,
+				5FCF1C3BF4E9379946E24E9D28B888AF /* DALI.xcconfig */,
+				87F297958E7D18B53F9845424EB4B480 /* DALI-dummy.m */,
+				395010FF7332AC0683FD2B640543032F /* DALI-prefix.pch */,
+				CEF710E26DCDE581A2D3B222FD7B90EA /* DALI-umbrella.h */,
+				6321C0528D297F350AEC79645FA3C08E /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/DALI";
 			sourceTree = "<group>";
 		};
 		777FFFD917DB4785F2A26F42CDC14DCB /* Nimble */ = {
@@ -733,7 +904,7 @@
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				14CBDB51179B829D961679A6F3025309 /* Development Pods */,
+				4AED0D421DE1D92099B53ABBB371FCA1 /* Development Pods */,
 				93B26DBF9BC5CF1C3A33F68D6D0E05A0 /* Frameworks */,
 				BDDC993E70EF0BF74A28664710E926BB /* Pods */,
 				E8487E906950D9853BB8EDA4B96D52BC /* Products */,
@@ -847,27 +1018,6 @@
 			path = Quick;
 			sourceTree = "<group>";
 		};
-		B3AE4A8292D7B0443EED65368076CAD5 /* DALI */ = {
-			isa = PBXGroup;
-			children = (
-				9241945633E69D157B86A889AAF3C9E6 /* DALIapi.swift */,
-				A5B9031435E1CD24065CE42EDB19A4BB /* DALIConfig.swift */,
-				42472E6076CB977866482D57DB7B77CE /* DALIErrors.swift */,
-				33EB748402BC118FB30ED58E8F6B2F56 /* DALIEvent.swift */,
-				ECED70B0B4C403BF263D8DFB20217A60 /* DALIFood.swift */,
-				00AB2DCA33CF73CC8BFDD4082FDDDD81 /* DALILights.swift */,
-				D1FC1A314BF55023A269112D9D364A11 /* DALILocation.swift */,
-				4023D4ECC90F2CE155B4A205F7F34ACB /* DALIMember.swift */,
-				D5262FF36B16083D0D92F9ED29033C59 /* DALIPhoto.swift */,
-				5266FE71DFBBE5BFC442919098DC8520 /* DALIProject.swift */,
-				C4448F719AD905521011846FD560B451 /* Enumerations.swift */,
-				9D1EDE1B596E8D81CC7A9C09C89C285A /* ServerCommunicator.swift */,
-				26458E858433FF1EF881ADD228DBC258 /* Support Files */,
-			);
-			name = DALI;
-			path = ../..;
-			sourceTree = "<group>";
-		};
 		B81F2D051FCE6A3A90701CED1CD6C4B6 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -949,6 +1099,28 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Starscream";
+			sourceTree = "<group>";
+		};
+		FF51AE1107542980DC1B049EE9629D88 /* DALI */ = {
+			isa = PBXGroup;
+			children = (
+				417E0A59B96AE36CD2A9D320A37F55AB /* DALIapi.swift */,
+				1963803A64C3D1B9CC72DEBC151F9DBF /* DALIConfig.swift */,
+				F005ADE8E2B91633EE669786E868CE19 /* DALIErrors.swift */,
+				5E7DF8B567AE25E5820DD5EDC7ED23BA /* DALIEvent.swift */,
+				B4CE4A38747283F60EE36D707F7E358A /* DALIFood.swift */,
+				9C77D115D4891E72EA7E889DE7A0A614 /* DALILights.swift */,
+				B3B28C19335337D0F462A5C4FE9A8F42 /* DALILocation.swift */,
+				CAFEB4117F1CAFB1326585D6A8304DEB /* DALIMember.swift */,
+				18E3EE45BC307F2C1A78033B7336079E /* DALIPhoto.swift */,
+				E7F1A9EDE185FC0FCF38B5182E8F2CA0 /* DALIProject.swift */,
+				F9B7DEFEB2387DD940CC6BA89F080E49 /* Enumerations.swift */,
+				9C4C190ACEF54B9EB71A46F102DB2232 /* ServerCommunicator.swift */,
+				0D1578B551754FF3444DF39292E84309 /* Pod */,
+				6D64739C2B7B62A9C1546886E59323E0 /* Support Files */,
+			);
+			name = DALI;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1495,7 +1667,7 @@
 /* Begin XCBuildConfiguration section */
 		04CE3F0FAF420C33C928EC8B449DE5DC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E777A011F7E26E40C69E5BF70E90EF3A /* DALI.xcconfig */;
+			baseConfigurationReference = 5FCF1C3BF4E9379946E24E9D28B888AF /* DALI.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1998,7 +2170,7 @@
 		};
 		AA4ABF1F25C7845CF07E019EF39CAEFA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E777A011F7E26E40C69E5BF70E90EF3A /* DALI.xcconfig */;
+			baseConfigurationReference = 5FCF1C3BF4E9379946E24E9D28B888AF /* DALI.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";

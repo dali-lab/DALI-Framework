@@ -193,7 +193,7 @@ class ServerCommunicator {
 		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 		request.addValue("application/json", forHTTPHeaderField: "Accept")
 		if let token = config.token {
-			
+			request.addValue(token, forHTTPHeaderField: "authorization")
 		}else if let apiKey = config.apiKey {
 			request.addValue(apiKey, forHTTPHeaderField: "apiKey")
 		}

@@ -12,7 +12,7 @@ class SocketSpec: QuickSpec {
 		
         describe("sockets") {
 			it("works") {
-				DALIEvent.observeUpcoming(callback: { (events, error) in
+				let _ = DALIEvent.observeUpcoming(callback: { (events, error) in
 					print(events?.count ?? -1)
 				})
 			}

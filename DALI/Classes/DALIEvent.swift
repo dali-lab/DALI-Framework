@@ -633,24 +633,31 @@ public class DALIEvent {
 		- parameter event: Event found (if any)
 		- parameter error: Error encountered (if any)
 		*/
-		public static func getCurrent(callback: @escaping (_ event: VotingEvent?, _ error: DALIError.General?) -> Void) {
+		public static func getCurrent(callback: @escaping (_ events: [VotingEvent], _ error: DALIError.General?) -> Void) {
 			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/current") { (object, code, error) in
 				if let error = error {
 					DispatchQueue.main.async {
-						callback(nil, error)
+						callback([], error)
 					}
 					return
 				}
 				
-				guard let event = VotingEvent.parse(object!) else {
+				guard let list = object?.array else {
 					DispatchQueue.main.async {
-						callback(nil, DALIError.General.Unfound)
+						callback([], DALIError.General.Unfound)
 					}
-					return
+					return;
+				}
+				
+				var events = [VotingEvent]()
+				for item in list {
+					if let event = VotingEvent.parse(item) {
+						events.append(event)
+					}
 				}
 				
 				DispatchQueue.main.async {
-					callback(event, nil)
+					callback(events, nil)
 				}
 			}
 		}

@@ -88,6 +88,7 @@ open class DALIConfig {
 	}
 	/// Enables automatic connecting and disconnecting of sockets when going between forground and background
 	public var socketAutoSwitching = true
+	public var forceWebsockets = false
 	
 	/**
 	Creates a DALIConfig object

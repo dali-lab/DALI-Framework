@@ -26,7 +26,7 @@ public class DALIapi {
 		return unProtConfig!
 	}
 	
-	internal static let socketManager = SocketManager(socketURL: DALIapi.config.serverURLobject, config: SocketIOClientConfiguration(arrayLiteral: SocketIOClientConfiguration.Element.forceWebsockets(true)))
+	internal static let socketManager = SocketManager(socketURL: DALIapi.config.serverURLobject)
 	
 	/// Defines if the user is signed in
     public static var isSignedIn: Bool {
@@ -51,6 +51,7 @@ public class DALIapi {
 		
 		if config.enableSockets {
 			enableSockets()
+			self.socketManager.config = SocketIOClientConfiguration(arrayLiteral: SocketIOClientConfiguration.Element.forceWebsockets(config.forceWebsockets))
 		}
 	}
 	

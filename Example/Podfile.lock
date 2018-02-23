@@ -1,5 +1,5 @@
 PODS:
-  - DALI (0.4.42):
+  - DALI (0.4.43):
     - Socket.IO-Client-Swift
     - SwiftyJSON
   - Nimble (7.0.3)
@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  DALI: 445a13524365a22bac769489a7e2da9effbbde70
+  DALI: 1f615d47c8f0e32376ac36d0e57ba4fcfd48cca0
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   Socket.IO-Client-Swift: b67a96d6a9e5f271bceb93e99779d2cf77c74868

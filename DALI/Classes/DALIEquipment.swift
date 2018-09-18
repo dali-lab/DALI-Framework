@@ -11,7 +11,7 @@ import SwiftyJSON
 
 public struct DALIEquipment {
     let name: String
-    let password: String
+    let password: String?
     let id: String
     let lastCheckedOut: CheckOutRecord?
     var isCheckedOut: Bool {
@@ -69,6 +69,7 @@ public struct DALIEquipment {
         
         self.name = name
         self.id = id
+        self.password = dict["password"]?.string
         if let lastCheckedOutJSON = dict["lastCheckedOut"] {
             self.lastCheckedOut = CheckOutRecord(json: lastCheckedOutJSON)
         } else {

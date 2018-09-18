@@ -31,11 +31,23 @@ class ServerCommunicator {
 	- parameter code: The code for the response
 	- parameter error: The error encountered (if any)
 	*/
-	static func get(url: String, callback: @escaping (_ response: JSON?, _ code: Int?, _ error: DALIError.General?) -> Void) {
-		var request = URLRequest(url: URL(string: url)!)
+    static func get(url: String, callback: @escaping (_ response: JSON?, _ code: Int?, _ error: DALIError.General?) -> Void) {
+        self.get(url: url, callback: callback)
+    }
+    
+    static func get(url: String, params: [String:String]?, callback: @escaping (_ response: JSON?, _ code: Int?, _ error: DALIError.General?) -> Void) {
+        var urlComps = URLComponents(string: url)!
+        if let params = params {
+            urlComps.queryItems = params.keys.map({ (key) -> URLQueryItem in
+                return URLQueryItem(name: key, value: params[key])
+            })
+        }
+        
+		var request = URLRequest(url: urlComps.url!)
 		request.httpMethod = "GET"
 		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 		request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
 		if let token = config.token {
 			request.addValue(token, forHTTPHeaderField: "authorization")
 		}else if let apiKey = config.apiKey {
@@ -186,7 +198,7 @@ class ServerCommunicator {
 	- parameter data: The JSON data sent back
 	- parameter error: The error encountered (if any)
 	*/
-	static func post(url: String, data: Data, callback: @escaping (_ success: Bool, _ data: JSON?, _ error: DALIError.General?) -> Void) {
+	static func post(url: String, data: Data?, callback: @escaping (_ success: Bool, _ data: JSON?, _ error: DALIError.General?) -> Void) {
 		var request = URLRequest(url: URL(string: url)!)
 		request.httpMethod = "POST"
 		request.httpBody = data

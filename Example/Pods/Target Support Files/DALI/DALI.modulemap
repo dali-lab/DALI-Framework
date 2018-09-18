@@ -1,6 +1,0 @@
-framework module DALI {
-  umbrella header "DALI-umbrella.h"
-
-  export *
-  module * { export * }
-}

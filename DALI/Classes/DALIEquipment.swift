@@ -11,6 +11,7 @@ import SwiftyJSON
 
 public struct DALIEquipment {
     let name: String
+    let password: String
     let id: String
     let lastCheckedOut: CheckOutRecord?
     var isCheckedOut: Bool {
@@ -20,7 +21,7 @@ public struct DALIEquipment {
     public static func equipment(for id: String) -> Future<DALIEquipment> {
         let promise = Promise<DALIEquipment>()
         
-        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/equipment/\(id)") { (json, errorCode, error) in
+        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)") { (json, errorCode, error) in
             if let error = error {
                 promise.completeWithFail(error)
                 return;
@@ -39,7 +40,7 @@ public struct DALIEquipment {
     public static func allEquipment() -> Future<[DALIEquipment]> {
         let promise = Promise<[DALIEquipment]>()
         
-        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/equipment") { (response, responseCode, error) in
+        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment") { (response, responseCode, error) in
             if let dataArray = response?.array {
                 var array = [DALIEquipment]()
                 
@@ -100,7 +101,7 @@ public struct DALIEquipment {
     func getHistory() -> Future<[CheckOutRecord]> {
         let promise = Promise<[CheckOutRecord]>()
         
-        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/equipment/\(self.id)/checkout") { (response, errorCode, error) in
+        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/checkout") { (response, errorCode, error) in
             if let error = error {
                 promise.completeWithFail(error)
                 return
@@ -127,7 +128,7 @@ public struct DALIEquipment {
     func checkout() -> Future<CheckOutRecord> {
         let promise = Promise<CheckOutRecord>()
         
-        ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/equipment/\(self.id)/checkout", data: nil) { (success, response, error) in
+        ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/checkout", data: nil) { (success, response, error) in
             if let error = error {
                 promise.completeWithFail(error)
             } else if success {
@@ -146,7 +147,7 @@ public struct DALIEquipment {
     func returnEquipment() -> Future<Any> {
         let promise = Promise<Any>();
         
-        ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/equipment/\(self.id)/return", data: nil) { (success, response, error) in
+        ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/return", data: nil) { (success, response, error) in
             if let error = error {
                 promise.completeWithFail(error)
                 return

@@ -32,7 +32,7 @@ class ServerCommunicator {
 	- parameter error: The error encountered (if any)
 	*/
     static func get(url: String, callback: @escaping (_ response: JSON?, _ code: Int?, _ error: DALIError.General?) -> Void) {
-        self.get(url: url, callback: callback)
+        self.get(url: url, params: nil, callback: callback)
     }
     
     static func get(url: String, params: [String:String]?, callback: @escaping (_ response: JSON?, _ code: Int?, _ error: DALIError.General?) -> Void) {

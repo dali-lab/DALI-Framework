@@ -22,6 +22,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
+        
+        
+        DALIEquipment.allEquipment().onSuccess { (equipment) in
+            print(equipment)
+        }
     }
 	
 	override func viewWillAppear(_ animated: Bool) {

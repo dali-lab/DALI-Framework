@@ -10,10 +10,11 @@
     
   </head>
   <body>
+    <a name="//apple_ref/swift/Section/Classes" class="dashAnchor"></a>
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">DALI Docs</a> (99% documented)</p>
+        <p><a href="index.html">DALI Docs</a> (96% documented)</p>
         <p class="header-right"><a href="https://github.com/dali-lab/DALI-Framework"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -32,6 +33,12 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Classes/DALIConfig.html">DALIConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DALIEquipment.html">DALIEquipment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DALIEquipment.html#/s:4DALI13DALIEquipmentC14CheckOutRecordV">– CheckOutRecord</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/DALIError.html">DALIError</a>
@@ -106,38 +113,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI7DALIapiC"></a>
-                    <a name="//apple_ref/swift/Class/DALIapi" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI7DALIapiC">DALIapi</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Static class to configure and handle general requests for the DALI api framework</p>
-
-                        <a href="Classes/DALIapi.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIapi</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:4DALI10DALIConfigC"></a>
                     <a name="//apple_ref/swift/Class/DALIConfig" class="dashAnchor"></a>
                     <a class="token" href="#/s:4DALI10DALIConfigC">DALIConfig</a>
@@ -151,11 +126,11 @@
                         <p>Configurations for the DALIapi framework can be stored and handled using this</p>
 
 <p>Example usage:</p>
-<pre class="highlight plaintext"><code>let file = NSDictionary(dictionary: [
-    "server_url": "https://dalilab-api.herokuapp.com/"
-])
-let config = DALIConfig(dict: file)
-DALIapi.configure(config: config)
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="kt">NSDictionary</span><span class="p">(</span><span class="nv">dictionary</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s">"server_url"</span><span class="p">:</span> <span class="s">"https://dalilab-api.herokuapp.com/"</span>
+<span class="p">])</span>
+<span class="k">let</span> <span class="nv">config</span> <span class="o">=</span> <span class="kt">DALIConfig</span><span class="p">(</span><span class="nv">dict</span><span class="p">:</span> <span class="n">file</span><span class="p">)</span>
+<span class="kt">DALIapi</span><span class="o">.</span><span class="nf">configure</span><span class="p">(</span><span class="nv">config</span><span class="p">:</span> <span class="n">config</span><span class="p">)</span>
 </code></pre>
 
                         <a href="Classes/DALIConfig.html" class="slightly-smaller">See more</a>
@@ -164,7 +139,39 @@ DALIapi.configure(config: config)
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">DALIConfig</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">DALIConfig</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4DALI13DALIEquipmentC"></a>
+                    <a name="//apple_ref/swift/Class/DALIEquipment" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4DALI13DALIEquipmentC">DALIEquipment</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Classes/DALIEquipment.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIEquipment</span></code></pre>
 
                         </div>
                       </div>
@@ -196,7 +203,7 @@ DALIapi.configure(config: config)
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">DALIError</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">DALIError</span></code></pre>
 
                         </div>
                       </div>
@@ -228,7 +235,7 @@ DALIapi.configure(config: config)
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIEvent</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIEvent</span></code></pre>
 
                         </div>
                       </div>
@@ -260,7 +267,7 @@ DALIapi.configure(config: config)
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIFood</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIFood</span></code></pre>
 
                         </div>
                       </div>
@@ -292,7 +299,7 @@ DALIapi.configure(config: config)
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALILights</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALILights</span></code></pre>
 
                         </div>
                       </div>
@@ -318,14 +325,14 @@ DALIapi.configure(config: config)
                       <div class="abstract">
                         <p>A static struct that contains all location updates and queries</p>
 <h2 id='example' class='heading'>Example:</h2>
-<pre class="highlight plaintext"><code>DALILocation.Tim.get { (tim, error) in
-    // ...
-    if tim.inDALI {
-        // ...
-    } else if tim.inOffice {
-        // ...
-    }
-}
+<pre class="highlight swift"><code><span class="kt">DALILocation</span><span class="o">.</span><span class="kt">Tim</span><span class="o">.</span><span class="k">get</span> <span class="p">{</span> <span class="p">(</span><span class="n">tim</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+    <span class="c1">// ...</span>
+    <span class="k">if</span> <span class="n">tim</span><span class="o">.</span><span class="n">inDALI</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">tim</span><span class="o">.</span><span class="n">inOffice</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 
                         <a href="Classes/DALILocation.html" class="slightly-smaller">See more</a>
@@ -334,7 +341,7 @@ DALIapi.configure(config: config)
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALILocation</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALILocation</span></code></pre>
 
                         </div>
                       </div>
@@ -366,7 +373,39 @@ DALIapi.configure(config: config)
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIPhoto</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIPhoto</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4DALI7DALIapiC"></a>
+                    <a name="//apple_ref/swift/Class/DALIapi" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4DALI7DALIapiC">DALIapi</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Static class to configure and handle general requests for the DALI api framework</p>
+
+                        <a href="Classes/DALIapi.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIapi</span></code></pre>
 
                         </div>
                       </div>
@@ -378,8 +417,8 @@ DALIapi.configure(config: config)
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://dali-lab.github.io/DALI-Framework/" target="_blank" rel="external">John Kotz</a>. All rights reserved. (Last updated: 2018-02-23)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.4</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://dali-lab.github.io/DALI-Framework/" target="_blank" rel="external">John Kotz</a>. All rights reserved. (Last updated: 2018-09-24)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

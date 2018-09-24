@@ -6,6 +6,41 @@
       "symbol": "DALIConfig.forceWebsockets",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 13,
+      "symbol": "DALIEquipment",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 24,
+      "symbol": "DALIEquipment.equipment(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 46,
+      "symbol": "DALIEquipment.observeAllEquipment(callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 83,
+      "symbol": "DALIEquipment.allEquipment()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 137,
+      "symbol": "DALIEquipment.CheckOutRecord",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/john/Programming/DALI/Internal/framework"

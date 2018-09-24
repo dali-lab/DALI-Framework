@@ -1,6 +1,12 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIConfig.swift",
+      "line": 91,
+      "symbol": "DALIConfig.forceWebsockets",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/john/Programming/DALI/Internal/framework"
 }

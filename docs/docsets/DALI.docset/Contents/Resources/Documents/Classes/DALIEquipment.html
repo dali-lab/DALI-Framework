@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Observation Structure Reference</title>
+    <title>DALIEquipment Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/Observation" class="dashAnchor"></a>
-    <a title="Observation Structure Reference"></a>
+    <a name="//apple_ref/swift/Class/DALIEquipment" class="dashAnchor"></a>
+    <a title="DALIEquipment Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">DALI Docs</a> (96% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">DALI Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Observation Structure Reference
+        DALIEquipment Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -103,19 +103,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Observation</h1>
+            <h1>DALIEquipment</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Observation</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIEquipment</span></code></pre>
 
                 </div>
               </div>
-            <p>An object that allows the user to control socket observations.</p>
-
-<p>You receive an object of this class when you observe some data.
-    You may use this object to close the observation when you are done.
-    The observation will automatically be closed when the app terminates,
-    and the socket will be temporarily suspended when the app goes into the background.</p>
+            <p>Undocumented</p>
 
           </section>
           <section class="section task-group-section">
@@ -124,9 +119,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI11ObservationV4stopyycvp"></a>
-                    <a name="//apple_ref/swift/Property/stop" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI11ObservationV4stopyycvp">stop</a>
+                    <a name="/s:4DALI13DALIEquipmentC9equipment3for9FutureKit0E0CyACGSS_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/equipment(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4DALI13DALIEquipmentC9equipment3for9FutureKit0E0CyACGSS_tFZ">equipment(for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -134,14 +129,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A function to cancel an observation</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">stop</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">equipment</span><span class="p">(</span><span class="k">for</span> <span class="nv">qrID</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Future</span><span class="o">&lt;</span><span class="kt">DALIEquipment</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -151,9 +146,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI11ObservationV2idSSvp"></a>
-                    <a name="//apple_ref/swift/Property/id" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI11ObservationV2idSSvp">id</a>
+                    <a name="/s:4DALI13DALIEquipmentC19observeAllEquipment8callbackAA11ObservationVySayACG_AA9DALIErrorC7GeneralOSgtc_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/observeAllEquipment(callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4DALI13DALIEquipmentC19observeAllEquipment8callbackAA11ObservationVySayACG_AA9DALIErrorC7GeneralOSgtc_tFZ">observeAllEquipment(callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -161,14 +156,68 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An identifier of the observation</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">observeAllEquipment</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">DALIEquipment</span><span class="p">],</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Observation.html">Observation</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4DALI13DALIEquipmentC12allEquipment9FutureKit0E0CySayACGGyFZ"></a>
+                    <a name="//apple_ref/swift/Method/allEquipment()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4DALI13DALIEquipmentC12allEquipment9FutureKit0E0CySayACGGyFZ">allEquipment()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">allEquipment</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Future</span><span class="o">&lt;</span><span class="p">[</span><span class="kt">DALIEquipment</span><span class="p">]</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4DALI13DALIEquipmentC14CheckOutRecordV"></a>
+                    <a name="//apple_ref/swift/Struct/CheckOutRecord" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4DALI13DALIEquipmentC14CheckOutRecordV">CheckOutRecord</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CheckOutRecord</span></code></pre>
 
                         </div>
                       </div>

@@ -14,7 +14,7 @@
     <a title="DALIapi Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DALI Docs</a> (99% documented)</p>
+        <p><a href="../index.html">DALI Docs</a> (96% documented)</p>
         <p class="header-right"><a href="https://github.com/dali-lab/DALI-Framework"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -33,6 +33,12 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Classes/DALIConfig.html">DALIConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DALIEquipment.html">DALIEquipment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DALIEquipment.html#/s:4DALI13DALIEquipmentC14CheckOutRecordV">– CheckOutRecord</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/DALIError.html">DALIError</a>
@@ -100,7 +106,7 @@
             <h1>DALIapi</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIapi</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DALIapi</span></code></pre>
 
                 </div>
               </div>
@@ -113,9 +119,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI7DALIapiC6configAA10DALIConfigCvZ"></a>
+                    <a name="/s:4DALI7DALIapiC6configAA10DALIConfigCvpZ"></a>
                     <a name="//apple_ref/swift/Variable/config" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI7DALIapiC6configAA10DALIConfigCvZ">config</a>
+                    <a class="token" href="#/s:4DALI7DALIapiC6configAA10DALIConfigCvpZ">config</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -130,7 +136,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">config</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIConfig.html">DALIConfig</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">config</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIConfig.html">DALIConfig</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -140,9 +146,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI7DALIapiC10isSignedInSbvZ"></a>
+                    <a name="/s:4DALI7DALIapiC10isSignedInSbvpZ"></a>
                     <a name="//apple_ref/swift/Variable/isSignedIn" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI7DALIapiC10isSignedInSbvZ">isSignedIn</a>
+                    <a class="token" href="#/s:4DALI7DALIapiC10isSignedInSbvpZ">isSignedIn</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -157,7 +163,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">isSignedIn</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">isSignedIn</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -184,7 +190,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">SuccessCallback</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">SuccessCallback</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
 
                         </div>
                       </div>
@@ -225,9 +231,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI7DALIapiC9configureyAA10DALIConfigC6config_tFZ"></a>
+                    <a name="/s:4DALI7DALIapiC9configure6configyAA10DALIConfigC_tFZ"></a>
                     <a name="//apple_ref/swift/Method/configure(config:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI7DALIapiC9configureyAA10DALIConfigC6config_tFZ">configure(config:)</a>
+                    <a class="token" href="#/s:4DALI7DALIapiC9configure6configyAA10DALIConfigC_tFZ">configure(config:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -244,7 +250,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="nv">config</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIConfig.html">DALIConfig</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="nv">config</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIConfig.html">DALIConfig</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -271,7 +277,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">enableSockets</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">enableSockets</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -298,7 +304,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">disableSockets</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">disableSockets</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -308,9 +314,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI7DALIapiC6signinySS8authCode_ySb_AA9DALIErrorC7GeneralOSgtc4donetFZ"></a>
+                    <a name="/s:4DALI7DALIapiC6signin8authCode4doneySS_ySb_AA9DALIErrorC7GeneralOSgtctFZ"></a>
                     <a name="//apple_ref/swift/Method/signin(authCode:done:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI7DALIapiC6signinySS8authCode_ySb_AA9DALIErrorC7GeneralOSgtc4donetFZ">signin(authCode:done:)</a>
+                    <a class="token" href="#/s:4DALI7DALIapiC6signin8authCode4doneySS_ySb_AA9DALIErrorC7GeneralOSgtctFZ">signin(authCode:done:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -325,7 +331,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">signin</span><span class="p">(</span><span class="nv">authCode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">done</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">signin</span><span class="p">(</span><span class="nv">authCode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">done</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -390,9 +396,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI7DALIapiC6signinySS11accessToken_SS07refreshE0ySb_AA9DALIErrorC7GeneralOSgtc4donetFZ"></a>
+                    <a name="/s:4DALI7DALIapiC6signin11accessToken07refreshE04doneySS_SSySb_AA9DALIErrorC7GeneralOSgtctFZ"></a>
                     <a name="//apple_ref/swift/Method/signin(accessToken:refreshToken:done:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI7DALIapiC6signinySS11accessToken_SS07refreshE0ySb_AA9DALIErrorC7GeneralOSgtc4donetFZ">signin(accessToken:refreshToken:done:)</a>
+                    <a class="token" href="#/s:4DALI7DALIapiC6signin11accessToken07refreshE04doneySS_SSySb_AA9DALIErrorC7GeneralOSgtctFZ">signin(accessToken:refreshToken:done:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -407,7 +413,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">signin</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">refreshToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">done</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">signin</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">refreshToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">done</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -484,9 +490,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI7DALIapiC6signinySS11accessToken_SS07refreshE0Sb6forcedySb_AA9DALIErrorC7GeneralOSgtc4donetFZ"></a>
+                    <a name="/s:4DALI7DALIapiC6signin11accessToken07refreshE06forced4doneySS_SSSbySb_AA9DALIErrorC7GeneralOSgtctFZ"></a>
                     <a name="//apple_ref/swift/Method/signin(accessToken:refreshToken:forced:done:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI7DALIapiC6signinySS11accessToken_SS07refreshE0Sb6forcedySb_AA9DALIErrorC7GeneralOSgtc4donetFZ">signin(accessToken:refreshToken:forced:done:)</a>
+                    <a class="token" href="#/s:4DALI7DALIapiC6signin11accessToken07refreshE06forced4doneySS_SSSbySb_AA9DALIErrorC7GeneralOSgtctFZ">signin(accessToken:refreshToken:forced:done:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -501,7 +507,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">signin</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">refreshToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">forced</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">done</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">signin</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">refreshToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">forced</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">done</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -590,9 +596,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI7DALIapiC18silentMemberUpdateyyAA10DALIMemberVSgc8callback_tFZ"></a>
+                    <a name="/s:4DALI7DALIapiC18silentMemberUpdate8callbackyyAA10DALIMemberVSgc_tFZ"></a>
                     <a name="//apple_ref/swift/Method/silentMemberUpdate(callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI7DALIapiC18silentMemberUpdateyyAA10DALIMemberVSgc8callback_tFZ">silentMemberUpdate(callback:)</a>
+                    <a class="token" href="#/s:4DALI7DALIapiC18silentMemberUpdate8callbackyyAA10DALIMemberVSgc_tFZ">silentMemberUpdate(callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -607,7 +613,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">silentMemberUpdate</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">member</span><span class="p">:</span> <span class="kt"><a href="../Structs/DALIMember.html">DALIMember</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">silentMemberUpdate</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">member</span><span class="p">:</span> <span class="kt"><a href="../Structs/DALIMember.html">DALIMember</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -665,7 +671,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">signOut</span><span class="p">()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">signOut</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -675,9 +681,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:4DALI7DALIapiC22sendSimpleNotificationySS4with_SS3andSS2toySb_AA9DALIErrorC7GeneralOSgtc8callbacktFZ"></a>
+                    <a name="/s:4DALI7DALIapiC22sendSimpleNotification4with3and2to8callbackySS_S2SySb_AA9DALIErrorC7GeneralOSgtctFZ"></a>
                     <a name="//apple_ref/swift/Method/sendSimpleNotification(with:and:to:callback:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:4DALI7DALIapiC22sendSimpleNotificationySS4with_SS3andSS2toySb_AA9DALIErrorC7GeneralOSgtc8callbacktFZ">sendSimpleNotification(with:and:to:callback:)</a>
+                    <a class="token" href="#/s:4DALI7DALIapiC22sendSimpleNotification4with3and2to8callbackySS_S2SySb_AA9DALIErrorC7GeneralOSgtctFZ">sendSimpleNotification(with:and:to:callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -692,7 +698,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">sendSimpleNotification</span><span class="p">(</span><span class="n">with</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">and</span> <span class="nv">subtitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">to</span> <span class="nv">tag</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">sendSimpleNotification</span><span class="p">(</span><span class="n">with</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">and</span> <span class="nv">subtitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">to</span> <span class="nv">tag</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="n">_</span> <span class="nv">success</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Classes/DALIError.html">DALIError</a></span><span class="o">.</span><span class="kt">General</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -783,8 +789,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://dali-lab.github.io/DALI-Framework/" target="_blank" rel="external">John Kotz</a>. All rights reserved. (Last updated: 2018-02-23)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.4</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://dali-lab.github.io/DALI-Framework/" target="_blank" rel="external">John Kotz</a>. All rights reserved. (Last updated: 2018-09-24)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

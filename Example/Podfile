@@ -8,9 +8,6 @@ target 'DALI_Example' do
 	pod 'SwiftyJSON'
 	pod 'Socket.IO-Client-Swift'
     pod 'FutureKit'
-
-    pod 'Quick'
-    pod 'Nimble'
 	
 	
 	post_install do |installer|

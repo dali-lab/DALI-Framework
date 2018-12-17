@@ -16,30 +16,128 @@
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
-      "line": 24,
+      "line": 14,
+      "symbol": "DALIEquipment.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 15,
+      "symbol": "DALIEquipment.password",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 16,
+      "symbol": "DALIEquipment.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 17,
+      "symbol": "DALIEquipment.lastCheckedOut",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 18,
+      "symbol": "DALIEquipment.isCheckedOut",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 23,
       "symbol": "DALIEquipment.equipment(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
-      "line": 46,
+      "line": 45,
       "symbol": "DALIEquipment.observeAllEquipment(callback:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
-      "line": 83,
+      "line": 82,
       "symbol": "DALIEquipment.allEquipment()",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
-      "line": 137,
+      "line": 135,
       "symbol": "DALIEquipment.CheckOutRecord",
       "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 136,
+      "symbol": "DALIEquipment.CheckOutRecord.member",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 137,
+      "symbol": "DALIEquipment.CheckOutRecord.startDate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 138,
+      "symbol": "DALIEquipment.CheckOutRecord.endDate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 139,
+      "symbol": "DALIEquipment.CheckOutRecord.projectedEndDate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 164,
+      "symbol": "DALIEquipment.reload()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 184,
+      "symbol": "DALIEquipment.getHistory()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 211,
+      "symbol": "DALIEquipment.checkout(expectedEndDate:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEquipment.swift",
+      "line": 236,
+      "symbol": "DALIEquipment.returnEquipment()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/john/Programming/DALI/Internal/framework/DALI/Classes/DALIEvent.swift",
+      "line": 734,
+      "symbol": "DALIEvent.VotingEvent.observe()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     }
   ],

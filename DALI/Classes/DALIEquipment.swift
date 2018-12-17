@@ -11,28 +11,27 @@ import SwiftyJSON
 import SocketIO
 
 public class DALIEquipment {
-    var name: String
-    var password: String?
-    let id: String
-    let qrID: String
-    var lastCheckedOut: CheckOutRecord?
-    var isCheckedOut: Bool {
+    public var name: String
+    public var password: String?
+    public let id: String
+    public var lastCheckedOut: CheckOutRecord?
+    public var isCheckedOut: Bool {
         return lastCheckedOut?.endDate != nil
     }
     var socket: SocketIOClient!
     
-    public static func equipment(for qrID: String) -> Future<DALIEquipment> {
+    public static func equipment(for id: String) -> Future<DALIEquipment> {
         let promise = Promise<DALIEquipment>()
         
-        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(qrID)") { (json, errorCode, error) in
+        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)") { (json, errorCode, error) in
             if let error = error {
                 promise.completeWithFail(error)
-                return;
+                return
             }
             
             if let json = json, let equipment = DALIEquipment(json: json) {
                 promise.completeWithSuccess(equipment)
-                return;
+                return
             }
             promise.completeWithFail(DALIError.General.UnexpectedResponse)
         }
@@ -113,7 +112,6 @@ public class DALIEquipment {
         
         self.name = name
         self.id = id
-        self.qrID = qrID
         self.password = dict["password"]?.string
         if let lastCheckedOutJSON = dict["lastCheckedOut"] {
             self.lastCheckedOut = CheckOutRecord(json: lastCheckedOutJSON)
@@ -135,28 +133,55 @@ public class DALIEquipment {
     }
     
     public struct CheckOutRecord {
-        let member: DALIMember
-        let startDate: Date
-        let endDate: Date?
-        let projectedEndDate: Date?
+        public let member: DALIMember
+        public let startDate: Date
+        public let endDate: Date?
+        public let projectedEndDate: Date?
         
         internal init?(json: JSON) {
             guard let dict = json.dictionary,
-                let startDate = dict["startDate"]?.date else {
+                let startDateString = dict["startDate"]?.string,
+                let startDate = DALIEvent.dateFormatter().date(from: startDateString) else {
                 return nil
             }
             guard let memberJSON = dict["user"], let member = DALIMember.parse(memberJSON) else {
                 return nil
             }
             
+            let endDateString = dict["endDate"]?.string
+            let projectedEndDateString = dict["projectedEndDate"]?.string
+            
+            let endDate = endDateString != nil ? DALIEvent.dateFormatter().date(from: endDateString!) : nil
+            let projectedEndDate = projectedEndDateString != nil ? DALIEvent.dateFormatter().date(from: projectedEndDateString!) : nil
+            
             self.startDate = startDate
-            self.endDate = dict["endDate"]?.date
-            self.projectedEndDate = dict["projectedEndDate"]?.date
+            self.endDate = endDate
+            self.projectedEndDate = projectedEndDate
             self.member = member
         }
     }
     
-    func getHistory() -> Future<[CheckOutRecord]> {
+    public func reload() -> Future<DALIEquipment> {
+        let promise = Promise<DALIEquipment>()
+        
+        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)") { (json, code, error) in
+            guard error == nil else {
+                promise.completeWithFail(error!)
+                return
+            }
+            guard let json = json else {
+                promise.completeWithFail(DALIError.General.UnexpectedResponse)
+                return
+            }
+            
+            self.update(json: json)
+            promise.completeWithSuccess(self)
+        }
+        
+        return promise.future
+    }
+    
+    public func getHistory() -> Future<[CheckOutRecord]> {
         let promise = Promise<[CheckOutRecord]>()
         
         ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/checkout") { (response, errorCode, error) in
@@ -183,10 +208,16 @@ public class DALIEquipment {
         return promise.future
     }
     
-    func checkout() -> Future<CheckOutRecord> {
+    public func checkout(expectedEndDate: Date) -> Future<CheckOutRecord> {
         let promise = Promise<CheckOutRecord>()
         
-        ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/checkout", data: nil) { (success, response, error) in
+        let dict = ["projectedEndDate" : DALIEvent.dateFormatter().string(from: expectedEndDate)]
+        guard let data = try? JSONSerialization.data(withJSONObject: dict, options: []) else {
+            promise.completeWithFail(DALIError.General.Unprocessable)
+            return promise.future
+        }
+        
+        ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)/checkout", data: data) { (success, response, error) in
             if let error = error {
                 promise.completeWithFail(error)
             } else if success {
@@ -202,11 +233,11 @@ public class DALIEquipment {
         return promise.future
     }
     
-    func returnEquipment() -> Future<Any> {
+    public func returnEquipment() -> Future<Any> {
         let promise = Promise<Any>();
         
-        ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/return", data: nil) { (success, response, error) in
-            if let error = error {
+        ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)/return", data: nil) { (success, response, error) in
+             if let error = error {
                 promise.completeWithFail(error)
                 return
             }

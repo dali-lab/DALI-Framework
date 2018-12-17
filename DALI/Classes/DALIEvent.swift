@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import SocketIO
+import EmitterKit
 
 /**
 A DALI event
@@ -634,6 +635,8 @@ public class DALIEvent {
 		- parameter error: Error encountered (if any)
 		*/
 		public static func getCurrent(callback: @escaping (_ events: [VotingEvent], _ error: DALIError.General?) -> Void) {
+            
+            // TODO: Observe current and released events
 			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/current") { (object, code, error) in
 				if let error = error {
 					DispatchQueue.main.async {
@@ -723,6 +726,44 @@ public class DALIEvent {
 				handleEventList(object: object, code: code, error: error, callback: callback)
 			}
 		}
+        
+        // MARK: Static Observation Methods
+        internal static var votingEventSocket: SocketIOClient?
+        internal static var observationEvent: Event<[VotingEvent]>?
+        
+        public static func observe() -> Event<[VotingEvent]> {
+            guard observationEvent == nil else {
+                return observationEvent!
+            }
+            
+            observationEvent = Event<[VotingEvent]>()
+            votingEventSocket = DALIapi.socketManager.socket(forNamespace: "/voting")
+            
+            votingEventSocket?.connect()
+            ServerCommunicator.authenticateSocket(socket: votingEventSocket!)
+            
+            votingEventSocket?.on("events", callback: { (data, ack) in
+                guard let eventsData = data[0] as? [Any] else {
+                    DispatchQueue.main.async {
+                        observationEvent?.emit([])
+                    }
+                    return;
+                }
+                
+                var events: [VotingEvent] = []
+                for eventDataObj in eventsData {
+                    if let event = VotingEvent.parse(JSON(eventDataObj)) {
+                        events.append(event)
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    observationEvent?.emit(events)
+                }
+            })
+            
+            return observationEvent!;
+        }
 	}
 	
 	// MARK: Initialization Methods
@@ -1308,7 +1349,7 @@ public class DALIEvent {
 		}, id: "checkInMembers:\(self.id!)")
 	}
 	
-	private static func dateFormatter() -> DateFormatter {
+	internal static func dateFormatter() -> DateFormatter {
 		let formatter = DateFormatter()
 		formatter.calendar = Calendar(identifier: .iso8601)
 		formatter.locale = Locale(identifier: "en_US_POSIX")

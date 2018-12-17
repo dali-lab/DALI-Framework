@@ -32,6 +32,7 @@ As a DALI member, have you ever wondered if you could make an app that does all 
   s.dependency 'SwiftyJSON'
   s.dependency 'Socket.IO-Client-Swift'
   s.dependency 'FutureKit'
+  s.dependency 'EmitterKit'
   s.source_files = 'DALI/Classes/*.{swift}'
 
   s.documentation_url = 'https://dali-lab.github.io/DALI-Framework/'

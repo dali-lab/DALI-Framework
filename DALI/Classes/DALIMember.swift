@@ -15,7 +15,7 @@ A member of DALI
 
 The user object contains as much data as is allowed to a general client by the api
  */
-public struct DALIMember {
+public struct DALIMember: Equatable {
 	// MARK: - Properties
 	/// The current member
 	public static var current: DALIMember? {
@@ -167,4 +167,8 @@ public struct DALIMember {
 		
 		return user
 	}
+    
+    public static func == (lhs: DALIMember, rhs: DALIMember) -> Bool {
+        return lhs.id == rhs.id
+    }
 }

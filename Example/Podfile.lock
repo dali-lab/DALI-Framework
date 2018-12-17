@@ -1,11 +1,11 @@
 PODS:
-  - DALI (0.4.45):
+  - DALI (0.4.5):
+    - EmitterKit
     - FutureKit
     - Socket.IO-Client-Swift
     - SwiftyJSON
+  - EmitterKit (5.2.0)
   - FutureKit (3.5.0)
-  - Nimble (7.0.3)
-  - Quick (1.2.0)
   - Socket.IO-Client-Swift (13.1.0):
     - Starscream (~> 3.0.2)
   - Starscream (3.0.3)
@@ -14,16 +14,13 @@ PODS:
 DEPENDENCIES:
   - DALI (from `../`)
   - FutureKit
-  - Nimble
-  - Quick
   - Socket.IO-Client-Swift
   - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - EmitterKit
     - FutureKit
-    - Nimble
-    - Quick
     - Socket.IO-Client-Swift
     - Starscream
     - SwiftyJSON
@@ -33,14 +30,13 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  DALI: ccf288f1edecc3f164c3a0e8c3f9c04b082769c4
+  DALI: ba094cdc68e781e3469873a161d68eff1d1271d0
+  EmitterKit: c3948fb82c4cdb11d9019c13d374e7f22188537e
   FutureKit: 91f6760df942278db387b05f19a9fdfbeb097df2
-  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
-  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   Socket.IO-Client-Swift: b67a96d6a9e5f271bceb93e99779d2cf77c74868
   Starscream: dfb1b3f39506717ee52b67fb48de0c8269504cbc
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: c3d5d422cc40f35510cc0d5b4eec90e093cfbb54
+PODFILE CHECKSUM: 9551841c5a6599cd5d8e8a593d9cf03d085c108d
 
 COCOAPODS: 1.5.3

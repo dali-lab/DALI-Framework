@@ -4,12 +4,12 @@ PODS:
     - FutureKit
     - Socket.IO-Client-Swift
     - SwiftyJSON
-  - EmitterKit (5.2.0)
+  - EmitterKit (5.2.1)
   - FutureKit (3.5.0)
-  - Socket.IO-Client-Swift (13.1.0):
+  - Socket.IO-Client-Swift (13.4.0):
     - Starscream (~> 3.0.2)
-  - Starscream (3.0.3)
-  - SwiftyJSON (4.0.0)
+  - Starscream (3.0.6)
+  - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
   - DALI (from `../`)
@@ -31,11 +31,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   DALI: ba094cdc68e781e3469873a161d68eff1d1271d0
-  EmitterKit: c3948fb82c4cdb11d9019c13d374e7f22188537e
+  EmitterKit: 2a6818d291cb9f553d3cfdd6aba570bf62337f51
   FutureKit: 91f6760df942278db387b05f19a9fdfbeb097df2
-  Socket.IO-Client-Swift: b67a96d6a9e5f271bceb93e99779d2cf77c74868
-  Starscream: dfb1b3f39506717ee52b67fb48de0c8269504cbc
-  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  Socket.IO-Client-Swift: 2b2720f14c92ff1237ced09bc2f2da2022624fee
+  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
 PODFILE CHECKSUM: 9551841c5a6599cd5d8e8a593d9cf03d085c108d
 

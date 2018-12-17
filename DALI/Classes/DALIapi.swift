@@ -57,15 +57,15 @@ public class DALIapi {
 	
 	/// Enables the use of sockets
 	public static func enableSockets() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.goingForeground), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.goingBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goingForeground), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goingBackground), name: UIApplication.willResignActiveNotification, object: nil)
 	}
 	
 	/// Disables all sockets used by the API
 	public static func disableSockets() {
 		
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
 		
 		if let eventSocket = DALIEvent.updatesSocket, eventSocket.status != .disconnected {
 			eventSocket.disconnect()

@@ -11,5 +11,5 @@ before_install:
 - pod update --project-directory=Example
 - pod install --project-directory=Example
 script:
-# - set -o pipefail && xcodebuild -workspace Example/DALI.xcworkspace -scheme DALI-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild -workspace Example/DALI.xcworkspace -scheme DALI-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint

@@ -16,7 +16,7 @@ public class DALIEquipment {
     public let id: String
     public var lastCheckedOut: CheckOutRecord?
     public var isCheckedOut: Bool {
-        return lastCheckedOut?.endDate != nil
+        return lastCheckedOut != nil && lastCheckedOut!.endDate == nil
     }
     var socket: SocketIOClient!
     
@@ -30,7 +30,10 @@ public class DALIEquipment {
             }
             
             if let json = json, let equipment = DALIEquipment(json: json) {
-                promise.completeWithSuccess(equipment)
+                let future = equipment.retreiveRequirements().map(block: { (_) -> DALIEquipment in
+                    return equipment
+                })
+                promise.completeUsingFuture(future)
                 return
             }
             promise.completeWithFail(DALIError.General.UnexpectedResponse)
@@ -60,7 +63,12 @@ public class DALIEquipment {
                         array.append(equipment)
                     }
                 }
-                allEquipmentObservationCallback(array, nil)
+                let futures = array.map({ (equipment) -> Future<Any> in
+                    return equipment.retreiveRequirements()
+                })
+                FutureBatch(futures).batchFuture.onComplete { (_) in
+                    self.allEquipmentObservationCallback(array, nil)
+                }
             }
             
             generalSocket.connect()
@@ -92,10 +100,16 @@ public class DALIEquipment {
                     }
                 })
                 
-                promise.completeWithSuccess(array)
+                let future = FutureBatch(array.map({ (equipment) -> Future<Any> in
+                    return equipment.retreiveRequirements()
+                })).batchFuture.map(block: { (_) -> [DALIEquipment] in
+                    return array
+                })
+                
+                promise.completeUsingFuture(future)
+            } else {
+                promise.completeWithFail(error ?? DALIError.General.UnexpectedResponse)
             }
-            
-            promise.failIfNotCompleted(error ?? DALIError.General.UnexpectedResponse)
         }
         
         return promise.future
@@ -104,8 +118,7 @@ public class DALIEquipment {
     internal init?(json: JSON) {
         guard let dict = json.dictionary,
             let name = dict["name"]?.string,
-            let id = dict["id"]?.string,
-            let qrID = dict["qrID"]?.string
+            let id = dict["id"]?.string
         else {
             return nil
         }
@@ -113,7 +126,7 @@ public class DALIEquipment {
         self.name = name
         self.id = id
         self.password = dict["password"]?.string
-        if let lastCheckedOutJSON = dict["lastCheckedOut"] {
+        if let lastCheckedOutJSON = dict["lastCheckOut"] {
             self.lastCheckedOut = CheckOutRecord(json: lastCheckedOutJSON)
         } else {
             self.lastCheckedOut = nil
@@ -127,13 +140,18 @@ public class DALIEquipment {
         
         self.name = dict["name"]?.string ?? self.name
         self.password = dict["password"]?.string ?? self.password
-        if let lastCheckedOutJSON = dict["lastCheckedOut"] {
+        if let lastCheckedOutJSON = dict["lastCheckOut"] {
             self.lastCheckedOut = CheckOutRecord(json: lastCheckedOutJSON)
         }
     }
     
-    public struct CheckOutRecord {
-        public let member: DALIMember
+    func retreiveRequirements() -> Future<Any> {
+        return lastCheckedOut?.retreiveRequirements() ?? Future<Any>(success: self)
+    }
+    
+    public class CheckOutRecord {
+        private var memberID: String?
+        public var member: DALIMember! = nil
         public let startDate: Date
         public let endDate: Date?
         public let projectedEndDate: Date?
@@ -144,7 +162,11 @@ public class DALIEquipment {
                 let startDate = DALIEvent.dateFormatter().date(from: startDateString) else {
                 return nil
             }
-            guard let memberJSON = dict["user"], let member = DALIMember.parse(memberJSON) else {
+            if let memberJSON = dict["user"], let member = DALIMember(json: memberJSON) {
+                self.member = member
+            } else if let memberID = dict["user"]?.string {
+                self.memberID = memberID
+            } else {
                 return nil
             }
             
@@ -157,7 +179,18 @@ public class DALIEquipment {
             self.startDate = startDate
             self.endDate = endDate
             self.projectedEndDate = projectedEndDate
-            self.member = member
+        }
+        
+        func retreiveRequirements() -> Future<Any> {
+            if let memberID = memberID, member == nil {
+                let future = DALIMember.get(id: memberID)
+                return future.onSuccess { (member) -> Any in
+                    self.member = member
+                    return self
+                }
+            } else {
+                return Future<Any>(success: self)
+            }
         }
     }
     
@@ -175,7 +208,9 @@ public class DALIEquipment {
             }
             
             self.update(json: json)
-            promise.completeWithSuccess(self)
+            promise.completeUsingFuture(self.retreiveRequirements().map(block: { (_) -> DALIEquipment in
+                return self
+            }))
         }
         
         return promise.future
@@ -202,7 +237,15 @@ public class DALIEquipment {
                 }
             }
             
-            promise.completeWithSuccess(list)
+            let future = FutureBatch(list.map({ (record) -> Future<CheckOutRecord> in
+                return record.retreiveRequirements().map(block: { (_) -> CheckOutRecord in
+                    return record
+                })
+            })).batchFuture.map(block: { (list) -> [CheckOutRecord] in
+                return list as! [CheckOutRecord]
+            })
+            
+            promise.completeUsingFuture(future)
         }
         
         return promise.future

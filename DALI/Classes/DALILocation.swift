@@ -47,7 +47,7 @@ public class DALILocation {
 				
 				var outputArr: [DALIMember] = []
 				for obj in arr {
-					guard let dict = obj as? [String: Any], let user = dict["user"], let member = DALIMember.parse(JSON(user)) else {
+					guard let dict = obj as? [String: Any], let user = dict["user"], let member = DALIMember(json:JSON(user)) else {
 						if let sharedCallback = sharedCallback {
 							DispatchQueue.main.async {
 								sharedCallback(nil, DALIError.General.UnexpectedResponse)
@@ -68,7 +68,7 @@ public class DALILocation {
 			})
 			
 			updatingSocket.on("memberEnter", callback: { (data, ack) in
-				guard let user = data[0] as? [String: Any], let member = DALIMember.parse(JSON(user)) else {
+				guard let user = data[0] as? [String: Any], let member = DALIMember(json:JSON(user)) else {
 					return
 				}
 				
@@ -242,7 +242,7 @@ public class DALILocation {
 				
 				var outputArr: [DALIMember] = []
 				for obj in arr {
-					guard let dict = obj.dictionary, let user = dict["user"], let member = DALIMember.parse(user) else {
+					guard let dict = obj.dictionary, let user = dict["user"], let member = DALIMember(json:user) else {
 						callback(nil, DALIError.General.UnexpectedResponse)
 						return
 					}

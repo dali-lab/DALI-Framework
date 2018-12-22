@@ -1282,7 +1282,7 @@ public class DALIEvent {
 			var members: [DALIMember] = []
 			if let array = data?.array {
 				for memberObj in array {
-					if let member = DALIMember.parse(memberObj) {
+					if let member = DALIMember(json:memberObj) {
 						members.append(member)
 					}
 				}
@@ -1329,7 +1329,7 @@ public class DALIEvent {
 			
 			var members: [DALIMember] = []
 			for memberObj in array {
-				if let member = DALIMember.parse(JSON(memberObj)) {
+				if let member = DALIMember(json:JSON(memberObj)) {
 					members.append(member)
 				}
 			}

@@ -20,7 +20,7 @@ open class DALIError {
 		/// The object you are calling create on has already been created
 		case AlreadyCreated
 	}
-	
+
 	/// Pertaining to the General opperations. Mostly used by the ServerCommunicator
 	public enum General: Error {
 		/// The request did not have proper authorization
@@ -37,5 +37,14 @@ open class DALIError {
 		case UnexpectedResponse
 		/// The requested object(s) were not found on the server
 		case Unfound
+        
+        public var localizedDescription: String {
+            switch self {
+            case .Unprocessable:
+                return "Data was unprocessable"
+            default:
+                return "Unknown error has occured"
+            }
+        }
 	}
 }

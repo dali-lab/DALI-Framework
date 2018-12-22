@@ -62,7 +62,7 @@ open class DALIConfig {
 		get {
 			if let member_stored = member_stored {
 				return member_stored
-			}else if let stored = UserDefaults.standard.data(forKey: "DALIapi:member"), let member = DALIMember.parse(JSON(stored)) {
+			}else if let stored = UserDefaults.standard.data(forKey: "DALIapi:member"), let member = DALIMember(json: JSON(stored)) {
 				member_stored = member
 				return member
 			}

@@ -35,7 +35,7 @@ class ServerCommunicator {
         self.get(url: url, params: nil, callback: callback)
     }
     
-    static func get(url: String, params: [String:String]?, callback: @escaping (_ response: JSON?, _ code: Int?, _ error: DALIError.General?) -> Void) {
+    static func getRequest(for url: String, params: [String:String]?) -> URLRequest {
         var urlComps = URLComponents(string: url)!
         if let params = params {
             urlComps.queryItems = params.keys.map({ (key) -> URLQueryItem in
@@ -43,17 +43,22 @@ class ServerCommunicator {
             })
         }
         
-		var request = URLRequest(url: urlComps.url!)
-		request.httpMethod = "GET"
-		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-		request.addValue("application/json", forHTTPHeaderField: "Accept")
+        var request = URLRequest(url: urlComps.url!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
         
-		if let token = config.token {
-			request.addValue(token, forHTTPHeaderField: "authorization")
-		}else if let apiKey = config.apiKey {
-			request.addValue(apiKey, forHTTPHeaderField: "apiKey")
-		}
-		
+        if let token = config.token {
+            request.addValue(token, forHTTPHeaderField: "authorization")
+        }else if let apiKey = config.apiKey {
+            request.addValue(apiKey, forHTTPHeaderField: "apiKey")
+        }
+        
+        return request
+    }
+    
+    static func get(url: String, params: [String:String]?, callback: @escaping (_ response: JSON?, _ code: Int?, _ error: DALIError.General?) -> Void) {
+        let request = getRequest(for: url, params: params)
 		let task = URLSession.shared.dataTask(with: request) { data, response, error in
 			let httpResponse = response as? HTTPURLResponse
 			
@@ -67,7 +72,7 @@ class ServerCommunicator {
 					err = DALIError.General.Unauthorized
 					break
 				case 403:
-					fatalError("DALIapi: Provided API Key out invalid!")
+					fatalError("DALIapi: Provided API Key invalid!")
 					break
 				case 422:
 					err = DALIError.General.Unprocessable
@@ -142,7 +147,7 @@ class ServerCommunicator {
 					err = DALIError.General.Unauthorized
 					break
 				case 403:
-					fatalError("DALIapi: Provided API Key out invalid!")
+					fatalError("DALIapi: Provided API Key invalid!")
 					break
 				case 422:
 					err = DALIError.General.Unprocessable
@@ -226,7 +231,7 @@ class ServerCommunicator {
 					err = DALIError.General.Unauthorized
 					break
 				case 403:
-					fatalError("DALIapi: Provided API Key out invalid!")
+					fatalError("DALIapi: Provided API Key invalid!")
 					break
 				case 422:
 					err = DALIError.General.Unprocessable

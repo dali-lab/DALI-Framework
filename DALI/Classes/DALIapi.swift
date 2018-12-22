@@ -155,7 +155,7 @@ public class DALIapi {
 			
 			let userObj = json["user"]
 			
-			guard let member = DALIMember.parse(userObj) else {
+            guard let member = DALIMember(json: userObj) else {
 				done(false, DALIError.General.UnexpectedResponse)
 				return
 			}
@@ -215,7 +215,7 @@ public class DALIapi {
 					return
 				}
 				
-				guard let member = DALIMember.parse(userObj) else {
+				guard let member = DALIMember(json: userObj) else {
 					done(false, DALIError.General.UnexpectedResponse)
 					return
 				}
@@ -238,7 +238,7 @@ public class DALIapi {
 	*/
 	public static func silentMemberUpdate(callback: @escaping (_ member: DALIMember?) -> Void) {
 		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/users/me") { (data, code, error) in
-			guard let data = data, let member = DALIMember.parse(data) else {
+			guard let data = data, let member = DALIMember(json: data) else {
 				callback(nil)
 				return
 			}

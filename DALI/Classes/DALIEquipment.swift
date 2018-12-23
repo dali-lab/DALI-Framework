@@ -9,118 +9,36 @@ import Foundation
 import FutureKit
 import SwiftyJSON
 import SocketIO
+import EmitterKit
 
-public class DALIEquipment {
-    public var name: String
-    public var password: String?
+/**
+ Singular equipment object describing one of the items DALI has available for sign out
+ */
+final public class DALIEquipment: DALIObject {
+    /// Identifier for this equipment
     public let id: String
+    /// Name of the device
+    public var name: String
+    /// Password, if any
+    public var password: String?
+    /// The most recent record of this device being checked out
     public var lastCheckedOut: CheckOutRecord?
+    /// This device has been checked
     public var isCheckedOut: Bool {
         return lastCheckedOut != nil && lastCheckedOut!.endDate == nil
     }
-    var socket: SocketIOClient!
+    var updatesSocket: SocketIOClient!
+    static private var staticUpdatesSocket: SocketIOClient!
+    static private var staticUpdatesEvent = Event<[DALIEquipment]>()
     
-    public static func equipment(for id: String) -> Future<DALIEquipment> {
-        let promise = Promise<DALIEquipment>()
-        
-        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)") { (json, errorCode, error) in
-            if let error = error {
-                promise.completeWithFail(error)
-                return
-            }
-            
-            if let json = json, let equipment = DALIEquipment(json: json) {
-                let future = equipment.retreiveRequirements().map(block: { (_) -> DALIEquipment in
-                    return equipment
-                })
-                promise.completeUsingFuture(future)
-                return
-            }
-            promise.completeWithFail(DALIError.General.UnexpectedResponse)
-        }
-        
-        return promise.future
-    }
-    
-    static private var generalSocket: SocketIOClient!
-    static private var allEquipmentObservationCallback: (([DALIEquipment], DALIError.General?) -> Void)!
-    
-    public static func observeAllEquipment(callback: @escaping ([DALIEquipment], DALIError.General?) -> Void) -> Observation {
-        if (generalSocket == nil) {
-            generalSocket = DALIapi.socketManager.socket(forNamespace: "/equipment")
-            
-            generalSocket.on("equipmentUpdate") { (data, ack) in
-                guard let arr = data[0] as? [[String: Any]] else {
-                    DispatchQueue.main.async {
-                        allEquipmentObservationCallback([], DALIError.General.UnexpectedResponse)
-                    }
-                    return
-                }
-                
-                var array = [DALIEquipment]()
-                for obj in arr {
-                    if let equipment = DALIEquipment(json: JSON(obj)) {
-                        array.append(equipment)
-                    }
-                }
-                let futures = array.map({ (equipment) -> Future<Any> in
-                    return equipment.retreiveRequirements()
-                })
-                FutureBatch(futures).batchFuture.onComplete { (_) in
-                    self.allEquipmentObservationCallback(array, nil)
-                }
-            }
-            
-            generalSocket.connect()
-            generalSocket.on(clientEvent: .connect, callback: { (data, ack) in
-                ServerCommunicator.authenticateSocket(socket: generalSocket!)
-            })
-        }
-        allEquipmentObservationCallback = callback;
-        
-        return Observation(stop: {
-            if let generalSocket = generalSocket {
-                generalSocket.disconnect()
-                self.generalSocket = nil
-                self.allEquipmentObservationCallback = nil
-            }
-        }, id: "equipmentUpdate")
-    }
-    
-    public static func allEquipment() -> Future<[DALIEquipment]> {
-        let promise = Promise<[DALIEquipment]>()
-        
-        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment") { (response, responseCode, error) in
-            if let dataArray = response?.array {
-                var array = [DALIEquipment]()
-                
-                dataArray.forEach({ (json) in
-                    if let equipment = DALIEquipment(json: json) {
-                        array.append(equipment)
-                    }
-                })
-                
-                let future = FutureBatch(array.map({ (equipment) -> Future<Any> in
-                    return equipment.retreiveRequirements()
-                })).batchFuture.map(block: { (_) -> [DALIEquipment] in
-                    return array
-                })
-                
-                promise.completeUsingFuture(future)
-            } else {
-                promise.completeWithFail(error ?? DALIError.General.UnexpectedResponse)
-            }
-        }
-        
-        return promise.future
-    }
+    // MARK: - Setup
     
     internal init?(json: JSON) {
         guard let dict = json.dictionary,
             let name = dict["name"]?.string,
             let id = dict["id"]?.string
-        else {
-            return nil
+            else {
+                return nil
         }
         
         self.name = name
@@ -145,150 +63,195 @@ public class DALIEquipment {
         }
     }
     
-    func retreiveRequirements() -> Future<Any> {
-        return lastCheckedOut?.retreiveRequirements() ?? Future<Any>(success: self)
+    // MARK: - Public API
+    
+    // MARK: Static Getters
+    
+    /**
+     Get a single equipment object with a given id
+     */
+    public static func equipment(for id: String) -> Future<DALIEquipment> {
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)").onSuccess(block: { (response) -> Future<DALIEquipment> in
+            if let json = response.json, let equipment = DALIEquipment(json: json) {
+                return equipment.retreiveRequirements()
+            } else {
+                throw response.assertedError
+            }
+        })
     }
     
-    public class CheckOutRecord {
-        private var memberID: String?
-        public var member: DALIMember! = nil
-        public let startDate: Date
-        public let endDate: Date?
-        public let projectedEndDate: Date?
-        
-        internal init?(json: JSON) {
-            guard let dict = json.dictionary,
-                let startDateString = dict["startDate"]?.string,
-                let startDate = DALIEvent.dateFormatter().date(from: startDateString) else {
-                return nil
-            }
-            if let memberJSON = dict["user"], let member = DALIMember(json: memberJSON) {
-                self.member = member
-            } else if let memberID = dict["user"]?.string {
-                self.memberID = memberID
+    /**
+     Get all the equipment
+     */
+    public static func allEquipment() -> Future<[DALIEquipment]> {
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment").onSuccess(block: { (response) -> Future<[DALIEquipment]> in
+            if let dataArray = response.json?.array {
+                var array = [DALIEquipment]()
+                
+                dataArray.forEach({ (json) in
+                    if let equipment = DALIEquipment(json: json) {
+                        array.append(equipment)
+                    }
+                })
+                
+                return retriveAllRequirements(on: array)
             } else {
-                return nil
+                throw response.assertedError
             }
-            
-            let endDateString = dict["endDate"]?.string
-            let projectedEndDateString = dict["projectedEndDate"]?.string
-            
-            let endDate = endDateString != nil ? DALIEvent.dateFormatter().date(from: endDateString!) : nil
-            let projectedEndDate = projectedEndDateString != nil ? DALIEvent.dateFormatter().date(from: projectedEndDateString!) : nil
-            
-            self.startDate = startDate
-            self.endDate = endDate
-            self.projectedEndDate = projectedEndDate
-        }
-        
-        func retreiveRequirements() -> Future<Any> {
-            if let memberID = memberID, member == nil {
-                let future = DALIMember.get(id: memberID)
-                return future.onSuccess { (member) -> Any in
-                    self.member = member
-                    return self
-                }
-            } else {
-                return Future<Any>(success: self)
-            }
-        }
+        })
     }
     
+    // MARK: Single equipment methods
+    
+    /**
+     Reload the information stored in this equipment
+     */
     public func reload() -> Future<DALIEquipment> {
-        let promise = Promise<DALIEquipment>()
-        
-        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)") { (json, code, error) in
-            guard error == nil else {
-                promise.completeWithFail(error!)
-                return
-            }
-            guard let json = json else {
-                promise.completeWithFail(DALIError.General.UnexpectedResponse)
-                return
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)").onSuccess(block: { (response) -> Future<DALIEquipment> in
+            guard let json = response.json else {
+                throw response.assertedError
             }
             
             self.update(json: json)
-            promise.completeUsingFuture(self.retreiveRequirements().map(block: { (_) -> DALIEquipment in
-                return self
-            }))
-        }
-        
-        return promise.future
+            return self.retreiveRequirements()
+        })
     }
     
+    /**
+     Get all the checkouts in the past for this equipment
+     */
     public func getHistory() -> Future<[CheckOutRecord]> {
-        let promise = Promise<[CheckOutRecord]>()
-        
-        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/checkout") { (response, errorCode, error) in
-            if let error = error {
-                promise.completeWithFail(error)
-                return
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/checkout").onSuccess { (response) -> Future<[CheckOutRecord]> in
+            guard let array = response.json?.array else {
+                throw response.assertedError
             }
             
-            guard let array = response?.array else {
-                promise.completeWithFail(DALIError.General.UnexpectedResponse)
-                return
-            }
-            
-            var list = [CheckOutRecord]()
-            for json in array {
-                if let checkOutRecord = CheckOutRecord(json: json) {
-                    list.append(checkOutRecord)
-                }
-            }
-            
-            let future = FutureBatch(list.map({ (record) -> Future<CheckOutRecord> in
-                return record.retreiveRequirements().map(block: { (_) -> CheckOutRecord in
-                    return record
-                })
-            })).batchFuture.map(block: { (list) -> [CheckOutRecord] in
-                return list as! [CheckOutRecord]
+            let list = array.compactMap({ (json) -> CheckOutRecord? in
+                return CheckOutRecord(json: json)
             })
-            
-            promise.completeUsingFuture(future)
+            return retriveAllRequirements(on: list)
         }
-        
-        return promise.future
     }
     
+    /**
+     Check out this equipment
+     
+     - note: Will only succeed when the user is signed in and it is not currently checked out
+     */
     public func checkout(expectedEndDate: Date) -> Future<CheckOutRecord> {
-        let promise = Promise<CheckOutRecord>()
+        guard !isCheckedOut else {
+            return Future<CheckOutRecord>(fail: DALIError.Equipment.AlreadyCheckedOut)
+        }
         
         let dict = ["projectedEndDate" : DALIEvent.dateFormatter().string(from: expectedEndDate)]
-        guard let data = try? JSONSerialization.data(withJSONObject: dict, options: []) else {
-            promise.completeWithFail(DALIError.General.Unprocessable)
-            return promise.future
+        var data: Data!
+        do {
+            data = try JSONSerialization.data(withJSONObject: dict, options: [])
+        } catch {
+            return Future(fail: error)
         }
         
-        ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)/checkout", data: data) { (success, response, error) in
-            if let error = error {
-                promise.completeWithFail(error)
-            } else if success {
-                if let response = response, let checkOutRecord = CheckOutRecord(json: response) {
-                    promise.completeWithSuccess(checkOutRecord)
-                } else {
-                    promise.completeWithFail(DALIError.General.UnexpectedResponse)
+        return ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)/checkout", data: data).onSuccess { (response) -> Future<CheckOutRecord> in
+            if let json = response.json, let checkOutRecord = CheckOutRecord(json: json) {
+                return Future(success: checkOutRecord)
+            } else {
+                return self.reload().onSuccess { (equipment) in
+                    if equipment.isCheckedOut {
+                        throw DALIError.Equipment.AlreadyCheckedOut
+                    } else {
+                        throw DALIError.General.UnexpectedResponse
+                    }
                 }
             }
-            promise.failIfNotCompleted(DALIError.General.BadRequest)
         }
-        
-        return promise.future
     }
     
-    public func returnEquipment() -> Future<Any> {
-        let promise = Promise<Any>();
+    public func returnEquipment() -> Future<DALIEquipment> {
+        return ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)/return", data: nil).onSuccess(block: { (response) -> Future<DALIEquipment> in
+            if !response.success {
+                throw response.assertedError
+            }
+            return self.reload()
+        })
+    }
+    
+    // MARK: Observing changes
+    
+    /**
+     Observe all the equipment, get updates whenever there are changes
+     
+     - parameter block: The block that will be called when new information is available
+     - returns: Observation to allow you to control the flow of new information
+     */
+    public static func observeAllEquipment(block: @escaping ([DALIEquipment]) -> Void) -> Observation {
+        assertStaticSocket()
+        let listener = staticUpdatesEvent.on(block)
         
-        ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)/return", data: nil) { (success, response, error) in
-             if let error = error {
-                promise.completeWithFail(error)
+        return Observation(stop: {
+            listener.isListening = false
+            updateStaticSocketEnabled()
+        }, listener: listener, restartBlock: {
+            listener.isListening = true
+            assertStaticSocket()
+            return true
+        })
+    }
+    
+    // MARK: - DALIObject
+    
+    func retreiveRequirements() -> Future<DALIEquipment> {
+        if let subFuture = lastCheckedOut?.retreiveRequirements() {
+            return subFuture.map { (_) -> DALIEquipment in
+                return self
+            }
+        }
+        return Future<DALIEquipment>(success: self)
+    }
+    
+    // MARK: - Helpers
+    
+    /// Check to see if the static socket is open. If not, open one
+    private static func assertStaticSocket() {
+        guard staticUpdatesSocket == nil else {
+            return
+        }
+        staticUpdatesSocket = DALIapi.socketManager.socket(forNamespace: "/equipment")
+        
+        staticUpdatesSocket.on("equipmentUpdate") { (data, ack) in
+            guard let array = data[0] as? [[String: Any]] else {
+                staticUpdatesEvent.emit([])
                 return
             }
             
-            promise.completeWithSuccess(self)
+            let equipment = array.compactMap({ (data) -> DALIEquipment? in
+                return DALIEquipment(json: JSON(data))
+            })
+            
+            _ = retriveAllRequirements(on: equipment).onSuccess { (equipment) in
+                self.staticUpdatesEvent.emit(equipment)
+            }
         }
         
-        return promise.future;
+        staticUpdatesSocket.connect()
+        staticUpdatesSocket.on(clientEvent: .connect, callback: { (data, ack) in
+            ServerCommunicator.authenticateSocket(socket: staticUpdatesSocket!)
+        })
+    }
+    
+    /// Disconnect the socket if no one is listening
+    private static func updateStaticSocketEnabled() {
+        guard let staticUpdatesSocket = staticUpdatesSocket else {
+            return
+        }
+        
+        let listeners = staticUpdatesEvent.getListeners(nil).filter { (listener) -> Bool in
+            return listener.isListening
+        }
+        
+        if listeners.count <= 0 {
+            staticUpdatesSocket.disconnect()
+            self.staticUpdatesSocket = nil
+        }
     }
     
     private var observeCallback: ((DALIEquipment) -> Void)?
@@ -296,10 +259,10 @@ public class DALIEquipment {
     private var observeDeletionCallback: ((DALIEquipment) -> Void)?
     
     private func assertSocket() {
-        if (socket == nil) {
-            socket = DALIapi.socketManager.socket(forNamespace: "/equipment")
+        if (updatesSocket == nil) {
+            updatesSocket = DALIapi.socketManager.socket(forNamespace: "/equipment")
             
-            socket.on("checkOuts") { (data, ack) in
+            updatesSocket.on("checkOuts") { (data, ack) in
                 if let observeCheckoutsCallback = self.observeCheckoutsCallback, let data = data[0] as? [[String: Any]] {
                     var checkOuts = [CheckOutRecord]()
                     for obj in data {
@@ -310,31 +273,31 @@ public class DALIEquipment {
                     observeCheckoutsCallback(checkOuts, self)
                 }
             }
-            socket.on("update") { (data, ack) in
+            updatesSocket.on("update") { (data, ack) in
                 if let observeCallback = self.observeCallback, let data = data[0] as? [String:Any] {
                     self.update(json: JSON(data))
                     observeCallback(self)
                 }
             }
-            socket.on("deleted") { (data, ack) in
+            updatesSocket.on("deleted") { (data, ack) in
                 if let observeDeletionCallback = self.observeDeletionCallback {
                     observeDeletionCallback(self)
                 }
             }
             
-            socket.connect()
-            socket.on(clientEvent: .connect) { (data, ack) in
-                ServerCommunicator.authenticateSocket(socket: self.socket)
+            updatesSocket.connect()
+            updatesSocket.on(clientEvent: .connect) { (data, ack) in
+                ServerCommunicator.authenticateSocket(socket: self.updatesSocket)
             }
-            socket.on("authed", callback: { (data, ack) in
-                self.socket.emit("equipmentSelect", self.id)
+            updatesSocket.on("authed", callback: { (data, ack) in
+                self.updatesSocket.emit("equipmentSelect", self.id)
             })
         }
     }
     
     private func cleanupSocket() {
         if (observeCallback == nil && observeCheckoutsCallback == nil && observeDeletionCallback == nil) {
-            socket?.disconnect()
+            updatesSocket?.disconnect()
         }
     }
     

@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import SocketIO
+import FutureKit
 
 /**
 A static struct that contains all location updates and queries
@@ -133,28 +134,17 @@ public class DALILocation {
 			    }
 			}
 		*/
-		public static func get(callback: @escaping (Tim?, DALIError.General?) -> Void) {
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/location/tim") { (object, code, error) in
-				if let error = error {
-					DispatchQueue.main.async {
-						callback(nil, error)
-					}
-					return
-				}
-				
-				guard let dict = object?.dictionary, let inDALI = dict["inDALI"]?.bool, let inOffice = dict["inOffice"]?.bool else {
-					DispatchQueue.main.async {
-						callback(nil, DALIError.General.UnexpectedResponse)
-					}
-					return
-				}
-				let tim = Tim(inDALI: inDALI, inOffice: inOffice)
-				self.current = tim
-				
-				DispatchQueue.main.async {
-					callback(tim, nil)
-				}
-			}
+		public static func get() -> Future<Tim> {
+            return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/location/tim").onSuccess { (response) -> Tim in
+                guard let dict = response.json?.dictionary,
+                    let inDALI = dict["inDALI"]?.bool,
+                    let inOffice = dict["inOffice"]?.bool else {
+                    throw response.assertedError
+                }
+                let tim = Tim(inDALI: inDALI, inOffice: inOffice)
+                self.current = tim
+                return tim
+            }
 		}
 		
 		/**
@@ -191,7 +181,7 @@ public class DALILocation {
 		- parameter inOffice: Tim is in his office
 		- parameter callback: Function called apon completion
 		*/
-		public static func submit(inDALI: Bool, inOffice: Bool, callback: @escaping (Bool, DALIError.General?) -> Void) {
+		public static func submit(inDALI: Bool, inOffice: Bool) -> Future<Void> {
 			DALIapi.assertUser(funcName: "DALILocation.Tim.submit")
 			
 			let dict: [String: Any] = [
@@ -200,17 +190,13 @@ public class DALILocation {
 			]
 			
 			do {
-				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/tim", json: JSON(dict)) { (success, response, error) in
-					DispatchQueue.main.async {
-						callback(success, error)
-					}
-					
-					
-				}
+                return try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/tim", json: JSON(dict)).onSuccess(block: { (response) in
+                    if !response.success {
+                        throw response.assertedError
+                    }
+                })
 			} catch {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: SwiftyJSONError.invalidJSON as NSError))
-				}
+				return Future(fail: error)
 			}
 		}
 	}
@@ -224,36 +210,21 @@ public class DALILocation {
 		
 		- parameter callback: Function called apon completion
 		*/
-		public static func get(callback: @escaping ([DALIMember]?, DALIError.General?) -> Void) {
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/location/shared") { (object, code, error) in
-				if let error = error {
-					DispatchQueue.main.async {
-						callback(nil, error)
-					}
-					return
-				}
-				
-				guard let arr = object?.array else {
-					DispatchQueue.main.async {
-						callback(nil, DALIError.General.UnexpectedResponse)
-					}
-					return
-				}
-				
-				var outputArr: [DALIMember] = []
-				for obj in arr {
-					guard let dict = obj.dictionary, let user = dict["user"], let member = DALIMember(json:user) else {
-						callback(nil, DALIError.General.UnexpectedResponse)
-						return
-					}
-
-					outputArr.append(member)
-				}
-				
-				DispatchQueue.main.async {
-					callback(outputArr, nil)
-				}
-			}
+		public static func get() -> Future<[DALIMember]> {
+            return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/location/shared").onSuccess { (response) -> [DALIMember] in
+                guard let array = response.json?.array else {
+                    throw DALIError.General.UnexpectedResponse
+                }
+                
+                let outputArr: [DALIMember] = array.compactMap({ (json) -> DALIMember? in
+                    guard let dict = json.dictionary,
+                        let user = dict["user"] else {
+                        return nil
+                    }
+                    return DALIMember(json: user)
+                })
+                return outputArr
+            }
 		}
 		
 		/**
@@ -290,7 +261,7 @@ public class DALILocation {
 		- parameter entering: The user is entering DALI
 		- parameter callback: Function that is called when done
 		*/
-		public static func submit(inDALI: Bool, entering: Bool, callback: @escaping (Bool, DALIError.General?) -> Void) {
+		public static func submit(inDALI: Bool, entering: Bool) -> Future<Void> {
 			DALIapi.assertUser(funcName: "DALILocation.submit")
 			
 			let dict: [String: Any] = [
@@ -300,15 +271,13 @@ public class DALILocation {
 			]
 			
 			do {
-				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/shared", json: JSON(dict)) { (success, response, error) in
-					DispatchQueue.main.async {
-						callback(success, error)
-					}
-				}
+                return try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/shared", json: JSON(dict)).onSuccess(block: { (response) in
+                    if !response.success {
+                        throw response.assertedError
+                    }
+                })
 			} catch {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: SwiftyJSONError.invalidJSON as NSError))
-				}
+				return Future(fail: error)
 			}
 		}
 	}
@@ -341,13 +310,7 @@ public class DALILocation {
 		}
 		set {
 			UserDefaults.standard.set(newValue, forKey: "DALIapi:sharing")
-			do {
-				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/shared/updatePreference", json: JSON(["sharing": newValue]), callback: { (success, object, error) in
-				
-			})
-			} catch {
-				
-			}
+            _ = try? ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/location/shared/updatePreference", json: JSON(["sharing": newValue]))
 		}
 	}
 }

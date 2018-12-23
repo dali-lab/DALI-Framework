@@ -101,18 +101,12 @@ public class DALIMember: Equatable {
     }
     
     static func get(id: String) -> Future<DALIMember> {
-        let promise = Promise<DALIMember>()
-        
-        ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/users/\(id)") { (json, code, error) in
-            if let json = json, let member = DALIMember(json: json) {
-                promise.completeWithSuccess(member)
-            } else if let error = error {
-                promise.completeWithFail(error)
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/users/\(id)").onSuccess(block: { (response) -> DALIMember in
+            if let json = response.json, let member = DALIMember(json: json) {
+                return member
             } else {
-                promise.completeWithFail("Failed to get user")
+                throw response.assertedError
             }
-        }
-        
-        return promise.future
+        })
     }
 }

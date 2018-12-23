@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import SocketIO
+import FutureKit
 
 /**
 An interface for getting and setting information about food in the lab
@@ -23,12 +24,13 @@ public class DALIFood {
 	- parameter callback: The function called when the data has been received
 	- parameter food: The food tonight
 	*/
-	public static func getFood(callback: @escaping (_ food: String?) -> Void) {
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/food") { (data, code, error) in
-			DispatchQueue.main.async {
-				callback(data?.string)
-			}
-		}
+	public static func getFood() -> Future<String?> {
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/food").onSuccess { (response) -> String? in
+            if let error = response.error ?? response.generalError ?? response.jsonError {
+                throw error
+            }
+            return response.json?.string
+        }
 	}
 	
 	/// The socket to be used for observing
@@ -73,24 +75,19 @@ public class DALIFood {
 	- parameter callback: Called when complete
 	- parameter success: Was successful
 	*/
-	public static func setFood(food: String, callback: @escaping (_ success: Bool) -> Void) {
+	public static func setFood(food: String) -> Future<Void> {
 		if !(DALIMember.current?.isAdmin ?? false) {
-			DispatchQueue.main.async {
-				callback(false)
-			}
-			return
+			return Future(fail: DALIError.General.Unauthorized)
 		}
 		
 		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/food", json: JSON(["food": food]), callback: { (success, data, error) in
-				DispatchQueue.main.async {
-					callback(success)
-				}
-			})
+            return try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/food", json: JSON(["food": food])).onSuccess(block: { (response) in
+                if !response.success {
+                    throw response.assertedError
+                }
+            })
 		} catch {
-			DispatchQueue.main.async {
-				callback(false)
-			}
+			return Future(fail: error)
 		}
 	}
 	
@@ -102,24 +99,19 @@ public class DALIFood {
 	- parameter callback: Called when complete
 	- parameter success: Was successful
 	*/
-	public static func cancelFood(callback: @escaping (_ success: Bool) -> Void) {
-		if !(DALIMember.current?.isAdmin ?? false) {
-			DispatchQueue.main.async {
-				callback(false)
-			}
-			return
+	public static func cancelFood() -> Future<Void> {
+		guard DALIMember.current?.isAdmin ?? false else {
+			return Future(fail: DALIError.General.Unauthorized)
 		}
 		
 		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/food", json: JSON([:]), callback: { (success, data, error) in
-				DispatchQueue.main.async {
-					callback(success)
-				}
-			})
+            return try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/food", json: JSON([:])).onSuccess(block: { (response) in
+                if !response.success {
+                    throw response.assertedError
+                }
+            })
 		} catch {
-			DispatchQueue.main.async {
-				callback(false)
-			}
+            return Future(fail: error)
 		}
 	}
 }

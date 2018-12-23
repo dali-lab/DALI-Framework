@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import SocketIO
+import FutureKit
 
 class ServerCommunicator {
 	private static var config: DALIConfig {
@@ -31,18 +32,17 @@ class ServerCommunicator {
 	- parameter code: The code for the response
 	- parameter error: The error encountered (if any)
 	*/
-    static func get(url: String, callback: @escaping (_ response: JSON?, _ code: Int?, _ error: DALIError.General?) -> Void) {
-        self.get(url: url, params: nil, callback: callback)
+    static func get(url: String) -> Future<Response> {
+        return get(url: url, params: nil)
     }
     
-    static func getRequest(for url: String, params: [String:String]?) -> URLRequest {
+    static func get(url: String, params: [String:String]?) -> Future<Response> {
         var urlComps = URLComponents(string: url)!
         if let params = params {
             urlComps.queryItems = params.keys.map({ (key) -> URLQueryItem in
                 return URLQueryItem(name: key, value: params[key])
             })
         }
-        
         var request = URLRequest(url: urlComps.url!)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -54,75 +54,21 @@ class ServerCommunicator {
             request.addValue(apiKey, forHTTPHeaderField: "apiKey")
         }
         
-        return request
-    }
-    
-    static func get(url: String, params: [String:String]?, callback: @escaping (_ response: JSON?, _ code: Int?, _ error: DALIError.General?) -> Void) {
-        let request = getRequest(for: url, params: params)
-		let task = URLSession.shared.dataTask(with: request) { data, response, error in
-			let httpResponse = response as? HTTPURLResponse
-			
-			if let httpResponse = httpResponse, httpResponse.statusCode != 200 || error != nil {
-				print("Didn't get 200: \(httpResponse.statusCode)")
-				
-				var err: DALIError.General = DALIError.General.UnknownError(error: error, text: data == nil ? nil : String(data: data!, encoding: .utf8), code: httpResponse.statusCode)
-				
-				switch httpResponse.statusCode {
-				case 401:
-					err = DALIError.General.Unauthorized
-					break
-				case 403:
-					fatalError("DALIapi: Provided API Key invalid!")
-					break
-				case 422:
-					err = DALIError.General.Unprocessable
-					break
-				case 400:
-					err = DALIError.General.BadRequest
-					break
-				case 404:
-					err = DALIError.General.Unfound
-					break
-				default:
-					break
-				}
-				
-				callback(nil, httpResponse.statusCode, err)
-				return
-			}else if let error = error {
-				print(error)
-				
-				callback(nil, httpResponse?.statusCode, DALIError.General.UnknownError(error: error, text: data == nil ? nil : String(data: data!, encoding: .utf8), code: httpResponse == nil ? -1 : httpResponse!.statusCode))
-				return
-			}
-			
-			
-			guard let data = data else {
-				print("Data is empty")
-				callback(nil, httpResponse?.statusCode, nil)
-				return
-			}
-			
-			do{
-				let json = try JSON.init(data: data)
-				callback(json, httpResponse?.statusCode, nil)
-			} catch is SwiftyJSONError {
-				callback(nil, httpResponse?.statusCode, DALIError.General.InvalidJSON(text: String(data: data, encoding: .utf8), jsonError: SwiftyJSONError.invalidJSON as NSError))
-			} catch {
-				callback(nil, nil, nil)
-			}
-		}
-		
-		task.resume()
+        let promise = Promise<Response>()
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+			let response = Response(response: response, data: data, error: error)
+            promise.completeWithSuccess(response)
+		}.resume()
+        
+        return promise.future
 	}
 	
-	static func delete(url: String, json: JSON, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) throws {
-		let data = try json.rawData()
-		
-		ServerCommunicator.delete(url: url, data: data, callback: callback)
+	static func delete(url: String, json: JSON) throws -> Future<Response> {
+		return ServerCommunicator.delete(url: url, data: try json.rawData())
 	}
 	
-	static func delete(url: String, data: Data, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
+	static func delete(url: String, data: Data) -> Future<Response> {
 		var request = URLRequest(url: URL(string: url)!)
 		request.httpMethod = "DELETE"
 		request.httpBody = data
@@ -133,48 +79,15 @@ class ServerCommunicator {
 		}else if let apiKey = config.apiKey {
 			request.addValue(apiKey, forHTTPHeaderField: "apiKey")
 		}
+        
+        let promise = Promise<Response>()
 		
-		let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-			let httpResponse = response as? HTTPURLResponse
-			
-			if let httpResponse = httpResponse, httpResponse.statusCode != 200 || error != nil {
-				print("Didn't get 200: \(httpResponse.statusCode)")
-				
-				var err: DALIError.General = DALIError.General.UnknownError(error: error, text: data == nil ? nil : String(data: data!, encoding: .utf8), code: httpResponse.statusCode)
-				
-				switch httpResponse.statusCode {
-				case 401:
-					err = DALIError.General.Unauthorized
-					break
-				case 403:
-					fatalError("DALIapi: Provided API Key invalid!")
-					break
-				case 422:
-					err = DALIError.General.Unprocessable
-					break
-				case 400:
-					err = DALIError.General.BadRequest
-					break
-				case 404:
-					err = DALIError.General.Unfound
-					break
-				default:
-					break
-				}
-				
-				callback(false, err)
-				return
-			}else if let error = error {
-				print(error)
-				
-				callback(false, DALIError.General.UnknownError(error: error, text: data == nil ? nil : String(data: data!, encoding: .utf8), code: -1))
-				return
-			}
-			
-			callback(true, nil)
-		}
-		
-		task.resume()
+		URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let response = Response(response: response, data: data, error: error)
+            promise.completeWithSuccess(response)
+		}.resume()
+        
+        return promise.future
 	}
 	
 	/**
@@ -187,10 +100,8 @@ class ServerCommunicator {
 	- parameter data: The JSON data sent back
 	- parameter error: The error encountered (if any)
 	*/
-	static func post(url: String, json: JSON, callback: @escaping (_ success: Bool, _ data: JSON?, _ error: DALIError.General?) -> Void) throws {
-		let data = try json.rawData()
-		
-		ServerCommunicator.post(url: url, data: data, callback: callback)
+    static func post(url: String, json: JSON) throws -> Future<Response> {
+		return ServerCommunicator.post(url: url, data: try json.rawData())
 	}
 	
 	/**
@@ -203,75 +114,93 @@ class ServerCommunicator {
 	- parameter data: The JSON data sent back
 	- parameter error: The error encountered (if any)
 	*/
-	static func post(url: String, data: Data?, callback: @escaping (_ success: Bool, _ data: JSON?, _ error: DALIError.General?) -> Void) {
+	static func post(url: String, data: Data?) -> Future<Response> {
 		var request = URLRequest(url: URL(string: url)!)
 		request.httpMethod = "POST"
 		request.httpBody = data
 		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 		request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
 		if let token = config.token {
 			request.addValue(token, forHTTPHeaderField: "authorization")
 		}else if let apiKey = config.apiKey {
 			request.addValue(apiKey, forHTTPHeaderField: "apiKey")
 		}
 		
+		let promise = Promise<Response>()
 		
-		
-		// Set up the task
-		let task = URLSession.shared.dataTask(with: request) { data, response, error in
-			let httpResponse = response as? HTTPURLResponse
-			
-			if let httpResponse = httpResponse, httpResponse.statusCode != 200 || error != nil {
-				print("Didn't get 200: \(httpResponse.statusCode)")
-				
-				var err: DALIError.General = DALIError.General.UnknownError(error: error, text: data == nil ? nil : String(data: data!, encoding: .utf8), code: httpResponse.statusCode)
-				
-				switch httpResponse.statusCode {
-				case 401:
-					err = DALIError.General.Unauthorized
-					break
-				case 403:
-					fatalError("DALIapi: Provided API Key invalid!")
-					break
-				case 422:
-					err = DALIError.General.Unprocessable
-					break
-				case 400:
-					err = DALIError.General.BadRequest
-					break
-				case 404:
-					err = DALIError.General.Unfound 
-					break
-				default:
-					break
-				}
-				
-				callback(false, nil, err)
-				return
-			}else if let error = error {
-				print(error)
-				
-				callback(false, nil, DALIError.General.UnknownError(error: error, text: data == nil ? nil : String(data: data!, encoding: .utf8), code: -1))
-				return
-			}
-			
-			guard let data = data else {
-				print("Data is empty")
-				callback(true, nil, nil)
-				return
-			}
-			
-			do {
-				let json = try JSON.init(data: data)
-				callback(true, json, nil)
-			}catch is SwiftyJSONError {
-				callback(true, nil, DALIError.General.InvalidJSON(text: String(data: data, encoding: .utf8), jsonError: SwiftyJSONError.invalidJSON as NSError))
-			}catch {
-				callback(true, nil, nil)
-			}
-		}
-		
-		// And complete it
-		task.resume()
+		URLSession.shared.dataTask(with: request) { data, response, error in
+            let response = Response(response: response, data: data, error: error)
+            promise.completeWithSuccess(response)
+		}.resume()
+        
+        return promise.future
 	}
+    
+    struct Response {
+        let response: URLResponse?
+        let data: Data?
+        let error: Error?
+        
+        // MARK: - Computed variables
+        
+        var success: Bool {
+            return code == 200
+        }
+        var code: Int? {
+            return (response as? HTTPURLResponse)?.statusCode
+        }
+        
+        var jsonError: SwiftyJSONError? {
+            guard let data = data else {
+                return SwiftyJSONError.notExist
+            }
+            
+            do {
+                _ = try JSON.init(data: data)
+            } catch is SwiftyJSONError {
+                return error as? SwiftyJSONError
+            } catch {}
+            return nil
+        }
+        
+        var assertedError: Error {
+            if error != nil {
+                return error!
+            } else if generalError != nil {
+                return generalError!
+            } else if jsonError != nil {
+                return jsonError!
+            }
+            return unknownError
+        }
+        
+        var json: JSON? {
+            guard let data = data else {
+                return nil
+            }
+            return try? JSON.init(data: data)
+        }
+        
+        var generalError: DALIError.General? {
+            guard let code = code else {
+                return nil
+            }
+            
+            switch code {
+            case 200: return nil
+            case 401: return DALIError.General.Unauthorized
+            case 403: fatalError("DALIapi: Provided API Key invalid!")
+            case 422: return DALIError.General.Unprocessable
+            case 400: return DALIError.General.BadRequest
+            case 404: return DALIError.General.Unfound
+            default: return nil
+            }
+        }
+        
+        var unknownError: DALIError.General {
+            let text = data == nil ? nil : String(data: data!, encoding: .utf8)
+            return DALIError.General.UnknownError(error: error, text: text, code: code)
+        }
+    }
 }

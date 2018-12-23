@@ -10,6 +10,7 @@ import Foundation
 import SwiftyJSON
 import SocketIO
 import EmitterKit
+import FutureKit
 
 /**
 A DALI event
@@ -248,21 +249,17 @@ public class DALIEvent {
 		- parameter haveVoted: Flag expressing if the user and device has voted already (default false)
 		- parameter error: The error encountered, if any
 		*/
-		public func haveVoted(callback: @escaping (_ haveVoted: Bool, _ error: DALIError.General?) -> Void) {
+		public func haveVoted() -> Future<Bool> {
 			guard let id = self.id else {
-				DispatchQueue.main.async { 
-					callback(false, DALIError.General.BadRequest)
-				}
-				return
+                return Future(fail: DALIError.General.BadRequest)
 			}
 			
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)/hasVoted") { (data, code, error) in
-				if let dict = data?.dictionary, let haveVoted = dict["voted"]?.bool {
-					callback(haveVoted, nil)
-				}else{
-					callback(false, error)
-				}
-			}
+            return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)/hasVoted").onSuccess { (response) -> Bool in
+                guard let dict = response.json?.dictionary, let haveVoted = dict["voted"]?.bool else {
+                    throw response.assertedError
+                }
+                return haveVoted
+            }
 		}
 		
 		/**
@@ -271,42 +268,21 @@ public class DALIEvent {
 		- parameters event: Event to get the results of
 		- parameters callback: Function to be called when done
 		*/
-		public func getResults(callback: @escaping ([Option]?, DALIError.General?) -> Void) {
+		public func getResults() -> Future<[Option]> {
 			guard let id = self.id else {
-				DispatchQueue.main.async {
-					callback(nil, DALIError.General.BadRequest)
-				}
-				return
+				return Future(fail: DALIError.General.BadRequest)
 			}
 			
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)/results") { (object, code, error) in
-				if let error = error {
-					DispatchQueue.main.async {
-						callback(nil, error)
-					}
-					return
-				}
-				
-				guard let array = object?.array else {
-					DispatchQueue.main.async {
-						callback(nil, DALIError.General.UnexpectedResponse)
-					}
-					return
-				}
-				
-				var outputArr: [Option] = []
-				for optionObj in array {
-					if let option = Option.parse(object: optionObj) {
-						outputArr.append(option)
-					}
-				}
-				
-				self.options = outputArr
-				
-				DispatchQueue.main.async {
-					callback(outputArr, nil)
-				}
-			}
+            return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)/results").onSuccess { (response) -> [Option] in
+                guard let array = response.json?.array else {
+                    throw response.assertedError
+                }
+                
+                self.options = array.compactMap({ (json) -> Option? in
+                    return Option.parse(object: json)
+                })
+                return self.options!
+            }
 		}
 		
 		/**
@@ -315,47 +291,29 @@ public class DALIEvent {
 		- parameter event: Event to get the options for
 		- parameters callback: Function to be called when done
 		*/
-		public func getOptions(callback: @escaping ([Option]?, DALIError.General?) -> Void) {
+        public func getOptions() -> Future<[Option]> {
+            let promise = Promise<[Option]>()
 			if let options = self.options {
-				DispatchQueue.main.async {
-					callback(options, nil)
-				}
+				promise.completeWithSuccess(options)
 			}
 			
 			guard let id = self.id else {
-				DispatchQueue.main.async {
-					callback(nil, DALIError.General.BadRequest)
-				}
-				return
+				return promise.futureWithFailure(error: DALIError.General.BadRequest)
 			}
 			
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)") { (object, code, error) in
-				if let error = error {
-					DispatchQueue.main.async {
-						callback(nil, error)
-					}
-					return
-				}
-				
-				guard let array = object?.array else {
-					DispatchQueue.main.async {
-						callback(nil, DALIError.General.UnexpectedResponse)
-					}
-					return
-				}
-				
-				var outputArr: [Option] = []
-				for optionObj in array {
-					if let option = Option.parse(object: optionObj) {
-						outputArr.append(option)
-					}
-				}
-				self.options = outputArr
-				
-				DispatchQueue.main.async {
-					callback(outputArr, nil)
-				}
-			}
+           _ = ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)").onSuccess { (response) in
+                guard let array = response.json?.array else {
+                    promise.completeWithFail(response.assertedError)
+                    return
+                }
+                
+                self.options = array.compactMap({ (json) -> Option? in
+                    return Option.parse(object: json)
+                })
+                promise.completeWithSuccess(self.options!)
+            }
+            
+            return promise.future
 		}
 		
 		/**
@@ -364,7 +322,7 @@ public class DALIEvent {
 		- parameter options: The options to be submitted. If the voting event is ordered then they need to be in 1st, 2nd, 3rd, ..., nth choice order
 		- parameter callback: Function to be called when done
 		*/
-		public func submitVote(options: [Option], callback: @escaping DALIapi.SuccessCallback) {
+		public func submitVote(options: [Option]) -> Future<Void> {
 			var optionsData: [[String: Any]] = []
 			
 			for option in options {
@@ -379,22 +337,17 @@ public class DALIEvent {
 			}
 			
 			guard let id = self.id else {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.BadRequest)
-				}
-				return
+				return Future(fail: DALIError.General.BadRequest)
 			}
 			
 			do {
-				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)", json: JSON(optionsData), callback: { (success, data, error) in
-					DispatchQueue.main.async {
-						callback(success, error)
-					}
-				})
+                return try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/public/\(id)", json: JSON(optionsData)).onSuccess(block: { (response) in
+                    if !response.success {
+                        throw response.assertedError
+                    }
+                })
 			}catch {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.InvalidJSON(text: optionsData.description, jsonError: NSError(domain: "some", code: SwiftyJSONError.invalidJSON.rawValue, userInfo: nil)))
-				}
+				return Future(fail: error)
 			}
 		}
 		
@@ -409,41 +362,26 @@ public class DALIEvent {
 		- parameter options: The options to save
 		- parameter callback: Function called when done
 		*/
-		public func saveResults(options: [Option], callback: @escaping DALIapi.SuccessCallback) {
-			if !(DALIapi.config.member?.isAdmin ?? false) {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.Unauthorized)
-				}
-				return
+		public func saveResults(options: [Option]) -> Future<Void> {
+			guard DALIapi.config.member?.isAdmin ?? false else {
+				return Future(fail: DALIError.General.Unauthorized)
 			}
+            guard let id = self.id else {
+                return Future(fail: DALIError.General.BadRequest)
+            }
 			
-			var optionsData = [[String: Any]]()
-			for option in options {
-				let dict: [String : Any] = [
-					"id": option.id,
-					"awards": option.awards ?? []
-				]
-				
-				optionsData.append(dict)
-			}
-			
-			guard let id = self.id else {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.BadRequest)
-				}
-				return
-			}
+            let optionsData = options.map { (option) -> [String:Any] in
+                return ["id": option.id, "awards": option.awards ?? []]
+            }
 			
 			do {
-				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/results", json: JSON(optionsData)) { (success, response, error) in
-					DispatchQueue.main.async {
-						callback(success, error)
-					}
-				}
+                return try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/results", json: JSON(optionsData)).onSuccess(block: { (response) in
+                    if !response.success {
+                        throw response.assertedError
+                    }
+                })
 			} catch {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.InvalidJSON(text: optionsData.description, jsonError: SwiftyJSONError.invalidJSON as NSError))
-				}
+				return Future(fail: error)
 			}
 		}
 		
@@ -457,48 +395,25 @@ public class DALIEvent {
 		- parameter results: The results requested
 		- parameter error: Error encountered (if any)
 		*/
-		public func getUnreleasedResults(callback: @escaping (_ results: [Option]?, _ error: DALIError.General?) -> Void) {
-			if !(DALIapi.config.member?.isAdmin ?? false) {
-				DispatchQueue.main.async {
-					callback(nil, DALIError.General.Unauthorized)
-				}
-				return
+		public func getUnreleasedResults() -> Future<[Option]> {
+            guard DALIapi.config.member?.isAdmin ?? false else {
+				return Future(fail: DALIError.General.Unauthorized)
 			}
 			
 			guard let id = self.id else {
-				DispatchQueue.main.async {
-					callback(nil, DALIError.General.BadRequest)
-				}
-				return
+				return Future(fail: DALIError.General.BadRequest)
 			}
 			
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)") { (object, code, error) in
-				if let error = error {
-					DispatchQueue.main.async {
-						callback(nil, error)
-					}
-					return
-				}
-				
-				guard let array = object?.array else {
-					DispatchQueue.main.async {
-						callback(nil, DALIError.General.UnexpectedResponse)
-					}
-					return
-				}
-				
-				var outputArr: [Option] = []
-				for optionObj in array {
-					if let option = Option.parse(object: optionObj) {
-						outputArr.append(option)
-					}
-				}
-				self.options = outputArr
-				
-				DispatchQueue.main.async {
-					callback(outputArr, nil)
-				}
-			}
+            return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)").onSuccess { (response) -> [Option] in
+                guard let array = response.json?.array else {
+                    throw response.assertedError
+                }
+                
+                self.options = array.compactMap({ (json) -> Option? in
+                    return Option.parse(object: json)
+                })
+                return self.options!
+            }
 		}
 		
 		/**
@@ -508,30 +423,23 @@ public class DALIEvent {
 		
 		- parameter callback: Function called when done
 		*/
-		public func release(callback: @escaping DALIapi.SuccessCallback) {
+		public func release() -> Future<Void> {
 			if !(DALIapi.config.member?.isAdmin ?? false) {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.Unauthorized)
-				}
-				return
+				return Future(fail: DALIError.General.Unauthorized)
 			}
 			
 			guard let id = self.id else {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.BadRequest)
-				}
-				return
+				return Future(fail: DALIError.General.BadRequest)
 			}
 			
-			ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)", data: "".data(using: .utf8)!) { (success, data, error) in
-				if (success) {
-					self.resultsReleased = true
-					self.dict?["votingResultsReleased"] = JSON(true)
-				}
-				DispatchQueue.main.async {
-					callback(success, error)
-				}
-			}
+            return ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)", data: "".data(using: .utf8)!).onSuccess { (response) in
+                if response.success {
+                    self.resultsReleased = true
+                    self.dict?["votingResultsReleased"] = JSON(true)
+                } else {
+                    throw response.assertedError
+                }
+            }
 		}
 		
 		/**
@@ -542,43 +450,28 @@ public class DALIEvent {
 		- parameter option: The option to be added
 		- parameter callback: Function called when done
 		*/
-		public func addOption(option: String, callback: @escaping DALIapi.SuccessCallback) {
-			if !(DALIapi.config.member?.isAdmin ?? false) {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.Unauthorized)
-				}
-				return
+		public func addOption(option: String) -> Future<Void> {
+			guard DALIapi.config.member?.isAdmin ?? false else {
+				return Future(fail: DALIError.General.Unauthorized)
 			}
+            guard let id = self.id else {
+                return Future(fail: DALIError.General.BadRequest)
+            }
 			
 			let dict: [String: String] = [
 				"option": option
 			]
 			
-			guard let id = self.id else {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.BadRequest)
-				}
-				return
-			}
-			
 			do {
-				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/options", json: JSON(dict), callback: { (success, data, error) in
-					if success, let data = data, let option = Option.parse(object: data) {
-						if self.options == nil {
-							self.options = []
-						}
-						
-						self.options!.append(option)
-					}
-					
-					DispatchQueue.main.async {
-						callback(success, error)
-					}
-				})
+                return try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/options", json: JSON(dict)).onSuccess(block: { (response) in
+                    guard let data = response.json, let option = Option.parse(object: data) else {
+                        throw response.assertedError
+                    }
+                    self.options = self.options ?? []
+                    self.options!.append(option)
+                })
 			} catch {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: SwiftyJSONError.invalidJSON as NSError))
-				}
+                return Future(fail: error)
 			}
 		}
 		
@@ -590,37 +483,30 @@ public class DALIEvent {
 		- parameter option: The option to remove
 		- parameter callback: Function called when done
 		*/
-		public func removeOption(option: Option, callback: @escaping DALIapi.SuccessCallback) {
-			if !(DALIapi.config.member?.isAdmin ?? false) {
-				DispatchQueue.main.async {
-					callback(false, DALIError.General.Unauthorized)
-				}
-				return
+		public func removeOption(option: Option) -> Future<Void> {
+			guard DALIapi.config.member?.isAdmin ?? false else {
+				return Future(fail: DALIError.General.Unauthorized)
 			}
+            guard let id = self.id else {
+                return Future(fail: DALIError.General.BadRequest)
+            }
 			
 			let dict: [String: String] = [
 				"option": option.id
 			]
 			
-			guard let id = self.id else {
-				callback(false, DALIError.General.BadRequest)
-				return
-			}
-			
 			do {
-				try ServerCommunicator.delete(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/options", json: JSON(dict), callback: { (success, error) in
-					if success {
-						if let index = self.options?.index(where: { (option2) -> Bool in return option2.id == option.id }) {
-							self.options?.remove(at: index)
-						}
-					}
-					
-					DispatchQueue.main.async {
-						callback(success, error)
-					}
-				})
+                return try ServerCommunicator.delete(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/options", json: JSON(dict)).onSuccess(block: { (response) in
+                    if response.success {
+                        if let index = self.options?.firstIndex(where: { (option2) -> Bool in return option2.id == option.id }) {
+                            self.options?.remove(at: index)
+                        }
+                    } else {
+                        throw response.assertedError
+                    }
+                })
 			} catch {
-				callback(false, DALIError.General.InvalidJSON(text: dict.description, jsonError: SwiftyJSONError.invalidJSON as NSError))
+				return Future(fail: error)
 			}
 		}
 		
@@ -634,62 +520,28 @@ public class DALIEvent {
 		- parameter event: Event found (if any)
 		- parameter error: Error encountered (if any)
 		*/
-		public static func getCurrent(callback: @escaping (_ events: [VotingEvent], _ error: DALIError.General?) -> Void) {
+		public static func getCurrent() -> Future<[VotingEvent]> {
             
             // TODO: Observe current and released events
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/current") { (object, code, error) in
-				if let error = error {
-					DispatchQueue.main.async {
-						callback([], error)
-					}
-					return
-				}
-				
-				guard let list = object?.array else {
-					DispatchQueue.main.async {
-						callback([], DALIError.General.Unfound)
-					}
-					return;
-				}
-				
-				var events = [VotingEvent]()
-				for item in list {
-					if let event = VotingEvent.parse(item) {
-						events.append(event)
-					}
-				}
-				
-				DispatchQueue.main.async {
-					callback(events, nil)
-				}
-			}
+            return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public/current").onSuccess { (response) -> [VotingEvent] in
+                guard let list = response.json?.array else {
+                    throw response.assertedError
+                }
+                
+                return list.compactMap({ (json) -> VotingEvent? in
+                    return VotingEvent.parse(json)
+                })
+            }
 		}
 		
-		private static func handleEventList(object: JSON?, code: Int?, error: DALIError.General?, callback: @escaping ([VotingEvent]?, DALIError.General?) -> Void) {
-			if let error = error {
-				DispatchQueue.main.async {
-					callback(nil, error)
-				}
-				return
-			}
-			
-			guard let eventObjects = object?.array else {
-				DispatchQueue.main.async {
-					callback(nil, DALIError.General.UnexpectedResponse)
-				}
-				return
-			}
-			
-			var outputArr = [VotingEvent]()
-			for object in eventObjects {
-				if let event = VotingEvent.parse(object) {
-					outputArr.append(event)
-				}
-			}
-			
-			DispatchQueue.main.async {
-				callback(outputArr, nil)
-			}
+        private static func handleEventList(response: ServerCommunicator.Response) throws -> [VotingEvent] {
+            guard let eventObjects = response.json?.array else {
+                throw response.assertedError
+            }
+            
+            return eventObjects.compactMap { (json) -> VotingEvent? in
+                VotingEvent.parse(json)
+            }
 		}
 		
 		/**
@@ -699,10 +551,10 @@ public class DALIEvent {
 		- parameter events: List of events retrieved
 		- parameter error: Error encountered (if any)
 		*/
-		public static func getReleasedEvents(callback: @escaping (_ events: [VotingEvent]?, _ error: DALIError.General?) -> Void) {
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public") { (object, code, error) in
-				handleEventList(object: object, code: code, error: error, callback: callback)
-			}
+		public static func getReleasedEvents() -> Future<[VotingEvent]> {
+            return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/public").onSuccess { (response) -> [VotingEvent] in
+                return try handleEventList(response: response)
+            }
 		}
 		
 		/**
@@ -714,17 +566,14 @@ public class DALIEvent {
 		- parameter events: List of events retrieved
 		- parameter error: Error encountered (if any)
 		*/
-		public static func get(callback: @escaping (_ events: [VotingEvent]?, _ error: DALIError.General?) -> Void) {
-			if !(DALIapi.config.member?.isAdmin ?? false) {
-				DispatchQueue.main.async {
-					callback(nil, DALIError.General.Unauthorized)
-				}
-				return
+		public static func get() -> Future<[VotingEvent]> {
+			guard DALIapi.config.member?.isAdmin ?? false else {
+				return Future(fail: DALIError.General.Unauthorized)
 			}
 			
-			ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/admin") { (object, code, error) in
-				handleEventList(object: object, code: code, error: error, callback: callback)
-			}
+            return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/voting/admin").onSuccess { (response) -> [VotingEvent] in
+                return try handleEventList(response: response)
+            }
 		}
         
         // MARK: Static Observation Methods
@@ -795,16 +644,20 @@ public class DALIEvent {
 	
 		- throws: `DALIError.Create` error describing some error encountered
 	 */
-	public func create(callback: @escaping (Bool, DALIError.General?) -> Void) throws {
-		if self.id != nil {
-			throw DALIError.Create.AlreadyCreated
+	public func create() -> Future<Void> {
+		guard self.id == nil else {
+			return Future(fail: DALIError.Create.AlreadyCreated)
 		}
 		
-		try ServerCommunicator.post(url: DALIapi.config.serverURL + "/api/events", json: self.json()) { success, json, error in
-			DispatchQueue.main.async {
-				callback(success, error)
-			}
-		}
+        do {
+            return try ServerCommunicator.post(url: DALIapi.config.serverURL + "/api/events", json: self.json()).onSuccess(block: { (response) in
+                if !response.success {
+                    throw response.assertedError
+                }
+            })
+        } catch {
+            return Future(fail: error)
+        }
 	}
 	
 	// MARK: JSON Parsing and Constructing Methods
@@ -891,33 +744,16 @@ public class DALIEvent {
 	- parameter events: The events returned by the API
 	- parameter error: The error encountered (if any)
 	 */
-	public static func getAll(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) {
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events") { (json, code, error) in
-			if let error = error {
-				DispatchQueue.main.async {
-					callback(nil, error)
-				}
-				return
-			}
-			
-			guard let array = json?.array else {
-				DispatchQueue.main.async {
-					callback(nil, DALIError.General.UnexpectedResponse)
-				}
-				return
-			}
-			
-			var outputArr = [DALIEvent]()
-			for object in array {
-				if let event = DALIEvent.parse(object) {
-					outputArr.append(event)
-				}
-			}
-			
-			DispatchQueue.main.async {
-				callback(outputArr, nil)
-			}
-		}
+	public static func getAll() -> Future<[DALIEvent]> {
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events").onSuccess { (response) -> [DALIEvent] in
+            guard let array = response.json?.array else {
+                throw DALIError.General.UnexpectedResponse
+            }
+            
+            return array.compactMap({ (json) -> DALIEvent? in
+                return DALIEvent.parse(json)
+            })
+        }
 	}
 	
 	/// The socket used to get event updates
@@ -966,12 +802,16 @@ public class DALIEvent {
 	- parameter events: The updated events
 	- parameter error: The error, if any, encountered
 	*/
-	public static func observeAll(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) -> Observation {
+	public static func observeAll(block: @escaping (_ events: [DALIEvent]?, _ error: Error?) -> Void) -> Observation {
 		assertUpdatesSocket()
-		updatesCallbacks["allEvents"] = callback
+		updatesCallbacks["allEvents"] = block
 		
-		getAll(callback: callback)
-		
+        getAll().onSuccess { (events) in
+            block(events, nil)
+        }.onFail { (error) in
+            block(nil, error)
+        }
+        
 		return Observation(stop: {
 			removeCallback(forKey: "allEvents")
 		}, id: "allEventsOberver")
@@ -984,11 +824,15 @@ public class DALIEvent {
 	- parameter events: The events
 	- parameter error: The error, if any, encountered
 	*/
-	public static func observeUpcoming(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) -> Observation {
+	public static func observeUpcoming(callback: @escaping (_ events: [DALIEvent]?, _ error: Error?) -> Void) -> Observation {
 		assertUpdatesSocket()
 		updatesCallbacks["weekEvents"] = callback
 		
-		getUpcoming(callback: callback)
+        getUpcoming().onSuccess { (events) in
+            callback(events, nil)
+        }.onFail { (error) in
+            callback(nil, error)
+        }
 		
 		return Observation(stop: {
 			removeCallback(forKey: "weekEvents")
@@ -1015,11 +859,15 @@ public class DALIEvent {
 	- parameter events: The updated events
 	- parameter error: The error, if any, encountered
 	*/
-	public static func observeFuture(includeHidden: Bool = false, callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) -> Observation {
+	public static func observeFuture(includeHidden: Bool = false, callback: @escaping (_ events: [DALIEvent]?, _ error: Error?) -> Void) -> Observation {
 		assertUpdatesSocket()
 		updatesCallbacks["futureEvents" + (includeHidden && (DALIapi.config.member?.isAdmin ?? false) ? "Hidden" : "")] = callback
 		
-		getFuture(includeHidden: includeHidden && (DALIapi.config.member?.isAdmin ?? false), callback: callback)
+        getFuture(includeHidden: includeHidden && (DALIapi.config.member?.isAdmin ?? false)).onSuccess { (events) in
+            callback(events, nil)
+        }.onFail { (error) in
+            callback(nil, error)
+        }
 		
 		return Observation(stop: {
 			removeCallback(forKey: "futureEvents" + (includeHidden && (DALIapi.config.member?.isAdmin ?? false) ? "Hidden" : ""))
@@ -1033,11 +881,15 @@ public class DALIEvent {
 	- parameter events: The events that have been updated
 	- parameter error: The error, if any, encountered
 	*/
-	public static func observePublicUpcoming(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) -> Observation {
+	public static func observePublicUpcoming(callback: @escaping (_ events: [DALIEvent]?, _ error: Error?) -> Void) -> Observation {
 		assertUpdatesSocket()
 		updatesCallbacks["publicEvents"] = callback
 		
-		getPublicUpcoming(callback: callback)
+        getPublicUpcoming().onSuccess { (events) in
+            callback(events, nil)
+        }.onFail { (error) in
+            callback(nil, error)
+        }
 		
 		return Observation(stop: {
 			removeCallback(forKey: "publicEvents")
@@ -1051,33 +903,15 @@ public class DALIEvent {
 	- parameter events: The events returned by the API
 	- parameter error: The error encountered (if any)
 	*/
-	public static func getUpcoming(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) {
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/week") { (json, code, error) in
-			if let error = error {
-				DispatchQueue.main.async {
-					callback(nil, error)
-				}
-				return
-			}
-			
-			guard let array = json?.array else {
-				DispatchQueue.main.async {
-					callback(nil, DALIError.General.UnexpectedResponse)
-				}
-				return
-			}
-			
-			var outputArr = [DALIEvent]()
-			for object in array {
-				if let event = DALIEvent.parse(object) {
-					outputArr.append(event)
-				}
-			}
-			
-			DispatchQueue.main.async {
-				callback(outputArr, nil)
-			}
-		}
+	public static func getUpcoming() -> Future<[DALIEvent]> {
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/week").onSuccess { (response) -> [DALIEvent] in
+            guard let array = response.json?.array else {
+                throw response.assertedError
+            }
+            return array.compactMap({ (json) -> DALIEvent? in
+                return DALIEvent.parse(json)
+            })
+        }
 	}
 	
 	/**
@@ -1088,33 +922,15 @@ public class DALIEvent {
 	- parameter events: The events returned by the API
 	- parameter error: The error encountered (if any)
 	*/
-	public static func getPublicUpcoming(callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) {
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/public/week") { (json, code, error) in
-			if let error = error {
-				DispatchQueue.main.async {
-					callback(nil, error)
-				}
-				return
-			}
-			
-			guard let array = json?.array else {
-				DispatchQueue.main.async {
-					callback(nil, DALIError.General.UnexpectedResponse)
-				}
-				return
-			}
-			
-			var outputArr = [DALIEvent]()
-			for object in array {
-				if let event = DALIEvent.parse(object) {
-					outputArr.append(event)
-				}
-			}
-			
-			DispatchQueue.main.async {
-				callback(outputArr, nil)
-			}
-		}
+	public static func getPublicUpcoming() -> Future<[DALIEvent]> {
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/public/week").onSuccess { (response) -> [DALIEvent] in
+            guard let array = response.json?.array else {
+                throw response.assertedError
+            }
+            return array.compactMap({ (json) -> DALIEvent? in
+                return DALIEvent.parse(json)
+            })
+        }
 	}
 	
 	/**
@@ -1125,38 +941,20 @@ public class DALIEvent {
 	- parameter events: The events returned by the API
 	- parameter error: The error encountered (if any)
 	*/
-	public static func getFuture(includeHidden: Bool = false, callback: @escaping (_ events: [DALIEvent]?, _ error: DALIError.General?) -> Void) {
-		var add = ""
+	public static func getFuture(includeHidden: Bool = false) -> Future<[DALIEvent]> {
+        var params = [String:String]()
 		if includeHidden && (DALIapi.config.member?.isAdmin ?? false) {
-			add = "?hidden=true"
+			params["hidden"] = "true"
 		}
 		
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/future" + add) { (json, code, error) in
-			if let error = error {
-				DispatchQueue.main.async {
-					callback(nil, error)
-				}
-				return
-			}
-			
-			guard let array = json?.array else {
-				DispatchQueue.main.async {
-					callback(nil, DALIError.General.UnexpectedResponse)
-				}
-				return
-			}
-			
-			var outputArr = [DALIEvent]()
-			for object in array {
-				if let event = DALIEvent.parse(object) {
-					outputArr.append(event)
-				}
-			}
-			
-			DispatchQueue.main.async {
-				callback(outputArr, nil)
-			}
-		}
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/future", params: params).onSuccess { (response) -> [DALIEvent] in
+            guard let array = response.json?.array else {
+                throw response.assertedError
+            }
+            return array.compactMap({ (json) -> DALIEvent? in
+                return DALIEvent.parse(json)
+            })
+        }
 	}
 	
 	// MARK: Voting Conversion Methods
@@ -1173,33 +971,27 @@ public class DALIEvent {
 	- parameter event: The new VotingEvent, if it was successful
 	- parameter error: The error encountered if it was not successful
 	*/
-	public func enableVoting(numSelected: Int, ordered: Bool, callback: @escaping (_ success: Bool, _ event: VotingEvent?, _ error: DALIError.General?) -> Void) {
-		if !(DALIapi.config.member?.isAdmin ?? false) {
-			DispatchQueue.main.async {
-				callback(false, nil, DALIError.General.Unauthorized)
-			}
-			return
-		}
+	public func enableVoting(numSelected: Int, ordered: Bool) -> Future<VotingEvent> {
+        guard DALIapi.config.member?.isAdmin ?? false else {
+			return Future(fail: DALIError.General.Unauthorized)
+        }
+        guard let id = self.id else {
+            return Future(fail: DALIError.General.BadRequest)
+        }
 		
 		let config = VotingEvent.Config(numSelected: numSelected, ordered: ordered)
-		
-		guard let id = self.id else {
-			DispatchQueue.main.async {
-				callback(false, nil, DALIError.General.BadRequest)
-			}
-			return
-		}
+        let url = "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/enable"
 		
 		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/voting/admin/\(id)/enable", json: config.json()) { (success, data, error) in
-				DispatchQueue.main.async {
-					callback(success, success ? VotingEvent(event: self, votingConfig: config, options: nil, resultsReleased: false) : nil, error)
-				}
-			}
+            return try ServerCommunicator.post(url: url, json: config.json()).onSuccess(block: { (response) -> VotingEvent in
+                if response.success {
+                    return VotingEvent(event: self, votingConfig: config, options: nil, resultsReleased: false)
+                } else {
+                    throw response.assertedError
+                }
+            })
 		} catch {
-			DispatchQueue.main.async {
-				callback(false, nil, DALIError.General.InvalidJSON(text: config.json().string!, jsonError: SwiftyJSONError.invalidJSON as NSError))
-			}
+			return Future(fail: error)
 		}
 	}
 	
@@ -1214,20 +1006,18 @@ public class DALIEvent {
 	- parameter success: The operation was a success
 	- parameter error: The error, if any, encountered
 	*/
-	public static func checkIn(major: Int, minor: Int, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
+	public static func checkIn(major: Int, minor: Int) -> Future<Void> {
 		DALIapi.assertUser(funcName: "checkIn")
 		let data = ["major": major, "minor": minor]
 		
 		do {
-			try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/checkin", json: JSON(data)) { (success, json, error) in
-				DispatchQueue.main.async {
-					callback(success, error)
-				}
-			}
+            return try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/checkin", json: JSON(data)).onSuccess(block: { (response) in
+                if !response.success {
+                    throw response.assertedError
+                }
+            })
 		} catch {
-			DispatchQueue.main.async {
-				callback(false, DALIError.General.InvalidJSON(text: data.description, jsonError: SwiftyJSONError.invalidJSON as NSError))
-			}
+			return Future(fail: error)
 		}
 	}
 	
@@ -1240,27 +1030,21 @@ public class DALIEvent {
 	- parameter minor: The minor value of the beacon
 	- parameter error: The error, if any, encountered
 	*/
-	public func enableCheckin(callback: @escaping (_ success: Bool, _ major: Int?, _ minor: Int?, _ error: DALIError.General?) -> Void) {
+    public func enableCheckin() -> Future<(major: Int?, minor: Int?)> {
 		guard let id = self.id else {
-			DispatchQueue.main.async {
-				callback(false, nil, nil, DALIError.General.BadRequest)
-			}
-			return
+			return Future(fail: DALIError.General.BadRequest)
 		}
 		
-		ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/\(id)/checkin", data: "".data(using: .utf8)!) { (success, json, error) in
-			var major: Int?
-			var minor: Int?
-			
-			if let dict = json?.dictionary {
-				major = dict["major"]?.int
-				minor = dict["minor"]?.int
-			}
-			
-			DispatchQueue.main.async {
-				callback(success, major, minor, error)
-			}
-		}
+        return ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/events/\(id)/checkin", data: "".data(using: .utf8)!).onSuccess { (response) -> (Int?, Int?) in
+            if !response.success {
+                throw response.assertedError
+            }
+            
+            let dict = response.json?.dictionary
+            let major: Int? = dict?["major"]?.int
+            let minor: Int? = dict?["minor"]?.int
+            return (major, minor)
+        }
 	}
 	
 	/**
@@ -1270,28 +1054,20 @@ public class DALIEvent {
 	- parameter members: The members who have been checked in to the event
 	- parameter error: The error, if any, encountered
 	*/
-	public func getMembersCheckedIn(callback: @escaping (_ members: [DALIMember], _ error: DALIError.General?) -> Void) {
+    public func getMembersCheckedIn() -> Future<[DALIMember]> {
 		guard let id = self.id else {
-			DispatchQueue.main.async {
-				callback([], DALIError.General.BadRequest)
-			}
-			return
+			return Future(fail: DALIError.General.BadRequest)
 		}
 		
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/\(id)/checkin") { (data, code, error) in
-			var members: [DALIMember] = []
-			if let array = data?.array {
-				for memberObj in array {
-					if let member = DALIMember(json:memberObj) {
-						members.append(member)
-					}
-				}
-			}
-			
-			DispatchQueue.main.async {
-				callback(members, error)
-			}
-		}
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/events/\(id)/checkin").onSuccess { (response) -> [DALIMember] in
+            guard let array = response.json?.array else {
+                throw response.assertedError
+            }
+            
+            return array.compactMap({ (json) -> DALIMember? in
+                return DALIMember(json: json)
+            })
+        }
 	}
 	
 	internal var checkinSocket: SocketIOClient?

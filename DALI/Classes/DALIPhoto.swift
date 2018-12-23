@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FutureKit
 
 /**
 Photo class for getting a list of all photos from the API
@@ -19,21 +20,15 @@ public class DALIPhoto {
 	- parameter photos: The photos that were retrieved
 	- parameter error: The error, if any, encountered
 	*/
-	public static func get(callback: @escaping (_ photos: [String], _ error: DALIError.General?) -> Void) {
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/photos") { (data, code, error) in
-			guard let array = data?.array else {
-				callback([], error)
-				return
-			}
-			
-			var photos = [String]()
-			for value in array {
-				if let photoURL = value.string {
-					photos.append(photoURL)
-				}
-			}
-		
-			callback(photos, error)
-		}
+	public static func get() -> Future<[String]> {
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/photos").onSuccess { (response) -> [String] in
+            guard let array = response.json?.array else {
+                throw response.assertedError
+            }
+            
+            return array.compactMap({ (value) -> String? in
+                return value.string
+            })
+        }
 	}
 }

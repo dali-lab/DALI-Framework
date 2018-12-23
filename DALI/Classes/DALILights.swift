@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import SocketIO
+import FutureKit
 
 /**
 A class for controlling the lights in the lab
@@ -118,20 +119,20 @@ public class DALILights {
 		- parameter success: Was successful
 		- parameter error: The error, if any, encountered
 		*/
-		public func set(scene: String, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
-			self.setValue(value: scene, callback: callback)
+		public func set(scene: String) -> Future<Void> {
+			return setValue(value: scene)
 		}
 		
 		/// Used to set the value of the lights. The API uses strings to idenitify actions to take on the lights
-		internal func setValue(value: String, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
+		internal func setValue(value: String) -> Future<Void> {
 			do {
-				try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/lights/\(name)", json: JSON(["value":value]), callback: { (success, data, error) in
-					DispatchQueue.main.async {
-						callback(success, error)
-					}
-				})
+                return try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/lights/\(name)", json: JSON(["value":value])).onSuccess(block: { (response) in
+                    if !response.success {
+                        throw response.assertedError
+                    }
+                })
 			} catch {
-				
+				return Future(fail: error)
 			}
 		}
 		
@@ -143,8 +144,8 @@ public class DALILights {
 		- parameter success: Was successful
 		- parameter error: The error, if any, encountered
 		*/
-		public func set(color: String, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
-			self.setValue(value: color, callback: callback)
+		public func set(color: String) -> Future<Void> {
+			return setValue(value: color)
 		}
 		
 		/**
@@ -155,8 +156,8 @@ public class DALILights {
 		- parameter success: Was successful
 		- parameter error: The error, if any, encountered
 		*/
-		public func set(on: Bool, callback: @escaping (_ success: Bool, _ error: DALIError.General?) -> Void) {
-			self.setValue(value: on ? "on" : "off", callback: callback)
+		public func set(on: Bool) -> Future<Void> {
+			return setValue(value: on ? "on" : "off")
 		}
 		
 		/// All the groups
@@ -251,33 +252,33 @@ public class DALILights {
 			}
 		})
 		
-		ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/lights/config") { (data, code, error) in
-			guard let dict = data?.dictionary else {
-				return
-			}
-			
-			var map = [String:[String]]()
-			var colorMap = [String:[String:String]]()
-			
-			for entry in dict {
-				colorMap[entry.key] = [:]
-				if let value = entry.value.array {
-					var array: [String] = []
-					for scene in value {
-						if let sceneDict = scene.dictionary, let scene = sceneDict["name"]?.string {
-							
-							array.append(scene)
-							colorMap[entry.key]![scene] = sceneDict["averageColor"]?.string
-						}
-					}
-					
-					map[entry.key] = array
-				}
-			}
-			
-			DALILights.scenesAvgColorMap = colorMap
-			DALILights.scenesMap = map
-		}
+        _ = ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/lights/config").onSuccess { (response) in
+            guard let dict = response.json?.dictionary else {
+                return
+            }
+            
+            var map = [String:[String]]()
+            var colorMap = [String:[String:String]]()
+            
+            for entry in dict {
+                colorMap[entry.key] = [:]
+                if let value = entry.value.array {
+                    var array: [String] = []
+                    for scene in value {
+                        if let sceneDict = scene.dictionary, let scene = sceneDict["name"]?.string {
+                            
+                            array.append(scene)
+                            colorMap[entry.key]![scene] = sceneDict["averageColor"]?.string
+                        }
+                    }
+                    
+                    map[entry.key] = array
+                }
+            }
+            
+            DALILights.scenesAvgColorMap = colorMap
+            DALILights.scenesMap = map
+        }
 		
 		return Observation(stop: {
 			updatingSocket.disconnect()

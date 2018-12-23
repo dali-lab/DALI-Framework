@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EmitterKit
 
 extension Notification.Name {
 	enum Custom {
@@ -28,5 +29,28 @@ public struct Observation {
 	public let stop: () -> Void
 	/// An identifier of the observation
 	public let id: String
+    /// The listener this represents
+    internal let listener: Listener?
+    /// The block that will restart the observation (if possible)
+    internal let restartBlock: (() -> Bool)?
+    
+    init(stop: @escaping () -> Void, id: String = "", listener: Listener? = nil, restartBlock: (() -> Bool)? = nil) {
+        self.stop = stop
+        self.id = id
+        self.listener = listener
+        self.restartBlock = restartBlock
+    }
+    
+    /**
+     Restart the observation if possible
+     
+     - note: Not all classes that use Observation support restarting
+     
+     - returns: Whether restart was successful
+     */
+    func restart() -> Bool {
+        let result = restartBlock?()
+        return restartBlock != nil && result!
+    }
 }
 

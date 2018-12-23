@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 /// A set of errors used by the DALIapi framework to signal the user when there is an issue
 open class DALIError {
@@ -20,15 +21,19 @@ open class DALIError {
 		/// The object you are calling create on has already been created
 		case AlreadyCreated
 	}
+    
+    public enum Equipment: Error {
+        case AlreadyCheckedOut
+    }
 
 	/// Pertaining to the General opperations. Mostly used by the ServerCommunicator
 	public enum General: Error {
 		/// The request did not have proper authorization
 		case Unauthorized
 		/// A unknown error has occured. Information about the error is stored. Code will be -1 if there is no code
-		case UnknownError(error: Error?, text: String?, code: Int)
+		case UnknownError(error: Error?, text: String?, code: Int?)
 		/// Response was not JSON! Text version is stored
-		case InvalidJSON(text: String?, jsonError: NSError)
+		case InvalidJSON(error: SwiftyJSONError)
 		/// The data sent to the server was not able to be processed for whatever reason
 		case Unprocessable
 		/// The data sent was not valid for the route. Consult the documentation for the route you are using

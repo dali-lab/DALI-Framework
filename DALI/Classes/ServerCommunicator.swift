@@ -37,57 +37,19 @@ class ServerCommunicator {
     }
     
     static func get(url: String, params: [String:String]?) -> Future<Response> {
-        var urlComps = URLComponents(string: url)!
-        if let params = params {
-            urlComps.queryItems = params.keys.map({ (key) -> URLQueryItem in
-                return URLQueryItem(name: key, value: params[key])
-            })
-        }
-        var request = URLRequest(url: urlComps.url!)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        if let token = config.token {
-            request.addValue(token, forHTTPHeaderField: "authorization")
-        }else if let apiKey = config.apiKey {
-            request.addValue(apiKey, forHTTPHeaderField: "apiKey")
-        }
-        
-        let promise = Promise<Response>()
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-			let response = Response(response: response, data: data, error: error)
-            promise.completeWithSuccess(response)
-		}.resume()
-        
-        return promise.future
+        return doDataRequest(url: url, httpMethod: "GET", params: params, data: nil)
 	}
 	
-	static func delete(url: String, json: JSON) throws -> Future<Response> {
-		return ServerCommunicator.delete(url: url, data: try json.rawData())
+	static func delete(url: String, json: JSON) -> Future<Response> {
+        do {
+            return delete(url: url, data: try json.rawData())
+        } catch {
+            return Future(fail: error)
+        }
 	}
 	
 	static func delete(url: String, data: Data) -> Future<Response> {
-		var request = URLRequest(url: URL(string: url)!)
-		request.httpMethod = "DELETE"
-		request.httpBody = data
-		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-		request.addValue("application/json", forHTTPHeaderField: "Accept")
-		if let token = config.token {
-			request.addValue(token, forHTTPHeaderField: "authorization")
-		}else if let apiKey = config.apiKey {
-			request.addValue(apiKey, forHTTPHeaderField: "apiKey")
-		}
-        
-        let promise = Promise<Response>()
-		
-		URLSession.shared.dataTask(with: request) { (data, response, error) in
-            let response = Response(response: response, data: data, error: error)
-            promise.completeWithSuccess(response)
-		}.resume()
-        
-        return promise.future
+		return doDataRequest(url: url, httpMethod: "DELETE", params: nil, data: data)
 	}
 	
 	/**
@@ -100,8 +62,12 @@ class ServerCommunicator {
 	- parameter data: The JSON data sent back
 	- parameter error: The error encountered (if any)
 	*/
-    static func post(url: String, json: JSON) throws -> Future<Response> {
-		return ServerCommunicator.post(url: url, data: try json.rawData())
+    static func post(url: String, json: JSON) -> Future<Response> {
+        do {
+            return post(url: url, data: try json.rawData())
+        } catch {
+            return Future(fail: error)
+        }
 	}
 	
 	/**
@@ -115,27 +81,50 @@ class ServerCommunicator {
 	- parameter error: The error encountered (if any)
 	*/
 	static func post(url: String, data: Data?) -> Future<Response> {
-		var request = URLRequest(url: URL(string: url)!)
-		request.httpMethod = "POST"
-		request.httpBody = data
-		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-		request.addValue("application/json", forHTTPHeaderField: "Accept")
+		return doDataRequest(url: url, httpMethod: "POST", params: nil, data: data)
+	}
+    
+    static func put(url: String, json: JSON) -> Future<Response> {
+        do {
+            return put(url: url, data: try json.rawData())
+        } catch {
+            return Future(fail: error)
+        }
+    }
+    
+    static func put(url: String, data: Data?) -> Future<Response> {
+        return doDataRequest(url: url, httpMethod: "PUT", params: nil, data: data)
+    }
+    
+    static func doDataRequest(url: String, httpMethod: String, params: [String:String]?, data: Data?) -> Future<Response> {
+        var urlComps = URLComponents(string: url)!
+        if let params = params {
+            urlComps.queryItems = params.keys.map({ (key) -> URLQueryItem in
+                return URLQueryItem(name: key, value: params[key])
+            })
+        }
         
-		if let token = config.token {
-			request.addValue(token, forHTTPHeaderField: "authorization")
-		}else if let apiKey = config.apiKey {
-			request.addValue(apiKey, forHTTPHeaderField: "apiKey")
-		}
-		
-		let promise = Promise<Response>()
-		
-		URLSession.shared.dataTask(with: request) { data, response, error in
+        var request = URLRequest(url: urlComps.url!)
+        request.httpMethod = httpMethod
+        request.httpBody = data
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        if let token = config.token {
+            request.addValue(token, forHTTPHeaderField: "authorization")
+        }else if let apiKey = config.apiKey {
+            request.addValue(apiKey, forHTTPHeaderField: "apiKey")
+        }
+        
+        let promise = Promise<Response>()
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
             let response = Response(response: response, data: data, error: error)
             promise.completeWithSuccess(response)
-		}.resume()
+            }.resume()
         
         return promise.future
-	}
+    }
     
     struct Response {
         let response: URLResponse?

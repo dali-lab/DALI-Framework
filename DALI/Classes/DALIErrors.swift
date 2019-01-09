@@ -24,6 +24,7 @@ open class DALIError {
     
     public enum Equipment: Error {
         case AlreadyCheckedOut
+        case NotCheckedOut
     }
 
 	/// Pertaining to the General opperations. Mostly used by the ServerCommunicator

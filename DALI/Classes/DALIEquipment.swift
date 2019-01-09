@@ -151,7 +151,8 @@ final public class DALIEquipment: DALIObject {
             return Future(fail: error)
         }
         
-        return ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)/checkout", data: data).onSuccess { (response) -> Future<CheckOutRecord> in
+        let url = "\(DALIapi.config.serverURL)/api/equipment/\(id)/checkout"
+        return ServerCommunicator.post(url: url, data: data).onSuccess { (response) -> Future<CheckOutRecord> in
             if let json = response.json, let checkOutRecord = CheckOutRecord(json: json) {
                 return Future(success: checkOutRecord)
             } else {
@@ -166,6 +167,32 @@ final public class DALIEquipment: DALIObject {
         }
     }
     
+    public func update(returnDate: Date) -> Future<CheckOutRecord> {
+        guard isCheckedOut else {
+            return Future<CheckOutRecord>(fail: DALIError.Equipment.AlreadyCheckedOut)
+        }
+        
+        let dict: [String:Any] = ["projectedEndDate" : DALIEvent.dateFormatter().string(from: returnDate)]
+        
+        let url = "\(DALIapi.config.serverURL)/api/equipment/\(id)/checkout"
+        return ServerCommunicator.put(url: url, json: JSON(dict)).onSuccess(block: { (response) -> Future<CheckOutRecord> in
+            if let json = response.json, let checkOutRecord = CheckOutRecord(json: json) {
+                return Future(success: checkOutRecord)
+            } else {
+                return self.reload().onSuccess(block: { (equipment) in
+                    if equipment.isCheckedOut {
+                        throw DALIError.General.UnexpectedResponse
+                    } else {
+                        throw DALIError.Equipment.NotCheckedOut
+                    }
+                })
+            }
+        })
+    }
+    
+    /**
+     Return a peice of equipment
+     */
     public func returnEquipment() -> Future<DALIEquipment> {
         return ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)/return", data: nil).onSuccess(block: { (response) -> Future<DALIEquipment> in
             if !response.success {

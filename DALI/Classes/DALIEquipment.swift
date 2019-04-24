@@ -14,18 +14,34 @@ import EmitterKit
 /**
  Singular equipment object describing one of the items DALI has available for sign out
  */
-final public class DALIEquipment: DALIObject {
+final public class DALIEquipment: DALIObject, Hashable {
     /// Identifier for this equipment
     public let id: String
     /// Name of the device
     public var name: String
     /// Password, if any
     public var password: String?
+    /// The name of the icon
+    public var iconName: String?
+    /// The make of the device
+    public var make: String?
+    /// Model of the device
+    public var model: String?
+    /// Serial number of the device
+    public var serialNumber: String?
+    /// Description of this device's make and model, eg. "iPhone XS Max"
+    public var description: String?
+    /// The type of equipment it is (single or collection)
+    public var type: EquipmentType
+    /// The number of devices there are. By default 1
+    public var totalStock: Int
+    
+    public private(set) var checkingOutMembers: [DALIMember] = []
     /// The most recent record of this device being checked out
     public var lastCheckedOut: CheckOutRecord?
     /// This device has been checked
     public var isCheckedOut: Bool {
-        return lastCheckedOut != nil && lastCheckedOut!.endDate == nil
+        return lastCheckedOut != nil && lastCheckedOut!.endDate == nil || checkingOutMembers.count >= totalStock
     }
     var updatesSocket: SocketIOClient!
     static private var staticUpdatesSocket: SocketIOClient!
@@ -36,7 +52,9 @@ final public class DALIEquipment: DALIObject {
     internal init?(json: JSON) {
         guard let dict = json.dictionary,
             let name = dict["name"]?.string,
-            let id = dict["id"]?.string
+            let id = dict["id"]?.string,
+            let typeString = dict["type"]?.string,
+            let type = EquipmentType(rawValue: typeString)
             else {
                 return nil
         }
@@ -44,6 +62,13 @@ final public class DALIEquipment: DALIObject {
         self.name = name
         self.id = id
         self.password = dict["password"]?.string
+        self.iconName = dict["iconName"]?.string
+        self.make = dict["make"]?.string
+        self.model = dict["model"]?.string
+        self.serialNumber = dict["serialNumber"]?.string
+        self.totalStock = dict["totalStock"]?.int ?? 1
+        self.description = dict["description"]?.string
+        self.type = type
         if let lastCheckedOutJSON = dict["lastCheckOut"] {
             self.lastCheckedOut = CheckOutRecord(json: lastCheckedOutJSON)
         } else {
@@ -58,9 +83,27 @@ final public class DALIEquipment: DALIObject {
         
         self.name = dict["name"]?.string ?? self.name
         self.password = dict["password"]?.string ?? self.password
+        self.iconName = dict["iconName"]?.string ?? self.iconName
+        self.make = dict["make"]?.string ?? self.make
+        self.model = dict["model"]?.string ?? self.model
+        self.serialNumber = dict["serialNumber"]?.string ?? self.serialNumber
+        self.description = dict["description"]?.string ?? self.description
+        self.totalStock = dict["totalStock"]?.int ?? self.totalStock
+        
+        if let typeString = dict["type"]?.string {
+            self.type = EquipmentType(rawValue: typeString) ?? self.type
+        }
         if let lastCheckedOutJSON = dict["lastCheckOut"] {
             self.lastCheckedOut = CheckOutRecord(json: lastCheckedOutJSON)
         }
+    }
+    
+    public static func == (lhs: DALIEquipment, rhs: DALIEquipment) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
     // MARK: - Public API
@@ -133,28 +176,43 @@ final public class DALIEquipment: DALIObject {
         }
     }
     
+    public func getCheckingOutMembers() -> Future<[DALIMember]> {
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/checkingOutUsers").onSuccess { (response) -> [DALIMember] in
+            guard let array = response.json?.array else {
+                throw response.assertedError
+            }
+            
+            return array.compactMap({ (json) -> DALIMember? in
+                return DALIMember(json: json)
+            })
+        }
+    }
+    
     /**
      Check out this equipment
      
      - note: Will only succeed when the user is signed in and it is not currently checked out
      */
-    public func checkout(expectedEndDate: Date) -> Future<CheckOutRecord> {
+    public func checkout(expectedEndDate: Date?) -> Future<CheckOutRecord?> {
         guard !isCheckedOut else {
-            return Future<CheckOutRecord>(fail: DALIError.Equipment.AlreadyCheckedOut)
+            return Future<CheckOutRecord?>(fail: DALIError.Equipment.AlreadyCheckedOut)
         }
         
-        let dict = ["projectedEndDate" : DALIEvent.dateFormatter().string(from: expectedEndDate)]
-        var data: Data!
-        do {
-            data = try JSONSerialization.data(withJSONObject: dict, options: [])
-        } catch {
-            return Future(fail: error)
+        var data: Data?
+        
+        if let expectedEndDate = expectedEndDate {
+            let dict = ["projectedEndDate" : DALIEvent.dateFormatter().string(from: expectedEndDate)]
+            do {
+                data = try JSONSerialization.data(withJSONObject: dict, options: [])
+            } catch {
+                return Future(fail: error)
+            }
         }
         
         let url = "\(DALIapi.config.serverURL)/api/equipment/\(id)/checkout"
-        return ServerCommunicator.post(url: url, data: data).onSuccess { (response) -> Future<CheckOutRecord> in
-            if let json = response.json, let checkOutRecord = CheckOutRecord(json: json) {
-                return Future(success: checkOutRecord)
+        return ServerCommunicator.post(url: url, data: data).onSuccess { (response) -> Future<CheckOutRecord?> in
+            if let json = response.json {
+                return Future(success: CheckOutRecord(json: json))
             } else {
                 return self.reload().onSuccess { (equipment) in
                     if equipment.isCheckedOut {
@@ -181,7 +239,7 @@ final public class DALIEquipment: DALIObject {
             } else {
                 return self.reload().onSuccess(block: { (equipment) in
                     if equipment.isCheckedOut {
-                        throw DALIError.General.UnexpectedResponse
+                        throw response.assertedError
                     } else {
                         throw DALIError.Equipment.NotCheckedOut
                     }
@@ -228,11 +286,17 @@ final public class DALIEquipment: DALIObject {
     
     func retreiveRequirements() -> Future<DALIEquipment> {
         if let subFuture = lastCheckedOut?.retreiveRequirements() {
-            return subFuture.map { (_) -> DALIEquipment in
+            return subFuture.onSuccess { (_) -> Future<[DALIMember]> in
+                return self.getCheckingOutMembers()
+            }.onSuccess(block: { (members) -> DALIEquipment in
+                self.checkingOutMembers = members
                 return self
-            }
+            })
         }
-        return Future<DALIEquipment>(success: self)
+        return self.getCheckingOutMembers().onSuccess(block: { (members) -> DALIEquipment in
+            self.checkingOutMembers = members
+            return self
+        })
     }
     
     // MARK: - Helpers
@@ -356,5 +420,10 @@ final public class DALIEquipment: DALIObject {
             self.observeDeletionCallback = nil
             self.cleanupSocket()
         }, id: "observingDeletion-\(id)")
+    }
+    
+    public enum EquipmentType: String {
+        case single
+        case collection
     }
 }

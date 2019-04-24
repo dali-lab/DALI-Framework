@@ -331,7 +331,7 @@ public class DALIEvent {
 						"id": option.id,
 						"name": option.name
 						])
-				}else{
+				} else {
 					// TODO: Have an error
 				}
 			}

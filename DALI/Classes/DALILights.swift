@@ -28,7 +28,7 @@ public class DALILights {
 		public var formattedName: String {
 			if name == "tvspace" {
 				return "TV Space"
-			}else{
+			} else {
 				return name.replacingOccurrences(of: "pod:", with: "").capitalized
 			}
 		}
@@ -47,7 +47,7 @@ public class DALILights {
 				return color
 			}else if let scene = scene {
 				return DALILights.scenesAvgColorMap[self.name]?[scene]
-			}else{
+			} else {
 				return nil
 			}
 		}
@@ -65,7 +65,7 @@ public class DALILights {
 					}
 					if allSet != nil {
 						allSet = allSet!.intersection(set)
-					}else{
+					} else {
 						allSet = set
 					}
 				}
@@ -83,7 +83,7 @@ public class DALILights {
 						}
 						if podsSet != nil {
 							podsSet = podsSet!.intersection(set)
-						}else{
+						} else {
 							podsSet = set
 						}
 					}
@@ -98,7 +98,7 @@ public class DALILights {
 				return scenes.sorted(by: { (string1, string2) -> Bool in
 					return string1 == "default" || string1 < string2
 				})
-			}else{
+			} else {
 				return []
 			}
 		}
@@ -252,7 +252,7 @@ public class DALILights {
 			}
 		})
 		
-        _ = ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/lights/config").onSuccess { (response) in
+        _ = ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/lights/scenes").onSuccess { (response) in
             guard let dict = response.json?.dictionary else {
                 return
             }

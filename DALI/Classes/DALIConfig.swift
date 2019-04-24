@@ -38,7 +38,7 @@ open class DALIConfig {
 			}else if let token = UserDefaults.standard.string(forKey: "DALIapi:token") {
 				token_stored = token
 				return token
-			}else{
+			} else {
 				return nil
 			}
 		}
@@ -46,7 +46,7 @@ open class DALIConfig {
 			self.token_stored = newValue
 			if let token = newValue {
 				UserDefaults.standard.set(token, forKey: "DALIapi:token")
-			}else{
+			} else {
 				UserDefaults.standard.removeObject(forKey: "DALIapi:token")
 			}
 		}
@@ -70,7 +70,7 @@ open class DALIConfig {
 		}
 		set {
 			self.member_stored = newValue
-			if let data = try? newValue?.json.rawData() {
+			if let data = ((try? newValue?.json.rawData()) as Data??) {
 				UserDefaults.standard.set(data, forKey: "DALIapi:member")
 			}else if newValue == nil {
 				UserDefaults.standard.removeObject(forKey: "DALIapi:member")

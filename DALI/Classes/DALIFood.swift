@@ -80,15 +80,11 @@ public class DALIFood {
 			return Future(fail: DALIError.General.Unauthorized)
 		}
 		
-		do {
-            return try ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/food", json: JSON(["food": food])).onSuccess(block: { (response) in
-                if !response.success {
-                    throw response.assertedError
-                }
-            })
-		} catch {
-			return Future(fail: error)
-		}
+        return ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/food", json: JSON(["food": food])).onSuccess(block: { (response) in
+            if !response.success {
+                throw response.assertedError
+            }
+        })
 	}
 	
 	/**

@@ -14,7 +14,7 @@ import EmitterKit
 /**
  Singular equipment object describing one of the items DALI has available for sign out
  */
-final public class DALIEquipment: DALIObject, Hashable {
+final public class DALIEquipment: Hashable {
     /// Identifier for this equipment
     public let id: String
     /// Name of the device
@@ -35,17 +35,20 @@ final public class DALIEquipment: DALIObject, Hashable {
     public var type: EquipmentType
     /// The number of devices there are. By default 1
     public var totalStock: Int
+    /// If there is a history of checkouts. Will be true if there is more than the most recent checkout
+    public var hasHistory: Bool
     
-    public private(set) var checkingOutMembers: [DALIMember] = []
+    public private(set) var checkingOutUsers: [DALIMember] = []
     /// The most recent record of this device being checked out
     public var lastCheckedOut: CheckOutRecord?
     /// This device has been checked
     public var isCheckedOut: Bool {
-        return lastCheckedOut != nil && lastCheckedOut!.endDate == nil || checkingOutMembers.count >= totalStock
+        return lastCheckedOut != nil && lastCheckedOut!.endDate == nil || checkingOutUsers.count >= totalStock
     }
     var updatesSocket: SocketIOClient!
     static private var staticUpdatesSocket: SocketIOClient!
     static private var staticUpdatesEvent = Event<[DALIEquipment]>()
+    static private let populateString = "[\"lastCheckOut\", \"lastCheckOut.user\"]"
     
     // MARK: - Setup
     
@@ -54,7 +57,8 @@ final public class DALIEquipment: DALIObject, Hashable {
             let name = dict["name"]?.string,
             let id = dict["id"]?.string,
             let typeString = dict["type"]?.string,
-            let type = EquipmentType(rawValue: typeString)
+            let type = EquipmentType(rawValue: typeString),
+            let checkingOutUsersData = dict["checkingOutUsers"]?.array
             else {
                 return nil
         }
@@ -69,11 +73,19 @@ final public class DALIEquipment: DALIObject, Hashable {
         self.totalStock = dict["totalStock"]?.int ?? 1
         self.description = dict["description"]?.string
         self.type = type
+        
+        var lastCheckedOut: CheckOutRecord?
         if let lastCheckedOutJSON = dict["lastCheckOut"] {
-            self.lastCheckedOut = CheckOutRecord(json: lastCheckedOutJSON)
+            lastCheckedOut = CheckOutRecord(json: lastCheckedOutJSON)
         } else {
-            self.lastCheckedOut = nil
+            lastCheckedOut = nil
         }
+        self.hasHistory = dict["hasHistory"]?.bool ?? (lastCheckedOut != nil)
+        self.lastCheckedOut = lastCheckedOut
+        
+        self.checkingOutUsers = checkingOutUsersData.compactMap({ (json) -> DALIMember? in
+            return DALIMember(json: json)
+        })
     }
     
     private func update(json: JSON) {
@@ -114,9 +126,9 @@ final public class DALIEquipment: DALIObject, Hashable {
      Get a single equipment object with a given id
      */
     public static func equipment(for id: String) -> Future<DALIEquipment> {
-        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)").onSuccess(block: { (response) -> Future<DALIEquipment> in
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)", params: ["populate": populateString]).onSuccess(block: { (response) -> DALIEquipment in
             if let json = response.json, let equipment = DALIEquipment(json: json) {
-                return equipment.retreiveRequirements()
+                return equipment
             } else {
                 throw response.assertedError
             }
@@ -127,7 +139,9 @@ final public class DALIEquipment: DALIObject, Hashable {
      Get all the equipment
      */
     public static func allEquipment() -> Future<[DALIEquipment]> {
-        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment").onSuccess(block: { (response) -> Future<[DALIEquipment]> in
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment",
+                                      params: ["populate": populateString])
+        .onSuccess(block: { (response) -> [DALIEquipment] in
             if let dataArray = response.json?.array {
                 var array = [DALIEquipment]()
                 
@@ -137,7 +151,7 @@ final public class DALIEquipment: DALIObject, Hashable {
                     }
                 })
                 
-                return retriveAllRequirements(on: array)
+                return array
             } else {
                 throw response.assertedError
             }
@@ -150,13 +164,15 @@ final public class DALIEquipment: DALIObject, Hashable {
      Reload the information stored in this equipment
      */
     public func reload() -> Future<DALIEquipment> {
-        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)").onSuccess(block: { (response) -> Future<DALIEquipment> in
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(id)",
+                                      params: ["populate": DALIEquipment.populateString])
+        .onSuccess(block: { (response) -> DALIEquipment in
             guard let json = response.json else {
                 throw response.assertedError
             }
             
             self.update(json: json)
-            return self.retreiveRequirements()
+            return self
         })
     }
     
@@ -164,7 +180,7 @@ final public class DALIEquipment: DALIObject, Hashable {
      Get all the checkouts in the past for this equipment
      */
     public func getHistory() -> Future<[CheckOutRecord]> {
-        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/checkout").onSuccess { (response) -> Future<[CheckOutRecord]> in
+        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/checkout").onSuccess { (response) -> [CheckOutRecord] in
             guard let array = response.json?.array else {
                 throw response.assertedError
             }
@@ -172,19 +188,7 @@ final public class DALIEquipment: DALIObject, Hashable {
             let list = array.compactMap({ (json) -> CheckOutRecord? in
                 return CheckOutRecord(json: json)
             })
-            return retriveAllRequirements(on: list)
-        }
-    }
-    
-    public func getCheckingOutMembers() -> Future<[DALIMember]> {
-        return ServerCommunicator.get(url: "\(DALIapi.config.serverURL)/api/equipment/\(self.id)/checkingOutUsers").onSuccess { (response) -> [DALIMember] in
-            guard let array = response.json?.array else {
-                throw response.assertedError
-            }
-            
-            return array.compactMap({ (json) -> DALIMember? in
-                return DALIMember(json: json)
-            })
+            return list
         }
     }
     
@@ -282,23 +286,6 @@ final public class DALIEquipment: DALIObject, Hashable {
         })
     }
     
-    // MARK: - DALIObject
-    
-    func retreiveRequirements() -> Future<DALIEquipment> {
-        if let subFuture = lastCheckedOut?.retreiveRequirements() {
-            return subFuture.onSuccess { (_) -> Future<[DALIMember]> in
-                return self.getCheckingOutMembers()
-            }.onSuccess(block: { (members) -> DALIEquipment in
-                self.checkingOutMembers = members
-                return self
-            })
-        }
-        return self.getCheckingOutMembers().onSuccess(block: { (members) -> DALIEquipment in
-            self.checkingOutMembers = members
-            return self
-        })
-    }
-    
     // MARK: - Helpers
     
     /// Check to see if the static socket is open. If not, open one
@@ -318,9 +305,7 @@ final public class DALIEquipment: DALIObject, Hashable {
                 return DALIEquipment(json: JSON(data))
             })
             
-            _ = retriveAllRequirements(on: equipment).onSuccess { (equipment) in
-                self.staticUpdatesEvent.emit(equipment)
-            }
+            self.staticUpdatesEvent.emit(equipment)
         }
         
         staticUpdatesSocket.connect()

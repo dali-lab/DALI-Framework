@@ -229,25 +229,20 @@ final public class DALIEquipment: Hashable {
         }
     }
     
-    public func update(returnDate: Date) -> Future<CheckOutRecord> {
+    public func update(returnDate: Date) -> Future<DALIEquipment> {
         guard isCheckedOut else {
-            return Future<CheckOutRecord>(fail: DALIError.Equipment.AlreadyCheckedOut)
+            return Future<DALIEquipment>(fail: DALIError.Equipment.AlreadyCheckedOut)
         }
         
         let dict: [String:Any] = ["projectedEndDate" : DALIEvent.dateFormatter().string(from: returnDate)]
         
         let url = "\(DALIapi.config.serverURL)/api/equipment/\(id)/checkout"
-        return ServerCommunicator.put(url: url, json: JSON(dict)).onSuccess(block: { (response) -> Future<CheckOutRecord> in
-            if let json = response.json, let checkOutRecord = CheckOutRecord(json: json) {
-                return Future(success: checkOutRecord)
+        return ServerCommunicator.put(url: url, json: JSON(dict)).onSuccess(block: { (response) -> DALIEquipment in
+            if let json = response.json {
+                self.update(json: json)
+                return self
             } else {
-                return self.reload().onSuccess(block: { (equipment) in
-                    if equipment.isCheckedOut {
-                        throw response.assertedError
-                    } else {
-                        throw DALIError.Equipment.NotCheckedOut
-                    }
-                })
+                throw response.assertedError
             }
         })
     }
@@ -360,24 +355,24 @@ final public class DALIEquipment: Hashable {
                     observeDeletionCallback(self)
                 }
             }
-            
-            updatesSocket.connect()
-            updatesSocket.on(clientEvent: .connect) { (data, ack) in
-                ServerCommunicator.authenticateSocket(socket: self.updatesSocket)
+            updatesSocket.on(clientEvent: .error) { (data, ack) in
+                print(data)
             }
-            updatesSocket.on("authed", callback: { (data, ack) in
-                self.updatesSocket.emit("equipmentSelect", self.id)
-            })
+        }
+        updatesSocket.connect()
+        updatesSocket.once(clientEvent: .connect) { (_, _) in
+            self.updatesSocket.emit("equipmentSelect", JSON([DALIapi.config.token!, self.id]).rawString()!)
         }
     }
     
     private func cleanupSocket() {
         if (observeCallback == nil && observeCheckoutsCallback == nil && observeDeletionCallback == nil) {
             updatesSocket?.disconnect()
+            updatesSocket = nil
         }
     }
     
-    func observe(callback: @escaping (DALIEquipment) -> Void) -> Observation {
+    public func observe(callback: @escaping (DALIEquipment) -> Void) -> Observation {
         self.assertSocket()
         observeCallback = callback
         
@@ -387,7 +382,7 @@ final public class DALIEquipment: Hashable {
         }, id: "observing-\(id)")
     }
     
-    func observeCheckouts(callback: @escaping ([CheckOutRecord], DALIEquipment) -> Void) -> Observation {
+    public func observeCheckouts(callback: @escaping ([CheckOutRecord], DALIEquipment) -> Void) -> Observation {
         self.assertSocket()
         observeCheckoutsCallback = callback
         
@@ -397,7 +392,7 @@ final public class DALIEquipment: Hashable {
         }, id: "observingCheckOuts-\(id)")
     }
     
-    func observeDeletion(callback: @escaping (DALIEquipment) -> Void) -> Observation {
+    public func observeDeletion(callback: @escaping (DALIEquipment) -> Void) -> Observation {
         self.assertSocket()
         observeDeletionCallback = callback
         

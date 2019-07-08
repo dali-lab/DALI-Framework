@@ -22,13 +22,13 @@ Example usage:
 */
 open class DALIConfig {
 	/// The URL to the server. This is required
-	internal var serverURL: String
+	public var serverURL: String
 	/// Used to connect to the server without needing user signin
 	internal var apiKey: String?
 	
 	/// Token. This is needed for requests when needing user signin
 	internal var token_stored: String?
-	internal var token: String? {
+	public var token: String? {
 		/*
 		The token is stored in the UserDefaults so it can be recalled after the app is restarted
 		*/

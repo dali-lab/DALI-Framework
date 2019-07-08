@@ -361,7 +361,10 @@ final public class DALIEquipment: Hashable {
         }
         updatesSocket.connect()
         updatesSocket.once(clientEvent: .connect) { (_, _) in
-            self.updatesSocket.emit("equipmentSelect", JSON([DALIapi.config.token!, self.id]).rawString()!)
+            guard let rawString = JSON([DALIapi.config.token!, self.id]).rawString() else {
+                return
+            }
+            self.updatesSocket.emit("equipmentSelect", rawString)
         }
     }
     

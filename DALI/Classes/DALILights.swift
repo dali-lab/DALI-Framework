@@ -29,7 +29,7 @@ public class DALILights {
 			if name == "tvspace" {
 				return "TV Space"
 			} else {
-				return name.replacingOccurrences(of: "pod:", with: "").capitalized
+				return name.lowercased().replacingOccurrences(of: "pod:", with: "").capitalized
 			}
 		}
 		/// The name the currently set scene

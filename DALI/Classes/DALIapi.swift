@@ -19,10 +19,14 @@ public class DALIapi {
 	/// The current configuration being used by the framework
 	public static var config: DALIConfig {
 		if self.unProtConfig == nil {
-			fatalError("DALIapi: Config missing! You are required to have a configuration\n" +
-					   "Run:\nlet config = DALIConfig(dict: NSDictionary(contentsOfFile: filePath))\n" +
-					   "DALIapi.configure(config)\n" +
-					   "before you use it")
+            guard let data = UserDefaults.standard.data(forKey: "DALIapi-config"),
+                let config = try? JSONDecoder().decode(DALIConfig.self, from: data) else {
+                    fatalError("DALIapi: Config missing! You are required to have a configuration\n" +
+                        "Run:\nlet config = DALIConfig(dict: NSDictionary(contentsOfFile: filePath))\n" +
+                        "DALIapi.configure(config)\n" +
+                        "before you use it")
+            }
+            self.unProtConfig = config
 		}
 		return unProtConfig!
 	}
@@ -49,6 +53,11 @@ public class DALIapi {
 	*/
 	public static func configure(config: DALIConfig) {
 		self.unProtConfig = config
+        
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(config) {
+            UserDefaults.standard.set(encoded, forKey: "DALIapi-config")
+        }
 		
 		if config.enableSockets {
 			enableSockets()

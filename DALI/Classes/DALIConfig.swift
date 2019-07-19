@@ -20,7 +20,7 @@ Example usage:
 	let config = DALIConfig(dict: file)
 	DALIapi.configure(config: config)
 */
-open class DALIConfig {
+open class DALIConfig: Codable {
 	/// The URL to the server. This is required
 	public var serverURL: String
 	/// Used to connect to the server without needing user signin
@@ -120,4 +120,13 @@ open class DALIConfig {
 		
 		self.enableSockets_internal = enableSockets ?? false
 	}
+    
+    enum CodingKeys: String, CodingKey {
+        case serverURL
+        case apiKey
+        case socketAutoSwitching
+        case forceWebsockets
+        case sharingDefault
+        case enableSockets_internal
+    }
 }

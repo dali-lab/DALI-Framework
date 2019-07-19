@@ -120,6 +120,21 @@ final public class DALIEquipment: Hashable {
     
     // MARK: - Public API
     
+    // MARK: Creators
+    
+    public static func create(withName name: String, extraInfo: [String:Any]) -> Future<DALIEquipment> {
+        var dict = extraInfo
+        dict["name"] = name
+        return ServerCommunicator.post(url: "\(DALIapi.config.serverURL)/api/equipment", json: JSON(dict))
+            .onSuccess { (response) in
+                if let json = response.json, let equipment = DALIEquipment(json: json) {
+                    return equipment
+                } else {
+                    throw response.assertedError
+                }
+        }
+    }
+    
     // MARK: Static Getters
     
     /**
@@ -361,10 +376,10 @@ final public class DALIEquipment: Hashable {
         }
         updatesSocket.connect()
         updatesSocket.once(clientEvent: .connect) { (_, _) in
-            guard let rawString = JSON([DALIapi.config.token!, self.id]).rawString() else {
+            guard let rawString = JSON([DALIapi.config.token!, self.id]).rawString(), let socket = self.updatesSocket else {
                 return
             }
-            self.updatesSocket.emit("equipmentSelect", rawString)
+            socket.emit("equipmentSelect", rawString)
         }
     }
     

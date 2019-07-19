@@ -181,6 +181,9 @@ public class DALILights {
 			updatingSocket.connect()
 			
 			updatingSocket.on(clientEvent: .connect, callback: { (data, ack) in
+                guard let updatingSocket = updatingSocket else {
+                    return
+                }
 				ServerCommunicator.authenticateSocket(socket: updatingSocket)
 			})
 		}
